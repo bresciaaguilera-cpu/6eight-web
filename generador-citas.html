@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de citas para parejas | 6EIGHT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crema:#F7EFE2; --verde:#22362B; --terracota:#B87460; --kraft:#C9A57A; --tinta:#2E302D; --beige2:#EFE5D6;
+    --font-display:'Oswald', sans-serif; --font-body:'Inter', sans-serif; --font-hand:'Caveat', cursive;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--crema); color:var(--tinta); font-family:var(--font-body); font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+  h1,h2,h3{font-family:var(--font-display); font-weight:600; line-height:1.15;}
+  .wrap{max-width:900px; margin:0 auto; padding:0 20px;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--terracota); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+
+  header{position:sticky; top:0; z-index:50; background:var(--crema); border-bottom:1px solid rgba(46,48,45,.12);}
+  .header-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 20px; max-width:900px; margin:0 auto;}
+  .logo{font-family:var(--font-display); font-size:1.4rem; font-weight:700;}
+  .logo .six{color:var(--terracota);}
+  .back-link{font-size:.9rem; color:var(--verde); font-weight:500;}
+
+  .intro{padding:44px 0 10px; text-align:center;}
+  .intro .eyebrow-hand{font-family:var(--font-hand); font-size:1.4rem; color:var(--terracota);}
+  .intro h1{font-size:2rem; margin:8px 0 12px;}
+  @media(min-width:640px){ .intro h1{font-size:2.5rem;} }
+  .intro p{color:rgba(46,48,45,.75); max-width:48ch; margin:0 auto;}
+
+  .tool-panel{padding:36px 0 70px;}
+  .filters{display:flex; flex-direction:column; gap:26px; background:var(--beige2); padding:26px 22px; margin-bottom:26px;}
+  .filter-group label.group-label{display:block; font-size:.82rem; font-weight:600; text-transform:uppercase; letter-spacing:.06em; color:var(--verde); margin-bottom:10px;}
+  .chip-row{display:flex; flex-wrap:wrap; gap:10px;}
+  .chip{
+    padding:10px 16px; background:var(--crema); border:1.5px solid rgba(46,48,45,.18);
+    font-size:.9rem; border-radius:20px; transition:all .15s ease;
+  }
+  .chip.active{background:var(--verde); color:var(--crema); border-color:var(--verde);}
+  .chip:hover:not(.active){border-color:var(--terracota);}
+
+  .generar-btn{
+    display:block; width:100%; padding:17px; background:var(--terracota); color:var(--crema);
+    font-weight:600; font-size:1rem; border-radius:2px; transition:background .2s ease;
+  }
+  .generar-btn:hover{background:#a3634f;}
+  .generar-btn:active{transform:scale(.99);}
+
+  .resultado{
+    margin-top:30px; background:var(--crema); border:1.5px dashed var(--terracota); padding:34px 26px;
+    text-align:center; display:none;
+  }
+  .resultado.show{display:block;}
+  .resultado .sello{
+    width:56px; height:56px; border-radius:50%; border:1.5px solid var(--terracota); margin:0 auto 16px;
+    display:flex; align-items:center; justify-content:center; font-family:var(--font-display); color:var(--terracota); font-size:.85rem;
+  }
+  .resultado h2{font-size:1.5rem; margin-bottom:12px;}
+  @media(min-width:640px){ .resultado h2{font-size:1.8rem;} }
+  .resultado p.desc{color:rgba(46,48,45,.75); max-width:46ch; margin:0 auto 20px;}
+  .resultado .tags{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-bottom:24px;}
+  .resultado .tag{font-size:.78rem; padding:5px 12px; background:var(--beige2); color:var(--verde); border-radius:14px;}
+  .resultado-actions{display:flex; flex-direction:column; gap:12px; max-width:280px; margin:0 auto;}
+  @media(min-width:480px){ .resultado-actions{flex-direction:row;} }
+  .btn{display:inline-flex; align-items:center; justify-content:center; padding:13px 20px; font-weight:600; font-size:.9rem; border-radius:2px; flex:1;}
+  .btn-primary{background:var(--verde); color:var(--crema);}
+  .btn-primary:hover{background:#1a2921;}
+  .btn-secondary{background:transparent; color:var(--verde); border:1.5px solid var(--verde);}
+  .btn-secondary:hover{background:rgba(34,54,43,.06);}
+  .no-match{color:rgba(46,48,45,.6); font-size:.95rem;}
+
+  .cta-band{background:var(--verde); color:var(--crema); padding:50px 0; margin-top:20px; text-align:center;}
+  .cta-band .eyebrow-hand{color:var(--kraft);}
+  .cta-band h2{font-size:1.5rem; margin:10px 0 12px; color:var(--crema);}
+  .cta-band p{color:rgba(247,239,226,.8); max-width:46ch; margin:0 auto 22px;}
+  .cta-band .btn-primary{background:var(--terracota);}
+  .cta-band .btn-primary:hover{background:#a3634f;}
+
+  footer{padding:34px 0; text-align:center; font-size:.85rem; color:rgba(46,48,45,.55);}
+  footer a{color:var(--verde); font-weight:600;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo"><span class="six">6</span>EIGHT</a>
+    <a href="/" class="back-link">← Volver a 6EIGHT</a>
+  </div>
+</header>
+
+<section class="intro wrap">
+  <span class="eyebrow-hand">Jugar gratis</span>
+  <h1>Generador de citas</h1>
+  <p>Elegid presupuesto, lugar, tiempo y energía. Nosotros os proponemos el plan.</p>
+</section>
+
+<section class="tool-panel wrap">
+  <div class="filters">
+    <div class="filter-group">
+      <label class="group-label">Presupuesto</label>
+      <div class="chip-row" data-group="presupuesto">
+        <button class="chip active" data-value="0">0 €</button>
+        <button class="chip" data-value="20">Menos de 20 €</button>
+        <button class="chip" data-value="50">20–50 €</button>
+        <button class="chip" data-value="999">Sin límite</button>
+      </div>
+    </div>
+    <div class="filter-group">
+      <label class="group-label">Lugar</label>
+      <div class="chip-row" data-group="lugar">
+        <button class="chip active" data-value="casa">Casa</button>
+        <button class="chip" data-value="fuera">Fuera</button>
+        <button class="chip" data-value="naturaleza">Naturaleza</button>
+      </div>
+    </div>
+    <div class="filter-group">
+      <label class="group-label">Tiempo</label>
+      <div class="chip-row" data-group="tiempo">
+        <button class="chip active" data-value="30">30 min</button>
+        <button class="chip" data-value="120">2 horas</button>
+        <button class="chip" data-value="medio">Medio día</button>
+        <button class="chip" data-value="completo">Día completo</button>
+      </div>
+    </div>
+    <div class="filter-group">
+      <label class="group-label">Energía</label>
+      <div class="chip-row" data-group="energia">
+        <button class="chip active" data-value="tranquila">Tranquila</button>
+        <button class="chip" data-value="divertida">Divertida</button>
+        <button class="chip" data-value="aventurera">Aventurera</button>
+      </div>
+    </div>
+    <button class="generar-btn" id="generarBtn">Generar cita</button>
+  </div>
+
+  <div class="resultado" id="resultado"></div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <span class="eyebrow-hand">¿Os han gustado las citas?</span>
+    <h2>Tenéis 68 más esperando</h2>
+    <p>Inspired by 68 convierte estos planes sueltos en una ruta completa para vivir en pareja.</p>
+    <a href="/inspired-by-68" class="btn btn-primary">Descubrir Inspired by 68</a>
+  </div>
+</section>
+
+<footer>
+  <p>¿Preferís que os hagamos una pregunta en vez de un plan? <a href="/#jugar">Probad la pregunta del día</a></p>
+</footer>
+
+<script>
+  const citas = [
+    {titulo:'Cena a oscuras en casa', desc:'Cenad con los ojos vendados por turnos y adivinad qué está comiendo el otro.', presupuesto:0, lugar:'casa', tiempo:30, energia:'divertida'},
+    {titulo:'Maratón de la primera peli que visteis juntos', desc:'Volved a verla y contad qué recordáis distinto cada uno.', presupuesto:0, lugar:'casa', tiempo:120, energia:'tranquila'},
+    {titulo:'Paseo sin rumbo por un barrio que no pisáis', desc:'Sin Google Maps: girad donde os apetezca y ved a dónde lleva.', presupuesto:0, lugar:'fuera', tiempo:120, energia:'aventurera'},
+    {titulo:'Picnic improvisado en el parque', desc:'Con lo que haya en la nevera, en una manta, sin plan cerrado.', presupuesto:20, lugar:'naturaleza', tiempo:120, energia:'tranquila'},
+    {titulo:'Clase de baile en casa por videotutorial', desc:'Elegid un estilo que nunca hayáis probado y aprendedlo juntos.', presupuesto:0, lugar:'casa', tiempo:30, energia:'divertida'},
+    {titulo:'Ruta de miradores al atardecer', desc:'Buscad dos o tres puntos altos de la ciudad y encadenadlos antes de que caiga el sol.', presupuesto:0, lugar:'naturaleza', tiempo:'medio', energia:'aventurera'},
+    {titulo:'Cata de quesos o vinos económicos', desc:'Comprad tres variedades distintas y puntuadlas por separado, sin mirar al otro.', presupuesto:20, lugar:'casa', tiempo:120, energia:'divertida'},
+    {titulo:'Escapada de un día a un pueblo cercano', desc:'Elegid uno al que nunca hayáis ido, sin planificar mucho más que el transporte.', presupuesto:50, lugar:'fuera', tiempo:'completo', energia:'aventurera'},
+    {titulo:'Sesión de fotos improvisada por casa', desc:'Con el móvil, buscando la luz de las ventanas, sin poses forzadas.', presupuesto:0, lugar:'casa', tiempo:30, energia:'divertida'},
+    {titulo:'Ruta en bici sin destino fijo', desc:'Salid sin decidir a dónde vais y parad donde os llame la atención.', presupuesto:0, lugar:'naturaleza', tiempo:'medio', energia:'aventurera'},
+    {titulo:'Noche de juegos de mesa con apuestas tontas', desc:'Quien pierda hace el desayuno de mañana. Nada más.', presupuesto:0, lugar:'casa', tiempo:120, energia:'divertida'},
+    {titulo:'Spa casero por turnos', desc:'Cada uno prepara quince minutos de relax para el otro, sin repetir técnica.', presupuesto:20, lugar:'casa', tiempo:'medio', energia:'tranquila'},
+    {titulo:'Excursión de senderismo a media distancia', desc:'Una ruta que ninguno de los dos haya hecho, con parada para comer al aire libre.', presupuesto:20, lugar:'naturaleza', tiempo:'completo', energia:'aventurera'},
+    {titulo:'Sesión de preguntas con vino y velas', desc:'Elegid diez preguntas que no os soléis hacer y respondedlas despacio.', presupuesto:20, lugar:'casa', tiempo:120, energia:'tranquila'},
+    {titulo:'Escapada de fin de semana sin fecha límite', desc:'Reservad dos noches en algún sitio nuevo y dejad el itinerario abierto.', presupuesto:999, lugar:'fuera', tiempo:'completo', energia:'aventurera'},
+    {titulo:'Concierto o teatro de última hora', desc:'Mirad qué hay esta misma semana cerca de casa y comprad entradas sin pensarlo mucho.', presupuesto:50, lugar:'fuera', tiempo:'medio', energia:'divertida'},
+  ];
+
+  const state = { presupuesto:0, lugar:'casa', tiempo:30, energia:'tranquila' };
+  let lastTitle = null;
+
+  document.querySelectorAll('.chip-row').forEach(row => {
+    const group = row.dataset.group;
+    row.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        row.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const raw = chip.dataset.value;
+        state[group] = isNaN(raw) ? raw : Number(raw);
+      });
+    });
+  });
+
+  const resultadoEl = document.getElementById('resultado');
+
+  function buscarCita(){
+    let candidatas = citas.filter(c =>
+      c.presupuesto <= state.presupuesto &&
+      c.lugar === state.lugar &&
+      c.energia === state.energia
+    );
+    // tiempo: si no hay coincidencia exacta, no filtramos por tiempo para no dejar la lista vacía
+    let conTiempo = candidatas.filter(c => c.tiempo === state.tiempo);
+    if(conTiempo.length) candidatas = conTiempo;
+
+    if(!candidatas.length){
+      // relajamos energía si no hay nada
+      candidatas = citas.filter(c => c.presupuesto <= state.presupuesto && c.lugar === state.lugar);
+    }
+    if(!candidatas.length){
+      resultadoEl.classList.add('show');
+      resultadoEl.innerHTML = '<p class="no-match">No tenemos todavía un plan que encaje exactamente con esa combinación. Probad cambiando el presupuesto o el lugar.</p>';
+      return;
+    }
+    let opciones = candidatas.filter(c => c.titulo !== lastTitle);
+    if(!opciones.length) opciones = candidatas;
+    const elegida = opciones[Math.floor(Math.random() * opciones.length)];
+    lastTitle = elegida.titulo;
+
+    const tiempoLabel = {30:'30 min', 120:'2 horas', medio:'Medio día', completo:'Día completo'}[elegida.tiempo] || elegida.tiempo;
+    const presupuestoLabel = elegida.presupuesto === 0 ? '0 €' : (elegida.presupuesto >= 999 ? 'Sin límite' : elegida.presupuesto + ' €');
+
+    resultadoEl.classList.add('show');
+    resultadoEl.innerHTML = `
+      <div class="sello">68</div>
+      <h2>${elegida.titulo}</h2>
+      <p class="desc">${elegida.desc}</p>
+      <div class="tags">
+        <span class="tag">${presupuestoLabel}</span>
+        <span class="tag">${elegida.lugar}</span>
+        <span class="tag">${tiempoLabel}</span>
+        <span class="tag">${elegida.energia}</span>
+      </div>
+      <div class="resultado-actions">
+        <button class="btn btn-secondary" id="otraCitaBtn">Otra cita</button>
+        <a href="/inspired-by-68" class="btn btn-primary">Ver más planes así</a>
+      </div>
+    `;
+    document.getElementById('otraCitaBtn').addEventListener('click', buscarCita);
+    resultadoEl.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
+  document.getElementById('generarBtn').addEventListener('click', buscarCita);
+</script>
+
+</body>
+</html>

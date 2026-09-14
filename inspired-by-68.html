@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inspired by 68 — 68 paradas para volver a poner vuestra relación en movimiento | 6EIGHT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crema:#F7EFE2; --verde:#22362B; --terracota:#B87460; --kraft:#C9A57A; --tinta:#2E302D; --beige2:#EFE5D6;
+    --font-display:'Oswald', sans-serif; --font-body:'Inter', sans-serif; --font-hand:'Caveat', cursive;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--crema); color:var(--tinta); font-family:var(--font-body); font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 20px;}
+  h1,h2,h3{font-family:var(--font-display); font-weight:600; line-height:1.15;}
+  .eyebrow-hand{font-family:var(--font-hand); font-size:1.35rem; color:var(--terracota); display:inline-block; transform:rotate(-2deg);}
+  a:focus-visible, button:focus-visible, input:focus-visible{outline:2px solid var(--terracota); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+
+  header{position:sticky; top:0; z-index:50; background:var(--crema); border-bottom:1px solid rgba(46,48,45,.12);}
+  .header-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 20px;}
+  .logo{font-family:var(--font-display); font-size:1.4rem; font-weight:700;}
+  .logo .six{color:var(--terracota);}
+  .header-inner .btn{display:none;}
+  @media(min-width:640px){ .header-inner .btn{display:inline-flex;} }
+
+  section{padding:56px 0;}
+  @media(min-width:860px){ section{padding:96px 0;} }
+  .btn{display:inline-flex; align-items:center; justify-content:center; padding:15px 26px; font-weight:600; font-size:.98rem; border-radius:2px; transition:transform .15s ease, background .2s ease;}
+  .btn-primary{background:var(--terracota); color:var(--crema);}
+  .btn-primary:hover{background:#a3634f;}
+  .btn-secondary{background:transparent; color:var(--verde); border:1.5px solid var(--verde);}
+  .btn-secondary:hover{background:rgba(34,54,43,.06);}
+  .btn:active{transform:scale(.98);}
+  .btn-block{width:100%;}
+
+  /* HERO */
+  .hero{padding-top:40px;}
+  .hero-grid{display:flex; flex-direction:column; gap:32px;}
+  @media(min-width:960px){ .hero-grid{flex-direction:row; align-items:center; gap:60px;} .hero-text{flex:0 0 48%;} }
+  .hero-text .eyebrow-hand{margin-bottom:10px;}
+  .hero-text h1{font-size:2.3rem; margin-bottom:16px;}
+  @media(min-width:640px){ .hero-text h1{font-size:2.9rem;} }
+  .hero-text .price-row{display:flex; align-items:baseline; gap:12px; margin:18px 0 22px;}
+  .price-now{font-family:var(--font-display); font-size:2rem; color:var(--verde);}
+  .price-before{font-size:1.05rem; color:rgba(46,48,45,.5); text-decoration:line-through;}
+  .price-note{font-size:.85rem; color:var(--terracota);}
+  .hero-visual{flex:1; position:relative;}
+  .pages-fan{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  .pagina{background:#fff; aspect-ratio:3/4; padding:16px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 14px 28px rgba(46,48,45,.16);}
+  .pagina:nth-child(2){transform:translateY(-14px);}
+  .pagina .num{font-family:var(--font-display); font-size:1.3rem; color:var(--terracota);}
+  .pagina .linea{height:1px; background:rgba(46,48,45,.15); margin:6px 0;}
+  .pagina .txt{font-size:.68rem; color:rgba(46,48,45,.65); line-height:1.4;}
+  .pagina .sello{align-self:flex-end; width:30px; height:30px; border-radius:50%; border:1.5px dashed var(--terracota); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:.65rem; color:var(--terracota);}
+
+  /* PROBLEMA / SOLUCION */
+  .prob-sol{background:var(--verde); color:var(--crema);}
+  .prob-sol .wrap{display:flex; flex-direction:column; gap:40px;}
+  @media(min-width:860px){ .prob-sol .wrap{flex-direction:row; gap:70px;} }
+  .prob-sol .col{flex:1;}
+  .prob-sol .eyebrow-hand{color:var(--kraft);}
+  .prob-sol h2{font-size:1.6rem; margin:10px 0 14px; color:var(--crema);}
+  .prob-sol p{color:rgba(247,239,226,.82); max-width:44ch;}
+
+  /* QUE ES */
+  .que-es{text-align:center;}
+  .que-es .wrap{max-width:640px;}
+  .que-es .big-num{font-family:var(--font-display); font-size:5rem; color:var(--terracota); line-height:1;}
+  .que-es h2{font-size:1.7rem; margin:8px 0 16px;}
+  .que-es p{color:rgba(46,48,45,.78); max-width:50ch; margin:0 auto;}
+
+  /* RUTAS */
+  .rutas{background:var(--beige2);}
+  .rutas-grid{display:grid; grid-template-columns:1fr; gap:16px;}
+  @media(min-width:640px){ .rutas-grid{grid-template-columns:1fr 1fr;} }
+  .ruta-card{background:var(--crema); padding:26px 24px; border-top:3px solid var(--terracota);}
+  .ruta-card .ruta-n{font-family:var(--font-hand); font-size:1.15rem; color:var(--terracota); margin-bottom:6px; display:block;}
+  .ruta-card h3{font-size:1.15rem; margin-bottom:8px;}
+  .ruta-card p{font-size:.92rem; color:rgba(46,48,45,.72);}
+
+  /* VISTA INTERIOR */
+  .vista-interior .pages-fan{margin-top:30px;}
+  .vista-interior .section-head{max-width:560px;}
+
+  /* QUE INCLUYE / COMO FUNCIONA */
+  .detalles{display:flex; flex-direction:column; gap:40px;}
+  @media(min-width:960px){ .detalles{flex-direction:row; gap:60px;} }
+  .detalles .col{flex:1;}
+  .ficha{display:flex; flex-direction:column; gap:0;}
+  .ficha-row{display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid rgba(46,48,45,.12); font-size:.95rem;}
+  .ficha-row span:first-child{color:rgba(46,48,45,.6);}
+  .ficha-row span:last-child{font-weight:600; text-align:right;}
+  .como-step{display:flex; gap:14px; margin-bottom:20px;}
+  .como-n{font-family:var(--font-display); color:var(--terracota); border:1.5px solid var(--terracota); border-radius:50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:.95rem;}
+  .como-step h3{font-size:1rem; margin-bottom:3px;}
+  .como-step p{font-size:.9rem; color:rgba(46,48,45,.72);}
+
+  /* CTA PRECIO */
+  .cta-precio{background:var(--terracota); color:var(--crema); text-align:center;}
+  .cta-precio .wrap{max-width:520px;}
+  .cta-precio h2{font-size:1.8rem; margin-bottom:12px; color:var(--crema);}
+  .cta-precio .price-row{justify-content:center; margin:18px 0 24px;}
+  .cta-precio .price-now{color:var(--crema);}
+  .cta-precio .price-before{color:rgba(247,239,226,.6);}
+  .cta-precio p.detail{color:rgba(247,239,226,.85); margin-bottom:24px; font-size:.92rem;}
+
+  /* FAQ */
+  .faq{max-width:720px; margin:0 auto;}
+  .faq-item{border-bottom:1px solid rgba(46,48,45,.15);}
+  .faq-q{width:100%; display:flex; justify-content:space-between; align-items:center; padding:20px 0; text-align:left; font-weight:600; font-size:1rem;}
+  .faq-q .plus{font-size:1.3rem; color:var(--terracota); transition:transform .2s ease;}
+  .faq-item.open .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
+  .faq-a p{padding-bottom:18px; color:rgba(46,48,45,.75); font-size:.94rem; max-width:60ch;}
+
+  footer{padding:40px 0; border-top:1px solid rgba(46,48,45,.12); text-align:center; font-size:.85rem; color:rgba(46,48,45,.55);}
+  footer a{color:var(--verde); font-weight:600;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner wrap">
+    <a href="/" class="logo"><span class="six">6</span>EIGHT</a>
+    <a href="#comprar" class="btn btn-primary">Comprar ahora</a>
+  </div>
+</header>
+
+<!-- 1. HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <span class="eyebrow-hand">Producto insignia de 6EIGHT</span>
+      <h1>Inspired by 68</h1>
+      <p style="font-size:1.05rem; color:rgba(46,48,45,.8); max-width:44ch;">68 paradas para volver a poner vuestra relación en movimiento.</p>
+      <div class="price-row">
+        <span class="price-now">9,90 €</span>
+        <span class="price-before">17,90 €</span>
+        <span class="price-note">Precio de lanzamiento</span>
+      </div>
+      <a href="#comprar" class="btn btn-primary">Comprar Inspired by 68</a>
+    </div>
+    <div class="hero-visual">
+      <div class="pages-fan">
+        <div class="pagina"><div><div class="num">07</div><div class="linea"></div><div class="txt">Ruta 1. Una experiencia para hoy, sin planearla demasiado.</div></div><div class="sello">68</div></div>
+        <div class="pagina"><div><div class="num">24</div><div class="linea"></div><div class="txt">Ruta 2. Anécdota para escribir juntos, aquí mismo.</div></div><div class="sello">68</div></div>
+        <div class="pagina"><div><div class="num">51</div><div class="linea"></div><div class="txt">Ruta 4. Reflexión y valoración de la parada.</div></div><div class="sello">68</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 y 3. PROBLEMA / SOLUCION -->
+<section class="prob-sol">
+  <div class="wrap">
+    <div class="col">
+      <span class="eyebrow-hand">El problema</span>
+      <h2>Hay relaciones que no están mal.</h2>
+      <p>Simplemente llevan demasiado tiempo recorriendo la misma carretera: los mismos planes, las mismas conversaciones, el mismo sofá los sábados.</p>
+    </div>
+    <div class="col">
+      <span class="eyebrow-hand">La solución</span>
+      <h2>No necesitáis un gran viaje.</h2>
+      <p>Necesitáis cosas nuevas que compartir. Pequeñas paradas que os saquen del piloto automático, una detrás de otra.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. QUE ES -->
+<section class="que-es">
+  <div class="wrap">
+    <span class="big-num">68</span>
+    <h2>experiencias para vivir en pareja</h2>
+    <p>Cada parada incluye una experiencia que hacer juntos, algo que fortalece la relación, un recuerdo obligatorio, espacio para escribir vuestra anécdota, una pequeña reflexión y un sello 68 con fecha, lugar y valoración.</p>
+  </div>
+</section>
+
+<!-- 5. CUATRO RUTAS -->
+<section class="rutas">
+  <div class="wrap">
+    <div class="section-head" style="max-width:560px; margin-bottom:34px;">
+      <h2 style="font-size:1.9rem;">Cuatro rutas, un mismo camino</h2>
+    </div>
+    <div class="rutas-grid">
+      <div class="ruta-card"><span class="ruta-n">Ruta 1</span><h3>Volver a arrancar</h3><p>Paradas sencillas para retomar el hábito de hacer cosas juntos, sin grandes planes.</p></div>
+      <div class="ruta-card"><span class="ruta-n">Ruta 2</span><h3>Salir del camino conocido</h3><p>Experiencias que os sacan de los sitios y las rutinas de siempre.</p></div>
+      <div class="ruta-card"><span class="ruta-n">Ruta 3</span><h3>Conversaciones con vistas</h3><p>Paradas pensadas para hablar de lo que normalmente no sale en el día a día.</p></div>
+      <div class="ruta-card"><span class="ruta-n">Ruta 4</span><h3>Carretera abierta</h3><p>Las paradas más ambiciosas, para cuando ya lleváis un buen tramo recorrido.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. VISTA INTERIOR -->
+<section class="vista-interior">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow-hand">Por dentro</span>
+      <h2 style="margin-top:8px; font-size:1.9rem;">Así es una parada</h2>
+    </div>
+    <div class="pages-fan">
+      <div class="pagina" style="aspect-ratio:3/4;"><div><div class="num">12</div><div class="linea"></div><div class="txt">Experiencia: cocinad juntos algo que ninguno de los dos ha probado a hacer.</div></div><div class="sello">68</div></div>
+      <div class="pagina" style="aspect-ratio:3/4;"><div><div class="num">33</div><div class="linea"></div><div class="txt">Recuerdo obligatorio: una foto, un billete, algo que se pueda guardar aquí.</div></div><div class="sello">68</div></div>
+      <div class="pagina" style="aspect-ratio:3/4;"><div><div class="num">45</div><div class="linea"></div><div class="txt">Reflexión: ¿qué os habéis descubierto el uno al otro con esta parada?</div></div><div class="sello">68</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUE INCLUYE + COMO FUNCIONA -->
+<section style="background:var(--beige2);">
+  <div class="wrap detalles">
+    <div class="col">
+      <h2 style="font-size:1.5rem; margin-bottom:20px;">Ficha del producto</h2>
+      <div class="ficha">
+        <div class="ficha-row"><span>Formato</span><span>PDF digital, A4</span></div>
+        <div class="ficha-row"><span>Contenido</span><span>68 paradas en 4 rutas</span></div>
+        <div class="ficha-row"><span>Imprimible</span><span>Sí, o para usar en pantalla</span></div>
+        <div class="ficha-row"><span>Personalizable</span><span>No (ver versión personalizada)</span></div>
+        <div class="ficha-row"><span>Entrega</span><span>Descarga inmediata por email</span></div>
+        <div class="ficha-row"><span>Licencia</span><span>Uso personal, una pareja</span></div>
+      </div>
+    </div>
+    <div class="col">
+      <h2 style="font-size:1.5rem; margin-bottom:20px;">Cómo funciona</h2>
+      <div class="como-step"><div class="como-n">1</div><div><h3>Compráis y descargáis</h3><p>Recibiréis el enlace de descarga al momento en vuestro correo.</p></div></div>
+      <div class="como-step"><div class="como-n">2</div><div><h3>Elegís por dónde empezar</h3><p>Podéis seguir las rutas en orden o saltar a la que más os apetezca.</p></div></div>
+      <div class="como-step"><div class="como-n">3</div><div><h3>Vivís la parada</h3><p>Marcáis la fecha, el lugar y guardáis el recuerdo en el propio documento.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA PRECIO -->
+<section class="cta-precio" id="comprar">
+  <div class="wrap">
+    <h2>Empezad hoy vuestra primera parada</h2>
+    <div class="price-row">
+      <span class="price-now">9,90 €</span>
+      <span class="price-before">17,90 €</span>
+    </div>
+    <p class="detail">Pago único. Descarga inmediata. Sin suscripción.</p>
+    <button id="comprarBtn" class="btn" style="background:var(--verde); color:var(--crema); width:auto;">Comprar Inspired by 68</button>
+    <p id="comprarError" style="display:none; color:#fff; font-size:.85rem; margin-top:14px;"></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <div class="section-head" style="margin:0 auto 30px; text-align:center; max-width:560px;">
+      <h2 style="font-size:1.7rem;">Preguntas frecuentes</h2>
+    </div>
+    <div class="faq" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Es un archivo para imprimir o lo podemos usar en el móvil?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>Las dos cosas. Podéis imprimirlo en A4 o llevarlo con vosotros en el móvil o la tablet y marcar cada parada según la vayáis viviendo.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Tenemos que seguir las 68 paradas en orden?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>No. Podéis seguir las cuatro rutas en el orden que queráis, o ir eligiendo la parada según el día y las ganas que tengáis.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Se puede personalizar con nuestros nombres?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>La edición estándar no es personalizable. Si queréis vuestros nombres, fecha de aniversario y una portada propia, tenemos una versión personalizada de Inspired by 68.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Cuánto tarda en llegar tras la compra?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>La descarga es inmediata: recibiréis el enlace por email nada más completar el pago.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>¿Buscáis algo distinto? <a href="/">Volver a 6EIGHT</a></p>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(other => {
+        other.classList.remove('open');
+        other.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+
+<script>
+  // --- Conexión real a la pasarela de pagos (Stripe) ---
+  // Llama al backend en /api/create-checkout-session. Si el backend no está
+  // desplegado todavía (por ejemplo, mientras probáis este archivo suelto en
+  // el navegador), fallará con un aviso claro en vez de fingir que ha
+  // funcionado — así nunca hay una compra "fantasma".
+  async function iniciarPago(productId, opciones = {}) {
+    const boton = document.getElementById('comprarBtn');
+    const errorEl = document.getElementById('comprarError');
+    const textoOriginal = boton.textContent;
+    boton.textContent = 'Redirigiendo al pago...';
+    boton.disabled = true;
+    errorEl.style.display = 'none';
+
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId, ...opciones }),
+      });
+      if (!response.ok) throw new Error('Respuesta no válida del servidor');
+      const { url } = await response.json();
+      window.location.href = url;
+    } catch (err) {
+      errorEl.textContent = 'No hemos podido conectar con la pasarela de pago. (Backend aún no desplegado — ver 6eight-backend/README.md)';
+      errorEl.style.color = 'var(--terracota)';
+      errorEl.style.display = 'block';
+      boton.textContent = textoOriginal;
+      boton.disabled = false;
+    }
+  }
+
+  document.getElementById('comprarBtn').addEventListener('click', () => iniciarPago('inspired-by-68'));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6EIGHT — Experiencias y regalos digitales para parejas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crema:#F7EFE2;
+    --verde:#22362B;
+    --terracota:#B87460;
+    --kraft:#C9A57A;
+    --tinta:#2E302D;
+    --beige2:#EFE5D6;
+    --font-display:'Oswald', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-hand:'Caveat', cursive;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--crema);
+    color:var(--tinta);
+    font-family:var(--font-body);
+    font-size:17px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 20px;}
+  h1,h2,h3{font-family:var(--font-display); font-weight:600; line-height:1.12; letter-spacing:.2px;}
+  .eyebrow-hand{font-family:var(--font-hand); font-size:1.35rem; color:var(--terracota); display:inline-block; transform:rotate(-2deg);}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible, input:focus-visible{
+    outline:2px solid var(--terracota); outline-offset:3px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--crema);
+    border-bottom:1px solid rgba(46,48,45,.12);
+  }
+  .header-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 20px;
+  }
+  .logo{
+    font-family:var(--font-display);
+    font-size:1.5rem; font-weight:700; letter-spacing:.5px;
+    display:flex; align-items:baseline; gap:2px;
+  }
+  .logo .six{color:var(--terracota);}
+  nav.main-nav{display:none;}
+  .header-icons{display:flex; align-items:center; gap:18px;}
+  .icon-btn{width:22px; height:22px; color:var(--verde);}
+  .hamburger{display:flex; flex-direction:column; gap:5px; width:24px;}
+  .hamburger span{height:2px; background:var(--verde); border-radius:2px;}
+
+  @media(min-width:860px){
+    nav.main-nav{display:flex; gap:34px; font-size:.98rem; font-weight:500;}
+    nav.main-nav a{position:relative; padding-bottom:4px;}
+    nav.main-nav a:hover{color:var(--terracota);}
+    .hamburger{display:none;}
+  }
+
+  /* mobile menu */
+  #mobileMenu{
+    display:none; flex-direction:column; gap:2px;
+    padding:6px 20px 22px;
+    border-bottom:1px solid rgba(46,48,45,.12);
+  }
+  #mobileMenu.open{display:flex;}
+  #mobileMenu a{padding:12px 0; font-size:1.05rem; border-bottom:1px solid rgba(46,48,45,.08);}
+
+  /* ---------- SECTION SPACING ---------- */
+  section{padding:64px 0;}
+  @media(min-width:860px){ section{padding:100px 0;} }
+  .section-head{max-width:560px; margin-bottom:36px;}
+  .section-head h2{font-size:1.9rem;}
+  @media(min-width:860px){ .section-head h2{font-size:2.5rem;} }
+
+  /* ---------- HERO ---------- */
+  .hero{padding-top:44px; padding-bottom:20px;}
+  .hero-grid{display:flex; flex-direction:column; gap:36px;}
+  @media(min-width:960px){
+    .hero-grid{flex-direction:row; align-items:center; gap:60px;}
+    .hero-text{flex:0 0 46%;}
+    .hero-visual{flex:1;}
+  }
+  .hero-text h1{font-size:2.5rem; margin-bottom:18px;}
+  @media(min-width:640px){ .hero-text h1{font-size:3.1rem;} }
+  .hero-text p{font-size:1.08rem; color:rgba(46,48,45,.82); max-width:44ch; margin-bottom:28px;}
+  .btn-row{display:flex; flex-direction:column; gap:14px;}
+  @media(min-width:480px){ .btn-row{flex-direction:row;} }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:15px 26px; font-weight:600; font-size:.98rem;
+    border-radius:2px; transition:transform .15s ease, background .2s ease;
+  }
+  .btn-primary{background:var(--verde); color:var(--crema);}
+  .btn-primary:hover{background:#1a2921;}
+  .btn-secondary{background:transparent; color:var(--verde); border:1.5px solid var(--verde);}
+  .btn-secondary:hover{background:rgba(34,54,43,.06);}
+  .btn:active{transform:scale(.98);}
+
+  /* scrapbook hero visual */
+  .hero-visual{position:relative; height:340px;}
+  @media(min-width:640px){ .hero-visual{height:400px;} }
+  .polaroid{
+    position:absolute; background:#fff; padding:10px 10px 34px;
+    box-shadow:0 10px 24px rgba(46,48,45,.18);
+  }
+  .polaroid .photo{width:150px; height:150px; background:linear-gradient(135deg,#C9A57A,#8f7250);}
+  .polaroid .cap{font-family:var(--font-hand); font-size:1.1rem; color:var(--tinta); text-align:center; margin-top:8px;}
+  .p1{top:6%; left:4%; transform:rotate(-6deg); z-index:3;}
+  .p2{top:24%; left:38%; transform:rotate(4deg); z-index:2;}
+  .p2 .photo{background:linear-gradient(135deg,#B87460,#6f463a);}
+  .p3{top:2%; left:60%; transform:rotate(8deg); z-index:1;}
+  .p3 .photo{width:120px; height:120px; background:linear-gradient(135deg,#22362B,#4a6350);}
+  .tape{
+    position:absolute; width:70px; height:24px; background:rgba(201,165,122,.7);
+    box-shadow:0 2px 4px rgba(0,0,0,.08);
+  }
+  .t1{top:0; left:10%; transform:rotate(-18deg);}
+  .t2{top:20%; left:44%; transform:rotate(12deg);}
+  .route-line{position:absolute; bottom:0; left:0; width:100%; height:90px;}
+
+  /* ---------- PRODUCTO ESTRELLA ---------- */
+  .producto-band{background:var(--verde); color:var(--crema);}
+  .producto-grid{display:flex; flex-direction:column; gap:34px;}
+  @media(min-width:960px){ .producto-grid{flex-direction:row; align-items:center; gap:60px;} }
+  .producto-text{flex:0 0 42%;}
+  .producto-text .eyebrow-hand{color:var(--kraft);}
+  .producto-text h2{font-size:2.1rem; margin:12px 0 16px; color:var(--crema);}
+  @media(min-width:640px){ .producto-text h2{font-size:2.6rem;} }
+  .producto-text p{color:rgba(247,239,226,.82); margin-bottom:26px; max-width:42ch;}
+  .why68{font-size:.95rem; color:var(--kraft); border-bottom:1px solid var(--kraft); padding-bottom:2px;}
+
+  .paginas{flex:1; position:relative; display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  .pagina{
+    background:var(--crema); color:var(--tinta); aspect-ratio:3/4;
+    padding:16px; display:flex; flex-direction:column; justify-content:space-between;
+    box-shadow:0 14px 30px rgba(0,0,0,.25);
+  }
+  .pagina:nth-child(2){transform:translateY(-16px);}
+  .pagina .num{font-family:var(--font-display); font-size:1.4rem; color:var(--terracota);}
+  .pagina .linea{height:1px; background:rgba(46,48,45,.15); margin:6px 0;}
+  .pagina .txt{font-size:.72rem; color:rgba(46,48,45,.7); line-height:1.4;}
+  .pagina .sello{
+    align-self:flex-end; width:34px; height:34px; border-radius:50%;
+    border:1.5px dashed var(--terracota); display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-size:.75rem; color:var(--terracota);
+  }
+
+  /* ---------- ELIGE QUE NECESITAS ---------- */
+  .necesitas-grid{display:grid; grid-template-columns:1fr; gap:16px;}
+  @media(min-width:640px){ .necesitas-grid{grid-template-columns:1fr 1fr;} }
+  @media(min-width:960px){ .necesitas-grid{grid-template-columns:repeat(3,1fr);} }
+  .necesita-card{
+    background:var(--beige2); padding:26px 22px; border-left:3px solid var(--terracota);
+    transition:background .2s ease;
+  }
+  .necesita-card:hover{background:#e9ddc8;}
+  .necesita-card h3{font-size:1.15rem; margin-bottom:8px; color:var(--verde);}
+  .necesita-card p{font-size:.92rem; color:rgba(46,48,45,.72);}
+
+  /* ---------- PERSONALIZADOS ---------- */
+  .personalizados{display:flex; flex-direction:column; gap:40px;}
+  @media(min-width:960px){ .personalizados{flex-direction:row; gap:70px;} }
+  .personalizados-visual{flex:0 0 40%; position:relative;}
+  .stack-card{
+    background:#fff; padding:18px 18px 40px; box-shadow:0 12px 26px rgba(46,48,45,.15);
+    max-width:280px; margin:0 auto;
+  }
+  .stack-card .photo{width:100%; height:180px; background:linear-gradient(135deg,#B87460,#22362B);}
+  .stack-card .cap{font-family:var(--font-hand); font-size:1.3rem; text-align:center; margin-top:12px;}
+  .steps{flex:1; display:flex; flex-direction:column; gap:22px;}
+  .step{display:flex; gap:16px;}
+  .step-n{
+    font-family:var(--font-display); font-size:1.1rem; color:var(--terracota);
+    border:1.5px solid var(--terracota); border-radius:50%; width:34px; height:34px;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .step h3{font-size:1.05rem; margin-bottom:4px;}
+  .step p{font-size:.92rem; color:rgba(46,48,45,.72);}
+
+  /* ---------- JUGAR GRATIS ---------- */
+  .jugar{background:var(--beige2);}
+  .jugar-grid{display:flex; flex-direction:column; gap:22px;}
+  @media(min-width:860px){ .jugar-grid{flex-direction:row; align-items:stretch;} }
+  .juego-card{
+    background:var(--crema); padding:30px; flex:1; display:flex; flex-direction:column;
+    box-shadow:0 8px 18px rgba(46,48,45,.08);
+  }
+  .juego-card h3{font-size:1.2rem; margin-bottom:14px;}
+  #pregunta-texto{
+    font-family:var(--font-hand); font-size:1.5rem; color:var(--verde);
+    min-height:80px; display:flex; align-items:center;
+  }
+  .otra-btn{margin-top:16px; align-self:flex-start;}
+  .otra-btn{background:var(--verde); color:var(--crema); padding:11px 20px; font-size:.9rem; font-weight:600;}
+  .otra-btn:hover{background:#1a2921;}
+  .mini-tools{display:flex; flex-direction:column; gap:14px; justify-content:center;}
+  .mini-tool{
+    background:var(--crema); padding:18px 20px; display:flex; align-items:center; justify-content:space-between;
+    box-shadow:0 6px 14px rgba(46,48,45,.06);
+  }
+  .mini-tool span{font-size:.95rem; font-weight:500;}
+  .mini-tool .arrow{color:var(--terracota); font-size:1.2rem;}
+
+  /* ---------- HISTORIA 68 ---------- */
+  .historia{display:flex; flex-direction:column; gap:36px; align-items:center;}
+  @media(min-width:860px){ .historia{flex-direction:row; gap:60px; align-items:center;} }
+  .historia-visual{flex:0 0 240px;}
+  .historia-text{flex:1;}
+  .historia-text .eyebrow-hand{margin-bottom:10px;}
+  .historia-text p{max-width:52ch; color:rgba(46,48,45,.82); margin-bottom:22px;}
+  .historia-text blockquote{
+    font-family:var(--font-hand); font-size:1.5rem; color:var(--terracota);
+    border-left:3px solid var(--kraft); padding-left:16px; margin-bottom:22px;
+  }
+
+  /* ---------- NEWSLETTER ---------- */
+  .newsletter{background:var(--verde); color:var(--crema); text-align:center;}
+  .newsletter .wrap{max-width:560px;}
+  .newsletter h2{font-size:1.9rem; margin-bottom:10px; color:var(--crema);}
+  .newsletter p{color:rgba(247,239,226,.78); margin-bottom:28px;}
+  .newsletter-form{display:flex; flex-direction:column; gap:12px; max-width:400px; margin:0 auto;}
+  @media(min-width:520px){ .newsletter-form{flex-direction:row;} }
+  .newsletter-form input{
+    flex:1; padding:14px 16px; border:none; background:rgba(247,239,226,.12);
+    color:var(--crema); font-family:inherit; font-size:1rem; border:1px solid rgba(247,239,226,.35);
+  }
+  .newsletter-form input::placeholder{color:rgba(247,239,226,.55);}
+  .newsletter-form button{background:var(--terracota); color:var(--crema); padding:14px 24px; font-weight:600;}
+  .newsletter-form button:hover{background:#a3634f;}
+  .newsletter-note{font-size:.78rem; color:rgba(247,239,226,.55); margin-top:14px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:50px 0 30px; border-top:1px solid rgba(46,48,45,.12);}
+  .footer-grid{display:grid; grid-template-columns:1fr; gap:30px;}
+  @media(min-width:640px){ .footer-grid{grid-template-columns:repeat(4,1fr);} }
+  .footer-grid h4{font-size:.85rem; margin-bottom:12px; color:var(--verde);}
+  .footer-grid a{display:block; font-size:.88rem; color:rgba(46,48,45,.68); margin-bottom:8px;}
+  .footer-grid a:hover{color:var(--terracota);}
+  .footer-bottom{margin-top:40px; font-size:.8rem; color:rgba(46,48,45,.5); display:flex; flex-direction:column; gap:6px;}
+  @media(min-width:640px){ .footer-bottom{flex-direction:row; justify-content:space-between;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner wrap">
+    <a href="#" class="logo"><span class="six">6</span>EIGHT</a>
+    <nav class="main-nav">
+      <a href="#">Inicio</a>
+      <a href="/tienda">Tienda</a>
+      <a href="#personalizados">Personalizados</a>
+      <a href="#producto">Inspired by 68</a>
+      <a href="#jugar">Jugar gratis</a>
+      <a href="/preguntas-para-parejas">Ideas</a>
+      <a href="/sobre-6eight">Sobre 6EIGHT</a>
+    </nav>
+    <div class="header-icons">
+      <svg class="icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <svg class="icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"/></svg>
+      <svg class="icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16l-1.5 12h-13z"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/></svg>
+      <button class="hamburger" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div id="mobileMenu">
+    <a href="#">Inicio</a>
+    <a href="/tienda">Tienda</a>
+    <a href="#personalizados">Personalizados</a>
+    <a href="#producto">Inspired by 68</a>
+    <a href="#jugar">Jugar gratis</a>
+    <a href="/preguntas-para-parejas">Ideas</a>
+    <a href="/sobre-6eight">Sobre 6EIGHT</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <h1>No regales otra cosa.<br>Regala algo que vais a vivir.</h1>
+      <p>Juegos, experiencias y recuerdos personalizados para parejas que todavía quieren seguir descubriéndose.</p>
+      <div class="btn-row">
+        <a href="#producto" class="btn btn-primary">Descubrir la colección</a>
+        <a href="#personalizados" class="btn btn-secondary">Crear algo personalizado</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="tape t1"></div>
+      <div class="tape t2"></div>
+      <div class="polaroid p3"><div class="photo"></div></div>
+      <div class="polaroid p2"><div class="photo"></div><div class="cap">parada 24</div></div>
+      <div class="polaroid p1"><div class="photo"></div><div class="cap">parada 7</div></div>
+      <svg class="route-line" viewBox="0 0 400 90" preserveAspectRatio="none">
+        <path d="M0,70 C80,20 160,90 240,40 C300,10 340,60 400,30" fill="none" stroke="#22362B" stroke-width="2" stroke-dasharray="1,10" stroke-linecap="round"/>
+        <circle cx="240" cy="40" r="5" fill="#B87460"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTO ESTRELLA -->
+<section class="producto-band" id="producto">
+  <div class="wrap producto-grid">
+    <div class="producto-text">
+      <span class="eyebrow-hand">Inspired by 68</span>
+      <h2>68 paradas.<br>Una historia que todavía sigue moviéndose.</h2>
+      <p>Un libro-experiencia para parejas, dividido en cuatro rutas: volver a arrancar, salir del camino conocido, conversaciones con vistas y carretera abierta. Cada parada es algo que se vive, no algo que se lee.</p>
+      <div class="btn-row">
+        <a href="#" class="btn btn-primary" style="background:var(--terracota);">Descubrir Inspired by 68</a>
+      </div>
+      <p style="margin-top:20px;"><a href="#historia" class="why68">¿Por qué 68?</a></p>
+    </div>
+    <div class="paginas">
+      <div class="pagina">
+        <div><div class="num">07</div><div class="linea"></div><div class="txt">Ruta 1 — Volver a arrancar. Una experiencia para hoy, sin planearla demasiado.</div></div>
+        <div class="sello">68</div>
+      </div>
+      <div class="pagina">
+        <div><div class="num">24</div><div class="linea"></div><div class="txt">Ruta 2 — Salir del camino conocido. Anécdota para escribir juntos.</div></div>
+        <div class="sello">68</div>
+      </div>
+      <div class="pagina">
+        <div><div class="num">51</div><div class="linea"></div><div class="txt">Ruta 4 — Carretera abierta. Reflexión y valoración de la parada.</div></div>
+        <div class="sello">68</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ELIGE QUE NECESITAS -->
+<section id="necesitas">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>¿Qué necesitáis ahora mismo?</h2>
+    </div>
+    <div class="necesitas-grid">
+      <a href="#" class="necesita-card"><h3>Salir de la rutina</h3><p>Planes y experiencias para dejar de repetir el mismo fin de semana.</p></a>
+      <a href="#" class="necesita-card"><h3>Hacerle un regalo</h3><p>Algo que se recuerde más que se guarde en un cajón.</p></a>
+      <a href="#personalizados" class="necesita-card"><h3>Algo personalizado</h3><p>Con vuestros nombres, vuestra fecha, vuestra historia.</p></a>
+      <a href="/juegos-para-parejas" class="necesita-card"><h3>Un juego para esta noche</h3><p>Listo en cinco minutos, sin instrucciones complicadas.</p></a>
+      <a href="/generador-citas" class="necesita-card"><h3>Organizar vuestras citas</h3><p>Calendarios y cuponeras para no volver a decir "lo que sea".</p></a>
+      <a href="/preguntas-para-parejas" class="necesita-card"><h3>Descargar algo gratis</h3><p>Doce preguntas para salir de la conversación de siempre.</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONALIZADOS -->
+<section id="personalizados" style="background:var(--beige2);">
+  <div class="wrap personalizados">
+    <div class="personalizados-visual">
+      <div class="stack-card">
+        <div class="photo"></div>
+        <div class="cap">Marta &amp; Diego — 14.03.2019</div>
+      </div>
+    </div>
+    <div class="steps" style="flex:1;">
+      <div class="section-head" style="margin-bottom:8px;">
+        <h2>Vuestra historia no debería parecerse a ninguna otra.</h2>
+      </div>
+      <div class="step">
+        <div class="step-n">1</div>
+        <div><h3>Elige</h3><p>El producto que mejor encaja con lo que queréis vivir.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div><h3>Contadnos vuestra historia</h3><p>Nombres, fechas, lugares, alguna anécdota que solo vosotros entendéis.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div><h3>Recibid vuestro diseño</h3><p>Listo para imprimir o para abrir juntos en pantalla.</p></div>
+      </div>
+      <div>
+        <a href="#" class="btn btn-primary">Crear el nuestro</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JUGAR GRATIS -->
+<section class="jugar" id="jugar">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow-hand">Antes de comprar nada, jugad</span>
+      <h2 style="margin-top:8px;">Jugar gratis</h2>
+    </div>
+    <div class="jugar-grid">
+      <div class="juego-card">
+        <h3>Pregunta del día</h3>
+        <p id="pregunta-texto">"¿Qué pequeño hábito mío empezaste a hacer tú sin darte cuenta?"</p>
+        <button class="btn otra-btn" id="otraPreguntaBtn">Otra pregunta</button>
+      </div>
+      <div class="mini-tools">
+        <a href="/generador-citas" class="mini-tool"><span>Generador de citas</span><span class="arrow">→</span></a>
+        <a href="/test-lenguaje-del-amor" class="mini-tool"><span>Test del lenguaje del amor</span><span class="arrow">→</span></a>
+        <a href="#" class="mini-tool"><span>Ruleta de citas</span><span class="arrow">→</span></a>
+        <a href="#" class="mini-tool"><span>Bingo de pareja</span><span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORIA 68 -->
+<section id="historia">
+  <div class="wrap historia">
+    <div class="historia-visual">
+      <svg viewBox="0 0 220 220" width="220" height="220">
+        <rect x="30" y="90" width="140" height="50" rx="4" fill="#22362B"/>
+        <rect x="45" y="65" width="90" height="35" rx="4" fill="#22362B"/>
+        <rect x="55" y="72" width="30" height="22" fill="#F7EFE2"/>
+        <rect x="95" y="72" width="30" height="22" fill="#F7EFE2"/>
+        <circle cx="60" cy="142" r="14" fill="#2E302D"/>
+        <circle cx="140" cy="142" r="14" fill="#2E302D"/>
+        <rect x="145" y="100" width="20" height="14" fill="#B87460"/>
+        <text x="148" y="111" font-family="Oswald" font-size="11" fill="#F7EFE2">68</text>
+        <path d="M10,180 C60,160 140,200 210,170" fill="none" stroke="#C9A57A" stroke-width="2" stroke-dasharray="1,8" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="historia-text">
+      <span class="eyebrow-hand">Por qué 68</span>
+      <blockquote>"Hay números que cuentan. Y otros que, además, nos llevan a algún sitio."</blockquote>
+      <p>Antes de convertirse en esta marca, 68 fue el número del taxi de mi padre. Durante años significó carretera, trayectos, historias y personas. Con el tiempo entendí que las relaciones también necesitan movimiento: cuando dejamos de descubrir cosas juntos, podemos acabar viviendo en piloto automático. De ahí nace Inspired by 68.</p>
+      <a href="/sobre-6eight" class="btn btn-secondary">Conocer la historia</a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="wrap">
+    <h2>Una idea para los dos, de vez en cuando.</h2>
+    <p>Planes, preguntas y descargables para cuando no sepáis qué hacer juntos.</p>
+    <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Ya estás dentro';">
+      <input type="email" placeholder="tuemail@ejemplo.com" required aria-label="Correo electrónico">
+      <button type="submit">Me apunto</button>
+    </form>
+    <p class="newsletter-note">Sin spam. Podéis salir cuando queráis.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Tienda</h4>
+        <a href="/inspired-by-68">Inspired by 68</a>
+        <a href="/crea-el-vuestro">Personalizados</a>
+        <a href="#">Regalos digitales</a>
+        <a href="#">Novedades</a>
+      </div>
+      <div>
+        <h4>La Guantera</h4>
+        <a href="/preguntas-para-parejas">Ideas para citas</a>
+        <a href="/preguntas-para-parejas">Preguntas para parejas</a>
+        <a href="/juegos-para-parejas">Juegos</a>
+        <a href="#">Regalos</a>
+      </div>
+      <div>
+        <h4>6EIGHT</h4>
+        <a href="/sobre-6eight">Por qué 68</a>
+        <a href="mailto:hola@6eight.es">Contacto</a>
+        <a href="/preguntas-frecuentes">Preguntas frecuentes</a>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <a href="#">Privacidad</a>
+        <a href="#">Términos</a>
+        <a href="#">Licencia de uso</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 6EIGHT</span>
+      <span>Hecho para parejas que todavía quieren descubrirse</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  const preguntas = [
+    '¿Qué pequeño hábito mío empezaste a hacer tú sin darte cuenta?',
+    '¿Cuál fue el momento en el que supiste que esto iba en serio?',
+    '¿Qué plan pequeño te haría más ilusión repetir este mes?',
+    '¿Qué cosa nuestra le contarías a nuestros hijos, o a un amigo, sin dudarlo?',
+    '¿Qué conversación llevamos tiempo posponiendo?',
+    '¿Qué lugar nos falta por descubrir juntos, cerca de casa?',
+    '¿Qué recuerdo cambiarías si pudieras revivirlo exactamente igual?',
+    '¿Qué es lo que más ha cambiado de nosotros en el último año, para bien?'
+  ];
+  let lastIndex = -1;
+  const preguntaEl = document.getElementById('pregunta-texto');
+  document.getElementById('otraPreguntaBtn').addEventListener('click', () => {
+    let i;
+    do { i = Math.floor(Math.random() * preguntas.length); } while (i === lastIndex);
+    lastIndex = i;
+    preguntaEl.textContent = '"' + preguntas[i] + '"';
+  });
+</script>
+
+</body>
+</html>

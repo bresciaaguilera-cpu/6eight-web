@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test: ¿cuál es vuestro lenguaje del amor? | 6EIGHT</title>
+<meta name="description" content="Descubrid en 8 preguntas cómo dais y recibís cariño cada uno, y qué podéis hacer con esa información como pareja.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crema:#F7EFE2; --verde:#22362B; --terracota:#B87460; --kraft:#C9A57A; --tinta:#2E302D; --beige2:#EFE5D6;
+    --font-display:'Oswald', sans-serif; --font-body:'Inter', sans-serif; --font-hand:'Caveat', cursive;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--crema); color:var(--tinta); font-family:var(--font-body); font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+  h1,h2,h3{font-family:var(--font-display); font-weight:600; line-height:1.18;}
+  .wrap{max-width:640px; margin:0 auto; padding:0 20px;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--terracota); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+
+  header{position:sticky; top:0; z-index:50; background:var(--crema); border-bottom:1px solid rgba(46,48,45,.12);}
+  .header-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 20px; max-width:900px; margin:0 auto;}
+  .logo{font-family:var(--font-display); font-size:1.4rem; font-weight:700;}
+  .logo .six{color:var(--terracota);}
+  .back-link{font-size:.9rem; color:var(--verde); font-weight:500;}
+
+  .intro{padding:40px 0 10px; text-align:center;}
+  .intro .eyebrow-hand{font-family:var(--font-hand); font-size:1.4rem; color:var(--terracota);}
+  .intro h1{font-size:1.9rem; margin:8px 0 12px;}
+  @media(min-width:640px){ .intro h1{font-size:2.3rem;} }
+  .intro p{color:rgba(46,48,45,.72); font-size:.98rem; max-width:48ch; margin:0 auto 22px;}
+  .btn{display:inline-flex; align-items:center; justify-content:center; padding:15px 26px; font-weight:600; font-size:.98rem; border-radius:2px; transition:background .2s ease, transform .15s ease;}
+  .btn-primary{background:var(--verde); color:var(--crema);}
+  .btn-primary:hover{background:#1a2921;}
+  .btn:active{transform:scale(.98);}
+
+  .progress-wrap{padding:20px 0 6px;}
+  .progress-bar{height:3px; background:rgba(46,48,45,.15); position:relative;}
+  .progress-bar-fill{height:100%; background:var(--terracota); width:0%; transition:width .3s ease;}
+  .progress-label{font-size:.78rem; color:rgba(46,48,45,.5); margin-top:8px; text-align:right;}
+
+  .pantalla{display:none; padding-bottom:50px;}
+  .pantalla.active{display:block;}
+
+  .pregunta h2{font-size:1.3rem; margin-bottom:26px; line-height:1.4;}
+  .opciones{display:flex; flex-direction:column; gap:12px;}
+  .opcion{
+    text-align:left; padding:18px 20px; background:var(--beige2); border:1.5px solid transparent; font-size:.97rem; transition:all .15s ease;
+  }
+  .opcion:hover{border-color:var(--terracota);}
+
+  .resultado-sello{width:80px; height:80px; border-radius:50%; border:2px solid var(--terracota); margin:0 auto 22px;
+    display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:.9rem; color:var(--terracota); text-align:center; line-height:1.2;}
+  .resultado h2{font-size:1.7rem; text-align:center; margin-bottom:10px;}
+  .resultado .subtitulo{text-align:center; color:var(--terracota); font-family:var(--font-hand); font-size:1.3rem; margin-bottom:26px;}
+  .resultado-desc{background:var(--beige2); padding:24px 22px; margin-bottom:20px;}
+  .resultado-desc p{font-size:.95rem; color:rgba(46,48,45,.8);}
+  .resultado-segundo{font-size:.88rem; color:rgba(46,48,45,.6); text-align:center; margin-bottom:30px;}
+  .resultado-cta{background:var(--verde); color:var(--crema); padding:30px 26px; text-align:center;}
+  .resultado-cta .eyebrow-hand{font-family:var(--font-hand); font-size:1.15rem; color:var(--kraft);}
+  .resultado-cta h3{font-size:1.15rem; margin:8px 0 10px; color:var(--crema);}
+  .resultado-cta p{color:rgba(247,239,226,.82); font-size:.9rem; margin-bottom:18px; max-width:42ch; margin-left:auto; margin-right:auto;}
+  .resultado-cta .btn-primary{background:var(--terracota);}
+  .resultado-cta .btn-primary:hover{background:#a3634f;}
+  .reiniciar{display:block; text-align:center; margin-top:20px; font-size:.85rem; color:rgba(46,48,45,.5); text-decoration:underline;}
+
+  footer{padding:34px 0; text-align:center; font-size:.85rem; color:rgba(46,48,45,.55); border-top:1px solid rgba(46,48,45,.12); margin-top:20px;}
+  footer a{color:var(--verde); font-weight:600;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo"><span class="six">6</span>EIGHT</a>
+    <a href="/" class="back-link">← Volver a 6EIGHT</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- INTRO -->
+  <div class="pantalla active" data-pantalla="intro">
+    <div class="intro">
+      <span class="eyebrow-hand">Jugar gratis</span>
+      <h1>¿Cuál es vuestro lenguaje del amor?</h1>
+      <p>8 preguntas rápidas para descubrir cómo das y recibes cariño — y qué hacer con esa información en pareja. Sin registro, dos minutos.</p>
+      <button class="btn btn-primary" id="empezarBtn">Empezar el test</button>
+    </div>
+  </div>
+
+  <!-- TEST -->
+  <div class="pantalla" data-pantalla="test">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+      <div class="progress-label" id="progressLabel">Pregunta 1 de 8</div>
+    </div>
+    <div class="pregunta">
+      <h2 id="preguntaTexto"></h2>
+      <div class="opciones" id="opcionesContainer"></div>
+    </div>
+  </div>
+
+  <!-- RESULTADO -->
+  <div class="pantalla" data-pantalla="resultado">
+    <div class="resultado" style="padding-top:20px;">
+      <div class="resultado-sello" id="resultadoSello">68</div>
+      <h2 id="resultadoTitulo"></h2>
+      <p class="subtitulo" id="resultadoSubtitulo"></p>
+      <div class="resultado-desc"><p id="resultadoDesc"></p></div>
+      <p class="resultado-segundo" id="resultadoSegundo"></p>
+
+      <div class="resultado-cta">
+        <span class="eyebrow-hand">Para poner esto en práctica</span>
+        <h3 id="ctaTitulo"></h3>
+        <p id="ctaDesc"></p>
+        <a href="#" id="ctaBoton" class="btn btn-primary">Ver producto</a>
+      </div>
+      <button class="reiniciar" id="reiniciarBtn">Volver a hacer el test</button>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>¿Preferís un plan a un test? <a href="/generador-citas">Probad el generador de citas</a></p>
+</footer>
+
+<script>
+  const preguntas = [
+    { texto: '¿Qué os hace sentir más queridos un día cualquiera?', opciones: [
+      {t:'Que me digan algo bonito, sin más motivo', l:'palabras'},
+      {t:'Que se ocupen de algo para hacerme la vida más fácil', l:'actos'},
+      {t:'Un mensaje o un detalle inesperado, aunque sea pequeño', l:'regalos'},
+      {t:'Que dejen el móvil y me presten atención de verdad', l:'tiempo'},
+      {t:'Un abrazo o que me cojan la mano sin razón', l:'contacto'},
+    ]},
+    { texto: 'Si tuvierais una tarde libre juntos, ¿qué agradeceríais más?', opciones: [
+      {t:'Que me digan lo bien que lo estoy haciendo últimamente', l:'palabras'},
+      {t:'Que se encarguen de algo pendiente sin que lo pida', l:'actos'},
+      {t:'Que aparezcan con algo que sabían que me iba a gustar', l:'regalos'},
+      {t:'Pasarla juntos, sin planes ni distracciones', l:'tiempo'},
+      {t:'Estar cerca físicamente, aunque sea sin hacer nada especial', l:'contacto'},
+    ]},
+    { texto: '¿Qué es lo que más echáis de menos si vuestra pareja está fuera unos días?', opciones: [
+      {t:'Escuchar su voz diciéndome cosas bonitas', l:'palabras'},
+      {t:'Que resuelva cosas del día a día que ahora me tocan a mí', l:'actos'},
+      {t:'Que me sorprenda con algo al volver', l:'regalos'},
+      {t:'Simplemente estar en la misma habitación', l:'tiempo'},
+      {t:'El contacto físico, un abrazo al llegar', l:'contacto'},
+    ]},
+    { texto: 'Cuando algo os sale mal, ¿qué apoyo os reconforta más?', opciones: [
+      {t:'Que me digan que confían en mí y en que lo voy a resolver', l:'palabras'},
+      {t:'Que se pongan a ayudarme directamente con el problema', l:'actos'},
+      {t:'Que me traigan algo que me guste para animarme', l:'regalos'},
+      {t:'Que se sienten conmigo y me escuchen sin prisa', l:'tiempo'},
+      {t:'Un abrazo largo, antes que cualquier palabra', l:'contacto'},
+    ]},
+    { texto: '¿Cómo demostráis vosotros el cariño, casi sin pensarlo?', opciones: [
+      {t:'Diciendo lo que admiro o agradezco del otro', l:'palabras'},
+      {t:'Haciendo cosas por la otra persona sin que las pida', l:'actos'},
+      {t:'Trayendo pequeños detalles o sorpresas', l:'regalos'},
+      {t:'Buscando tiempo a solas juntos', l:'tiempo'},
+      {t:'Con contacto físico — abrazos, caricias, cercanía', l:'contacto'},
+    ]},
+    { texto: '¿Qué gesto de una pareja os parece más significativo, visto desde fuera?', opciones: [
+      {t:'Una carta o un mensaje bien pensado', l:'palabras'},
+      {t:'Uno haciendo algo tedioso para ahorrárselo al otro', l:'actos'},
+      {t:'Un regalo que demuestra que le conoce de verdad', l:'regalos'},
+      {t:'Una escapada solo para ellos dos', l:'tiempo'},
+      {t:'Cogerse de la mano sin ni darse cuenta', l:'contacto'},
+    ]},
+    { texto: '¿Qué os dolería más que faltara en una relación?', opciones: [
+      {t:'Que nunca me dijeran lo que sienten en voz alta', l:'palabras'},
+      {t:'Que nunca se implicaran en el día a día', l:'actos'},
+      {t:'Que se olvidaran siempre de las fechas importantes', l:'regalos'},
+      {t:'Que nunca hubiera tiempo solo para nosotros', l:'tiempo'},
+      {t:'Que faltara la cercanía física', l:'contacto'},
+    ]},
+    { texto: 'Por último: si solo pudierais elegir un tipo de "buenos días", ¿cuál sería?', opciones: [
+      {t:'Un mensaje bonito nada más despertar', l:'palabras'},
+      {t:'Que ya esté hecho el café cuando me levante', l:'actos'},
+      {t:'Encontrarme una nota o un detalle en la mesa', l:'regalos'},
+      {t:'Desayunar juntos, sin prisa', l:'tiempo'},
+      {t:'Un abrazo antes de levantarnos de la cama', l:'contacto'},
+    ]},
+  ];
+
+  const resultados = {
+    palabras: {
+      titulo: 'Palabras de afirmación',
+      subtitulo: 'Lo que se dice, importa',
+      desc: 'Necesitáis escuchar el cariño, no solo sentirlo. Un "lo estás haciendo muy bien" o un "esto me gusta de ti" os llega más hondo de lo que la otra persona a veces imagina. El silencio, aunque no signifique nada malo, se puede sentir como distancia.',
+      ctaTitulo: 'Escribidlo, no solo lo penséis',
+      ctaDesc: '100 preguntas para parejas os da la excusa perfecta para decir en voz alta lo que normalmente os calláis.',
+      ctaHref: 'preguntas-para-parejas.html', ctaTexto: 'Ver preguntas para parejas',
+    },
+    actos: {
+      titulo: 'Actos de servicio',
+      subtitulo: 'Las acciones hablan más alto',
+      desc: 'Para vosotros, el amor se demuestra haciendo, no solo diciendo. Que el otro se ocupe de algo sin que se lo pidáis pesa más que cualquier frase bonita. Cuidado: es fácil sentir que "no se hace lo suficiente" aunque sí haya cariño de por medio.',
+      ctaTitulo: 'Convertid los gestos en costumbre',
+      ctaDesc: 'Inspired by 68 tiene paradas pensadas justo para esto: pequeñas acciones que se convierten en hábito.',
+      ctaHref: 'inspired-by-68.html', ctaTexto: 'Descubrir Inspired by 68',
+    },
+    regalos: {
+      titulo: 'Recibir detalles',
+      subtitulo: 'No es el precio, es la intención',
+      desc: 'No se trata de lo caro que sea, sino de que alguien haya pensado en vosotros al elegirlo. Un detalle pequeño pero acertado dice "te conozco" de una forma que las palabras a veces no consiguen.',
+      ctaTitulo: 'Un regalo que sea solo vuestro',
+      ctaDesc: 'Con vuestros nombres, vuestra fecha y vuestra historia — no un objeto genérico.',
+      ctaHref: 'crea-el-vuestro.html', ctaTexto: 'Crear un regalo personalizado',
+    },
+    tiempo: {
+      titulo: 'Tiempo de calidad',
+      subtitulo: 'Presencia real, sin distracciones',
+      desc: 'Lo que más os llena es la atención completa del otro: sin móvil, sin prisa, sin medio pensar en otra cosa. Un rato corto pero presente vale más que una tarde entera compartiendo espacio sin compartir atención.',
+      ctaTitulo: 'Reservad ese tiempo, de verdad',
+      ctaDesc: 'Dejad que el generador de citas os proponga un plan para desconectar del resto durante un rato.',
+      ctaHref: 'generador-citas.html', ctaTexto: 'Probar el generador de citas',
+    },
+    contacto: {
+      titulo: 'Contacto físico',
+      subtitulo: 'La cercanía habla primero',
+      desc: 'Un abrazo, una mano cogida sin motivo, estar cerca físicamente — así es como sentís el cariño de forma más directa. No hace falta que sea gran cosa: la constancia del contacto pequeño es lo que más se nota.',
+      ctaTitulo: 'Buscad la cercanía, no solo el plan',
+      ctaDesc: 'Muchas de las 68 paradas de Inspired by 68 están pensadas para estar cerca, no solo para hacer algo.',
+      ctaHref: 'inspired-by-68.html', ctaTexto: 'Descubrir Inspired by 68',
+    },
+  };
+
+  let actual = 0;
+  const conteo = { palabras:0, actos:0, regalos:0, tiempo:0, contacto:0 };
+
+  function mostrarPantalla(nombre){
+    document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('active'));
+    document.querySelector(`[data-pantalla="${nombre}"]`).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  document.getElementById('empezarBtn').addEventListener('click', () => {
+    actual = 0;
+    Object.keys(conteo).forEach(k => conteo[k] = 0);
+    mostrarPantalla('test');
+    renderPregunta();
+  });
+
+  function renderPregunta(){
+    const p = preguntas[actual];
+    document.getElementById('preguntaTexto').textContent = p.texto;
+    document.getElementById('progressLabel').textContent = `Pregunta ${actual+1} de ${preguntas.length}`;
+    document.getElementById('progressFill').style.width = `${(actual/preguntas.length)*100}%`;
+
+    const cont = document.getElementById('opcionesContainer');
+    cont.innerHTML = '';
+    // barajar opciones para que no siempre aparezcan en el mismo orden de lenguaje
+    const opciones = [...p.opciones].sort(() => Math.random() - 0.5);
+    opciones.forEach(op => {
+      const btn = document.createElement('button');
+      btn.className = 'opcion';
+      btn.textContent = op.t;
+      btn.addEventListener('click', () => {
+        conteo[op.l]++;
+        actual++;
+        if(actual < preguntas.length){
+          renderPregunta();
+        } else {
+          mostrarResultado();
+        }
+      });
+      cont.appendChild(btn);
+    });
+  }
+
+  function mostrarResultado(){
+    const ordenado = Object.entries(conteo).sort((a,b) => b[1]-a[1]);
+    const [principal, segundo] = ordenado;
+    const r = resultados[principal[0]];
+    const r2 = resultados[segundo[0]];
+
+    document.getElementById('resultadoTitulo').textContent = r.titulo;
+    document.getElementById('resultadoSubtitulo').textContent = r.subtitulo;
+    document.getElementById('resultadoDesc').textContent = r.desc;
+    document.getElementById('resultadoSegundo').textContent = `Vuestro segundo lenguaje más marcado: ${r2.titulo.toLowerCase()}.`;
+    document.getElementById('ctaTitulo').textContent = r.ctaTitulo;
+    document.getElementById('ctaDesc').textContent = r.ctaDesc;
+    const boton = document.getElementById('ctaBoton');
+    boton.href = r.ctaHref;
+    boton.textContent = r.ctaTexto;
+
+    mostrarPantalla('resultado');
+  }
+
+  document.getElementById('reiniciarBtn').addEventListener('click', () => {
+    mostrarPantalla('intro');
+  });
+</script>
+
+</body>
+</html>

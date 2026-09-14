@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tienda — Experiencias y regalos digitales para parejas | 6EIGHT</title>
+<meta name="description" content="Catálogo de 6EIGHT: experiencias, juegos, calendarios y regalos personalizados para parejas. Descarga inmediata.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crema:#F7EFE2; --verde:#22362B; --terracota:#B87460; --kraft:#C9A57A; --tinta:#2E302D; --beige2:#EFE5D6;
+    --font-display:'Oswald', sans-serif; --font-body:'Inter', sans-serif; --font-hand:'Caveat', cursive;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--crema); color:var(--tinta); font-family:var(--font-body); font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+  h1,h2,h3{font-family:var(--font-display); font-weight:600; line-height:1.15;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 20px;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--terracota); outline-offset:3px;}
+
+  header{position:sticky; top:0; z-index:50; background:var(--crema); border-bottom:1px solid rgba(46,48,45,.12);}
+  .header-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 20px; max-width:1180px; margin:0 auto;}
+  .logo{font-family:var(--font-display); font-size:1.4rem; font-weight:700;}
+  .logo .six{color:var(--terracota);}
+  .back-link{font-size:.9rem; color:var(--verde); font-weight:500;}
+
+  .intro{padding:44px 0 8px; text-align:center;}
+  .intro .eyebrow-hand{font-family:var(--font-hand); font-size:1.35rem; color:var(--terracota);}
+  .intro h1{font-size:2rem; margin:8px 0 10px;}
+  @media(min-width:640px){ .intro h1{font-size:2.5rem;} }
+  .intro p{color:rgba(46,48,45,.72); max-width:52ch; margin:0 auto; font-size:1rem;}
+
+  .filters{
+    display:flex; gap:10px; overflow-x:auto; padding:30px 0 10px; -webkit-overflow-scrolling:touch;
+  }
+  .filters::-webkit-scrollbar{display:none;}
+  .filtro-chip{
+    flex-shrink:0; padding:10px 18px; background:var(--beige2); border-radius:20px; font-size:.88rem; font-weight:600;
+    color:var(--tinta); border:1.5px solid transparent; transition:all .15s ease;
+  }
+  .filtro-chip.active{background:var(--verde); color:var(--crema);}
+  .filtro-chip:hover:not(.active){border-color:var(--terracota);}
+
+  .productos-grid{
+    display:grid; grid-template-columns:1fr; gap:20px; padding:20px 0 70px;
+  }
+  @media(min-width:640px){ .productos-grid{grid-template-columns:1fr 1fr;} }
+  @media(min-width:960px){ .productos-grid{grid-template-columns:repeat(3,1fr);} }
+
+  .producto-card{
+    background:var(--beige2); display:flex; flex-direction:column; overflow:hidden; transition:transform .15s ease;
+  }
+  .producto-card:hover{transform:translateY(-3px);}
+  .producto-card.proximamente{cursor:default;}
+  .card-visual{
+    aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .card-visual .sello{
+    position:absolute; bottom:12px; right:12px; width:36px; height:36px; border-radius:50%;
+    border:1.5px dashed rgba(255,255,255,.8); display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-size:.68rem; color:#fff;
+  }
+  .card-body{padding:20px 22px 24px; display:flex; flex-direction:column; gap:8px; flex:1;}
+  .card-tag{font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--terracota); font-weight:700;}
+  .card-body h3{font-size:1.1rem;}
+  .card-body p{font-size:.87rem; color:rgba(46,48,45,.65); flex:1;}
+  .card-footer{display:flex; align-items:center; justify-content:space-between; margin-top:8px;}
+  .card-precio{font-family:var(--font-display); color:var(--verde); font-size:1.25rem;}
+  .card-precio .antes{font-size:.85rem; color:rgba(46,48,45,.4); text-decoration:line-through; font-weight:400; margin-right:6px;}
+  .btn-mini{background:var(--verde); color:var(--crema); padding:9px 16px; font-size:.82rem; font-weight:600; border-radius:2px;}
+  .btn-mini:hover{background:#1a2921;}
+  .btn-mini.disabled{background:rgba(46,48,45,.15); color:rgba(46,48,45,.5); cursor:default;}
+
+  footer{padding:34px 0; text-align:center; font-size:.85rem; color:rgba(46,48,45,.55); border-top:1px solid rgba(46,48,45,.12);}
+  footer a{color:var(--verde); font-weight:600;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo"><span class="six">6</span>EIGHT</a>
+    <a href="/" class="back-link">← Volver a 6EIGHT</a>
+  </div>
+</header>
+
+<section class="intro wrap">
+  <span class="eyebrow-hand">Tienda</span>
+  <h1>Experiencias, juegos y regalos para parejas</h1>
+  <p>Todo en descarga digital: pagáis, descargáis, lo vivís. Filtrad por lo que buscáis ahora mismo.</p>
+</section>
+
+<div class="wrap">
+  <div class="filters" id="filtros">
+    <button class="filtro-chip active" data-cat="todos">Todos</button>
+    <button class="filtro-chip" data-cat="insignia">Inspired by 68</button>
+    <button class="filtro-chip" data-cat="personalizado">Personalizados</button>
+    <button class="filtro-chip" data-cat="juego">Juegos y calendarios</button>
+    <button class="filtro-chip" data-cat="kit">Kits de regalo</button>
+  </div>
+
+  <div class="productos-grid" id="grid"></div>
+</div>
+
+<footer>
+  <p>¿Buscáis algo personalizado? <a href="/crea-el-vuestro">Crear el nuestro</a></p>
+</footer>
+
+<script>
+  const productos = [
+    {cat:'insignia', nombre:'Inspired by 68', desc:'68 paradas para volver a poner vuestra relación en movimiento.', precio:'9,90 €', antes:'17,90 €', color1:'#22362B', color2:'#B87460', href:'/inspired-by-68'},
+    {cat:'insignia', nombre:'Inspired by 68 — Edición personalizada', desc:'Las 68 paradas con portada y dedicatoria propias.', precio:'24,90 €', color1:'#B87460', color2:'#22362B', href:'/crea-el-vuestro'},
+    {cat:'juego', nombre:'Calendario de 12 citas', desc:'Una cita diferente cada mes, para todo el año.', precio:'14,90 €', color1:'#C9A57A', color2:'#22362B', href:'#'},
+    {cat:'juego', nombre:'Calendario de 52 citas', desc:'Una experiencia nueva cada semana del año.', precio:'19,90 €', color1:'#22362B', color2:'#C9A57A', href:'#'},
+    {cat:'kit', nombre:'Calendario de Adviento para parejas', desc:'24 sorpresas para diciembre, una por día.', precio:'17,90 €', color1:'#B87460', color2:'#C9A57A', href:'/calendario-adviento-parejas'},
+    {cat:'juego', nombre:'Cuponera de experiencias', desc:'20 vales para canjear cuando os apetezca.', precio:'12,90 €', color1:'#C9A57A', color2:'#B87460', href:'#'},
+    {cat:'juego', nombre:'Juego de preguntas para parejas', desc:'100 preguntas para conoceros mejor, en formato imprimible.', precio:'9,90 €', color1:'#22362B', color2:'#B87460', href:'#'},
+    {cat:'juego', nombre:'¿Cuánto me conoces?', desc:'El juego para descubrir cuánto sabéis realmente el uno del otro.', precio:'9,90 €', color1:'#B87460', color2:'#22362B', href:'#'},
+    {cat:'kit', nombre:'Kit noche de cita en casa', desc:'Todo lo necesario para una cita sin salir de casa.', precio:'14,90 €', color1:'#C9A57A', color2:'#22362B', href:'#'},
+    {cat:'juego', nombre:'Bingo de pareja', desc:'Marcad juntos los pequeños momentos del día a día.', precio:'7,90 €', color1:'#22362B', color2:'#C9A57A', href:'#'},
+    {cat:'personalizado', nombre:'Nuestra historia', desc:'Vuestra línea del tiempo como pareja, con fotos y anécdotas.', precio:'19,90 €', color1:'#B87460', color2:'#C9A57A', href:'/crea-el-vuestro'},
+    {cat:'personalizado', nombre:'Calendario con fotos', desc:'12 meses, 12 recuerdos elegidos por vosotros.', precio:'22,90 €', color1:'#22362B', color2:'#B87460', href:'/crea-el-vuestro'},
+    {cat:'personalizado', nombre:'Juego personalizado', desc:'Preguntas y retos con vuestros nombres, lugares y fechas.', precio:'17,90 €', color1:'#C9A57A', color2:'#22362B', href:'/crea-el-vuestro'},
+    {cat:'kit', nombre:'Kit San Valentín', desc:'Una selección para esta fecha, sin tópicos.', precio:'14,90 €', color1:'#B87460', color2:'#22362B', href:'/san-valentin'},
+    {cat:'kit', nombre:'Kit Navidad en pareja', desc:'Planes y juegos para las fiestas, de los dos.', precio:'14,90 €', color1:'#22362B', color2:'#C9A57A', href:'#'},
+    {cat:'juego', nombre:'50 preguntas profundas', desc:'Para cuando queráis hablar de algo que no sea el día a día.', precio:'6,90 €', color1:'#C9A57A', color2:'#B87460', href:'#'},
+  ];
+
+  const grid = document.getElementById('grid');
+
+  function render(cat){
+    const lista = cat === 'todos' ? productos : productos.filter(p => p.cat === cat);
+    grid.innerHTML = lista.map(p => {
+      const disponible = p.href !== '#';
+      const tag = disponible ? 'a' : 'div';
+      const attrs = disponible ? `href="${p.href}"` : `aria-disabled="true"`;
+      return `
+      <${tag} ${attrs} class="producto-card ${disponible ? '' : 'proximamente'}">
+        <div class="card-visual" style="background:linear-gradient(135deg, ${p.color1}, ${p.color2});">
+          <div class="sello">68</div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">${labelCat(p.cat)}</span>
+          <h3>${p.nombre}</h3>
+          <p>${p.desc}</p>
+          <div class="card-footer">
+            <span class="card-precio">${p.antes ? `<span class="antes">${p.antes}</span>` : ''}${p.precio}</span>
+            <span class="btn-mini ${disponible ? '' : 'disabled'}">${disponible ? 'Ver producto' : 'Próximamente'}</span>
+          </div>
+        </div>
+      </${tag}>
+    `;
+    }).join('');
+  }
+
+  function labelCat(cat){
+    return {insignia:'Producto insignia', personalizado:'Personalizado', juego:'Juego / calendario', kit:'Kit de regalo'}[cat] || '';
+  }
+
+  document.querySelectorAll('.filtro-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.filtro-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      render(chip.dataset.cat);
+    });
+  });
+
+  render('todos');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100 preguntas para parejas: profundas, divertidas y para conoceros mejor | La Guantera — 6EIGHT</title>
+<meta name="description" content="Una selección de preguntas para parejas organizada por tipo: para conoceros mejor, profundas, divertidas y para aniversario. Sin relleno, listas para usar hoy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crema:#F7EFE2; --verde:#22362B; --terracota:#B87460; --kraft:#C9A57A; --tinta:#2E302D; --beige2:#EFE5D6;
+    --font-display:'Oswald', sans-serif; --font-body:'Inter', sans-serif; --font-hand:'Caveat', cursive;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--crema); color:var(--tinta); font-family:var(--font-body); font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+  h1,h2,h3{font-family:var(--font-display); font-weight:600; line-height:1.18;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 20px;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--terracota); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+
+  header{position:sticky; top:0; z-index:50; background:var(--crema); border-bottom:1px solid rgba(46,48,45,.12);}
+  .header-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 20px; max-width:900px; margin:0 auto;}
+  .logo{font-family:var(--font-display); font-size:1.4rem; font-weight:700;}
+  .logo .six{color:var(--terracota);}
+  .back-link{font-size:.9rem; color:var(--verde); font-weight:500;}
+
+  .breadcrumb{font-size:.82rem; color:rgba(46,48,45,.55); padding:24px 0 0;}
+  .breadcrumb a{color:var(--terracota);}
+
+  .article-head{padding:14px 0 30px;}
+  .kicker{font-family:var(--font-hand); font-size:1.3rem; color:var(--terracota);}
+  .article-head h1{font-size:1.9rem; margin:8px 0 14px;}
+  @media(min-width:640px){ .article-head h1{font-size:2.5rem;} }
+  .article-head .lead{font-size:1.05rem; color:rgba(46,48,45,.8); max-width:60ch;}
+  .article-meta{font-size:.85rem; color:rgba(46,48,45,.5); margin-top:16px;}
+
+  .toc{background:var(--beige2); padding:20px 22px; margin:26px 0 40px;}
+  .toc h2{font-size:.95rem; text-transform:uppercase; letter-spacing:.06em; margin-bottom:12px; color:var(--verde);}
+  .toc ul{list-style:none; display:flex; flex-direction:column; gap:8px;}
+  .toc a{font-size:.92rem; color:var(--tinta);}
+  .toc a:hover{color:var(--terracota);}
+
+  article section{margin-bottom:44px;}
+  article h2{font-size:1.5rem; margin-bottom:8px;}
+  article .section-note{color:rgba(46,48,45,.65); font-size:.95rem; margin-bottom:20px; max-width:60ch;}
+
+  .preguntas-list{display:flex; flex-direction:column; gap:0;}
+  .pregunta-item{
+    display:flex; gap:16px; padding:16px 0; border-bottom:1px solid rgba(46,48,45,.12);
+  }
+  .pregunta-n{font-family:var(--font-display); color:var(--terracota); font-size:1rem; flex-shrink:0; width:28px;}
+  .pregunta-item p{font-size:1rem;}
+
+  .mid-cta{
+    background:var(--verde); color:var(--crema); padding:34px 28px; text-align:center; margin:40px 0;
+  }
+  .mid-cta .eyebrow-hand{color:var(--kraft); font-family:var(--font-hand); font-size:1.2rem;}
+  .mid-cta h3{font-size:1.3rem; margin:8px 0 10px; color:var(--crema);}
+  .mid-cta p{color:rgba(247,239,226,.82); max-width:44ch; margin:0 auto 18px; font-size:.95rem;}
+  .btn{display:inline-flex; align-items:center; justify-content:center; padding:13px 22px; font-weight:600; font-size:.92rem; border-radius:2px;}
+  .btn-primary{background:var(--terracota); color:var(--crema);}
+  .btn-primary:hover{background:#a3634f;}
+
+  .related-grid{display:grid; grid-template-columns:1fr; gap:14px; margin-top:16px;}
+  @media(min-width:560px){ .related-grid{grid-template-columns:1fr 1fr;} }
+  .related-card{background:var(--beige2); padding:20px; border-left:3px solid var(--terracota);}
+  .related-card h3{font-size:1rem; margin-bottom:6px; color:var(--verde);}
+  .related-card p{font-size:.85rem; color:rgba(46,48,45,.65);}
+
+  .lead-magnet{background:var(--beige2); padding:30px 26px; text-align:center; margin:50px 0;}
+  .lead-magnet h3{font-size:1.2rem; margin-bottom:8px;}
+  .lead-magnet p{font-size:.9rem; color:rgba(46,48,45,.7); max-width:44ch; margin:0 auto 18px;}
+  .lead-form{display:flex; flex-direction:column; gap:10px; max-width:340px; margin:0 auto;}
+  @media(min-width:460px){ .lead-form{flex-direction:row;} }
+  .lead-form input{flex:1; padding:12px 14px; border:1px solid rgba(46,48,45,.25); background:var(--crema); font-family:inherit; font-size:.95rem;}
+  .lead-form button{background:var(--verde); color:var(--crema); padding:12px 18px; font-weight:600; font-size:.9rem;}
+  .lead-form button:hover{background:#1a2921;}
+
+  footer{padding:34px 0; text-align:center; font-size:.85rem; color:rgba(46,48,45,.55); border-top:1px solid rgba(46,48,45,.12);}
+  footer a{color:var(--verde); font-weight:600;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo"><span class="six">6</span>EIGHT</a>
+    <a href="/" class="back-link">← Volver a 6EIGHT</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="/">6EIGHT</a> / <a href="#">La Guantera</a> / Preguntas para parejas</p>
+
+  <div class="article-head">
+    <span class="kicker">La Guantera — Preguntas</span>
+    <h1>100 preguntas para parejas: profundas, divertidas y para conoceros mejor</h1>
+    <p class="lead">Una selección organizada por tipo, para cuando queráis hablar de algo que no sea el día a día. Elegid cinco y ved a dónde os llevan.</p>
+    <p class="article-meta">Actualizado · La Guantera</p>
+  </div>
+
+  <nav class="toc">
+    <h2>En este artículo</h2>
+    <ul>
+      <li><a href="#conoceros">Preguntas para conoceros mejor</a></li>
+      <li><a href="#profundas">Preguntas profundas</a></li>
+      <li><a href="#divertidas">Preguntas divertidas</a></li>
+      <li><a href="#aniversario">Preguntas para aniversario</a></li>
+    </ul>
+  </nav>
+
+  <article>
+    <section id="conoceros">
+      <h2>Preguntas para conoceros mejor</h2>
+      <p class="section-note">Aunque llevéis años juntos, siempre hay rincones por descubrir. Empezad por aquí.</p>
+      <div class="preguntas-list">
+        <div class="pregunta-item"><span class="pregunta-n">01</span><p>¿Qué manía mía te costó más entender al principio?</p></div>
+        <div class="pregunta-item"><span class="pregunta-n">02</span><p>¿Cuál es el recuerdo más antiguo que tienes de nosotros?</p></div>
+        <div class="pregunta-item"><span class="pregunta-n">03</span><p>¿Qué cosa haces cada día que yo probablemente no me he dado cuenta que haces?</p></div>
+        <div class="pregunta-item"><span class="pregunta-n">04</span><p>¿Qué te gustaría que preguntara más a menudo?</p></div>
+        <div class="pregunta-item"><span class="pregunta-n">05</span><p>¿Cuál crees que es mi mayor miedo, aunque nunca te lo haya dicho?</p></div>
+      </div>
+    </section>
+
+    <div class="mid-cta">
+      <span class="eyebrow-hand">Si os está gustando esto...</span>
+      <h3>Hay 68 paradas más como esta, con espacio para escribir las respuestas</h3>
+      <p>Inspired by 68 convierte estas conversaciones en un recorrido completo para vivir en pareja.</p>
+      <a href="/inspired-by-68" class="btn btn-primary">Descubrir Inspired by 68</a>
+    </div>
+
+    <section id="profundas">
+      <h2>Preguntas profundas</h2>
+      <p class="section-note">Para cuando tengáis tiempo y ganas de hablar sin prisa.</p>
+      <div class="preguntas-list">
+        <div class="pregunta-item"><span class="pregunta-n">06</span><p>¿Qué decisión importante de tu vida cambiarías si pudieras, y por qué?</p></div>
+        <div class="pregunta-item"><span class="pregunta-n">07</span><p>¿En qué momento de la relación te sentiste más comprendido por mí?</p></div>
+        <div class="pregunta-item"><span class="pregunta-n">08</span><p>¿Qué te gustaría que supiera de ti que nunca te he preguntado directamente?</p></div>
+        <div class="pregunta-item"><span class="pregunta-n">09</span><p>¿Qué crees que hemos aprendido a hacer mejor juntos, con el tiempo?</p></div>
+      </div>
+    </section>
+
+    <section id="divertidas">
+      <h2>Preguntas divertidas</h2>
+      <p class="section-note">Para una noche ligera, sin más objetivo que reíros un rato.</p>
+      <div class="preguntas-list">
+        <div class="pregunta-item"><span class="pregunta-n">10</span><p>Si tuviéramos que montar un negocio juntos mañana, ¿cuál sería el peor posible?</p></div>
+        <div class="pregunta-item"><span class="pregunta-n">11</span><p>¿Qué serie o película describe mejor nuestra relación, aunque sea de forma ridícula?</p></div>
+        <div class="pregunta-item"><span class="pregunta-n">12</span><p>Si furamos personajes de una peli de acción, ¿quién moriría primero y por qué?</p></div>
+      </div>
+    </section>
+
+    <section id="aniversario">
+      <h2>Preguntas para aniversario</h2>
+      <p class="section-note">Ideales para revisar el año o los años que lleváis juntos.</p>
+      <div class="preguntas-list">
+        <div class="pregunta-item"><span class="pregunta-n">13</span><p>¿Cuál ha sido el mejor plan que hemos hecho juntos este último año?</p></div>
+        <div class="pregunta-item"><span class="pregunta-n">14</span><p>¿Qué nos falta por vivir juntos que llevamos tiempo posponiendo?</p></div>
+        <div class="pregunta-item"><span class="pregunta-n">15</span><p>Si tuviéramos que resumir este año en una palabra cada uno, ¿cuál sería?</p></div>
+      </div>
+    </section>
+
+    <div class="lead-magnet">
+      <h3>¿Queréis 12 preguntas más, en PDF, gratis?</h3>
+      <p>Doce preguntas para salir de la conversación de siempre, listas para imprimir o llevar en el móvil.</p>
+      <form class="lead-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Revisad vuestro correo';">
+        <input type="email" placeholder="tuemail@ejemplo.com" required aria-label="Correo electrónico">
+        <button type="submit">Descargar gratis</button>
+      </form>
+    </div>
+
+    <section>
+      <h2>Seguid explorando</h2>
+      <div class="related-grid">
+        <a href="/generador-citas" class="related-card"><h3>Generador de citas</h3><p>Filtrad por presupuesto, lugar y tiempo, y os proponemos un plan.</p></a>
+        <a href="/#jugar" class="related-card"><h3>Pregunta del día</h3><p>Una pregunta nueva cada vez que la pedís, sin registro.</p></a>
+        <a href="/inspired-by-68" class="related-card"><h3>Inspired by 68</h3><p>68 paradas para volver a poner vuestra relación en movimiento.</p></a>
+        <a href="#" class="related-card"><h3>Juegos para parejas</h3><p>Ideas para una noche sin pantallas, listas en cinco minutos.</p></a>
+      </div>
+    </section>
+  </article>
+</div>
+
+<footer>
+  <p>Un artículo de <a href="/">6EIGHT</a> — La Guantera</p>
+</footer>
+
+</body>
+</html>

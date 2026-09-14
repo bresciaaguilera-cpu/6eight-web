@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vista previa del libro — Inspired by 68 | 6EIGHT</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  :root{
+    --crema:#F7EFE2; --verde:#22362B; --terracota:#B87460; --kraft:#C9A57A; --tinta:#2E302D; --beige2:#EFE5D6;
+    --font-display:'Oswald', sans-serif; --font-body:'Inter', sans-serif; --font-hand:'Caveat', cursive;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--tinta); color:var(--tinta); font-family:var(--font-body); font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+  h1,h2,h3{font-family:var(--font-display); font-weight:600; line-height:1.18;}
+  a:focus-visible, button:focus-visible, input:focus-visible{outline:2px solid var(--terracota); outline-offset:3px;}
+
+  header{background:var(--crema); border-bottom:1px solid rgba(46,48,45,.12);}
+  .header-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 20px; max-width:1080px; margin:0 auto;}
+  .logo{font-family:var(--font-display); font-size:1.4rem; font-weight:700; color:var(--tinta);}
+  .logo .six{color:var(--terracota);}
+  .back-link{font-size:.9rem; color:var(--verde); font-weight:500;}
+
+  .toolbar{
+    background:var(--crema); padding:14px 20px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;
+    border-bottom:1px solid rgba(46,48,45,.12);
+  }
+  .toolbar .datos{display:flex; flex-wrap:wrap; gap:8px;}
+  .toolbar input{
+    padding:8px 10px; border:1.5px solid rgba(46,48,45,.2); font-family:inherit; font-size:.85rem; background:#fff; width:130px;
+  }
+  .toolbar .btn-pdf{
+    background:var(--verde); color:var(--crema); padding:10px 18px; font-weight:600; font-size:.85rem; border-radius:2px;
+    white-space:nowrap;
+  }
+  .toolbar .btn-pdf:hover{background:#1a2921;}
+  .toolbar .btn-pdf:disabled{opacity:.5; cursor:wait;}
+  .toolbar .estado-pdf{font-size:.78rem; color:rgba(46,48,45,.6);}
+
+  .stage{
+    display:flex; flex-direction:column; align-items:center; padding:34px 16px 20px; min-height:70vh;
+  }
+  .page-indicator{color:var(--kraft); font-size:.82rem; margin-bottom:16px; font-family:var(--font-display); letter-spacing:.05em;}
+
+  .book-page{
+    width:100%; max-width:420px; aspect-ratio:210/297; background:var(--crema); box-shadow:0 25px 60px rgba(0,0,0,.45);
+    padding:36px 32px; display:flex; flex-direction:column; position:relative; overflow:hidden;
+  }
+  .book-page .ruta-tag{font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; color:var(--terracota); font-weight:700; margin-bottom:6px;}
+  .book-page .num{font-family:var(--font-display); font-size:2.4rem; color:rgba(46,48,45,.18); position:absolute; top:26px; right:30px;}
+  .book-page h2{font-size:1.35rem; color:var(--verde); margin-bottom:18px; max-width:80%;}
+  .book-page .bloque{margin-bottom:14px;}
+  .book-page .bloque .etiqueta{font-size:.68rem; text-transform:uppercase; letter-spacing:.06em; color:var(--terracota); font-weight:700; margin-bottom:3px;}
+  .book-page .bloque p{font-size:.86rem; color:rgba(46,48,45,.85); line-height:1.45;}
+  .book-page .recuerdo-linea{border-bottom:1px dashed rgba(46,48,45,.35); height:16px; margin-top:4px;}
+  .book-page .footer-row{margin-top:auto; display:flex; align-items:center; justify-content:space-between; padding-top:14px; border-top:1px solid rgba(46,48,45,.15);}
+  .book-page .footer-row .campo{font-size:.68rem; color:rgba(46,48,45,.55);}
+  .book-page .sello{
+    width:44px; height:44px; border-radius:50%; border:1.5px dashed var(--terracota); display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-size:.75rem; color:var(--terracota); flex-shrink:0;
+  }
+
+  /* PORTADA especial */
+  .book-page.portada{justify-content:space-between; text-align:left;}
+  .portada .top-label{font-family:var(--font-hand); font-size:1.2rem; color:var(--terracota);}
+  .portada .titulo{font-family:var(--font-display); font-size:1.9rem; color:var(--verde); margin-top:10px;}
+  .portada .nombres{font-family:var(--font-hand); font-size:2rem; color:var(--tinta);}
+  .portada .fecha-lugar{font-size:.8rem; color:rgba(46,48,45,.6); margin-top:6px;}
+
+  /* INDICE */
+  .indice-list{display:flex; flex-direction:column; gap:10px; margin-top:6px;}
+  .indice-list .ir{display:flex; justify-content:space-between; font-size:.85rem; padding:6px 0; border-bottom:1px dotted rgba(46,48,45,.25);}
+  .indice-list .ir span:first-child{color:var(--verde); font-weight:600;}
+
+  .nav-row{display:flex; gap:14px; margin-top:26px; align-items:center;}
+  .nav-btn{
+    width:44px; height:44px; border-radius:50%; background:var(--crema); color:var(--tinta); font-size:1.2rem;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .nav-btn:disabled{opacity:.3; cursor:not-allowed;}
+  .thumbs{display:flex; gap:6px; overflow-x:auto; max-width:90vw; padding:6px 0;}
+  .thumb-dot{width:8px; height:8px; border-radius:50%; background:rgba(247,239,226,.3); flex-shrink:0;}
+  .thumb-dot.active{background:var(--terracota);}
+
+  footer{padding:30px 0; text-align:center; font-size:.85rem; color:rgba(247,239,226,.6);}
+  footer a{color:var(--kraft); font-weight:600;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo"><span class="six">6</span>EIGHT</a>
+    <a href="/inspired-by-68" class="back-link">← Volver al producto</a>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="datos">
+    <input type="text" id="tbNombres" placeholder="Vuestros nombres" value="Marta &amp; Diego">
+    <input type="text" id="tbFecha" placeholder="Fecha" value="14 de marzo de 2019">
+    <input type="text" id="tbLugar" placeholder="Lugar" value="Madrid">
+  </div>
+  <div style="display:flex; align-items:center; gap:10px;">
+    <span class="estado-pdf" id="estadoPdf"></span>
+    <button class="btn-pdf" id="descargarTodoBtn">Descargar esta muestra en PDF</button>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="page-indicator" id="pageIndicator">Página 1 de 15</div>
+  <div class="book-page" id="bookPage"></div>
+  <div class="nav-row">
+    <button class="nav-btn" id="prevBtn" aria-label="Página anterior">←</button>
+    <div class="thumbs" id="thumbs"></div>
+    <button class="nav-btn" id="nextBtn" aria-label="Página siguiente">→</button>
+  </div>
+</div>
+
+<footer>
+  <p>Esto es una muestra de 15 páginas representativas — el libro completo tiene 68. <a href="/crea-el-vuestro">Pedir el vuestro completo</a></p>
+</footer>
+
+<script>
+  // Contenido real de muestra: no relleno, una selección representativa de las 4 rutas.
+  const paradas = [
+    {ruta:1, rutaLabel:'Ruta 1 · Volver a arrancar', titulo:'La cita que no vais a planear', num:3,
+      experiencia:'Hoy no decidís nada con antelación. Uno de los dos elige, sin avisar, un plan para dentro de una hora.',
+      fortalece:'Recupera la espontaneidad y la confianza en que el otro también puede sorprenderos bien.',
+      reflexion:'¿Qué es lo último que hicisteis sin planearlo?'},
+    {ruta:1, rutaLabel:'Ruta 1 · Volver a arrancar', titulo:'El menú a ciegas', num:8,
+      experiencia:'Id a un sitio que no conozcáis y pedid lo que os recomiende el camarero, sin mirar la carta.',
+      fortalece:'Practicar decidir juntos sin control total del resultado.',
+      reflexion:'¿Qué os ha sorprendido más de lo que esperabais?'},
+    {ruta:1, rutaLabel:'Ruta 1 · Volver a arrancar', titulo:'Un domingo sin agenda', num:14,
+      experiencia:'Ese día no hay listas ni planes de "aprovechar el tiempo". Solo estar.',
+      fortalece:'Deshacer la costumbre de medir el tiempo juntos en productividad.',
+      reflexion:'¿Cuándo fue la última vez que un domingo no os pesó?'},
+
+    {ruta:2, rutaLabel:'Ruta 2 · Salir del camino conocido', titulo:'El barrio que nunca pisáis', num:21,
+      experiencia:'Coged transporte hasta una zona de vuestra ciudad en la que casi nunca habéis estado, y paseadla sin más objetivo.',
+      fortalece:'Volver a mirar con curiosidad algo tan cercano como vuestra propia ciudad.',
+      reflexion:'¿Qué encontrasteis que no esperabais?'},
+    {ruta:2, rutaLabel:'Ruta 2 · Salir del camino conocido', titulo:'Cambiad de rol un día', num:28,
+      experiencia:'Durante un día, cada uno se encarga de una tarea que normalmente hace el otro, sin instrucciones.',
+      fortalece:'Entender mejor la carga invisible del otro.',
+      reflexion:'¿Qué os ha costado más de lo que pensabais?'},
+    {ruta:2, rutaLabel:'Ruta 2 · Salir del camino conocido', titulo:'La actividad que uno odia y el otro ama', num:33,
+      experiencia:'Uno elige algo que el otro nunca haría por iniciativa propia. Probadlo juntos, con curiosidad real.',
+      fortalece:'Ampliar terreno común sin forzar gustos compartidos.',
+      reflexion:'¿Le daríais una segunda oportunidad?'},
+
+    {ruta:3, rutaLabel:'Ruta 3 · Conversaciones con vistas', titulo:'La conversación pendiente', num:39,
+      experiencia:'Buscad un lugar con buenas vistas, sin pantallas, y habladlo de eso que lleváis tiempo posponiendo.',
+      fortalece:'Da espacio y calma a algo que normalmente se dice con prisa o enfado.',
+      reflexion:'¿Qué habéis entendido del otro que no sabíais?'},
+    {ruta:3, rutaLabel:'Ruta 3 · Conversaciones con vistas', titulo:'Diez años atrás, diez años después', num:44,
+      experiencia:'Contad cómo os imaginabais hace diez años y cómo os imagináis dentro de diez más.',
+      fortalece:'Poner en común hacia dónde va cada uno, no solo hacia dónde va la pareja.',
+      reflexion:'¿Coincide más de lo que pensabais?'},
+    {ruta:3, rutaLabel:'Ruta 3 · Conversaciones con vistas', titulo:'Lo que nunca os preguntáis', num:50,
+      experiencia:'Elegid tres preguntas que os avergüence un poco hacer, y hacedlas de todas formas.',
+      fortalece:'Normaliza hablar de lo incómodo antes de que se acumule.',
+      reflexion:'¿Qué pregunta os costó más responder?'},
+
+    {ruta:4, rutaLabel:'Ruta 4 · Carretera abierta', titulo:'El viaje de una noche, sin reservar nada', num:57,
+      experiencia:'Salid de casa con una mochila pequeña y decidid el destino por el camino, sin reserva previa.',
+      fortalece:'Recupera la tolerancia compartida a la incertidumbre.',
+      reflexion:'¿Qué habría pasado si algo hubiera salido mal?'},
+    {ruta:4, rutaLabel:'Ruta 4 · Carretera abierta', titulo:'La promesa a cinco años', num:63,
+      experiencia:'Escribid juntos, en el propio libro, una promesa concreta para dentro de cinco años. Fecha, y a qué os comprometéis.',
+      fortalece:'Convierte una intención abstracta en un compromiso escrito.',
+      reflexion:'¿Qué tendría que pasar para que esto se cumpla?'},
+    {ruta:4, rutaLabel:'Ruta 4 · Carretera abierta', titulo:'La última parada', num:68,
+      experiencia:'Repasad juntos las paradas que habéis vivido y elegid cuál repetiríais mañana mismo.',
+      fortalece:'Cierra el recorrido con una mirada atrás, no solo hacia adelante.',
+      reflexion:'¿Con qué parada empezaríais si volvierais a hacer el libro entero?'},
+  ];
+
+  function nombresEl(){ return document.getElementById('tbNombres').value.trim() || 'Vuestros nombres'; }
+  function fechaEl(){ return document.getElementById('tbFecha').value.trim(); }
+  function lugarEl(){ return document.getElementById('tbLugar').value.trim(); }
+
+  function buildPages(){
+    const pages = [];
+    pages.push({tipo:'portada'});
+    pages.push({tipo:'indice'});
+    paradas.forEach(p => pages.push({tipo:'parada', data:p}));
+    pages.push({tipo:'cierre'});
+    return pages;
+  }
+  let pages = buildPages();
+  let current = 0;
+
+  function renderPortada(){
+    return `
+      <div class="top-label">Inspired by 68</div>
+      <h2 class="titulo">68 paradas para<br>volver a poner<br>vuestra relación<br>en movimiento</h2>
+      <div>
+        <div class="nombres">${nombresEl()}</div>
+        <div class="fecha-lugar">${[fechaEl(), lugarEl()].filter(Boolean).join(' · ')}</div>
+      </div>
+    `;
+  }
+
+  function renderIndice(){
+    const rutas = [
+      ['Ruta 1', 'Volver a arrancar'],
+      ['Ruta 2', 'Salir del camino conocido'],
+      ['Ruta 3', 'Conversaciones con vistas'],
+      ['Ruta 4', 'Carretera abierta'],
+    ];
+    return `
+      <div class="ruta-tag">Índice</div>
+      <h2>Cuatro rutas, 68 paradas</h2>
+      <div class="indice-list">
+        ${rutas.map(r => `<div class="ir"><span>${r[0]}</span><span>${r[1]}</span></div>`).join('')}
+      </div>
+      <p style="margin-top:20px; font-size:.8rem; color:rgba(46,48,45,.6);">Esta muestra incluye 3 paradas de cada ruta, elegidas para que veáis el tono y la estructura del libro completo.</p>
+    `;
+  }
+
+  function renderParada(p){
+    return `
+      <div class="num">${String(p.num).padStart(2,'0')}</div>
+      <div class="ruta-tag">${p.rutaLabel}</div>
+      <h2>${p.titulo}</h2>
+      <div class="bloque"><div class="etiqueta">Experiencia</div><p>${p.experiencia}</p></div>
+      <div class="bloque"><div class="etiqueta">Esto fortalece</div><p>${p.fortalece}</p></div>
+      <div class="bloque"><div class="etiqueta">Recuerdo obligatorio</div><div class="recuerdo-linea"></div></div>
+      <div class="bloque"><div class="etiqueta">Reflexión</div><p>${p.reflexion}</p></div>
+      <div class="footer-row">
+        <div class="campo">${nombresEl()} · ${fechaEl() || 'fecha'} · ${lugarEl() || 'lugar'}</div>
+        <div class="sello">68</div>
+      </div>
+    `;
+  }
+
+  function renderCierre(){
+    return `
+      <div class="ruta-tag">Fin del recorrido (de esta muestra)</div>
+      <h2 style="margin-top:10px;">Esto es solo el principio</h2>
+      <p style="font-size:.9rem; color:rgba(46,48,45,.75); margin-top:6px;">El libro completo tiene 68 paradas como estas, repartidas en las cuatro rutas, con espacio de sobra para escribir, pegar y guardar cada recuerdo.</p>
+      <div style="margin-top:auto; font-family:var(--font-hand); font-size:1.4rem; color:var(--terracota);">— 6EIGHT</div>
+    `;
+  }
+
+  function render(){
+    const page = pages[current];
+    const el = document.getElementById('bookPage');
+    el.className = 'book-page' + (page.tipo === 'portada' ? ' portada' : '');
+    if(page.tipo === 'portada') el.innerHTML = renderPortada();
+    else if(page.tipo === 'indice') el.innerHTML = renderIndice();
+    else if(page.tipo === 'parada') el.innerHTML = renderParada(page.data);
+    else el.innerHTML = renderCierre();
+
+    document.getElementById('pageIndicator').textContent = `Página ${current + 1} de ${pages.length}`;
+    document.getElementById('prevBtn').disabled = current === 0;
+    document.getElementById('nextBtn').disabled = current === pages.length - 1;
+
+    const thumbs = document.getElementById('thumbs');
+    thumbs.innerHTML = pages.map((_, i) => `<div class="thumb-dot ${i === current ? 'active' : ''}"></div>`).join('');
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', () => { if(current > 0){ current--; render(); } });
+  document.getElementById('nextBtn').addEventListener('click', () => { if(current < pages.length - 1){ current++; render(); } });
+  ['tbNombres','tbFecha','tbLugar'].forEach(id => document.getElementById(id).addEventListener('input', render));
+
+  render();
+
+  // Descarga de la muestra completa en un único PDF (requiere conexión a internet
+  // para cargar html2canvas y jsPDF desde cdnjs; si no hay conexión, avisamos).
+  async function descargarTodoPDF(){
+    const btn = document.getElementById('descargarTodoBtn');
+    const estado = document.getElementById('estadoPdf');
+    if(typeof html2canvas === 'undefined' || typeof window.jspdf === 'undefined'){
+      estado.textContent = 'No se pudo cargar el generador de PDF — comprobad la conexión a internet.';
+      return;
+    }
+    btn.disabled = true;
+    const originalCurrent = current;
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ unit: 'pt', format: 'a4' });
+    const el = document.getElementById('bookPage');
+
+    for(let i = 0; i < pages.length; i++){
+      current = i;
+      render();
+      estado.textContent = `Generando página ${i + 1} de ${pages.length}...`;
+      await new Promise(r => setTimeout(r, 60));
+      const canvas = await html2canvas(el, { scale: 2, backgroundColor: '#F7EFE2' });
+      const imgData = canvas.toDataURL('image/jpeg', 0.92);
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      if(i > 0) pdf.addPage();
+      pdf.addImage(imgData, 'JPEG', 0, 0, pageWidth, pageHeight);
+    }
+
+    current = originalCurrent;
+    render();
+    pdf.save('inspired-by-68-muestra.pdf');
+    estado.textContent = '✓ PDF descargado';
+    btn.disabled = false;
+  }
+
+  document.getElementById('descargarTodoBtn').addEventListener('click', descargarTodoPDF);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preguntas frecuentes | 6EIGHT</title>
+<meta name="description" content="Respuestas a las preguntas más comunes sobre los productos digitales de 6EIGHT: descarga, personalización, formatos, licencia y pagos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crema:#F7EFE2; --verde:#22362B; --terracota:#B87460; --kraft:#C9A57A; --tinta:#2E302D; --beige2:#EFE5D6;
+    --font-display:'Oswald', sans-serif; --font-body:'Inter', sans-serif; --font-hand:'Caveat', cursive;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--crema); color:var(--tinta); font-family:var(--font-body); font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none; text-align:left; width:100%;}
+  h1,h2{font-family:var(--font-display); font-weight:600; line-height:1.18;}
+  .wrap{max-width:720px; margin:0 auto; padding:0 20px;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--terracota); outline-offset:3px;}
+
+  header{position:sticky; top:0; z-index:50; background:var(--crema); border-bottom:1px solid rgba(46,48,45,.12);}
+  .header-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 20px; max-width:900px; margin:0 auto;}
+  .logo{font-family:var(--font-display); font-size:1.4rem; font-weight:700;}
+  .logo .six{color:var(--terracota);}
+  .back-link{font-size:.9rem; color:var(--verde); font-weight:500;}
+
+  .intro{padding:44px 0 8px; text-align:center;}
+  .intro .eyebrow-hand{font-family:var(--font-hand); font-size:1.35rem; color:var(--terracota);}
+  .intro h1{font-size:2rem; margin:8px 0 10px;}
+  @media(min-width:640px){ .intro h1{font-size:2.4rem;} }
+  .intro p{color:rgba(46,48,45,.72); max-width:52ch; margin:0 auto;}
+
+  .buscador{margin:30px 0 10px;}
+  .buscador input{
+    width:100%; padding:14px 16px; border:1.5px solid rgba(46,48,45,.22); background:#fff; font-family:inherit; font-size:1rem;
+  }
+
+  .categoria{margin:36px 0 14px; font-size:.82rem; text-transform:uppercase; letter-spacing:.06em; color:var(--terracota); font-weight:700;}
+  .faq-item{border-bottom:1px solid rgba(46,48,45,.15);}
+  .faq-item.oculto{display:none;}
+  .faq-q{display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 0; font-weight:600; font-size:.98rem;}
+  .faq-q .plus{font-size:1.3rem; color:var(--terracota); transition:transform .2s ease; flex-shrink:0;}
+  .faq-item.open .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
+  .faq-a p{padding-bottom:18px; color:rgba(46,48,45,.75); font-size:.94rem; max-width:60ch;}
+
+  .sin-resultados{display:none; text-align:center; padding:40px 0; color:rgba(46,48,45,.5); font-size:.95rem;}
+  .sin-resultados.show{display:block;}
+
+  .cta-final{background:var(--beige2); padding:34px 26px; text-align:center; margin:50px 0 30px;}
+  .cta-final h3{font-size:1.1rem; margin-bottom:8px; font-family:var(--font-display);}
+  .cta-final p{font-size:.9rem; color:rgba(46,48,45,.68); margin-bottom:16px;}
+  .btn{display:inline-flex; padding:12px 22px; background:var(--verde); color:var(--crema); font-weight:600; font-size:.88rem; border-radius:2px; width:auto;}
+  .btn:hover{background:#1a2921;}
+
+  footer{padding:34px 0; text-align:center; font-size:.85rem; color:rgba(46,48,45,.55); border-top:1px solid rgba(46,48,45,.12);}
+  footer a{color:var(--verde); font-weight:600;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo"><span class="six">6</span>EIGHT</a>
+    <a href="/" class="back-link">← Volver a 6EIGHT</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="intro">
+    <span class="eyebrow-hand">Ayuda</span>
+    <h1>Preguntas frecuentes</h1>
+    <p>Todo lo que soléis preguntarnos sobre la descarga, la personalización y los pagos.</p>
+  </div>
+
+  <div class="buscador">
+    <input type="text" id="buscador" placeholder="Buscar una pregunta...">
+  </div>
+
+  <div id="listaFaq"></div>
+  <p class="sin-resultados" id="sinResultados">No hemos encontrado ninguna pregunta con esas palabras. Probad con otros términos.</p>
+
+  <div class="cta-final">
+    <h3>¿No encontráis lo que buscáis?</h3>
+    <p>Escribidnos y os respondemos en persona, no con un bot.</p>
+    <a href="mailto:hola@6eight.es" class="btn">Escribir a hola@6eight.es</a>
+  </div>
+</div>
+
+<footer>
+  <p><a href="/">Volver a 6EIGHT</a></p>
+</footer>
+
+<script>
+  const faqs = [
+    {cat:'Descarga y formato', q:'¿En qué formato recibo los productos?', a:'Todos los productos de 6EIGHT son PDF digitales. Podéis imprimirlos en A4 o usarlos directamente en el móvil o la tablet.'},
+    {cat:'Descarga y formato', q:'¿Cuánto tarda en llegar tras la compra?', a:'La descarga es inmediata: recibiréis el enlace por email nada más completar el pago, normalmente en menos de un minuto.'},
+    {cat:'Descarga y formato', q:'He perdido el email de descarga, ¿qué hago?', a:'Escribidnos a hola@6eight.es con el email que usasteis en la compra y os reenviamos el enlace sin problema.'},
+    {cat:'Descarga y formato', q:'¿Puedo imprimirlo en una copistería?', a:'Sí, la licencia permite imprimirlo donde queráis para vuestro uso personal — en casa o en una copistería.'},
+
+    {cat:'Personalización', q:'¿Cuánto tarda un pedido personalizado?', a:'Entre 2 y 4 días desde la compra. Si necesitáis algo con más urgencia, escribidnos antes de comprar y lo comentamos.'},
+    {cat:'Personalización', q:'¿Puedo cambiar los datos después de haber pagado?', a:'Sí, mientras no hayamos empezado a prepararlo. Escribidnos cuanto antes a hola@6eight.es con el cambio.'},
+    {cat:'Personalización', q:'¿Qué pasa si me equivoco al escribir un nombre?', a:'Revisamos cada pedido personalizado antes de generarlo, pero si veis un error una vez recibido, os lo corregimos sin coste.'},
+    {cat:'Personalización', q:'¿Puedo subir las fotos más tarde?', a:'Sí, podéis completar el pedido y enviarnos las fotos por email en las 48 horas siguientes sin que se retrase la entrega.'},
+
+    {cat:'Pagos', q:'¿Qué métodos de pago aceptáis?', a:'Tarjeta de crédito o débito, Bizum y PayPal.'},
+    {cat:'Pagos', q:'¿Es seguro pagar en la web?', a:'Sí, todos los pagos se procesan a través de Stripe, la misma tecnología que usan miles de tiendas online; nosotros no guardamos los datos de vuestra tarjeta en ningún momento.'},
+    {cat:'Pagos', q:'¿Puedo pedir factura?', a:'Sí, escribidnos a hola@6eight.es con vuestros datos fiscales después de la compra y os la enviamos.'},
+    {cat:'Pagos', q:'¿Hacéis devoluciones?', a:'Al ser productos digitales de descarga inmediata, no se pueden devolver una vez descargados. Si algo falla por nuestra parte, os lo solucionamos o devolvemos el importe.'},
+
+    {cat:'Licencia y uso', q:'¿Puedo regalar el mismo PDF a más de una pareja?', a:'La licencia es para un uso personal, una pareja. Si queréis regalarlo a varias personas, cada una necesita su propia compra.'},
+    {cat:'Licencia y uso', q:'¿Puedo compartirlo en redes sociales?', a:'Podéis compartir fotos de vosotros usándolo, mencionando a 6EIGHT. No podéis redistribuir el PDF en sí.'},
+  ];
+
+  const lista = document.getElementById('listaFaq');
+  const sinResultados = document.getElementById('sinResultados');
+
+  function render(items){
+    if(!items.length){
+      lista.innerHTML = '';
+      sinResultados.classList.add('show');
+      return;
+    }
+    sinResultados.classList.remove('show');
+    const categorias = [...new Set(items.map(i => i.cat))];
+    lista.innerHTML = categorias.map(cat => `
+      <div class="categoria">${cat}</div>
+      ${items.filter(i => i.cat === cat).map(i => `
+        <div class="faq-item">
+          <button class="faq-q"><span>${i.q}</span><span class="plus">+</span></button>
+          <div class="faq-a"><p>${i.a}</p></div>
+        </div>
+      `).join('')}
+    `).join('');
+    attachToggles();
+  }
+
+  function attachToggles(){
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const q = item.querySelector('.faq-q');
+      const a = item.querySelector('.faq-a');
+      q.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(other => {
+          other.classList.remove('open');
+          other.querySelector('.faq-a').style.maxHeight = null;
+        });
+        if(!isOpen){
+          item.classList.add('open');
+          a.style.maxHeight = a.scrollHeight + 'px';
+        }
+      });
+    });
+  }
+
+  document.getElementById('buscador').addEventListener('input', (e) => {
+    const term = e.target.value.trim().toLowerCase();
+    const filtradas = term
+      ? faqs.filter(f => f.q.toLowerCase().includes(term) || f.a.toLowerCase().includes(term))
+      : faqs;
+    render(filtradas);
+  });
+
+  render(faqs);
+</script>
+
+</body>
+</html>

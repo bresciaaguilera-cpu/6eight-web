@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crea el vuestro — Personalizado | 6EIGHT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crema:#F7EFE2; --verde:#22362B; --terracota:#B87460; --kraft:#C9A57A; --tinta:#2E302D; --beige2:#EFE5D6;
+    --font-display:'Oswald', sans-serif; --font-body:'Inter', sans-serif; --font-hand:'Caveat', cursive;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--crema); color:var(--tinta); font-family:var(--font-body); font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+  h1,h2,h3{font-family:var(--font-display); font-weight:600; line-height:1.18;}
+  .wrap{max-width:640px; margin:0 auto; padding:0 20px;}
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{outline:2px solid var(--terracota); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+
+  header{position:sticky; top:0; z-index:50; background:var(--crema); border-bottom:1px solid rgba(46,48,45,.12);}
+  .header-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 20px; max-width:900px; margin:0 auto;}
+  .logo{font-family:var(--font-display); font-size:1.4rem; font-weight:700;}
+  .logo .six{color:var(--terracota);}
+  .back-link{font-size:.9rem; color:var(--verde); font-weight:500;}
+
+  .intro{padding:40px 0 6px; text-align:center;}
+  .intro .eyebrow-hand{font-family:var(--font-hand); font-size:1.35rem; color:var(--terracota);}
+  .intro h1{font-size:1.9rem; margin:8px 0 8px;}
+  @media(min-width:640px){ .intro h1{font-size:2.3rem;} }
+  .intro p{color:rgba(46,48,45,.72); font-size:.95rem;}
+
+  /* progreso */
+  .progress-wrap{padding:26px 0 10px;}
+  .progress-steps{display:flex; justify-content:space-between; margin-bottom:10px;}
+  .p-step{display:flex; flex-direction:column; align-items:center; gap:6px; flex:1; position:relative;}
+  .p-dot{width:30px; height:30px; border-radius:50%; border:1.5px solid rgba(46,48,45,.25); background:var(--crema);
+    display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:.85rem; color:rgba(46,48,45,.45); transition:all .2s ease;}
+  .p-label{font-size:.68rem; color:rgba(46,48,45,.5); text-align:center; display:none;}
+  @media(min-width:560px){ .p-label{display:block;} }
+  .p-step.active .p-dot{border-color:var(--terracota); background:var(--terracota); color:var(--crema);}
+  .p-step.active .p-label{color:var(--verde); font-weight:600;}
+  .p-step.done .p-dot{border-color:var(--verde); background:var(--verde); color:var(--crema);}
+  .progress-bar{height:3px; background:rgba(46,48,45,.15); position:relative; margin-bottom:36px;}
+  .progress-bar-fill{height:100%; background:var(--terracota); width:20%; transition:width .3s ease;}
+
+  .step-panel{display:none; padding-bottom:50px;}
+  .step-panel.active{display:block;}
+
+  .step-panel h2{font-size:1.4rem; margin-bottom:6px;}
+  .step-panel .step-sub{color:rgba(46,48,45,.65); font-size:.92rem; margin-bottom:28px;}
+
+  .producto-grid{display:grid; grid-template-columns:1fr; gap:14px;}
+  @media(min-width:520px){ .producto-grid{grid-template-columns:1fr 1fr;} }
+  .producto-opcion{
+    background:var(--beige2); padding:20px; border:1.5px solid transparent; text-align:left; cursor:pointer;
+    transition:all .15s ease;
+  }
+  .producto-opcion:hover{border-color:var(--kraft);}
+  .producto-opcion.selected{border-color:var(--terracota); background:#fff;}
+  .producto-opcion h3{font-size:1.02rem; margin-bottom:4px; color:var(--verde);}
+  .producto-opcion p{font-size:.85rem; color:rgba(46,48,45,.65); margin-bottom:10px;}
+  .producto-opcion .precio{font-family:var(--font-display); color:var(--terracota); font-size:1.1rem;}
+
+  .form-field{margin-bottom:20px;}
+  .form-field label{display:block; font-size:.88rem; font-weight:600; color:var(--verde); margin-bottom:8px;}
+  .form-field input, .form-field textarea{
+    width:100%; padding:13px 14px; border:1.5px solid rgba(46,48,45,.22); background:#fff;
+    font-family:inherit; font-size:1rem; color:var(--tinta);
+  }
+  .form-row{display:flex; flex-direction:column; gap:20px;}
+  @media(min-width:520px){ .form-row.two{flex-direction:row;} .form-row.two .form-field{flex:1; margin-bottom:0;} }
+
+  .upload-box{
+    border:2px dashed var(--kraft); background:var(--beige2); padding:40px 20px; text-align:center; margin-bottom:20px;
+  }
+  .upload-box p{color:rgba(46,48,45,.65); font-size:.92rem; margin-top:8px;}
+  .upload-box .upload-icon{font-size:1.8rem; color:var(--terracota);}
+  .upload-note{font-size:.82rem; color:rgba(46,48,45,.5);}
+
+  .resumen{background:var(--beige2); padding:24px 22px; margin-bottom:24px;}
+  .resumen-row{display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid rgba(46,48,45,.15); font-size:.92rem;}
+  .resumen-row:last-child{border-bottom:none; padding-top:16px; font-weight:700; font-size:1.05rem;}
+  .resumen-row span:first-child{color:rgba(46,48,45,.6);}
+  .resumen-row:last-child span:first-child{color:var(--tinta);}
+
+  .nav-buttons{display:flex; gap:12px; margin-top:8px;}
+  .btn{display:inline-flex; align-items:center; justify-content:center; padding:14px 22px; font-weight:600; font-size:.95rem; border-radius:2px; flex:1; transition:background .2s ease, transform .15s ease;}
+  .btn-primary{background:var(--verde); color:var(--crema);}
+  .btn-primary:hover{background:#1a2921;}
+  .btn-secondary{background:transparent; color:var(--verde); border:1.5px solid var(--verde); flex:0 0 auto; padding:14px 20px;}
+  .btn-secondary:hover{background:rgba(34,54,43,.06);}
+  .btn:disabled{opacity:.45; cursor:not-allowed;}
+  .btn:active:not(:disabled){transform:scale(.98);}
+
+  .error-msg{color:var(--terracota); font-size:.82rem; margin-top:-14px; margin-bottom:16px; display:none;}
+  .error-msg.show{display:block;}
+
+  .confirmacion{text-align:center; padding:20px 0 50px;}
+  .confirmacion .sello{width:70px; height:70px; border-radius:50%; border:2px solid var(--terracota); margin:0 auto 22px;
+    display:flex; align-items:center; justify-content:center; font-family:var(--font-display); color:var(--terracota); font-size:1.3rem;}
+  .confirmacion h2{font-size:1.6rem; margin-bottom:12px;}
+  .confirmacion p{color:rgba(46,48,45,.72); max-width:44ch; margin:0 auto 26px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo"><span class="six">6</span>EIGHT</a>
+    <a href="/" class="back-link">← Volver a 6EIGHT</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="intro">
+    <span class="eyebrow-hand">Personalizado</span>
+    <h1>Crea el vuestro</h1>
+    <p>Cinco minutos. Vuestros nombres, vuestra historia, vuestro diseño.</p>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-steps" id="progressSteps">
+      <div class="p-step active" data-step="1"><div class="p-dot">1</div><div class="p-label">Producto</div></div>
+      <div class="p-step" data-step="2"><div class="p-dot">2</div><div class="p-label">Vuestra historia</div></div>
+      <div class="p-step" data-step="3"><div class="p-dot">3</div><div class="p-label">Fotos</div></div>
+      <div class="p-step" data-step="4"><div class="p-dot">4</div><div class="p-label">Pedido</div></div>
+    </div>
+    <div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
+  </div>
+
+  <!-- PASO 1 -->
+  <div class="step-panel active" data-panel="1">
+    <h2>Elige producto</h2>
+    <p class="step-sub">Todos incluyen vuestros nombres y fecha. Podéis añadir fotos en el siguiente paso.</p>
+    <div class="producto-grid" id="productoGrid">
+      <button class="producto-opcion" data-nombre="Inspired by 68 — Edición personalizada" data-precio="24.90" data-id="inspired-by-68-personalizado">
+        <h3>Inspired by 68 personalizado</h3>
+        <p>Las 68 paradas con portada y dedicatoria propias.</p>
+        <span class="precio">24,90 €</span>
+      </button>
+      <button class="producto-opcion" data-nombre="Nuestra historia (libro digital)" data-precio="19.90" data-id="nuestra-historia">
+        <h3>Nuestra historia</h3>
+        <p>Línea del tiempo de vuestra relación, con fotos y anécdotas.</p>
+        <span class="precio">19,90 €</span>
+      </button>
+      <button class="producto-opcion" data-nombre="Calendario personalizado con fotos" data-precio="22.90" data-id="calendario-personalizado">
+        <h3>Calendario con fotos</h3>
+        <p>12 meses, 12 recuerdos elegidos por vosotros.</p>
+        <span class="precio">22,90 €</span>
+      </button>
+      <button class="producto-opcion" data-nombre="Juego personalizado con nombres" data-precio="17.90" data-id="juego-personalizado">
+        <h3>Juego personalizado</h3>
+        <p>Preguntas y retos con vuestros nombres, lugares y fechas.</p>
+        <span class="precio">17,90 €</span>
+      </button>
+    </div>
+    <p class="error-msg" id="error1">Elegid un producto para continuar.</p>
+    <div class="nav-buttons"><button class="btn btn-primary" id="next1">Continuar</button></div>
+  </div>
+
+  <!-- PASO 2 -->
+  <div class="step-panel" data-panel="2">
+    <h2>Contadnos vuestra historia</h2>
+    <p class="step-sub">Con esto es suficiente para empezar. Podréis añadir detalles después.</p>
+    <div class="form-row two">
+      <div class="form-field"><label for="nombre1">Vuestro nombre</label><input type="text" id="nombre1" placeholder="Ej. Marta"></div>
+      <div class="form-field"><label for="nombre2">El nombre de vuestra pareja</label><input type="text" id="nombre2" placeholder="Ej. Diego"></div>
+    </div>
+    <div class="form-field"><label for="fecha">Fecha importante</label><input type="date" id="fecha"></div>
+    <div class="form-field"><label for="lugar">¿Dónde os conocisteis?</label><input type="text" id="lugar" placeholder="Ej. En una boda de amigos comunes"></div>
+    <div class="form-field"><label for="anecdota">Una anécdota o mensaje que queráis incluir (opcional)</label><textarea id="anecdota" rows="4" placeholder="Contadnos algo que solo vosotros entendáis..."></textarea></div>
+    <p class="error-msg" id="error2">Necesitamos al menos vuestros dos nombres para continuar.</p>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" id="back2">Atrás</button>
+      <button class="btn btn-primary" id="next2">Continuar</button>
+    </div>
+  </div>
+
+  <!-- PASO 3 -->
+  <div class="step-panel" data-panel="3">
+    <h2>Subid fotografías</h2>
+    <p class="step-sub">Entre 3 y 10 fotos suele ser suficiente. Podéis saltar este paso y enviarlas por email más tarde.</p>
+    <div class="upload-box" id="uploadBox">
+      <div class="upload-icon">↑</div>
+      <p><strong>Toca para elegir fotos</strong> o arrástralas aquí</p>
+      <p class="upload-note">JPG o PNG, hasta 10 fotos</p>
+      <input type="file" id="fileInput" accept="image/*" multiple style="display:none;">
+    </div>
+    <p id="filesSummary" style="font-size:.88rem; color:var(--verde); margin-bottom:20px;"></p>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" id="back3">Atrás</button>
+      <button class="btn btn-primary" id="next3">Continuar</button>
+    </div>
+  </div>
+
+  <!-- PASO 4 -->
+  <div class="step-panel" data-panel="4">
+    <h2>Revisad y confirmad</h2>
+    <p class="step-sub">Comprobad que todo esté bien antes de pagar. Podéis volver atrás si falta algo.</p>
+    <div class="resumen" id="resumenBox"></div>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" id="back4">Atrás</button>
+      <button class="btn btn-primary" id="pagarBtn">Realizar pedido</button>
+    </div>
+  </div>
+
+  <!-- CONFIRMACION -->
+  <div class="step-panel" data-panel="5">
+    <div class="confirmacion">
+      <div class="sello">68</div>
+      <h2>Pedido recibido</h2>
+      <p>En cuanto confirmemos el pago, empezaremos a preparar vuestro diseño. Os llegará por email en un plazo de 2 a 4 días.</p>
+      <a href="/" class="btn btn-primary" style="max-width:220px; margin:0 auto;">Volver a 6EIGHT</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const state = { producto:null, productoId:null, precio:null, nombre1:'', nombre2:'', fecha:'', lugar:'', anecdota:'', fotos:0 };
+  let currentStep = 1;
+  const totalSteps = 4;
+
+  function goToStep(n){
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    document.querySelector(`.step-panel[data-panel="${n}"]`).classList.add('active');
+    document.querySelectorAll('.p-step').forEach(s => {
+      const stepNum = Number(s.dataset.step);
+      s.classList.toggle('active', stepNum === n);
+      s.classList.toggle('done', stepNum < n);
+    });
+    document.getElementById('progressFill').style.width = (Math.min(n, totalSteps) / totalSteps * 100) + '%';
+    currentStep = n;
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  // PASO 1
+  document.querySelectorAll('.producto-opcion').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.producto-opcion').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      state.producto = opt.dataset.nombre;
+      state.productoId = opt.dataset.id;
+      state.precio = opt.dataset.precio;
+      document.getElementById('error1').classList.remove('show');
+    });
+  });
+  document.getElementById('next1').addEventListener('click', () => {
+    if(!state.producto){ document.getElementById('error1').classList.add('show'); return; }
+    goToStep(2);
+  });
+
+  // PASO 2
+  document.getElementById('back2').addEventListener('click', () => goToStep(1));
+  document.getElementById('next2').addEventListener('click', () => {
+    state.nombre1 = document.getElementById('nombre1').value.trim();
+    state.nombre2 = document.getElementById('nombre2').value.trim();
+    state.fecha = document.getElementById('fecha').value;
+    state.lugar = document.getElementById('lugar').value.trim();
+    state.anecdota = document.getElementById('anecdota').value.trim();
+    if(!state.nombre1 || !state.nombre2){ document.getElementById('error2').classList.add('show'); return; }
+    document.getElementById('error2').classList.remove('show');
+    goToStep(3);
+  });
+
+  // PASO 3
+  document.getElementById('back3').addEventListener('click', () => goToStep(2));
+  const uploadBox = document.getElementById('uploadBox');
+  const fileInput = document.getElementById('fileInput');
+  uploadBox.addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', () => {
+    state.fotos = fileInput.files.length;
+    document.getElementById('filesSummary').textContent = state.fotos > 0
+      ? `${state.fotos} foto(s) seleccionada(s).`
+      : '';
+  });
+  document.getElementById('next3').addEventListener('click', () => {
+    goToStep(4);
+    renderResumen();
+  });
+
+  // PASO 4
+  document.getElementById('back4').addEventListener('click', () => goToStep(3));
+  function renderResumen(){
+    document.getElementById('resumenBox').innerHTML = `
+      <div class="resumen-row"><span>Producto</span><span>${state.producto || '—'}</span></div>
+      <div class="resumen-row"><span>Nombres</span><span>${state.nombre1} &amp; ${state.nombre2}</span></div>
+      <div class="resumen-row"><span>Fecha</span><span>${state.fecha || '—'}</span></div>
+      <div class="resumen-row"><span>Dónde os conocisteis</span><span>${state.lugar || '—'}</span></div>
+      <div class="resumen-row"><span>Fotografías</span><span>${state.fotos} adjuntadas</span></div>
+      <div class="resumen-row"><span>Total</span><span>${state.precio ? Number(state.precio).toFixed(2).replace('.', ',') + ' €' : '—'}</span></div>
+    `;
+  }
+  document.getElementById('pagarBtn').addEventListener('click', () => iniciarPagoPersonalizado());
+
+  async function iniciarPagoPersonalizado(){
+    const btn = document.getElementById('pagarBtn');
+    const textoOriginal = btn.textContent;
+    btn.textContent = 'Redirigiendo al pago...';
+    btn.disabled = true;
+
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          productId: state.productoId,
+          personalization: {
+            nombre1: state.nombre1,
+            nombre2: state.nombre2,
+            fecha: state.fecha,
+            lugar: state.lugar,
+          },
+        }),
+      });
+      if (!response.ok) throw new Error('Respuesta no válida');
+      const { url } = await response.json();
+      window.location.href = url;
+    } catch (err) {
+      // Sin backend desplegado todavía: mostramos la confirmación simulada
+      // (igual que antes) pero dejándolo dicho con claridad, para no fingir
+      // un pago real que no ha ocurrido.
+      document.querySelector('[data-panel="5"] p').textContent =
+        'Esto es una simulación — el backend de pago aún no está desplegado. En producción, aquí se confirmaría el pago real y os llegaría el diseño por email en 2-4 días.';
+      goToStep(5);
+      btn.textContent = textoOriginal;
+      btn.disabled = false;
+    }
+  }
+</script>
+
+</body>
+</html>

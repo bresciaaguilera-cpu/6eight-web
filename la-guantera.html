@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Guantera — Ideas, preguntas y juegos para parejas | 6EIGHT</title>
+<meta name="description" content="La Guantera: el blog de 6EIGHT con ideas de citas, preguntas, juegos y regalos para parejas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crema:#F7EFE2; --verde:#22362B; --terracota:#B87460; --kraft:#C9A57A; --tinta:#2E302D; --beige2:#EFE5D6;
+    --font-display:'Oswald', sans-serif; --font-body:'Inter', sans-serif; --font-hand:'Caveat', cursive;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--crema); color:var(--tinta); font-family:var(--font-body); font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+  h1,h2,h3{font-family:var(--font-display); font-weight:600; line-height:1.15;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--terracota); outline-offset:3px;}
+
+  header{position:sticky; top:0; z-index:50; background:var(--crema); border-bottom:1px solid rgba(46,48,45,.12);}
+  .header-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 20px; max-width:1080px; margin:0 auto;}
+  .logo{font-family:var(--font-display); font-size:1.4rem; font-weight:700;}
+  .logo .six{color:var(--terracota);}
+  .back-link{font-size:.9rem; color:var(--verde); font-weight:500;}
+
+  .intro{padding:44px 0 10px; text-align:center;}
+  .intro .eyebrow-hand{font-family:var(--font-hand); font-size:1.4rem; color:var(--terracota);}
+  .intro h1{font-size:2rem; margin:8px 0 14px;}
+  @media(min-width:640px){ .intro h1{font-size:2.6rem;} }
+  .intro p{color:rgba(46,48,45,.75); max-width:56ch; margin:0 auto; font-size:1rem;}
+
+  .categorias{display:flex; gap:10px; overflow-x:auto; padding:30px 0 10px; -webkit-overflow-scrolling:touch;}
+  .categorias::-webkit-scrollbar{display:none;}
+  .cat-chip{flex-shrink:0; padding:9px 16px; background:var(--beige2); border-radius:20px; font-size:.85rem; font-weight:600; color:var(--tinta); border:1.5px solid transparent;}
+  .cat-chip.active{background:var(--verde); color:var(--crema);}
+
+  .articulos-grid{display:grid; grid-template-columns:1fr; gap:20px; padding:24px 0 50px;}
+  @media(min-width:640px){ .articulos-grid{grid-template-columns:1fr 1fr;} }
+  @media(min-width:960px){ .articulos-grid{grid-template-columns:repeat(3,1fr);} }
+
+  .articulo-card{background:var(--beige2); display:flex; flex-direction:column; overflow:hidden;}
+  .card-visual{aspect-ratio:16/10; display:flex; align-items:flex-end; padding:16px;}
+  .card-visual .cat-badge{background:rgba(255,255,255,.85); color:var(--verde); font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; padding:5px 10px; border-radius:12px;}
+  .card-body{padding:20px 22px 24px; display:flex; flex-direction:column; gap:8px; flex:1;}
+  .card-body h3{font-size:1.08rem;}
+  .card-body p{font-size:.87rem; color:rgba(46,48,45,.65); flex:1;}
+  .leer-mas{font-size:.85rem; font-weight:600; color:var(--verde); margin-top:6px;}
+  .articulo-card:hover .leer-mas{color:var(--terracota);}
+
+  .destacado{
+    display:flex; flex-direction:column; gap:0; background:var(--verde); color:var(--crema); margin:10px 0 30px; overflow:hidden;
+  }
+  @media(min-width:760px){ .destacado{flex-direction:row;} }
+  .destacado .visual{aspect-ratio:16/9; background:linear-gradient(135deg,#B87460,#22362B);}
+  @media(min-width:760px){ .destacado .visual{flex:0 0 42%; aspect-ratio:auto;} }
+  .destacado .cuerpo{padding:30px 28px; display:flex; flex-direction:column; justify-content:center; gap:10px;}
+  .destacado .tag{font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--kraft); font-weight:700;}
+  .destacado h2{font-size:1.4rem;}
+  .destacado p{color:rgba(247,239,226,.82); font-size:.92rem; max-width:48ch;}
+  .destacado a{align-self:flex-start; margin-top:6px; font-weight:600; border-bottom:1.5px solid var(--kraft); padding-bottom:2px; font-size:.9rem;}
+
+  footer{padding:34px 0; text-align:center; font-size:.85rem; color:rgba(46,48,45,.55); border-top:1px solid rgba(46,48,45,.12);}
+  footer a{color:var(--verde); font-weight:600;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo"><span class="six">6</span>EIGHT</a>
+    <a href="/" class="back-link">← Volver a 6EIGHT</a>
+  </div>
+</header>
+
+<section class="intro wrap">
+  <span class="eyebrow-hand">La Guantera</span>
+  <h1>Ideas, preguntas y juegos para parejas</h1>
+  <p>En un coche se guardan pequeñas cosas en la guantera. Aquí guardamos ideas, preguntas, planes y recursos para cuando no sepáis qué hacer juntos.</p>
+</section>
+
+<div class="wrap">
+  <div class="categorias" id="categorias">
+    <button class="cat-chip active" data-cat="todos">Todos</button>
+    <button class="cat-chip" data-cat="citas">Ideas para citas</button>
+    <button class="cat-chip" data-cat="preguntas">Preguntas</button>
+    <button class="cat-chip" data-cat="juegos">Juegos</button>
+    <button class="cat-chip" data-cat="regalos">Regalos</button>
+  </div>
+
+  <div class="destacado">
+    <div class="visual"></div>
+    <div class="cuerpo">
+      <span class="tag">Artículo destacado</span>
+      <h2>50 ideas para citas en pareja: en casa, gratis y por menos de 20€</h2>
+      <p>El artículo más completo de La Guantera, organizado por presupuesto y lugar.</p>
+      <a href="/ideas-citas-pareja">Leer artículo →</a>
+    </div>
+  </div>
+
+  <div class="articulos-grid" id="grid"></div>
+</div>
+
+<footer>
+  <p>¿Buscáis un regalo, no un artículo? <a href="/tienda">Ver la tienda</a></p>
+</footer>
+
+<script>
+  const articulos = [
+    {cat:'preguntas', titulo:'100 preguntas para parejas', desc:'Profundas, divertidas y para conoceros mejor.', href:'/preguntas-para-parejas', c1:'#22362B', c2:'#B87460'},
+    {cat:'juegos', titulo:'30 juegos para parejas', desc:'En casa, sin móvil, a distancia y para recién casados.', href:'/juegos-para-parejas', c1:'#B87460', c2:'#C9A57A'},
+    {cat:'citas', titulo:'50 ideas para citas en pareja', desc:'En casa, gratis y por menos de 20€.', href:'/ideas-citas-pareja', c1:'#C9A57A', c2:'#22362B'},
+    {cat:'citas', titulo:'Generador de citas', desc:'Filtrad por presupuesto, lugar y tiempo, y os proponemos un plan.', href:'/generador-citas', c1:'#22362B', c2:'#C9A57A'},
+    {cat:'preguntas', titulo:'Test: ¿cuál es vuestro lenguaje del amor?', desc:'8 preguntas para descubrir cómo dais y recibís cariño.', href:'/test-lenguaje-del-amor', c1:'#B87460', c2:'#22362B'},
+    {cat:'citas', titulo:'Me aburro con mi pareja: es normal', desc:'Qué es la rutina en pareja y qué hacer al respecto.', href:'/me-aburro-con-mi-pareja', c1:'#22362B', c2:'#B87460'},
+    {cat:'regalos', titulo:'Calendario de Adviento para parejas', desc:'24 sorpresas hasta Navidad, sin chocolatinas.', href:'/calendario-adviento-parejas', c1:'#B87460', c2:'#C9A57A'},
+    {cat:'regalos', titulo:'Kit de San Valentín', desc:'Ideas y regalos sin corazones rosas ni tópicos.', href:'/san-valentin', c1:'#B87460', c2:'#22362B'},
+    {cat:'regalos', titulo:'Ideas para aniversario', desc:'Del primer año al número quince, sin quedaros sin ideas.', href:'/aniversario', c1:'#C9A57A', c2:'#B87460'},
+  ];
+
+  const grid = document.getElementById('grid');
+  function render(cat){
+    const lista = cat === 'todos' ? articulos : articulos.filter(a => a.cat === cat);
+    grid.innerHTML = lista.map(a => `
+      <a href="${a.href}" class="articulo-card">
+        <div class="card-visual" style="background:linear-gradient(135deg, ${a.c1}, ${a.c2});">
+          <span class="cat-badge">${labelCat(a.cat)}</span>
+        </div>
+        <div class="card-body">
+          <h3>${a.titulo}</h3>
+          <p>${a.desc}</p>
+          <span class="leer-mas">Leer más →</span>
+        </div>
+      </a>
+    `).join('');
+  }
+  function labelCat(cat){
+    return {citas:'Ideas para citas', preguntas:'Preguntas', juegos:'Juegos', regalos:'Regalos'}[cat] || '';
+  }
+  document.querySelectorAll('.cat-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      render(chip.dataset.cat);
+    });
+  });
+  render('todos');
+</script>
+
+</body>
+</html>

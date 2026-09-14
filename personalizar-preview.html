@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personalizad vuestra portada — Inspired by 68 | 6EIGHT</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crema:#F7EFE2; --verde:#22362B; --terracota:#B87460; --kraft:#C9A57A; --tinta:#2E302D; --beige2:#EFE5D6;
+    --font-display:'Oswald', sans-serif; --font-body:'Inter', sans-serif; --font-hand:'Caveat', cursive;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--crema); color:var(--tinta); font-family:var(--font-body); font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+  h1,h2,h3{font-family:var(--font-display); font-weight:600; line-height:1.18;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 20px;}
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{outline:2px solid var(--terracota); outline-offset:3px;}
+
+  header{position:sticky; top:0; z-index:50; background:var(--crema); border-bottom:1px solid rgba(46,48,45,.12);}
+  .header-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 20px; max-width:1080px; margin:0 auto;}
+  .logo{font-family:var(--font-display); font-size:1.4rem; font-weight:700;}
+  .logo .six{color:var(--terracota);}
+  .back-link{font-size:.9rem; color:var(--verde); font-weight:500;}
+
+  .intro{padding:36px 0 6px; text-align:center;}
+  .intro .eyebrow-hand{font-family:var(--font-hand); font-size:1.35rem; color:var(--terracota);}
+  .intro h1{font-size:1.9rem; margin:8px 0 8px;}
+  @media(min-width:640px){ .intro h1{font-size:2.3rem;} }
+  .intro p{color:rgba(46,48,45,.72); font-size:.95rem; max-width:48ch; margin:0 auto;}
+
+  .editor-grid{display:flex; flex-direction:column; gap:36px; padding:36px 0 70px;}
+  @media(min-width:900px){ .editor-grid{flex-direction:row; align-items:flex-start; gap:50px;} }
+
+  /* FORMULARIO */
+  .form-col{flex:0 0 380px;}
+  .form-field{margin-bottom:18px;}
+  .form-field label{display:block; font-size:.86rem; font-weight:600; color:var(--verde); margin-bottom:7px;}
+  .form-field input, .form-field textarea{
+    width:100%; padding:12px 14px; border:1.5px solid rgba(46,48,45,.22); background:#fff;
+    font-family:inherit; font-size:.98rem; color:var(--tinta);
+  }
+  .form-field .char-count{font-size:.75rem; color:rgba(46,48,45,.45); text-align:right; margin-top:4px;}
+
+  .descarga-panel{margin-top:22px; padding-top:22px; border-top:1px solid rgba(46,48,45,.15);}
+  .btn{display:inline-flex; align-items:center; justify-content:center; padding:15px 22px; font-weight:600; font-size:.95rem; border-radius:2px; width:100%; transition:background .2s ease, transform .15s ease;}
+  .btn-primary{background:var(--verde); color:var(--crema);}
+  .btn-primary:hover{background:#1a2921;}
+  .btn:active{transform:scale(.99);}
+  .btn-primary:disabled{opacity:.5; cursor:not-allowed;}
+  .descarga-note{font-size:.8rem; color:rgba(46,48,45,.55); margin-top:10px; text-align:center;}
+  .descarga-ok{font-size:.85rem; color:var(--verde); font-weight:600; margin-top:12px; text-align:center; display:none;}
+  .descarga-ok.show{display:block;}
+
+  /* PREVIEW */
+  .preview-col{flex:1; display:flex; flex-direction:column; align-items:center;}
+  .preview-label{font-size:.8rem; text-transform:uppercase; letter-spacing:.06em; color:rgba(46,48,45,.5); margin-bottom:14px; align-self:flex-start;}
+  .portada{
+    width:100%; max-width:400px; aspect-ratio:210/297; background:var(--crema);
+    box-shadow:0 20px 50px rgba(46,48,45,.25); position:relative; overflow:hidden;
+    display:flex; flex-direction:column; justify-content:space-between; padding:34px 30px;
+    border:1px solid rgba(46,48,45,.08);
+  }
+  .portada .top-label{font-family:var(--font-hand); font-size:1.15rem; color:var(--terracota);}
+  .portada .titulo{font-family:var(--font-display); font-size:1.9rem; color:var(--verde); line-height:1.05; margin-top:10px;}
+  .portada .nombres{font-family:var(--font-hand); font-size:2.1rem; color:var(--tinta); margin-top:18px; word-break:break-word;}
+  .portada .fecha-lugar{font-size:.82rem; color:rgba(46,48,45,.6); margin-top:8px;}
+  .portada .mensaje{font-size:.85rem; color:rgba(46,48,45,.75); margin-top:16px; font-style:italic; max-width:90%;}
+  .portada .route-svg{position:absolute; bottom:60px; left:0; width:100%; height:60px;}
+  .portada .sello68{
+    position:absolute; bottom:30px; right:30px; width:52px; height:52px; border-radius:50%;
+    border:1.5px dashed var(--terracota); display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-size:.85rem; color:var(--terracota);
+  }
+  .portada .tape{position:absolute; top:-6px; right:24%; width:60px; height:20px; background:rgba(201,165,122,.65); transform:rotate(-8deg);}
+
+  footer{padding:34px 0; text-align:center; font-size:.85rem; color:rgba(46,48,45,.55); border-top:1px solid rgba(46,48,45,.12);}
+  footer a{color:var(--verde); font-weight:600;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo"><span class="six">6</span>EIGHT</a>
+    <a href="/crea-el-vuestro" class="back-link">← Volver a personalizar producto</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="intro">
+    <span class="eyebrow-hand">Vista previa en vivo</span>
+    <h1>Así quedaría vuestra portada</h1>
+    <p>Escribid vuestros datos y ved el resultado al momento. Al final podéis descargarlo de verdad.</p>
+  </div>
+
+  <div class="editor-grid">
+    <div class="form-col">
+      <div class="form-field">
+        <label for="nombres">Vuestros nombres</label>
+        <input type="text" id="nombres" placeholder="Marta &amp; Diego" value="Marta &amp; Diego" maxlength="40">
+      </div>
+      <div class="form-field">
+        <label for="fecha">Fecha importante</label>
+        <input type="text" id="fecha" placeholder="14 de marzo de 2019" value="14 de marzo de 2019" maxlength="40">
+      </div>
+      <div class="form-field">
+        <label for="lugar">Lugar donde os conocisteis</label>
+        <input type="text" id="lugar" placeholder="Madrid" value="Madrid" maxlength="30">
+      </div>
+      <div class="form-field">
+        <label for="mensaje">Dedicatoria (opcional)</label>
+        <textarea id="mensaje" rows="3" maxlength="120" placeholder="Para seguir descubriéndonos, parada a parada.">Para seguir descubriéndonos, parada a parada.</textarea>
+        <div class="char-count"><span id="charCount">0</span>/120</div>
+      </div>
+
+      <div class="descarga-panel">
+        <button class="btn btn-primary" id="descargarBtn">Descargar vuestra portada</button>
+        <p class="descarga-note">Se descarga como imagen (PNG) lista para imprimir o compartir</p>
+        <p class="descarga-ok" id="descargaOk">✓ Descargada — mirad vuestra carpeta de descargas</p>
+      </div>
+    </div>
+
+    <div class="preview-col">
+      <span class="preview-label">Vista previa</span>
+      <div class="portada" id="portadaPreview">
+        <div class="tape"></div>
+        <div>
+          <span class="top-label">Inspired by 68</span>
+          <h2 class="titulo">Nuestra ruta,<br>hecha a medida</h2>
+        </div>
+        <div>
+          <div class="nombres" id="pNombres">Marta &amp; Diego</div>
+          <div class="fecha-lugar" id="pFechaLugar">14 de marzo de 2019 · Madrid</div>
+          <div class="mensaje" id="pMensaje">"Para seguir descubriéndonos, parada a parada."</div>
+        </div>
+        <svg class="route-svg" viewBox="0 0 300 60" preserveAspectRatio="none">
+          <path d="M0,45 C60,15 120,55 180,25 C220,5 260,40 300,20" fill="none" stroke="#22362B" stroke-width="1.5" stroke-dasharray="1,8" stroke-linecap="round"/>
+        </svg>
+        <div class="sello68">68</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<canvas id="hiddenCanvas" width="1000" height="1414" style="display:none;"></canvas>
+
+<footer>
+  <p>¿Ya os convence? <a href="/crea-el-vuestro">Completad el pedido con vuestras fotos</a></p>
+</footer>
+
+<script>
+  const nombresInput = document.getElementById('nombres');
+  const fechaInput = document.getElementById('fecha');
+  const lugarInput = document.getElementById('lugar');
+  const mensajeInput = document.getElementById('mensaje');
+  const charCount = document.getElementById('charCount');
+
+  function actualizarPreview(){
+    const nombres = nombresInput.value.trim() || 'Vuestros nombres';
+    const fecha = fechaInput.value.trim();
+    const lugar = lugarInput.value.trim();
+    const mensaje = mensajeInput.value.trim();
+
+    document.getElementById('pNombres').textContent = nombres;
+    document.getElementById('pFechaLugar').textContent = [fecha, lugar].filter(Boolean).join(' · ') || 'Vuestra fecha · Vuestro lugar';
+    document.getElementById('pMensaje').textContent = mensaje ? `"${mensaje}"` : '';
+    charCount.textContent = mensaje.length;
+  }
+  [nombresInput, fechaInput, lugarInput, mensajeInput].forEach(el => el.addEventListener('input', actualizarPreview));
+  actualizarPreview();
+
+  function wrapText(ctx, text, x, y, maxWidth, lineHeight){
+    const words = text.split(' ');
+    let line = '';
+    let lines = [];
+    for(let word of words){
+      const test = line + word + ' ';
+      if(ctx.measureText(test).width > maxWidth && line !== ''){
+        lines.push(line.trim());
+        line = word + ' ';
+      } else {
+        line = test;
+      }
+    }
+    lines.push(line.trim());
+    lines.forEach((l, i) => ctx.fillText(l, x, y + i * lineHeight));
+    return lines.length;
+  }
+
+  function dibujarYDescargar(){
+    const canvas = document.getElementById('hiddenCanvas');
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+
+    // fondo
+    ctx.fillStyle = '#F7EFE2';
+    ctx.fillRect(0, 0, W, H);
+
+    // cinta kraft decorativa
+    ctx.save();
+    ctx.translate(W * 0.62, 30);
+    ctx.rotate(-8 * Math.PI / 180);
+    ctx.fillStyle = 'rgba(201,165,122,.65)';
+    ctx.fillRect(-60, 0, 180, 46);
+    ctx.restore();
+
+    // eyebrow
+    ctx.fillStyle = '#B87460';
+    ctx.font = 'italic 42px Georgia, serif';
+    ctx.fillText('Inspired by 68', 70, 130);
+
+    // titulo
+    ctx.fillStyle = '#22362B';
+    ctx.font = '700 56px Georgia, serif';
+    ctx.fillText('Nuestra ruta,', 70, 220);
+    ctx.fillText('hecha a medida', 70, 285);
+
+    // nombres
+    const nombres = nombresInput.value.trim() || 'Vuestros nombres';
+    ctx.fillStyle = '#2E302D';
+    ctx.font = 'italic 64px Georgia, serif';
+    wrapText(ctx, nombres, 70, 780, W - 140, 70);
+
+    // fecha y lugar
+    const fecha = fechaInput.value.trim();
+    const lugar = lugarInput.value.trim();
+    const fechaLugar = [fecha, lugar].filter(Boolean).join('  ·  ') || 'Vuestra fecha  ·  Vuestro lugar';
+    ctx.fillStyle = 'rgba(46,48,45,.7)';
+    ctx.font = '30px Arial, sans-serif';
+    ctx.fillText(fechaLugar, 70, 850);
+
+    // mensaje
+    const mensaje = mensajeInput.value.trim();
+    if(mensaje){
+      ctx.fillStyle = 'rgba(46,48,45,.8)';
+      ctx.font = 'italic 28px Georgia, serif';
+      wrapText(ctx, '"' + mensaje + '"', 70, 910, W - 140, 38);
+    }
+
+    // ruta punteada
+    ctx.strokeStyle = '#22362B';
+    ctx.lineWidth = 3;
+    ctx.setLineDash([2, 16]);
+    ctx.beginPath();
+    ctx.moveTo(70, H - 260);
+    ctx.bezierCurveTo(W*0.35, H - 340, W*0.55, H - 200, W*0.85, H - 260);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // sello 68
+    ctx.beginPath();
+    ctx.arc(W - 130, H - 130, 60, 0, Math.PI * 2);
+    ctx.strokeStyle = '#B87460';
+    ctx.lineWidth = 3;
+    ctx.setLineDash([4, 6]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#B87460';
+    ctx.font = '700 34px Georgia, serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('68', W - 130, H - 118);
+    ctx.textAlign = 'left';
+
+    // descarga
+    const dataUrl = canvas.toDataURL('image/png');
+    const a = document.createElement('a');
+    const nombreArchivo = 'inspired-by-68-' + (nombres.replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase() || 'portada') + '.png';
+    a.href = dataUrl;
+    a.download = nombreArchivo;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    document.getElementById('descargaOk').classList.add('show');
+  }
+
+  document.getElementById('descargarBtn').addEventListener('click', dibujarYDescargar);
+</script>
+
+</body>
+</html>
