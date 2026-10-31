@@ -5,6 +5,6 @@
   "description": "Web estática de 6EIGHT con funciones serverless de Vercel para checkout y descarga de productos digitales.",
   "dependencies": {
     "stripe": "^17.4.0",
-    "@vercel/blob": "^0.27.1"
+    "@vercel/blob": "^2.4.0"
   }
 }
