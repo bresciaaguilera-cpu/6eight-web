@@ -1,3 +1,12 @@
 .vercel
 .DS_Store
 *.log
+node_modules/
+
+# Variables de entorno: nunca deben subirse a Git (claves de Stripe/Blob)
+.env
+.env.local
+.env.*.local
+
+# Productos completos (contenido de pago) — nunca deben subirse a GitHub/Vercel
+private-products/

@@ -450,11 +450,11 @@
   <div class="wrap">
     <h2>Una idea para los dos, de vez en cuando.</h2>
     <p>Planes, preguntas y descargables para cuando no sepáis qué hacer juntos.</p>
-    <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Ya estás dentro';">
-      <input type="email" placeholder="tuemail@ejemplo.com" required aria-label="Correo electrónico">
-      <button type="submit">Me apunto</button>
+    <form class="newsletter-form" onsubmit="event.preventDefault();">
+      <input type="email" placeholder="tuemail@ejemplo.com" aria-label="Correo electrónico" disabled>
+      <button type="submit" disabled style="opacity:.6; cursor:default;">Próximamente</button>
     </form>
-    <p class="newsletter-note">Sin spam. Podéis salir cuando queráis.</p>
+    <p class="newsletter-note">Todavía no hemos activado esta función. Sin spam cuando lo hagamos, y podréis salir cuando queráis.</p>
   </div>
 </section>
 
@@ -483,9 +483,10 @@
       </div>
       <div>
         <h4>Legal</h4>
-        <span class="pendiente">Privacidad (próximamente)</span>
-        <span class="pendiente">Términos (próximamente)</span>
-        <span class="pendiente">Licencia de uso (próximamente)</span>
+        <a href="/privacidad">Privacidad</a>
+        <a href="/terminos">Términos</a>
+        <a href="/reembolsos">Reembolsos</a>
+        <a href="/licencia-uso">Licencia de uso</a>
       </div>
     </div>
     <div class="footer-bottom">

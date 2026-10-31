@@ -4,4 +4,4 @@ Disallow: /checkout-demo
 Disallow: /personalizar-preview
 Disallow: /vista-previa-libro
 
-Sitemap: https://DOMINIO-PENDIENTE.com/sitemap.xml
+Sitemap: https://6eight-web.vercel.app/sitemap.xml

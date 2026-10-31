@@ -13,7 +13,7 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{background:var(--crema); color:var(--tinta); font-family:var(--font-body); font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  body{background:var(--crema); color:var(--tinta); font-family:var(--font-body); font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
   a{color:inherit; text-decoration:none;}
   ul{list-style:none;}
   button{font-family:inherit; cursor:pointer; border:none; background:none;}
@@ -32,7 +32,7 @@
 
   section{padding:56px 0;}
   @media(min-width:860px){ section{padding:96px 0;} }
-  .btn{display:inline-flex; align-items:center; justify-content:center; padding:15px 26px; font-weight:600; font-size:.98rem; border-radius:2px; transition:transform .15s ease, background .2s ease;}
+  .btn{display:inline-flex; align-items:center; justify-content:center; padding:15px 26px; font-weight:600; font-size:.98rem; border-radius:2px; transition:transform .15s ease, background .2s ease; text-align:center;}
   .btn-primary{background:var(--terracota); color:var(--crema);}
   .btn-primary:hover{background:#a3634f;}
   .btn-secondary{background:transparent; color:var(--verde); border:1.5px solid var(--verde);}
@@ -45,68 +45,130 @@
   .hero-grid{display:flex; flex-direction:column; gap:32px;}
   @media(min-width:960px){ .hero-grid{flex-direction:row; align-items:center; gap:60px;} .hero-text{flex:0 0 48%;} }
   .hero-text .eyebrow-hand{margin-bottom:10px;}
-  .hero-text h1{font-size:2.3rem; margin-bottom:16px;}
-  @media(min-width:640px){ .hero-text h1{font-size:2.9rem;} }
-  .hero-text .price-row{display:flex; align-items:baseline; gap:12px; margin:18px 0 22px;}
+  .hero-text h1{font-size:2.1rem; margin-bottom:16px;}
+  @media(min-width:480px){ .hero-text h1{font-size:2.5rem;} }
+  @media(min-width:640px){ .hero-text h1{font-size:2.85rem;} }
+  .hero-text p.lead{font-size:1.05rem; color:rgba(46,48,45,.8); max-width:46ch;}
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:8px 14px; margin-top:18px; font-size:.84rem; font-weight:600;
+    color:var(--verde); text-transform:uppercase; letter-spacing:.04em;
+  }
+  .hero-meta span{position:relative; padding-right:14px;}
+  .hero-meta span:not(:last-child)::after{content:'·'; position:absolute; right:0; color:var(--kraft);}
+  .hero-text .price-row{display:flex; align-items:baseline; gap:12px; margin:22px 0 22px; flex-wrap:wrap;}
   .price-now{font-family:var(--font-display); font-size:2rem; color:var(--verde);}
   .price-before{font-size:1.05rem; color:rgba(46,48,45,.5); text-decoration:line-through;}
   .price-note{font-size:.85rem; color:var(--terracota);}
-  .hero-visual{flex:1; position:relative;}
+  .hero-cta-row{display:flex; flex-direction:column; align-items:flex-start; gap:14px;}
+  @media(min-width:480px){ .hero-cta-row{flex-direction:row; align-items:center; flex-wrap:wrap;} }
+  .link-discreto{
+    font-size:.92rem; font-weight:600; color:var(--verde); text-decoration:underline;
+    text-decoration-color:var(--kraft); text-underline-offset:4px; padding:6px 0;
+  }
+  .link-discreto:hover{color:var(--terracota); text-decoration-color:var(--terracota);}
+  .hero-visual{flex:1; position:relative; min-width:0;}
   .pages-fan{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
-  .pagina{background:#fff; aspect-ratio:3/4; padding:16px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 14px 28px rgba(46,48,45,.16);}
+  .pagina{background:#fff; aspect-ratio:3/4; padding:16px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 14px 28px rgba(46,48,45,.16); min-width:0;}
   .pagina:nth-child(2){transform:translateY(-14px);}
   .pagina .num{font-family:var(--font-display); font-size:1.3rem; color:var(--terracota);}
   .pagina .linea{height:1px; background:rgba(46,48,45,.15); margin:6px 0;}
   .pagina .txt{font-size:.68rem; color:rgba(46,48,45,.65); line-height:1.4;}
-  .pagina .sello{align-self:flex-end; width:30px; height:30px; border-radius:50%; border:1.5px dashed var(--terracota); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:.65rem; color:var(--terracota);}
+  .pagina .sello{align-self:flex-end; width:30px; height:30px; border-radius:50%; border:1.5px dashed var(--terracota); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:.65rem; color:var(--terracota); flex-shrink:0;}
 
-  /* PROBLEMA / SOLUCION */
+  /* IDENTIFICACION / SOLUCION */
   .prob-sol{background:var(--verde); color:var(--crema);}
   .prob-sol .wrap{display:flex; flex-direction:column; gap:40px;}
   @media(min-width:860px){ .prob-sol .wrap{flex-direction:row; gap:70px;} }
-  .prob-sol .col{flex:1;}
+  .prob-sol .col{flex:1; min-width:0;}
   .prob-sol .eyebrow-hand{color:var(--kraft);}
-  .prob-sol h2{font-size:1.6rem; margin:10px 0 14px; color:var(--crema);}
+  .prob-sol h2{font-size:1.5rem; margin:10px 0 16px; color:var(--crema);}
+  @media(min-width:640px){ .prob-sol h2{font-size:1.7rem;} }
   .prob-sol p{color:rgba(247,239,226,.82); max-width:44ch;}
+  .identificacion-list{display:flex; flex-direction:column; gap:11px; margin-top:4px;}
+  .identificacion-list li{position:relative; padding-left:20px; color:rgba(247,239,226,.85); font-size:.97rem;}
+  .identificacion-list li::before{content:'—'; position:absolute; left:0; color:var(--kraft);}
 
-  /* QUE ES */
-  .que-es{text-align:center;}
-  .que-es .wrap{max-width:640px;}
-  .que-es .big-num{font-family:var(--font-display); font-size:5rem; color:var(--terracota); line-height:1;}
-  .que-es h2{font-size:1.7rem; margin:8px 0 16px;}
-  .que-es p{color:rgba(46,48,45,.78); max-width:50ch; margin:0 auto;}
+  /* CIFRAS EDITORIAL (68 / 4 / 1) */
+  .cifras{text-align:center;}
+  .cifras-grid{display:grid; grid-template-columns:1fr; gap:30px; margin-top:10px;}
+  @media(min-width:640px){ .cifras-grid{grid-template-columns:repeat(3,1fr); gap:20px;} }
+  .cifra{padding:10px 8px;}
+  .cifra .big-num{font-family:var(--font-display); font-size:4.2rem; color:var(--terracota); line-height:1;}
+  @media(min-width:640px){ .cifra .big-num{font-size:5rem;} }
+  .cifra .label{display:block; margin-top:8px; font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; font-weight:700; color:var(--verde); max-width:22ch; margin-left:auto; margin-right:auto;}
+  .cifras-nota{margin-top:30px; color:rgba(46,48,45,.6); font-size:.95rem;}
 
   /* RUTAS */
   .rutas{background:var(--beige2);}
   .rutas-grid{display:grid; grid-template-columns:1fr; gap:16px;}
   @media(min-width:640px){ .rutas-grid{grid-template-columns:1fr 1fr;} }
-  .ruta-card{background:var(--crema); padding:26px 24px; border-top:3px solid var(--terracota);}
+  .ruta-card{background:var(--crema); padding:26px 24px; border-top:3px solid var(--terracota); min-width:0;}
   .ruta-card .ruta-n{font-family:var(--font-hand); font-size:1.15rem; color:var(--terracota); margin-bottom:6px; display:block;}
   .ruta-card h3{font-size:1.15rem; margin-bottom:8px;}
   .ruta-card p{font-size:.92rem; color:rgba(46,48,45,.72);}
+  .ruta-card .rango{display:inline-block; margin-top:12px; font-size:.74rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--verde); border-top:1px dashed rgba(46,48,45,.25); padding-top:10px; width:100%;}
 
-  /* VISTA INTERIOR */
+  /* VISTA INTERIOR / COMO ES CADA PARADA */
   .vista-interior .pages-fan{margin-top:30px;}
   .vista-interior .section-head{max-width:560px;}
+  .vista-interior-grid{display:flex; flex-direction:column; gap:40px; margin-top:34px;}
+  @media(min-width:960px){ .vista-interior-grid{flex-direction:row; gap:60px;} }
+  .vista-interior-grid .pages-fan{flex:0 0 46%; margin-top:0;}
+  .como-lista{flex:1; display:flex; flex-direction:column; gap:18px; min-width:0;}
+  .como-step{display:flex; gap:14px;}
+  .como-n{font-family:var(--font-display); color:var(--terracota); border:1.5px solid var(--terracota); border-radius:50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:.95rem;}
+  .como-step h3{font-size:1rem; margin-bottom:3px;}
+  .como-step p{font-size:.9rem; color:rgba(46,48,45,.72);}
+  .como-cierre{margin-top:10px; font-family:var(--font-hand); font-size:1.4rem; color:var(--terracota);}
+
+  /* EJEMPLOS */
+  .ejemplos-grid{display:grid; grid-template-columns:1fr; gap:18px; margin-top:34px;}
+  @media(min-width:640px){ .ejemplos-grid{grid-template-columns:repeat(3,1fr);} }
+  .ejemplo-card{background:var(--beige2); padding:24px 22px; border-top:3px solid var(--kraft); display:flex; flex-direction:column; gap:10px; min-width:0;}
+  .ejemplo-card .ruta-tag{font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--terracota); font-weight:700;}
+  .ejemplo-card h3{font-size:1.05rem;}
+  .ejemplo-card .exp{font-size:.88rem; color:rgba(46,48,45,.75);}
+  .ejemplo-card .reflexion{font-size:.82rem; color:rgba(46,48,45,.6); font-style:italic; border-top:1px dashed rgba(46,48,45,.2); padding-top:10px; margin-top:4px;}
+  .ejemplos-nota{text-align:center; margin-top:28px; font-family:var(--font-hand); font-size:1.35rem; color:var(--terracota);}
+
+  /* PARA QUIEN */
+  .para-quien-list{display:flex; flex-direction:column; gap:12px; margin-top:22px; max-width:56ch;}
+  .para-quien-list li{position:relative; padding-left:22px; font-size:.97rem; color:rgba(46,48,45,.82);}
+  .para-quien-list li::before{content:'—'; position:absolute; left:0; color:var(--terracota); font-weight:700;}
+  .para-quien-nota{margin-top:26px; font-size:.95rem; color:rgba(46,48,45,.6); max-width:52ch;}
+
+  /* REGALO */
+  .regalo{background:var(--beige2);}
+  .regalo .wrap{max-width:640px; text-align:center;}
+  .regalo h2{font-size:1.6rem; margin-bottom:14px;}
+  @media(min-width:640px){ .regalo h2{font-size:1.9rem;} }
+  .regalo p{color:rgba(46,48,45,.78); max-width:52ch; margin:0 auto;}
+
+  /* HISTORIA 68 */
+  .historia68 .wrap{max-width:640px;}
+  .historia68 blockquote{font-family:var(--font-hand); font-size:1.5rem; color:var(--terracota); border-left:3px solid var(--kraft); padding-left:18px; margin:14px 0 20px;}
+  .historia68 p{color:rgba(46,48,45,.8); max-width:56ch;}
 
   /* QUE INCLUYE / COMO FUNCIONA */
   .detalles{display:flex; flex-direction:column; gap:40px;}
   @media(min-width:960px){ .detalles{flex-direction:row; gap:60px;} }
-  .detalles .col{flex:1;}
+  .detalles .col{flex:1; min-width:0;}
   .ficha{display:flex; flex-direction:column; gap:0;}
-  .ficha-row{display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid rgba(46,48,45,.12); font-size:.95rem;}
+  .ficha-row{display:flex; justify-content:space-between; gap:12px; padding:14px 0; border-bottom:1px solid rgba(46,48,45,.12); font-size:.95rem;}
   .ficha-row span:first-child{color:rgba(46,48,45,.6);}
   .ficha-row span:last-child{font-weight:600; text-align:right;}
-  .como-step{display:flex; gap:14px; margin-bottom:20px;}
-  .como-n{font-family:var(--font-display); color:var(--terracota); border:1.5px solid var(--terracota); border-radius:50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:.95rem;}
-  .como-step h3{font-size:1rem; margin-bottom:3px;}
-  .como-step p{font-size:.9rem; color:rgba(46,48,45,.72);}
+  .funciona-step{display:flex; gap:14px; margin-bottom:20px;}
+  .funciona-n{font-family:var(--font-display); color:var(--terracota); border:1.5px solid var(--terracota); border-radius:50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:.95rem;}
+  .funciona-step h3{font-size:1rem; margin-bottom:3px;}
+  .funciona-step p{font-size:.9rem; color:rgba(46,48,45,.72);}
 
-  /* CTA PRECIO */
+  /* CTA FINAL */
   .cta-precio{background:var(--terracota); color:var(--crema); text-align:center;}
-  .cta-precio .wrap{max-width:520px;}
-  .cta-precio h2{font-size:1.8rem; margin-bottom:12px; color:var(--crema);}
-  .cta-precio .price-row{justify-content:center; margin:18px 0 24px;}
+  .cta-precio .wrap{max-width:560px;}
+  .cta-precio h2{font-size:1.5rem; margin-bottom:6px; color:var(--crema); line-height:1.25;}
+  @media(min-width:640px){ .cta-precio h2{font-size:1.75rem;} }
+  .cta-precio .subrayado{font-family:var(--font-hand); font-size:1.6rem; color:var(--crema); display:block; margin-bottom:22px;}
+  .cta-precio .price-row{justify-content:center; margin:0 0 24px; flex-wrap:wrap;}
   .cta-precio .price-now{color:var(--crema);}
   .cta-precio .price-before{color:rgba(247,239,226,.6);}
   .cta-precio p.detail{color:rgba(247,239,226,.85); margin-bottom:24px; font-size:.92rem;}
@@ -114,8 +176,8 @@
   /* FAQ */
   .faq{max-width:720px; margin:0 auto;}
   .faq-item{border-bottom:1px solid rgba(46,48,45,.15);}
-  .faq-q{width:100%; display:flex; justify-content:space-between; align-items:center; padding:20px 0; text-align:left; font-weight:600; font-size:1rem;}
-  .faq-q .plus{font-size:1.3rem; color:var(--terracota); transition:transform .2s ease;}
+  .faq-q{width:100%; display:flex; justify-content:space-between; align-items:center; gap:14px; padding:20px 0; text-align:left; font-weight:600; font-size:1rem;}
+  .faq-q .plus{font-size:1.3rem; color:var(--terracota); transition:transform .2s ease; flex-shrink:0;}
   .faq-item.open .plus{transform:rotate(45deg);}
   .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
   .faq-a p{padding-bottom:18px; color:rgba(46,48,45,.75); font-size:.94rem; max-width:60ch;}
@@ -137,48 +199,65 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-text">
-      <span class="eyebrow-hand">Producto insignia de 6EIGHT</span>
-      <h1>Inspired by 68</h1>
-      <p style="font-size:1.05rem; color:rgba(46,48,45,.8); max-width:44ch;">68 paradas para volver a poner vuestra relación en movimiento.</p>
+      <span class="eyebrow-hand">Una experiencia para dos</span>
+      <h1>68 paradas para volver a poner vuestra relación en movimiento</h1>
+      <p class="lead">Para parejas que se quieren, pero que a veces sienten que todos los fines de semana empiezan con la misma pregunta: ¿qué hacemos hoy?</p>
+      <div class="hero-meta">
+        <span>68 experiencias</span>
+        <span>4 rutas</span>
+        <span>Recuerdos para guardar</span>
+      </div>
       <div class="price-row">
         <span class="price-now">9,90 €</span>
         <span class="price-before">17,90 €</span>
         <span class="price-note">Precio de lanzamiento</span>
       </div>
-      <a href="#comprar" class="btn btn-primary">Comprar Inspired by 68</a>
+      <div class="hero-cta-row">
+        <a href="#comprar" class="btn btn-primary">Empezar nuestra ruta</a>
+        <a href="#interior" class="link-discreto">Ver qué hay dentro</a>
+      </div>
     </div>
     <div class="hero-visual">
       <div class="pages-fan">
         <div class="pagina"><div><div class="num">07</div><div class="linea"></div><div class="txt">Ruta 1. Una experiencia para hoy, sin planearla demasiado.</div></div><div class="sello">68</div></div>
         <div class="pagina"><div><div class="num">24</div><div class="linea"></div><div class="txt">Ruta 2. Anécdota para escribir juntos, aquí mismo.</div></div><div class="sello">68</div></div>
-        <div class="pagina"><div><div class="num">51</div><div class="linea"></div><div class="txt">Ruta 4. Reflexión y valoración de la parada.</div></div><div class="sello">68</div></div>
+        <div class="pagina"><div><div class="num">51</div><div class="linea"></div><div class="txt">Ruta 3. Reflexión y valoración de la parada.</div></div><div class="sello">68</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 2 y 3. PROBLEMA / SOLUCION -->
+<!-- 2. IDENTIFICACION -->
 <section class="prob-sol">
   <div class="wrap">
     <div class="col">
-      <span class="eyebrow-hand">El problema</span>
-      <h2>Hay relaciones que no están mal.</h2>
-      <p>Simplemente llevan demasiado tiempo recorriendo la misma carretera: los mismos planes, las mismas conversaciones, el mismo sofá los sábados.</p>
+      <span class="eyebrow-hand">¿Os suena esto?</span>
+      <h2>No hace falta que una relación vaya mal para caer en la rutina.</h2>
+      <ul class="identificacion-list">
+        <li>Los mismos planes, los mismos sitios.</li>
+        <li>Fines de semana improvisados a última hora.</li>
+        <li>Querer hacer algo juntos y no saber qué.</li>
+        <li>Esa experiencia que vais dejando para "otro día".</li>
+      </ul>
     </div>
+    <!-- 3. SOLUCION -->
     <div class="col">
       <span class="eyebrow-hand">La solución</span>
-      <h2>No necesitáis un gran viaje.</h2>
-      <p>Necesitáis cosas nuevas que compartir. Pequeñas paradas que os saquen del piloto automático, una detrás de otra.</p>
+      <h2>No necesitáis organizar un gran viaje.</h2>
+      <p>A veces solo necesitáis una excusa para salir del piloto automático. Cada parada de Inspired by 68 propone algo concreto que vivir juntos: no una idea más en una lista, sino algo que de verdad vais a hacer.</p>
     </div>
   </div>
 </section>
 
-<!-- 4. QUE ES -->
-<section class="que-es">
+<!-- 4. CIFRAS -->
+<section class="cifras">
   <div class="wrap">
-    <span class="big-num">68</span>
-    <h2>experiencias para vivir en pareja</h2>
-    <p>Cada parada incluye una experiencia que hacer juntos, algo que fortalece la relación, un recuerdo obligatorio, espacio para escribir vuestra anécdota, una pequeña reflexión y un sello 68 con fecha, lugar y valoración.</p>
+    <div class="cifras-grid">
+      <div class="cifra"><span class="big-num">68</span><span class="label">Paradas</span></div>
+      <div class="cifra"><span class="big-num">4</span><span class="label">Rutas</span></div>
+      <div class="cifra"><span class="big-num">1</span><span class="label">Historia que vais a escribir juntos</span></div>
+    </div>
+    <p class="cifras-nota">Una detrás de otra, al ritmo que vosotros decidáis.</p>
   </div>
 </section>
 
@@ -189,67 +268,161 @@
       <h2 style="font-size:1.9rem;">Cuatro rutas, un mismo camino</h2>
     </div>
     <div class="rutas-grid">
-      <div class="ruta-card"><span class="ruta-n">Ruta 1</span><h3>Volver a arrancar</h3><p>Paradas sencillas para retomar el hábito de hacer cosas juntos, sin grandes planes.</p></div>
-      <div class="ruta-card"><span class="ruta-n">Ruta 2</span><h3>Salir del camino conocido</h3><p>Experiencias que os sacan de los sitios y las rutinas de siempre.</p></div>
-      <div class="ruta-card"><span class="ruta-n">Ruta 3</span><h3>Conversaciones con vistas</h3><p>Paradas pensadas para hablar de lo que normalmente no sale en el día a día.</p></div>
-      <div class="ruta-card"><span class="ruta-n">Ruta 4</span><h3>Carretera abierta</h3><p>Las paradas más ambiciosas, para cuando ya lleváis un buen tramo recorrido.</p></div>
+      <div class="ruta-card">
+        <span class="ruta-n">Ruta 1</span><h3>Volver a arrancar</h3>
+        <p>Paradas sencillas para retomar el hábito de hacer cosas juntos, sin grandes planes.</p>
+        <span class="rango">Paradas 1–17 aprox.</span>
+      </div>
+      <div class="ruta-card">
+        <span class="ruta-n">Ruta 2</span><h3>Salir del camino conocido</h3>
+        <p>Experiencias que os sacan de los sitios y las rutinas de siempre.</p>
+        <span class="rango">Paradas 18–34 aprox.</span>
+      </div>
+      <div class="ruta-card">
+        <span class="ruta-n">Ruta 3</span><h3>Conversaciones con vistas</h3>
+        <p>Paradas pensadas para hablar de lo que normalmente no sale en el día a día.</p>
+        <span class="rango">Paradas 35–51 aprox.</span>
+      </div>
+      <div class="ruta-card">
+        <span class="ruta-n">Ruta 4</span><h3>Carretera abierta</h3>
+        <p>Las paradas más ambiciosas, para cuando ya lleváis un buen tramo recorrido.</p>
+        <span class="rango">Paradas 52–68 aprox.</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 6. VISTA INTERIOR -->
-<section class="vista-interior">
+<!-- 6. COMO ES CADA PARADA -->
+<section class="vista-interior" id="interior">
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow-hand">Por dentro</span>
       <h2 style="margin-top:8px; font-size:1.9rem;">Así es una parada</h2>
     </div>
-    <div class="pages-fan">
-      <div class="pagina" style="aspect-ratio:3/4;"><div><div class="num">12</div><div class="linea"></div><div class="txt">Experiencia: cocinad juntos algo que ninguno de los dos ha probado a hacer.</div></div><div class="sello">68</div></div>
-      <div class="pagina" style="aspect-ratio:3/4;"><div><div class="num">33</div><div class="linea"></div><div class="txt">Recuerdo obligatorio: una foto, un billete, algo que se pueda guardar aquí.</div></div><div class="sello">68</div></div>
-      <div class="pagina" style="aspect-ratio:3/4;"><div><div class="num">45</div><div class="linea"></div><div class="txt">Reflexión: ¿qué os habéis descubierto el uno al otro con esta parada?</div></div><div class="sello">68</div></div>
+    <div class="vista-interior-grid">
+      <div class="pages-fan">
+        <div class="pagina" style="aspect-ratio:3/4;"><div><div class="num">12</div><div class="linea"></div><div class="txt">Experiencia: cocinad juntos algo que ninguno de los dos ha probado a hacer.</div></div><div class="sello">68</div></div>
+        <div class="pagina" style="aspect-ratio:3/4;"><div><div class="num">33</div><div class="linea"></div><div class="txt">Recuerdo obligatorio: una foto, un billete, algo que se pueda guardar aquí.</div></div><div class="sello">68</div></div>
+        <div class="pagina" style="aspect-ratio:3/4;"><div><div class="num">45</div><div class="linea"></div><div class="txt">Reflexión: ¿qué os habéis descubierto el uno al otro con esta parada?</div></div><div class="sello">68</div></div>
+      </div>
+      <div class="como-lista">
+        <div class="como-step"><div class="como-n">1</div><div><h3>Una experiencia que hacer juntos</h3><p>Algo concreto, no una sugerencia vaga.</p></div></div>
+        <div class="como-step"><div class="como-n">2</div><div><h3>Qué fortalece</h3><p>Por qué esa experiencia le hace bien a la relación.</p></div></div>
+        <div class="como-step"><div class="como-n">3</div><div><h3>Un recuerdo obligatorio</h3><p>Espacio para pegar o guardar algo físico de ese momento.</p></div></div>
+        <div class="como-step"><div class="como-n">4</div><div><h3>Espacio para vuestra anécdota</h3><p>Lo que pasó de verdad, contado por vosotros.</p></div></div>
+        <div class="como-step"><div class="como-n">5</div><div><h3>Una reflexión</h3><p>Una pregunta para hablarlo después, no solo vivirlo.</p></div></div>
+        <div class="como-step"><div class="como-n">6</div><div><h3>Sello 68</h3><p>Con fecha, lugar y vuestra valoración de la parada.</p></div></div>
+      </div>
     </div>
+    <p class="como-cierre">No es una lista de ideas para citas. Es un diario de vuestra relación.</p>
   </div>
 </section>
 
-<!-- QUE INCLUYE + COMO FUNCIONA -->
+<!-- 7. EJEMPLOS -->
+<section style="background:var(--beige2);">
+  <div class="wrap">
+    <div class="section-head" style="max-width:560px;">
+      <span class="eyebrow-hand">Tres paradas, a modo de ejemplo</span>
+      <h2 style="margin-top:8px; font-size:1.9rem;">Así son algunas de las 68</h2>
+    </div>
+    <div class="ejemplos-grid">
+      <div class="ejemplo-card">
+        <span class="ruta-tag">Ruta 1 · Parada 03</span>
+        <h3>La cita que no vais a planear</h3>
+        <p class="exp">Hoy no decidís nada con antelación. Uno de los dos elige, sin avisar, un plan para dentro de una hora.</p>
+        <p class="reflexion">¿Qué es lo último que hicisteis sin planearlo?</p>
+      </div>
+      <div class="ejemplo-card">
+        <span class="ruta-tag">Ruta 3 · Parada 39</span>
+        <h3>La conversación pendiente</h3>
+        <p class="exp">Buscad un lugar con buenas vistas, sin pantallas, y habladlo de eso que lleváis tiempo posponiendo.</p>
+        <p class="reflexion">¿Qué habéis entendido del otro que no sabíais?</p>
+      </div>
+      <div class="ejemplo-card">
+        <span class="ruta-tag">Ruta 4 · Parada 63</span>
+        <h3>La promesa a cinco años</h3>
+        <p class="exp">Escribid juntos, en el propio libro, una promesa concreta para dentro de cinco años. Fecha, y a qué os comprometéis.</p>
+        <p class="reflexion">¿Qué tendría que pasar para que esto se cumpla?</p>
+      </div>
+    </div>
+    <p class="ejemplos-nota">Una pequeña muestra. Las otras 65 os esperan dentro.</p>
+  </div>
+</section>
+
+<!-- 8. PARA QUIEN -->
+<section>
+  <div class="wrap">
+    <div class="section-head" style="max-width:560px;">
+      <h2 style="font-size:1.9rem;">Esto es para vosotros si…</h2>
+    </div>
+    <ul class="para-quien-list">
+      <li>Lleváis tiempo juntos y acabáis haciendo siempre lo mismo.</li>
+      <li>Os gusta viajar o descubrir sitios nuevos.</li>
+      <li>Queréis pasar más tiempo de calidad juntos.</li>
+      <li>Buscáis un regalo que no termine olvidado en un cajón.</li>
+      <li>Os gusta guardar recuerdos de lo que vivís.</li>
+    </ul>
+    <p class="para-quien-nota">No necesitáis estar pasando por una crisis. Solo tener ganas de seguir viviendo cosas juntos.</p>
+  </div>
+</section>
+
+<!-- 9. REGALO -->
+<section class="regalo">
+  <div class="wrap">
+    <span class="eyebrow-hand">¿Es para regalar?</span>
+    <h2 style="margin-top:10px;">Un regalo que no se queda en una estantería.</h2>
+    <p>No regaláis un libro: regaláis 68 futuros recuerdos por vivir juntos, uno detrás de otro. Encaja bien para un aniversario, un cumpleaños, Navidad o San Valentín.</p>
+  </div>
+</section>
+
+<!-- 10. HISTORIA DEL 68 -->
+<section class="historia68">
+  <div class="wrap">
+    <span class="eyebrow-hand">Por qué 68</span>
+    <blockquote>"Hay números que cuentan. Y otros que, además, nos llevan a algún sitio."</blockquote>
+    <p>68 fue, durante años, el número del taxi de mi padre. Carretera, trayectos, personas que subían con una historia y bajaban con otra distinta. De ahí nace esta forma de entender las relaciones: como un camino con paradas, no como un destino fijo. Cuando una pareja deja de descubrir cosas juntas, puede acabar viviendo en piloto automático. Inspired by 68 es la excusa para volver a arrancar.</p>
+  </div>
+</section>
+
+<!-- 11. QUE RECIBES + COMO FUNCIONA -->
 <section style="background:var(--beige2);">
   <div class="wrap detalles">
     <div class="col">
-      <h2 style="font-size:1.5rem; margin-bottom:20px;">Ficha del producto</h2>
+      <h2 style="font-size:1.5rem; margin-bottom:20px;">Qué recibís</h2>
       <div class="ficha">
-        <div class="ficha-row"><span>Formato</span><span>PDF digital, A4</span></div>
-        <div class="ficha-row"><span>Contenido</span><span>68 paradas en 4 rutas</span></div>
-        <div class="ficha-row"><span>Imprimible</span><span>Sí, o para usar en pantalla</span></div>
-        <div class="ficha-row"><span>Personalizable</span><span>No (ver versión personalizada)</span></div>
-        <div class="ficha-row"><span>Entrega</span><span>Descarga inmediata por email</span></div>
-        <div class="ficha-row"><span>Licencia</span><span>Uso personal, una pareja</span></div>
+        <div class="ficha-row"><span>Producto</span><span>Inspired by 68</span></div>
+        <div class="ficha-row"><span>Contenido</span><span>68 experiencias</span></div>
+        <div class="ficha-row"><span>Estructura</span><span>4 rutas</span></div>
+        <div class="ficha-row"><span>Formato</span><span>Digital, PDF</span></div>
+        <div class="ficha-row"><span>Uso</span><span>Para imprimir o usar en dispositivo</span></div>
+        <div class="ficha-row"><span>Espacios</span><span>Para escribir y guardar recuerdos</span></div>
       </div>
     </div>
     <div class="col">
       <h2 style="font-size:1.5rem; margin-bottom:20px;">Cómo funciona</h2>
-      <div class="como-step"><div class="como-n">1</div><div><h3>Compráis y descargáis</h3><p>Recibiréis el enlace de descarga al momento en vuestro correo.</p></div></div>
-      <div class="como-step"><div class="como-n">2</div><div><h3>Elegís por dónde empezar</h3><p>Podéis seguir las rutas en orden o saltar a la que más os apetezca.</p></div></div>
-      <div class="como-step"><div class="como-n">3</div><div><h3>Vivís la parada</h3><p>Marcáis la fecha, el lugar y guardáis el recuerdo en el propio documento.</p></div></div>
+      <div class="funciona-step"><div class="funciona-n">1</div><div><h3>Compráis y descargáis</h3><p>Recibiréis el enlace de descarga al momento en vuestro correo.</p></div></div>
+      <div class="funciona-step"><div class="funciona-n">2</div><div><h3>Elegís por dónde empezar</h3><p>Podéis seguir las rutas en orden o saltar a la que más os apetezca.</p></div></div>
+      <div class="funciona-step"><div class="funciona-n">3</div><div><h3>Vivís la parada</h3><p>Marcáis la fecha, el lugar y guardáis el recuerdo en el propio documento.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- CTA PRECIO -->
+<!-- 12. CTA FINAL -->
 <section class="cta-precio" id="comprar">
   <div class="wrap">
-    <h2>Empezad hoy vuestra primera parada</h2>
+    <h2>Dentro de unos años no os acordaréis de todos los fines de semana que pasasteis en el sofá.</h2>
+    <span class="subrayado">Pero sí de aquella parada.</span>
     <div class="price-row">
       <span class="price-now">9,90 €</span>
       <span class="price-before">17,90 €</span>
     </div>
     <p class="detail">Pago único. Descarga inmediata. Sin suscripción.</p>
-    <button id="comprarBtn" class="btn" style="background:var(--verde); color:var(--crema); width:auto;">Comprar Inspired by 68</button>
+    <button id="comprarBtn" class="btn" style="background:var(--verde); color:var(--crema); width:auto;">Empezar nuestras 68 paradas</button>
     <p id="comprarError" style="display:none; color:#fff; font-size:.85rem; margin-top:14px;"></p>
   </div>
 </section>
 
-<!-- FAQ -->
+<!-- 13. FAQ -->
 <section>
   <div class="wrap">
     <div class="section-head" style="margin:0 auto 30px; text-align:center; max-width:560px;">
@@ -257,20 +430,36 @@
     </div>
     <div class="faq" id="faqList">
       <div class="faq-item">
-        <button class="faq-q"><span>¿Es un archivo para imprimir o lo podemos usar en el móvil?</span><span class="plus">+</span></button>
-        <div class="faq-a"><p>Las dos cosas. Podéis imprimirlo en A4 o llevarlo con vosotros en el móvil o la tablet y marcar cada parada según la vayáis viviendo.</p></div>
+        <button class="faq-q"><span>¿Es solo para parejas nuevas?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>No. Está pensado para cualquier pareja que quiera seguir viviendo cosas juntos, lleve un mes o veinte años.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q"><span>¿Tenemos que seguir las 68 paradas en orden?</span><span class="plus">+</span></button>
+        <button class="faq-q"><span>¿Hay que hacer las paradas en orden?</span><span class="plus">+</span></button>
         <div class="faq-a"><p>No. Podéis seguir las cuatro rutas en el orden que queráis, o ir eligiendo la parada según el día y las ganas que tengáis.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Tenemos que hacerlas todas?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>No hay examen final. Podéis ir a vuestro ritmo y quedaros con las paradas que más os llamen.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Necesitamos viajar?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>No. La mayoría de las paradas pueden vivirse cerca de casa; algunas de la Ruta 4 son algo más ambiciosas, pero nunca es obligatorio llegar hasta ahí.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Se puede imprimir?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>Sí. Es un PDF en A4 pensado también para imprimir, aunque podéis usarlo igualmente desde el móvil o la tablet.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Puedo regalarlo?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>Sí, es una de las formas más habituales de regalarlo: aniversarios, cumpleaños, Navidad o San Valentín.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Es un producto físico o digital?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>Es un PDF digital de descarga inmediata. No se envía nada físico por correo.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q"><span>¿Se puede personalizar con nuestros nombres?</span><span class="plus">+</span></button>
         <div class="faq-a"><p>La edición estándar no es personalizable. Si queréis vuestros nombres, fecha de aniversario y una portada propia, tenemos una versión personalizada de Inspired by 68.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q"><span>¿Cuánto tarda en llegar tras la compra?</span><span class="plus">+</span></button>
-        <div class="faq-a"><p>La descarga es inmediata: recibiréis el enlace por email nada más completar el pago.</p></div>
       </div>
     </div>
   </div>

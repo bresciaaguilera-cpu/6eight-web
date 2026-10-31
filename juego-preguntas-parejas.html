@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juego de preguntas para parejas | 6EIGHT</title>
+<meta name="description" content="Juego de 100 preguntas para parejas en formato de lista imprimible, organizadas en 8 categorías. Próximamente disponible en 6EIGHT.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --crema:#F7EFE2; --verde:#22362B; --terracota:#B87460; --kraft:#C9A57A; --tinta:#2E302D; --beige2:#EFE5D6;
+    --font-display:'Oswald', sans-serif; --font-body:'Inter', sans-serif; --font-hand:'Caveat', cursive;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--crema); color:var(--tinta); font-family:var(--font-body); font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+  h1,h2,h3{font-family:var(--font-display); font-weight:600; line-height:1.15;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 20px;}
+  .eyebrow-hand{font-family:var(--font-hand); font-size:1.3rem; color:var(--terracota); display:inline-block; transform:rotate(-2deg);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--terracota); outline-offset:3px;}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+
+  header{position:sticky; top:0; z-index:50; background:var(--crema); border-bottom:1px solid rgba(46,48,45,.12);}
+  .header-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 20px; max-width:900px; margin:0 auto;}
+  .logo{font-family:var(--font-display); font-size:1.4rem; font-weight:700;}
+  .logo .six{color:var(--terracota);}
+  .back-link{font-size:.9rem; color:var(--verde); font-weight:500;}
+
+  .breadcrumb{font-size:.82rem; color:rgba(46,48,45,.55); padding:22px 0 0;}
+  .breadcrumb a{color:var(--terracota);}
+
+  section{padding:40px 0;}
+  @media(min-width:860px){ section{padding:56px 0;} }
+
+  .btn{display:inline-flex; align-items:center; justify-content:center; padding:15px 26px; font-weight:600; font-size:.98rem; border-radius:2px; transition:transform .15s ease, background .2s ease; text-align:center;}
+  .btn-primary{background:var(--terracota); color:var(--crema);}
+  .btn-primary:hover{background:#a3634f;}
+  .btn-secondary{background:transparent; color:var(--verde); border:1.5px solid var(--verde);}
+  .btn:active{transform:scale(.98);}
+  .btn-pendiente{
+    display:inline-flex; align-items:center; justify-content:center; padding:15px 26px; font-weight:600; font-size:.95rem;
+    border-radius:2px; background:rgba(46,48,45,.12); color:rgba(46,48,45,.55); cursor:default; text-align:center;
+  }
+
+  .hero{padding-top:28px; text-align:center;}
+  .hero h1{font-size:1.9rem; margin:10px auto 14px; max-width:28ch;}
+  @media(min-width:640px){ .hero h1{font-size:2.4rem;} }
+  .hero .tagline{font-size:1.05rem; color:rgba(46,48,45,.78); max-width:48ch; margin:0 auto 20px;}
+  .price-row{display:flex; align-items:baseline; justify-content:center; gap:10px; margin-bottom:22px; flex-wrap:wrap;}
+  .price-now{font-family:var(--font-display); font-size:1.7rem; color:var(--verde);}
+  .price-pendiente-nota{font-size:.85rem; color:var(--terracota); margin-bottom:22px;}
+
+  .section-head{max-width:560px; margin-bottom:22px;}
+  .section-head h2{font-size:1.4rem;}
+  @media(min-width:640px){ .section-head h2{font-size:1.65rem;} }
+  .section-head p.sub{color:rgba(46,48,45,.68); font-size:.95rem; margin-top:8px;}
+
+  .ficha{display:flex; flex-direction:column; gap:0;}
+  .ficha-row{display:flex; justify-content:space-between; gap:12px; padding:13px 0; border-bottom:1px solid rgba(46,48,45,.12); font-size:.93rem;}
+  .ficha-row span:first-child{color:rgba(46,48,45,.6);}
+  .ficha-row span:last-child{font-weight:600; text-align:right;}
+
+  .pasos{display:flex; flex-direction:column; gap:18px; margin-top:6px;}
+  .paso{display:flex; gap:14px;}
+  .paso-n{font-family:var(--font-display); color:var(--terracota); border:1.5px solid var(--terracota); border-radius:50%; width:30px; height:30px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:.95rem;}
+  .paso h3{font-size:1rem; margin-bottom:3px;}
+  .paso p{font-size:.9rem; color:rgba(46,48,45,.72);}
+
+  .ejemplos-list{display:flex; flex-direction:column; gap:0; margin-top:6px;}
+  .ejemplo-item{display:flex; gap:14px; padding:16px 0; border-bottom:1px solid rgba(46,48,45,.12);}
+  .ejemplo-n{font-family:var(--font-display); color:var(--terracota); font-size:.9rem; flex-shrink:0; width:26px;}
+  .ejemplo-item p{font-size:.95rem;}
+  .ejemplos-nota{margin-top:18px; font-family:var(--font-hand); font-size:1.25rem; color:var(--terracota);}
+
+  .para-quien-list{display:flex; flex-direction:column; gap:11px; margin-top:6px; max-width:56ch;}
+  .para-quien-list li{position:relative; padding-left:20px; font-size:.95rem; color:rgba(46,48,45,.82);}
+  .para-quien-list li::before{content:'—'; position:absolute; left:0; color:var(--terracota); font-weight:700;}
+
+  .regalo-box{background:var(--beige2); padding:22px 24px; margin-top:8px;}
+  .regalo-box p{font-size:.95rem; color:rgba(46,48,45,.78);}
+
+  .faq{margin-top:6px;}
+  .faq-item{border-bottom:1px solid rgba(46,48,45,.15);}
+  .faq-q{width:100%; display:flex; justify-content:space-between; align-items:center; gap:14px; padding:18px 0; text-align:left; font-weight:600; font-size:.97rem;}
+  .faq-q .plus{font-size:1.2rem; color:var(--terracota); transition:transform .2s ease; flex-shrink:0;}
+  .faq-item.open .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
+  .faq-a p{padding-bottom:16px; color:rgba(46,48,45,.75); font-size:.92rem; max-width:60ch;}
+
+  .cta-final{background:var(--verde); color:var(--crema); text-align:center;}
+  .cta-final h2{font-size:1.4rem; margin-bottom:10px; color:var(--crema);}
+  @media(min-width:640px){ .cta-final h2{font-size:1.6rem;} }
+  .cta-final p{color:rgba(247,239,226,.82); max-width:46ch; margin:0 auto 22px; font-size:.95rem;}
+  .cta-final .btn-pendiente{background:rgba(247,239,226,.18); color:var(--crema);}
+
+  footer{padding:34px 0; text-align:center; font-size:.85rem; color:rgba(46,48,45,.55); border-top:1px solid rgba(46,48,45,.12);}
+  footer a{color:var(--verde); font-weight:600;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo"><span class="six">6</span>EIGHT</a>
+    <a href="/tienda" class="back-link">← Volver a la tienda</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="breadcrumb"><a href="/">6EIGHT</a> / <a href="/tienda">Tienda</a> / Juego de preguntas para parejas</p>
+
+  <section class="hero">
+    <span class="eyebrow-hand">Juegos y calendarios</span>
+    <h1>Juego de preguntas para parejas</h1>
+    <p class="tagline">100 preguntas para conoceros mejor, en formato imprimible.</p>
+    <div class="price-row">
+      <span class="price-now">9,90 €</span>
+    </div>
+    <p class="price-pendiente-nota">MODO DE PRUEBA &middot; no se realizará ningún cobro real.</p>
+    <a href="#comprar" class="btn btn-primary">Comprar ahora</a>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Qué incluye</h2>
+    </div>
+    <p style="color:rgba(46,48,45,.8); max-width:58ch; margin-bottom:18px;">Cien preguntas organizadas en ocho categorías (recuerdos, vosotros, futuro, divertida, íntima/emocional, sueños, convivencia y curiosidades), en una lista imprimible, lista para jugar directamente desde el móvil.</p>
+    <div class="ficha">
+      <div class="ficha-row"><span>Contenido</span><span>100 preguntas en 8 categorías</span></div>
+      <div class="ficha-row"><span>Formato</span><span>Digital, para imprimir o usar en pantalla</span></div>
+      <div class="ficha-row"><span>Personalizable</span><span>No (ver versión personalizada)</span></div>
+      <div class="ficha-row"><span>Uso</span><span>Personal, una pareja</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Cómo se usa</h2>
+    </div>
+    <div class="pasos">
+      <div class="paso"><div class="paso-n">1</div><div><h3>Elegís una categoría</h3><p>O jugáis mezclando todas, según el momento.</p></div></div>
+      <div class="paso"><div class="paso-n">2</div><div><h3>Os turnáis para preguntar</h3><p>Cada uno responde antes de pasar a la siguiente tarjeta.</p></div></div>
+      <div class="paso"><div class="paso-n">3</div><div><h3>Repetís cuando queráis</h3><p>Con 100 preguntas da para muchas noches distintas.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Una pequeña muestra</h2>
+      <p class="sub">En La Guantera ya tenéis una muestra gratuita; aquí van algunas más, distintas, de este juego completo.</p>
+    </div>
+    <div class="ejemplos-list">
+      <div class="ejemplo-item"><span class="ejemplo-n">01</span><p>¿Qué costumbre tuya he adoptado yo sin darme cuenta?</p></div>
+      <div class="ejemplo-item"><span class="ejemplo-n">02</span><p>¿Qué nos falta por discutir antes de que se convierta en un problema de verdad?</p></div>
+      <div class="ejemplo-item"><span class="ejemplo-n">03</span><p>Si tuviéramos que mudarnos de ciudad mañana, ¿a cuál iríamos?</p></div>
+      <div class="ejemplo-item"><span class="ejemplo-n">04</span><p>¿Qué es lo más distinto que soy ahora comparado con cuando nos conocimos?</p></div>
+    </div>
+    <p class="ejemplos-nota">Una muestra de 4. Las otras 96 os esperan dentro.</p>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Esto es para vosotros si…</h2>
+    </div>
+    <ul class="para-quien-list">
+      <li>Ya probasteis la muestra gratuita de La Guantera y queréis más.</li>
+      <li>Preferís tener las cien preguntas ya organizadas, sin tener que buscar nada.</li>
+      <li>Os gusta tener variedad para elegir según el día: ligero, profundo o divertido.</li>
+    </ul>
+  </section>
+
+
+
+  <section>
+    <div class="section-head" style="margin:0 auto 20px;">
+      <h2>Preguntas frecuentes</h2>
+    </div>
+    <div class="faq" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Cuándo podré comprarlo?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>Sí, ya podéis comprarlo. De momento el cobro está en modo de prueba mientras terminamos las comprobaciones: no se realiza ningún cargo real.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Es lo mismo que las preguntas gratuitas de La Guantera?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>No. Aquí hay 100 preguntas distintas, organizadas en 8 categorías en una lista imprimible; en La Guantera solo veis una pequeña muestra gratuita.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Es un producto físico o digital?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>Es un documento digital para imprimir o usar desde el móvil o la tablet.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>¿Hay que jugarlas en orden?</span><span class="plus">+</span></button>
+        <div class="faq-a"><p>No, podéis elegir categoría o mezclar todas las preguntas.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="cta-final" id="comprar">
+  <div class="wrap">
+    <h2>Cien preguntas, ninguna de relleno.</h2>
+    <p>Estamos terminando de prepararlo para que podáis descargarlo en cuanto activemos la venta.</p>
+    <button id="comprarBtn" class="btn" style="background:var(--terracota); color:var(--crema); width:auto;">Comprar ahora (modo prueba)</button>
+    <p id="comprarError" style="display:none; color:#fff; font-size:.85rem; margin-top:14px;"></p>
+    <p style="margin-top:16px; font-size:.78rem; color:rgba(247,239,226,.65);">MODO DE PRUEBA &middot; no se realizará ningún cobro real.</p>
+  </div>
+</section>
+
+<footer>
+  <p>¿Buscáis otra cosa? <a href="/tienda">Volver a la tienda</a></p>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(other => {
+        other.classList.remove('open');
+        other.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+
+
+<script>
+  // --- Conexión real a Stripe Checkout (modo TEST) ---
+  async function iniciarPago(productId) {
+    const boton = document.getElementById('comprarBtn');
+    const errorEl = document.getElementById('comprarError');
+    const textoOriginal = boton.textContent;
+    boton.textContent = 'Redirigiendo al pago...';
+    boton.disabled = true;
+    errorEl.style.display = 'none';
+
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId }),
+      });
+      if (!response.ok) throw new Error('Respuesta no válida del servidor');
+      const { url } = await response.json();
+      window.location.href = url;
+    } catch (err) {
+      errorEl.textContent = 'No hemos podido conectar con la pasarela de pago. Probad de nuevo en un momento.';
+      errorEl.style.color = 'var(--terracota)';
+      errorEl.style.display = 'block';
+      boton.textContent = textoOriginal;
+      boton.disabled = false;
+    }
+  }
+
+  document.getElementById('comprarBtn').addEventListener('click', () => iniciarPago('juego-preguntas-parejas'));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "6eight-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web estática de 6EIGHT con funciones serverless de Vercel para checkout y descarga de productos digitales.",
+  "dependencies": {
+    "stripe": "^17.4.0",
+    "@vercel/blob": "^0.27.1"
+  }
+}

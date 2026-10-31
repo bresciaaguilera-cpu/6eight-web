@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  IMPORTANTE: sustituir DOMINIO-PENDIENTE.com por el dominio definitivo de 6EIGHT
-  en todas las URLs de este archivo en cuanto esté decidido.
+  Dominio temporal: https://6eight-web.vercel.app
+  Sustituir por el dominio definitivo de 6EIGHT en todas las URLs de este
+  archivo en cuanto esté decidido y conectado en Vercel.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://DOMINIO-PENDIENTE.com/</loc></url>
-  <url><loc>https://DOMINIO-PENDIENTE.com/tienda</loc></url>
-  <url><loc>https://DOMINIO-PENDIENTE.com/inspired-by-68</loc></url>
-  <url><loc>https://DOMINIO-PENDIENTE.com/crea-el-vuestro</loc></url>
-  <url><loc>https://DOMINIO-PENDIENTE.com/la-guantera</loc></url>
-  <url><loc>https://DOMINIO-PENDIENTE.com/preguntas-para-parejas</loc></url>
-  <url><loc>https://DOMINIO-PENDIENTE.com/juegos-para-parejas</loc></url>
-  <url><loc>https://DOMINIO-PENDIENTE.com/ideas-citas-pareja</loc></url>
-  <url><loc>https://DOMINIO-PENDIENTE.com/generador-citas</loc></url>
-  <url><loc>https://DOMINIO-PENDIENTE.com/test-lenguaje-del-amor</loc></url>
-  <url><loc>https://DOMINIO-PENDIENTE.com/me-aburro-con-mi-pareja</loc></url>
-  <url><loc>https://DOMINIO-PENDIENTE.com/san-valentin</loc></url>
-  <url><loc>https://DOMINIO-PENDIENTE.com/aniversario</loc></url>
-  <url><loc>https://DOMINIO-PENDIENTE.com/calendario-adviento-parejas</loc></url>
-  <url><loc>https://DOMINIO-PENDIENTE.com/sobre-6eight</loc></url>
-  <url><loc>https://DOMINIO-PENDIENTE.com/preguntas-frecuentes</loc></url>
+  <url><loc>https://6eight-web.vercel.app/</loc></url>
+  <url><loc>https://6eight-web.vercel.app/tienda</loc></url>
+  <url><loc>https://6eight-web.vercel.app/inspired-by-68</loc></url>
+  <url><loc>https://6eight-web.vercel.app/crea-el-vuestro</loc></url>
+  <url><loc>https://6eight-web.vercel.app/la-guantera</loc></url>
+  <url><loc>https://6eight-web.vercel.app/preguntas-para-parejas</loc></url>
+  <url><loc>https://6eight-web.vercel.app/juegos-para-parejas</loc></url>
+  <url><loc>https://6eight-web.vercel.app/ideas-citas-pareja</loc></url>
+  <url><loc>https://6eight-web.vercel.app/generador-citas</loc></url>
+  <url><loc>https://6eight-web.vercel.app/test-lenguaje-del-amor</loc></url>
+  <url><loc>https://6eight-web.vercel.app/me-aburro-con-mi-pareja</loc></url>
+  <url><loc>https://6eight-web.vercel.app/san-valentin</loc></url>
+  <url><loc>https://6eight-web.vercel.app/aniversario</loc></url>
+  <url><loc>https://6eight-web.vercel.app/calendario-adviento-parejas</loc></url>
+  <url><loc>https://6eight-web.vercel.app/sobre-6eight</loc></url>
+  <url><loc>https://6eight-web.vercel.app/preguntas-frecuentes</loc></url>
+  <url><loc>https://6eight-web.vercel.app/calendario-12-citas</loc></url>
+  <url><loc>https://6eight-web.vercel.app/calendario-52-citas</loc></url>
+  <url><loc>https://6eight-web.vercel.app/cuponera-experiencias</loc></url>
+  <url><loc>https://6eight-web.vercel.app/juego-preguntas-parejas</loc></url>
+  <url><loc>https://6eight-web.vercel.app/cuanto-me-conoces</loc></url>
+  <url><loc>https://6eight-web.vercel.app/kit-noche-cita-casa</loc></url>
+  <url><loc>https://6eight-web.vercel.app/bingo-pareja</loc></url>
+  <url><loc>https://6eight-web.vercel.app/kit-navidad-pareja</loc></url>
+  <url><loc>https://6eight-web.vercel.app/50-preguntas-profundas</loc></url>
+  <url><loc>https://6eight-web.vercel.app/privacidad</loc></url>
+  <url><loc>https://6eight-web.vercel.app/terminos</loc></url>
+  <url><loc>https://6eight-web.vercel.app/reembolsos</loc></url>
+  <url><loc>https://6eight-web.vercel.app/licencia-uso</loc></url>
 </urlset>
