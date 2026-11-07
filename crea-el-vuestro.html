@@ -136,8 +136,8 @@
     <h2>Elige producto</h2>
     <p class="step-sub">Todos incluyen vuestros nombres y fecha. Podéis añadir fotos en el siguiente paso.</p>
     <div class="producto-grid" id="productoGrid">
-      <button class="producto-opcion" data-nombre="68INSPIRED — Edición personalizada" data-precio="24.90" data-id="inspired-by-68-personalizado">
-        <h3>68INSPIRED personalizado</h3>
+      <button class="producto-opcion" data-nombre="Inspired by 68 — Edición personalizada" data-precio="24.90" data-id="inspired-by-68-personalizado">
+        <h3>Inspired by 68 personalizado</h3>
         <p>Las 68 paradas con portada y dedicatoria propias.</p>
         <span class="precio">24,90 €</span>
       </button>
@@ -319,11 +319,11 @@
       const { url } = await response.json();
       window.location.href = url;
     } catch (err) {
-      // Informamos del fallo sin presentar el pedido como confirmado.
-      document.querySelector('[data-panel="5"] h2').textContent = 'No se ha completado el pedido';
-      document.querySelector('[data-panel="5"] .sello').textContent = '!';
+      // Sin backend desplegado todavía: mostramos la confirmación simulada
+      // (igual que antes) pero dejándolo dicho con claridad, para no fingir
+      // un pago real que no ha ocurrido.
       document.querySelector('[data-panel="5"] p').textContent =
-        'No hemos podido conectar con la pasarela de pago. No se ha confirmado ningún pago ni pedido. Inténtalo de nuevo en unos minutos.';
+        'Esto es una simulación — el backend de pago aún no está desplegado. En producción, aquí se confirmaría el pago real y os llegaría el diseño por email en 2-4 días.';
       goToStep(5);
       btn.textContent = textoOriginal;
       btn.disabled = false;
