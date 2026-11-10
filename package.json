@@ -6,5 +6,9 @@
   "dependencies": {
     "stripe": "^17.4.0",
     "@vercel/blob": "^2.4.0"
+  },
+  "scripts": {
+    "catalog": "node scripts/generate-shop-catalog.js",
+    "test": "node --test"
   }
 }

@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pedido confirmado | 6EIGHT</title>
+<title>Pedido confirmado | 68INSPIRED</title>
 <meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -61,15 +62,18 @@
 
   footer{padding:34px 0; text-align:center; font-size:.85rem; color:rgba(46,48,45,.55); border-top:1px solid rgba(46,48,45,.12); margin-top:30px;}
   footer a{color:var(--verde); font-weight:600;}
+
+  .downloads{display:grid;gap:10px;max-width:420px;margin:22px auto}
+  .downloads .btn{width:100%}
 </style>
+<link rel="stylesheet" href="/brand68.css">
 </head>
 <body>
 
-<div class="test-banner">MODO DE PRUEBA · No se realizará ningún cobro real.</div>
 
 <header>
   <div class="header-inner">
-    <a href="/" class="logo"><span class="six">6</span>EIGHT</a>
+    <a href="/" class="logo"><span class="six">68</span>INSPIRED</a>
     <a href="/tienda" class="back-link">← Volver a la tienda</a>
   </div>
 </header>
@@ -88,10 +92,11 @@
     <div id="estadoConfirmado" hidden>
       <div class="sello">68</div>
       <h1>Pedido confirmado</h1>
-      <p class="subtitulo" id="nombreProducto"></p>
-      <p class="texto">Ya está listo.</p>
-      <a id="botonDescarga" class="btn btn-primary" href="#" rel="noopener">Descargar mi PDF</a>
-      <p class="nota">El enlace de descarga caduca a los pocos minutos por seguridad. Si caduca, volved a esta misma página con el enlace que os envió el pago.</p>
+      <p class="subtitulo">Descargad aquí los archivos de vuestro pedido.</p>
+      <p class="texto">Aquí tenéis todo lo incluido en el pedido, también los regalos que hayáis desbloqueado.</p>
+      <div id="descargas" class="downloads"></div>
+      <p id="pendientes" class="nota" role="status" hidden></p>
+      <p class="nota">El enlace de descarga caduca a los pocos minutos por seguridad. Si caduca, recargad esta página para obtener un enlace nuevo.</p>
     </div>
 
     <!-- ESTADO: no confirmado / error -->
@@ -108,7 +113,7 @@
 </div>
 
 <footer>
-  <p>¿Necesitáis ayuda? <a href="mailto:hola@6eight.es">hola@6eight.es</a></p>
+  <p>¿Necesitáis ayuda? <a href="mailto:hola@68inspired.com">hola@68inspired.com</a></p>
 </footer>
 
 <script>
@@ -141,8 +146,29 @@
         return;
       }
 
-      document.getElementById('nombreProducto').textContent = datos.nombre || '';
-      document.getElementById('botonDescarga').href = datos.url;
+      const lista = Array.isArray(datos.descargas) ? datos.descargas : (datos.url ? [{nombre:datos.nombre || 'Descarga', url:datos.url}] : []);
+      const pendientes = Array.isArray(datos.pendientes) ? datos.pendientes : [];
+      const aviso = document.getElementById('pendientes');
+      if (pendientes.length || !lista.length) {
+        aviso.textContent = pendientes.length
+          ? 'Todavía faltan estos PDF: ' + pendientes.join(', ') + '. Recargad la página para volver a comprobarlos.'
+          : 'El pedido está confirmado. Recargad la página para volver a comprobar los archivos.';
+        aviso.hidden = false;
+      }
+      const cont = document.getElementById('descargas');
+      cont.innerHTML = '';
+      lista.forEach((d,i) => {
+        const a = document.createElement('a');
+        a.className = 'btn btn-primary';
+        a.href = d.url;
+        a.rel = 'noopener';
+        a.textContent = 'Descargar ' + (d.nombre || ('archivo ' + (i+1)));
+        cont.appendChild(a);
+      });
+      try {
+        localStorage.setItem('68inspired_has_order','1');
+        localStorage.removeItem('68inspired_cart_v2');
+      } catch {}
       mostrarEstado('estadoConfirmado');
     } catch (err) {
       mostrarError('No hemos podido conectar con el servidor. Comprobad vuestra conexión y recargad la página.');

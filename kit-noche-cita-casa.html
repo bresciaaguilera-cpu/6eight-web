@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kit noche de cita en casa | 6EIGHT</title>
-<meta name="description" content="Kit noche de cita en casa para parejas: guía de ambientación, actividad y preguntas de sobremesa. Próximamente disponible en 6EIGHT.">
+<title>Kit noche de cita en casa | 68INSPIRED</title>
+<meta name="description" content="Kit noche de cita en casa para parejas: guía de ambientación, actividad y preguntas de sobremesa.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -100,18 +100,20 @@
   footer{padding:34px 0; text-align:center; font-size:.85rem; color:rgba(46,48,45,.55); border-top:1px solid rgba(46,48,45,.12);}
   footer a{color:var(--verde); font-weight:600;}
 </style>
+<link rel="stylesheet" href="/brand68.css">
+<link rel="stylesheet" href="/cart.css">
 </head>
 <body>
 
 <header>
   <div class="header-inner">
-    <a href="/" class="logo"><span class="six">6</span>EIGHT</a>
+    <a href="/" class="logo"><span class="six">68</span>INSPIRED</a>
     <a href="/tienda" class="back-link">← Volver a la tienda</a>
   </div>
 </header>
 
 <div class="wrap">
-  <p class="breadcrumb"><a href="/">6EIGHT</a> / <a href="/tienda">Tienda</a> / Kit noche de cita en casa</p>
+  <p class="breadcrumb"><a href="/">68INSPIRED</a> / <a href="/tienda">Tienda</a> / Kit noche de cita en casa</p>
 
   <section class="hero">
     <span class="eyebrow-hand">Kits de regalo</span>
@@ -120,7 +122,6 @@
     <div class="price-row">
       <span class="price-now">14,90 €</span>
     </div>
-    <p class="price-pendiente-nota">MODO DE PRUEBA &middot; no se realizará ningún cobro real.</p>
     <a href="#comprar" class="btn btn-primary">Comprar ahora</a>
   </section>
 
@@ -190,7 +191,7 @@
     <div class="faq" id="faqList">
       <div class="faq-item">
         <button class="faq-q"><span>¿Cuándo podré comprarlo?</span><span class="plus">+</span></button>
-        <div class="faq-a"><p>Sí, ya podéis comprarlo. De momento el cobro está en modo de prueba mientras terminamos las comprobaciones: no se realiza ningún cargo real.</p></div>
+        <div class="faq-a"><p>Podréis descargarlo cuando Stripe confirme el pago.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q"><span>¿Necesito comprar algo especial?</span><span class="plus">+</span></button>
@@ -211,10 +212,8 @@
 <section class="cta-final" id="comprar">
   <div class="wrap">
     <h2>La cita ya está pensada. Solo falta vivirla.</h2>
-    <p>Estamos terminando de prepararlo para que podáis descargarlo en cuanto activemos la venta.</p>
-    <button id="comprarBtn" class="btn" style="background:var(--terracota); color:var(--crema); width:auto;">Comprar ahora (modo prueba)</button>
-    <p id="comprarError" style="display:none; color:#fff; font-size:.85rem; margin-top:14px;"></p>
-    <p style="margin-top:16px; font-size:.78rem; color:rgba(247,239,226,.65);">MODO DE PRUEBA &middot; no se realizará ningún cobro real.</p>
+    <p>Añadid el PDF a la cesta. Podréis descargarlo cuando se confirme el pago.</p>
+    <button id="comprarBtn" class="btn" style="background:var(--terracota); color:var(--crema); width:auto;" data-cart-add="kit-noche-cita-casa">Añadir a la cesta</button>
   </div>
 </section>
 
@@ -240,37 +239,7 @@
   });
 </script>
 
-
-<script>
-  // --- Conexión real a Stripe Checkout (modo TEST) ---
-  async function iniciarPago(productId) {
-    const boton = document.getElementById('comprarBtn');
-    const errorEl = document.getElementById('comprarError');
-    const textoOriginal = boton.textContent;
-    boton.textContent = 'Redirigiendo al pago...';
-    boton.disabled = true;
-    errorEl.style.display = 'none';
-
-    try {
-      const response = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ productId }),
-      });
-      if (!response.ok) throw new Error('Respuesta no válida del servidor');
-      const { url } = await response.json();
-      window.location.href = url;
-    } catch (err) {
-      errorEl.textContent = 'No hemos podido conectar con la pasarela de pago. Probad de nuevo en un momento.';
-      errorEl.style.color = 'var(--terracota)';
-      errorEl.style.display = 'block';
-      boton.textContent = textoOriginal;
-      boton.disabled = false;
-    }
-  }
-
-  document.getElementById('comprarBtn').addEventListener('click', () => iniciarPago('kit-noche-cita-casa'));
-</script>
-
+<script src="/shop-catalog.js"></script>
+<script src="/cart.js"></script>
 </body>
 </html>

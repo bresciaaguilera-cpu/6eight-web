@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>6EIGHT — Experiencias y regalos digitales para parejas</title>
+<title>68INSPIRED — Experiencias y regalos digitales para parejas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -120,13 +120,14 @@
     position:absolute; background:#fff; padding:10px 10px 34px;
     box-shadow:0 10px 24px rgba(46,48,45,.18);
   }
-  .polaroid .photo{width:150px; height:150px; background:linear-gradient(135deg,#C9A57A,#8f7250);}
+  .polaroid .photo{width:150px; height:150px; background:#d8c2a8; overflow:hidden;}
+  .polaroid .photo img{width:100%; height:100%; object-fit:cover; display:block;}
   .polaroid .cap{font-family:var(--font-hand); font-size:1.1rem; color:var(--tinta); text-align:center; margin-top:8px;}
   .p1{top:6%; left:4%; transform:rotate(-6deg); z-index:3;}
   .p2{top:24%; left:38%; transform:rotate(4deg); z-index:2;}
-  .p2 .photo{background:linear-gradient(135deg,#B87460,#6f463a);}
+  .p2 .photo{background:#c99a82;}
   .p3{top:2%; left:60%; transform:rotate(8deg); z-index:1;}
-  .p3 .photo{width:120px; height:120px; background:linear-gradient(135deg,#22362B,#4a6350);}
+  .p3 .photo{width:120px; height:120px; background:#7d8c80;}
   .tape{
     position:absolute; width:70px; height:24px; background:rgba(201,165,122,.7);
     box-shadow:0 2px 4px rgba(0,0,0,.08);
@@ -182,7 +183,8 @@
     background:#fff; padding:18px 18px 40px; box-shadow:0 12px 26px rgba(46,48,45,.15);
     max-width:280px; margin:0 auto;
   }
-  .stack-card .photo{width:100%; height:180px; background:linear-gradient(135deg,#B87460,#22362B);}
+  .stack-card .photo{width:100%; height:180px; background:#d8c2a8; overflow:hidden;}
+  .stack-card .photo img{width:100%; height:100%; object-fit:cover; display:block;}
   .stack-card .cap{font-family:var(--font-hand); font-size:1.3rem; text-align:center; margin-top:12px;}
   .steps{flex:1; display:flex; flex-direction:column; gap:22px;}
   .step{display:flex; gap:16px;}
@@ -258,21 +260,52 @@
   .footer-grid span.pendiente{display:block; font-size:.88rem; color:rgba(46,48,45,.4); margin-bottom:8px;}
   .footer-bottom{margin-top:40px; font-size:.8rem; color:rgba(46,48,45,.5); display:flex; flex-direction:column; gap:6px;}
   @media(min-width:640px){ .footer-bottom{flex-direction:row; justify-content:space-between;} }
+
+  /* ---------- NUEVA APERTURA 68 ---------- */
+  .hero-v2{padding:46px 0 52px;overflow:hidden}
+  .hero-v2-grid{display:grid;gap:34px;align-items:center}
+  @media(min-width:900px){.hero-v2-grid{grid-template-columns:.92fr 1.08fr;gap:58px}.hero-v2{padding:70px 0}}
+  .hero-kicker{font-family:var(--font-hand);font-size:1.45rem;color:var(--terracota);margin-bottom:10px}
+  .hero-v2 h1{font-size:2.65rem;max-width:13ch;margin-bottom:18px}
+  @media(min-width:640px){.hero-v2 h1{font-size:3.55rem}}
+  .hero-v2 p{max-width:48ch;color:rgba(46,48,45,.78);font-size:1.04rem}
+  .hero-media{position:relative;min-height:390px}
+  .route-photo{position:absolute;overflow:hidden;background:#ddd;box-shadow:0 18px 40px rgba(46,48,45,.18)}
+  .route-photo img{width:100%;height:100%;object-fit:cover}
+  .route-main{inset:12px 70px 34px 0;transform:rotate(-2deg)}
+  .route-small{width:42%;height:42%;right:0;bottom:4px;border:10px solid #fff;transform:rotate(5deg)}
+  .route-detail{width:34%;height:32%;right:4%;top:0;border:9px solid #fff;transform:rotate(7deg)}
+  .stamp68big{position:absolute;left:18px;bottom:5px;width:92px;height:92px;border-radius:50%;background:var(--terracota);color:#fff;display:grid;place-items:center;font:700 36px var(--font-display);border:3px dashed rgba(255,255,255,.75);transform:rotate(-8deg)}
+  .origin-top{background:var(--verde);color:var(--crema);padding:36px 0}
+  .origin-grid{display:grid;gap:20px;align-items:center}@media(min-width:760px){.origin-grid{grid-template-columns:130px 1fr auto}}
+  .origin-num{font:700 72px var(--font-display);color:var(--kraft);line-height:.9}
+  .origin-top h2{font-size:1.45rem;color:var(--crema);margin-bottom:6px}.origin-top p{font-size:.92rem;color:rgba(247,239,226,.78);max-width:64ch}
+  .origin-link{color:var(--crema);border-bottom:1px solid var(--kraft);font-weight:700;white-space:nowrap}
+  .free-hook{padding:58px 0;background:var(--beige2)}
+  .free-top{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:22px;flex-wrap:wrap}
+  .free-top h2{font-size:2rem}.free-top p{max-width:52ch;color:rgba(46,48,45,.68)}
+  .free-grid{display:grid;gap:16px}@media(min-width:850px){.free-grid{grid-template-columns:1.25fr .75fr}}
+  .free-card{background:var(--crema);padding:28px;box-shadow:0 8px 20px rgba(46,48,45,.07)}
+  .free-card h3{margin-bottom:10px}.free-card #pregunta-texto{font-family:var(--font-hand);font-size:1.55rem;color:var(--verde);min-height:76px;display:flex;align-items:center}
+  .free-links{display:grid;gap:12px}
+  .hero-note{font-size:.76rem!important;margin-top:12px;color:rgba(46,48,45,.55)!important}
+
 </style>
+<link rel="stylesheet" href="/cart.css">
+<link rel="stylesheet" href="/brand68.css">
 </head>
 <body>
 
 <header>
   <div class="header-inner wrap">
-    <a href="/" class="logo"><span class="six">6</span>EIGHT</a>
+    <a href="/" class="logo"><span class="six">68</span>INSPIRED</a>
     <nav class="main-nav">
-      <a href="/">Inicio</a>
       <a href="/tienda">Tienda</a>
-      <a href="#personalizados">Personalizados</a>
       <a href="#producto">Inspired by 68</a>
-      <a href="#jugar">Jugar gratis</a>
+      <a href="#personalizados">Personalizados</a>
+      <a href="#jugar">Probar gratis</a>
+      <a href="#historia">Por qué 68</a>
       <a href="/preguntas-para-parejas">Ideas</a>
-      <a href="/sobre-6eight">Sobre 6EIGHT</a>
     </nav>
     <div class="header-icons">
       <svg class="icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -284,37 +317,77 @@
     </div>
   </div>
   <div id="mobileMenu">
-    <a href="/">Inicio</a>
     <a href="/tienda">Tienda</a>
-    <a href="#personalizados">Personalizados</a>
     <a href="#producto">Inspired by 68</a>
-    <a href="#jugar">Jugar gratis</a>
+    <a href="#personalizados">Personalizados</a>
+    <a href="#jugar">Probar gratis</a>
+    <a href="#historia">Por qué 68</a>
     <a href="/preguntas-para-parejas">Ideas</a>
-    <a href="/sobre-6eight">Sobre 6EIGHT</a>
   </div>
 </header>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-text">
-      <h1>No regales otra cosa.<br>Regala algo que vais a vivir.</h1>
-      <p>Juegos, experiencias y recuerdos personalizados para parejas que todavía quieren seguir descubriéndose.</p>
-      <div class="btn-row">
-        <a href="#producto" class="btn btn-primary">Descubrir la colección</a>
-        <a href="#personalizados" class="btn btn-secondary">Crear algo personalizado</a>
+<section class="hero-v2">
+  <div class="wrap hero-v2-grid">
+    <div>
+      <div class="hero-kicker">Una historia detrás. Muchas por delante.</div>
+      <h1>El 68 empezó con él. Ahora empieza vuestra ruta.</h1>
+      <p>Juegos, experiencias y descargables para salir del piloto automático, volver a sorprenderos y crear recuerdos juntos.</p>
+      <div class="btn-row" style="margin-top:26px">
+        <a href="#jugar" class="btn btn-primary">Probar algo gratis</a>
+        <a href="/tienda" class="btn btn-secondary">Ver la tienda</a>
+      </div>
+
+    </div>
+    <div class="hero-media" aria-label="Recuerdos conectados por una ruta">
+      <svg class="route-map-line" viewBox="0 0 620 430" aria-hidden="true" preserveAspectRatio="none">
+        <path d="M45 350 C125 300, 105 205, 205 190 S350 275, 405 190 S500 95, 575 80"></path>
+        <circle cx="62" cy="340" r="8"></circle>
+        <circle cx="305" cy="220" r="8"></circle>
+        <circle cx="555" cy="88" r="8"></circle>
+      </svg>
+      <div class="route-photo route-main"><img src="https://images.pexels.com/photos/6108074/pexels-photo-6108074.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Mapa, cámara y café durante la planificación de un viaje"></div>
+      <div class="route-photo route-detail"><img src="https://images.pexels.com/photos/37832996/pexels-photo-37832996.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Carretera al atardecer vista desde el interior de un coche"></div>
+      <div class="route-photo route-small"><img src="https://images.pexels.com/photos/16036996/pexels-photo-16036996.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Mapa vintage, cámara y café como recuerdo de viaje"></div>
+      <div class="route-label stop-a">parada 01</div>
+      <div class="route-label stop-b">parada 24</div>
+      <div class="route-label stop-c">parada 68</div>
+      <div class="route-question">
+        <span class="route-question-kicker">Siguiente parada</span>
+        <strong>¿Preparados para vuestra próxima parada?</strong>
+        <span>Primer pedido: 12 mini citas de regalo.</span>
+        <a href="/tienda">Empezar a jugar →</a>
       </div>
     </div>
-    <div class="hero-visual" aria-hidden="true">
-      <div class="tape t1"></div>
-      <div class="tape t2"></div>
-      <div class="polaroid p3"><div class="photo"></div></div>
-      <div class="polaroid p2"><div class="photo"></div><div class="cap">parada 24</div></div>
-      <div class="polaroid p1"><div class="photo"></div><div class="cap">parada 7</div></div>
-      <svg class="route-line" viewBox="0 0 400 90" preserveAspectRatio="none">
-        <path d="M0,70 C80,20 160,90 240,40 C300,10 340,60 400,30" fill="none" stroke="#22362B" stroke-width="2" stroke-dasharray="1,10" stroke-linecap="round"/>
-        <circle cx="240" cy="40" r="5" fill="#B87460"/>
-      </svg>
+  </div>
+</section>
+
+<section class="origin-top" id="historia">
+  <div class="wrap origin-grid">
+    <div class="origin-num">68</div>
+    <div>
+      <h2>El 68 no salió de una lluvia de ideas. Venía de mucho antes.</h2>
+      <p>Mi padre trabajó durante años como taxista y el <strong>68</strong> era el número que identificaba su taxi. Con el tiempo dejó de ser una simple cifra: era carretera, gente que subía y bajaba, historias contadas entre semáforos, destinos, vueltas a casa y muchos kilómetros de vida.</p>
+      <p style="margin-top:10px">Cuando nació esta marca, ese número encajó con lo que queríamos crear: ideas que sacaran a las parejas del piloto automático y les dieran una excusa para volver a moverse, hablar, reírse, sorprenderse y crear recuerdos. Por eso aquí hablamos de <strong>rutas, paradas y experiencias</strong>. 68INSPIRED nace también como un pequeño homenaje a él y como recordatorio de que las mejores historias no se quedan quietas.</p>
+    </div>
+    <a class="origin-link" href="/sobre-68inspired">Leer la historia completa →</a>
+  </div>
+</section>
+
+<section class="free-hook" id="jugar">
+  <div class="wrap">
+    <div class="free-top"><div><span class="eyebrow-hand">Antes de comprar, probadnos</span><h2>Una pequeña chispa gratis</h2></div><p>Queremos que la parte gratuita sea un gancho de verdad: algo que podáis usar ahora mismo y os deje con ganas de otra parada.</p></div>
+    <div class="free-grid">
+      <div class="free-card">
+        <h3>Pregunta del día</h3>
+        <p id="pregunta-texto">"¿Qué pequeño hábito mío empezaste a hacer tú sin darte cuenta?"</p>
+        <button class="btn otra-btn" id="otraPreguntaBtn">Otra pregunta</button>
+      </div>
+      <div class="free-links">
+        <a href="/generador-citas" class="mini-tool"><span>Generador de citas</span><span class="arrow">→</span></a>
+        <a href="/test-lenguaje-del-amor" class="mini-tool"><span>Test del lenguaje del amor</span><span class="arrow">→</span></a>
+        <a href="/preguntas-para-parejas" class="mini-tool"><span>Preguntas para parejas</span><span class="arrow">→</span></a>
+      </div>
     </div>
   </div>
 </section>
@@ -370,7 +443,7 @@
   <div class="wrap personalizados">
     <div class="personalizados-visual">
       <div class="stack-card">
-        <div class="photo"></div>
+        <div class="photo"><img src="https://images.unsplash.com/photo-1754593798096-97672735942a?auto=format&fit=crop&w=900&q=80" alt="Pareja compartiendo un momento al atardecer" loading="lazy"></div>
         <div class="cap">Marta &amp; Diego — 14.03.2019</div>
       </div>
     </div>
@@ -393,54 +466,6 @@
       <div>
         <a href="/crea-el-vuestro" class="btn btn-primary">Crear el nuestro</a>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- JUGAR GRATIS -->
-<section class="jugar" id="jugar">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow-hand">Antes de comprar nada, jugad</span>
-      <h2 style="margin-top:8px;">Jugar gratis</h2>
-    </div>
-    <div class="jugar-grid">
-      <div class="juego-card">
-        <h3>Pregunta del día</h3>
-        <p id="pregunta-texto">"¿Qué pequeño hábito mío empezaste a hacer tú sin darte cuenta?"</p>
-        <button class="btn otra-btn" id="otraPreguntaBtn">Otra pregunta</button>
-      </div>
-      <div class="mini-tools">
-        <a href="/generador-citas" class="mini-tool"><span>Generador de citas</span><span class="arrow">→</span></a>
-        <a href="/test-lenguaje-del-amor" class="mini-tool"><span>Test del lenguaje del amor</span><span class="arrow">→</span></a>
-        <a href="/generador-citas" class="mini-tool"><span>Ruleta de citas</span><span class="arrow">→</span></a>
-        <div class="mini-tool proximamente" aria-disabled="true"><span>Bingo de pareja</span><span class="arrow">Próximamente</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HISTORIA 68 -->
-<section id="historia">
-  <div class="wrap historia">
-    <div class="historia-visual">
-      <svg viewBox="0 0 220 220" width="220" height="220">
-        <rect x="30" y="90" width="140" height="50" rx="4" fill="#22362B"/>
-        <rect x="45" y="65" width="90" height="35" rx="4" fill="#22362B"/>
-        <rect x="55" y="72" width="30" height="22" fill="#F7EFE2"/>
-        <rect x="95" y="72" width="30" height="22" fill="#F7EFE2"/>
-        <circle cx="60" cy="142" r="14" fill="#2E302D"/>
-        <circle cx="140" cy="142" r="14" fill="#2E302D"/>
-        <rect x="145" y="100" width="20" height="14" fill="#B87460"/>
-        <text x="148" y="111" font-family="Oswald" font-size="11" fill="#F7EFE2">68</text>
-        <path d="M10,180 C60,160 140,200 210,170" fill="none" stroke="#C9A57A" stroke-width="2" stroke-dasharray="1,8" stroke-linecap="round"/>
-      </svg>
-    </div>
-    <div class="historia-text">
-      <span class="eyebrow-hand">Por qué 68</span>
-      <blockquote>"Hay números que cuentan. Y otros que, además, nos llevan a algún sitio."</blockquote>
-      <p>Antes de convertirse en esta marca, 68 fue el número del taxi de mi padre. Durante años significó carretera, trayectos, historias y personas. Con el tiempo entendí que las relaciones también necesitan movimiento: cuando dejamos de descubrir cosas juntos, podemos acabar viviendo en piloto automático. De ahí nace Inspired by 68.</p>
-      <a href="/sobre-6eight" class="btn btn-secondary">Conocer la historia</a>
     </div>
   </div>
 </section>
@@ -476,9 +501,9 @@
         <span class="pendiente">Regalos (próximamente)</span>
       </div>
       <div>
-        <h4>6EIGHT</h4>
-        <a href="/sobre-6eight">Por qué 68</a>
-        <a href="mailto:hola@6eight.es">Contacto</a>
+        <h4>68INSPIRED</h4>
+        <a href="/sobre-68inspired">Por qué 68</a>
+        <a href="mailto:hola@68inspired.com">Contacto</a>
         <a href="/preguntas-frecuentes">Preguntas frecuentes</a>
       </div>
       <div>
@@ -490,7 +515,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 6EIGHT</span>
+      <span>© 2026 68INSPIRED</span>
       <span>Hecho para parejas que todavía quieren descubrirse</span>
     </div>
   </div>
@@ -528,5 +553,8 @@
   });
 </script>
 
+<script src="/shop-catalog.js"></script>
+<script src="/cart.js"></script>
 </body>
 </html>
+<script async data-explicit-opt-in="true" data-deployment-id="dpl_776i2jEc8HpwYWYcSrHdaV7ihzBs" src="https://vercel.live/_next-live/feedback/feedback.js"></script>

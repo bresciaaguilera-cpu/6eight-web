@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calendario de Adviento para parejas: 24 sorpresas hasta Navidad | 6EIGHT</title>
+<title>Calendario de Adviento para parejas: 24 sorpresas hasta Navidad | 68INSPIRED</title>
 <meta name="description" content="Un calendario de Adviento digital para parejas: 24 sorpresas, una por día, con experiencias en vez de chocolatinas.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
@@ -79,58 +79,76 @@
 
   footer{padding:34px 0; text-align:center; font-size:.85rem; color:rgba(46,48,45,.55); border-top:1px solid rgba(46,48,45,.12);}
   footer a{color:var(--verde); font-weight:600;}
+
+  .product-state{
+    display:inline-block;margin:0 auto 22px;padding:7px 10px;
+    border:1px solid rgba(184,116,96,.45);color:var(--terracota);
+    font-size:.7rem;font-weight:800;letter-spacing:.1em
+  }
+  .hero{padding-bottom:48px}
+  .hero h1{max-width:18ch}
+  .price-row{display:none!important}
+  .calendario-grid{margin-top:42px}
+  .cta-kicker{
+    display:block;color:var(--kraft);font-size:.68rem;font-weight:800;
+    letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px
+  }
+
+  .buy-state{display:flex;align-items:baseline;justify-content:center;gap:12px;flex-wrap:wrap;margin:0 auto 22px}
+  .buy-state strong{font-family:var(--font-display);font-size:1.8rem;color:var(--verde)}
+  .buy-state span{font-size:.78rem;color:rgba(46,48,45,.58)}
 </style>
+<link rel="stylesheet" href="/cart.css">
+<link rel="stylesheet" href="/brand68.css">
 </head>
 <body>
 
 <header>
   <div class="header-inner">
-    <a href="/" class="logo"><span class="six">6</span>EIGHT</a>
-    <a href="/" class="back-link">← Volver a 6EIGHT</a>
+    <a href="/" class="logo"><span class="six">68</span>INSPIRED</a>
+    <a href="/" class="back-link">← Volver a 68INSPIRED</a>
   </div>
 </header>
 
 <section class="hero wrap">
-  <span class="eyebrow-hand">Calendario de Adviento</span>
-  <h1>24 sorpresas hasta Navidad, sin una sola chocolatina</h1>
-  <p>Un calendario de Adviento digital para parejas: cada casilla esconde una experiencia, una pregunta o un pequeño reto para vivir juntos ese día de diciembre.</p>
-  <div class="price-row">
-    <span class="price-now">17,90 €</span>
-    <span class="price-before">24,90 €</span>
-  </div>
-  <a href="#comprar" class="btn btn-primary">Comprar el calendario</a>
+  <span class="eyebrow-hand">Calendario de Adviento para parejas</span>
+  <h1>24 paradas hasta Navidad.</h1>
+  <p>Un diciembre para hablar más, improvisar planes, recuperar recuerdos y volver a elegir un rato para los dos.</p>
+  <div class="buy-state"><strong>12,90 €</strong><span>PDF digital · 27 páginas · descarga inmediata</span></div>
+  <button class="btn btn-primary" data-cart-add="calendario-adviento-parejas">Añadir a la cesta</button>
 
   <div class="calendario-grid" id="calendarioGrid"></div>
   <div class="mensaje-dia placeholder" id="mensajeDia"><p>Tocad una casilla para ver un ejemplo de sorpresa.</p></div>
 </section>
 
-<section class="que-incluye">
+<section class="que-incluye" id="vista-previa">
   <div class="wrap">
     <h2 style="text-align:center; font-size:1.7rem;">Qué incluye</h2>
     <div class="incluye-grid">
-      <div class="incluye-card"><div class="num">24</div><p>Sorpresas, una por cada día de diciembre hasta Nochebuena.</p></div>
-      <div class="incluye-card"><div class="num">4</div><p>Tipos de casillas: experiencia, pregunta, reto y recuerdo para guardar.</p></div>
-      <div class="incluye-card"><div class="num">1</div><p>PDF digital, listo para imprimir y recortar u os las apuntáis directamente en el móvil.</p></div>
+      <div class="incluye-card"><div class="num">24</div><p>Paradas, una por cada día del 1 al 24 de diciembre.</p></div>
+      <div class="incluye-card"><div class="num">4</div><p>Tipos de propuesta: experiencia, pregunta, reto y recuerdo.</p></div>
+      <div class="incluye-card"><div class="num">27</div><p>Páginas: portada, instrucciones, 24 días y página final para guardar el recuerdo.</p></div>
     </div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <h2 style="text-align:center; font-size:1.7rem;">Cómo funciona</h2>
+    <h2 style="text-align:center; font-size:1.7rem;">Cómo se vive</h2>
     <div class="como-funciona">
-      <div class="paso"><div class="paso-n">1</div><div><h3>Descargáis el PDF</h3><p>Recibiréis el enlace al momento tras la compra.</p></div></div>
-      <div class="paso"><div class="paso-n">2</div><div><h3>Lo imprimís o no</h3><p>Podéis recortar las 24 casillas en papelitos para un frasco, o simplemente ir mirando el PDF cada día.</p></div></div>
-      <div class="paso"><div class="paso-n">3</div><div><h3>Abrís una casilla al día</h3><p>Del 1 al 24 de diciembre, sin adelantar ninguna — la gracia está en la espera.</p></div></div>
+      <div class="paso"><div class="paso-n">1</div><div><h3>Empezáis el 1 de diciembre</h3><p>Abrís una parada al día. Algunas duran cinco minutos; otras pueden convertirse en un plan entero.</p></div></div>
+      <div class="paso"><div class="paso-n">2</div><div><h3>No hace falta imprimir</h3><p>Podéis usarlo desde el móvil o imprimirlo si os apetece tenerlo en papel.</p></div></div>
+      <div class="paso"><div class="paso-n">3</div><div><h3>Guardáis pequeñas pruebas del mes</h3><p>Fotos, notas y frases. El día 24 recuperáis algunas para cerrar vuestra ruta de diciembre.</p></div></div>
     </div>
   </div>
 </section>
 
 <section class="cta-final" id="comprar">
   <div class="wrap">
-    <h2>Empezad el 1 de diciembre</h2>
-    <p>Pago único, sin suscripción. Disponible todo el año para que podáis planificarlo con tiempo.</p>
-    <a href="/tienda" class="btn btn-primary">Ver en la tienda</a>
+    <span class="cta-kicker">24 paradas · un diciembre</span>
+    <h2>Empezad vuestra ruta el 1 de diciembre.</h2>
+    <p>Pago único, PDF digital y descarga inmediata después de confirmar el pedido.</p>
+    <button class="btn btn-primary" data-cart-add="calendario-adviento-parejas">Añadir a la cesta · 12,90 €</button>
   </div>
 </section>
 
@@ -166,5 +184,7 @@
   }
 </script>
 
+<script src="/shop-catalog.js"></script>
+<script src="/cart.js"></script>
 </body>
 </html>

@@ -1,60 +1,75 @@
-// POST /api/create-checkout-session
-//
-// Recibe { productId } del navegador y nada más: el precio, el nombre y
-// la ruta del PDF se obtienen SIEMPRE del catálogo del servidor
-// (lib/products.js), nunca de lo que mande el cliente.
-//
-// Devuelve únicamente { url } con el enlace a Stripe Checkout. La clave
-// secreta de Stripe no sale nunca de este archivo.
-
 const Stripe = require("stripe");
 const { getProduct } = require("../lib/products");
-
-const SITE_URL = process.env.SITE_URL || "https://6eight-web.vercel.app";
+const { findPdf } = require("../lib/private-pdfs");
 
 module.exports = async function handler(req, res) {
+  res.setHeader("Cache-Control", "no-store");
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     return res.status(405).json({ error: "Método no permitido." });
   }
 
-  if (!process.env.STRIPE_SECRET_KEY) {
-    console.error("STRIPE_SECRET_KEY no está configurada.");
-    return res.status(500).json({ error: "El servicio de pago no está disponible ahora mismo." });
+  const key = process.env.STRIPE_SECRET_KEY || "";
+  const production = process.env.VERCEL_ENV === "production";
+  const validKey = production ? /^(sk|rk)_live_/ : /^(sk|rk)_test_/;
+  if (!validKey.test(key)) {
+    return res.status(503).json({ error: "El pago no está disponible en este momento." });
   }
 
   const body = req.body || {};
-  const productId = body.productId;
-
-  const product = getProduct(productId);
-  if (!product) {
-    return res.status(400).json({ error: "Producto no reconocido." });
+  const items = Array.isArray(body.productIds) ? body.productIds : [body.productId];
+  const products = [...new Set(items)].map(getProduct);
+  if (!products.length || products.some(product => !product || product.kind === "gift")) {
+    return res.status(400).json({ error: "Revisad los productos de la cesta." });
   }
 
-  try {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  const core = products.filter(product => product.kind === "core");
+  if (!core.length) {
+    return res.status(400).json({ error: "Añadid un producto de la tienda antes de continuar." });
+  }
 
+  const subtotal = core.reduce((sum, product) => sum + product.precioCentimos, 0);
+  const discount = subtotal >= 6800;
+  const spicy = getProduct("50-preguntas-picantes");
+  const buySpicy = subtotal < 5000 && products.includes(spicy);
+  const paid = buySpicy ? [...core, spicy] : core;
+  const deliver = [...paid];
+  if (body.welcomeGift === true) deliver.push(getProduct("12-mini-citas"));
+  if (subtotal >= 5000) deliver.push(spicy);
+
+  try {
+    const ready = await Promise.all(deliver.map(product => findPdf(product)));
+    const missing = deliver.filter((_, index) => !ready[index]);
+    if (missing.length) {
+      return res.status(409).json({
+        error: `Aún no podemos entregar estos PDF: ${missing.map(product => product.nombre).join(", ")}. El pago no se ha iniciado.`,
+      });
+    }
+
+    const site = process.env.VERCEL_ENV === "preview" && process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : (process.env.SITE_URL || "https://68inspired.com").replace(/\/$/, "");
+    const stripe = new Stripe(key);
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       payment_method_types: ["card"],
-      line_items: [
-        {
-          price_data: {
-            currency: product.moneda,
-            product_data: { name: product.nombre },
-            unit_amount: product.precioCentimos,
-          },
-          quantity: 1,
+      line_items: paid.map(product => ({
+        quantity: 1,
+        price_data: {
+          currency: "eur",
+          product_data: { name: product.nombre },
+          unit_amount: discount && product.kind === "core"
+            ? Math.round(product.precioCentimos * 0.9)
+            : product.precioCentimos,
         },
-      ],
-      metadata: { productId: product.productId },
-      success_url: `${SITE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${SITE_URL}/${product.productId}`,
+      })),
+      metadata: { deliverIds: deliver.map(product => product.productId).join(",") },
+      success_url: `${site}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${site}/tienda`,
     });
-
     return res.status(200).json({ url: session.url });
   } catch (err) {
-    console.error("Error creando la sesión de Stripe Checkout:", err);
-    return res.status(500).json({ error: "No hemos podido iniciar el pago. Probad de nuevo en un momento." });
+    console.error("Error iniciando checkout", err.code || err.name);
+    return res.status(502).json({ error: "No hemos podido comprobar la entrega o iniciar el pago. Probad en unos minutos." });
   }
 };

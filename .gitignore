@@ -10,3 +10,6 @@ node_modules/
 
 # Productos completos (contenido de pago) — nunca deben subirse a GitHub/Vercel
 private-products/
+
+# The paid PDF files are uploaded to private Blob, outside the web root.
+*.pdf

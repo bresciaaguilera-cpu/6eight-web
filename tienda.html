@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tienda — Experiencias y regalos digitales para parejas | 6EIGHT</title>
-<meta name="description" content="Catálogo de 6EIGHT: experiencias, juegos, calendarios y regalos personalizados para parejas. Descarga inmediata.">
+<title>Tienda — Experiencias y regalos digitales para parejas | 68INSPIRED</title>
+<meta name="description" content="Catálogo de 68INSPIRED: experiencias, juegos, calendarios y regalos personalizados para parejas. Descarga tras el pago.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <style>
@@ -75,24 +75,265 @@
 
   footer{padding:34px 0; text-align:center; font-size:.85rem; color:rgba(46,48,45,.55); border-top:1px solid rgba(46,48,45,.12);}
   footer a{color:var(--verde); font-weight:600;}
+
+  .promo-ladder{background:var(--verde);color:var(--crema);padding:11px 16px;text-align:center;font-size:.85rem;font-weight:700;letter-spacing:.01em}
+  .promo-ladder b{color:var(--kraft)}
+  .card-actions{display:flex;gap:8px;align-items:center;margin-top:8px}
+  .view-link{padding:9px 11px;border:1px solid var(--verde);font-size:.8rem;font-weight:700;color:var(--verde)}
+  .card-actions .btn-mini{border:0;cursor:pointer}
+
+  /* Tienda refinada */
+  .welcome-strip{
+    display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;
+    background:var(--verde);color:var(--crema);padding:11px 18px;text-align:center;font-size:.82rem
+  }
+  .welcome-label{color:var(--kraft);font-weight:800;letter-spacing:.09em;font-size:.7rem}
+  .intro{padding:42px 0 24px}
+  .intro h1{font-size:2.25rem;margin:7px 0 9px}
+  @media(min-width:640px){.intro h1{font-size:2.85rem}}
+  .intro p{max-width:48ch}
+  .shop-trust{display:flex;justify-content:center;gap:10px 22px;flex-wrap:wrap;margin-top:22px;font-size:.75rem;color:rgba(46,48,45,.62)}
+  .shop-trust span{position:relative;padding-left:13px}
+  .shop-trust span:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--terracota);position:absolute;left:0;top:.52em}
+  .shop-main{padding-bottom:70px}
+  .ready-section{padding-top:18px}
+  .shop-section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:24px}
+  .shop-section-head h2,.coming-intro h2{font-size:1.65rem;color:var(--verde)}
+  .shop-section-head p{max-width:38ch;font-size:.85rem;color:rgba(46,48,45,.6)}
+  .section-kicker{display:block;color:var(--terracota);font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+  .ready-grid{grid-template-columns:1fr!important;gap:22px!important;padding:0!important}
+  @media(min-width:700px){.ready-grid{grid-template-columns:1fr 1fr!important}}
+  .ready-card{border:1px solid rgba(46,48,45,.1)!important;background:#fff!important;overflow:hidden}
+  .ready-card:hover{transform:translateY(-2px)!important}
+  .ready-card .card-body{padding:20px 21px 22px!important}
+  .ready-status{font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;font-weight:800;color:#55715f;display:flex;align-items:center;gap:6px}
+  .ready-status span{width:6px;height:6px;border-radius:50%;background:#6e8c78}
+  .ready-card h3{font-size:1.22rem;margin-top:2px}
+  .ready-card p{font-size:.86rem;line-height:1.5}
+  .ready-bottom{display:flex;justify-content:space-between;align-items:end;gap:14px;padding-top:10px;margin-top:3px;border-top:1px solid rgba(46,48,45,.08)}
+  .price-label{display:block;font-size:.65rem;color:rgba(46,48,45,.48);text-transform:uppercase;letter-spacing:.08em}
+  .card-precio{display:block;font-size:1.35rem!important;line-height:1.1}
+  .instant-note{font-size:.7rem;color:rgba(46,48,45,.52)}
+  .card-actions{margin-top:11px!important}
+  .card-actions .view-link,.card-actions .btn-mini{flex:1;text-align:center;padding:11px 12px!important}
+  .product-cover{aspect-ratio:16/10!important;padding:22px!important;position:relative!important;display:block!important;color:var(--crema)!important}
+  .product-cover:before,.product-cover:after{content:none!important}
+  .cover-brand{position:absolute;left:22px;top:20px;font:700 9px/1 Inter,Arial,sans-serif;letter-spacing:.15em;opacity:.78}
+  .cover-index{position:absolute;right:20px;top:16px;font:600 28px/1 var(--font-display);opacity:.28}
+  .cover-name{position:absolute;left:22px;right:22px;bottom:50px;font:600 clamp(25px,3vw,35px)/1.02 var(--font-display);max-width:75%;z-index:2}
+  .cover-micro{position:absolute;left:22px;bottom:20px;font-size:.68rem;letter-spacing:.05em;opacity:.72}
+  .cover-68{background:#22362B!important}
+  .cover-68:after{content:"68"!important;display:block!important;position:absolute!important;right:10px!important;bottom:-35px!important;font:700 150px/1 var(--font-display)!important;color:#B87460!important;opacity:.17!important}
+  .cover-12{background:#C9A57A!important;color:#22362B!important}
+  .cover-12:after{content:"12"!important;display:block!important;position:absolute!important;right:10px!important;bottom:-30px!important;font:700 145px/1 var(--font-display)!important;color:#22362B!important;opacity:.12!important}
+  .cover-100{background:#B87460!important}
+  .cover-100:after{content:"100"!important;display:block!important;position:absolute!important;right:-7px!important;bottom:-28px!important;font:700 120px/1 var(--font-display)!important;color:#F7EFE2!important;opacity:.14!important}
+  .cover-conoces{background:#2E302D!important}
+  .cover-conoces:after{content:"?"!important;display:block!important;position:absolute!important;right:18px!important;bottom:-40px!important;font:700 165px/1 var(--font-display)!important;color:#C9A57A!important;opacity:.15!important}
+  .coming-section{margin-top:58px;padding-top:32px;border-top:1px solid rgba(46,48,45,.12)}
+  .coming-intro{display:flex;justify-content:space-between;gap:24px;align-items:end}
+  .coming-toggle{border:1px solid var(--verde);color:var(--verde);padding:10px 14px;font-size:.78rem;font-weight:700}
+  .coming-toggle:hover{background:rgba(34,54,43,.05)}
+  .coming-wrap{padding-top:24px}
+  .coming-grid{display:grid;grid-template-columns:1fr;gap:12px}
+  @media(min-width:640px){.coming-grid{grid-template-columns:1fr 1fr}}
+  @media(min-width:960px){.coming-grid{grid-template-columns:repeat(3,1fr)}}
+  .coming-card{position:relative;background:rgba(239,229,214,.58);padding:20px;border:1px solid rgba(46,48,45,.07);min-height:180px;display:flex;flex-direction:column}
+  .coming-number{position:absolute;right:14px;top:10px;font:600 26px/1 var(--font-display);color:rgba(46,48,45,.1)}
+  .coming-card h3{font-size:1rem;margin:4px 0 7px;max-width:80%}
+  .coming-card p{font-size:.8rem;color:rgba(46,48,45,.58);flex:1}
+  .coming-badge{align-self:flex-start;margin-top:14px;font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:rgba(46,48,45,.45)}
+  @media(max-width:639px){
+    .shop-section-head,.coming-intro{align-items:flex-start;flex-direction:column}
+    .coming-toggle{width:100%}
+    .product-cover{aspect-ratio:4/3!important}
+  }
+
+
+/* Colección completa con portada editorial + foto */
+.collection-head{
+  display:flex;justify-content:space-between;align-items:end;gap:28px;margin:12px 0 22px;
+}
+.collection-head h2{font-size:1.75rem;color:var(--verde)}
+.collection-head p{max-width:40ch;font-size:.84rem;color:rgba(46,48,45,.6)}
+.full-grid{padding:0 0 72px!important}
+.collection-card{
+  background:#fff!important;
+  border:1px solid rgba(46,48,45,.09)!important;
+  overflow:hidden!important;
+}
+.collection-card:hover{transform:translateY(-2px)!important}
+.collection-cover{
+  display:grid;
+  grid-template-rows:62% 38%;
+  aspect-ratio:4/5;
+  background:var(--c1);
+  color:var(--crema);
+  position:relative;
+  overflow:hidden;
+}
+.cover-copy{
+  position:relative;
+  padding:20px 20px 16px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:var(--c1);
+  z-index:2;
+}
+.cover-topline{
+  display:flex;justify-content:space-between;gap:12px;align-items:start
+}
+.cover-brand{
+  position:static!important;
+  font:700 9px/1 Inter,Arial,sans-serif!important;
+  letter-spacing:.15em!important;
+  opacity:.78!important;
+}
+.cover-status{
+  font-size:.62rem;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  font-weight:800;
+  color:var(--c2);
+  border-bottom:1px solid currentColor;
+  padding-bottom:2px;
+}
+.cover-copy h3{
+  font:600 clamp(24px,2.5vw,32px)/1.02 var(--font-display);
+  max-width:88%;
+  color:inherit;
+}
+.cover-micro{
+  position:static!important;
+  font-size:.67rem!important;
+  letter-spacing:.05em!important;
+  opacity:.72!important;
+}
+.cover-photo{
+  position:relative;
+  overflow:hidden;
+  background:#ddd;
+}
+.cover-photo:after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.03),rgba(0,0,0,.12));
+}
+.cover-photo img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:saturate(.82) contrast(.96);
+}
+.is-coming .collection-cover{filter:saturate(.82)}
+.is-coming .cover-photo img{opacity:.82}
+.collection-card .card-body{padding:18px 20px 21px!important}
+.collection-card .card-body h3{font-size:1.08rem}
+.collection-card .card-body p{font-size:.84rem;line-height:1.48}
+.product-buy-line{
+  display:flex;justify-content:space-between;align-items:end;gap:14px;
+  padding-top:10px;margin-top:4px;border-top:1px solid rgba(46,48,45,.08)
+}
+.coming-line{
+  display:flex;justify-content:space-between;gap:12px;align-items:center;
+  padding-top:12px;margin-top:5px;border-top:1px solid rgba(46,48,45,.08)
+}
+.coming-line span{
+  font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;
+  font-weight:800;color:rgba(46,48,45,.45)
+}
+.coming-line a{
+  font-size:.72rem;font-weight:700;color:var(--verde)
+}
+@media(max-width:700px){
+  .collection-head{align-items:flex-start;flex-direction:column}
+  .collection-cover{aspect-ratio:4/4.6}
+}
+
+
+  /* Portadas tipográficas sin fotografía */
+  .collection-cover.typographic-cover{
+    display:block!important;
+    aspect-ratio:4/5!important;
+    background:var(--c1)!important;
+    color:var(--crema)!important;
+    position:relative!important;
+    overflow:hidden!important;
+    padding:22px!important;
+  }
+  .cover-photo{display:none!important}
+  .typographic-cover .cover-topline{
+    position:relative;z-index:3;display:flex;justify-content:space-between;gap:12px;align-items:flex-start;
+  }
+  .typographic-cover .cover-brand{
+    position:static!important;
+    font:700 9px/1 Inter,Arial,sans-serif!important;
+    letter-spacing:.16em!important;
+    opacity:.8!important;
+  }
+  .typographic-cover .cover-status{
+    font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--c2);
+    border-bottom:1px solid currentColor;padding-bottom:2px;
+  }
+  .cover-center{
+    position:absolute;left:22px;right:22px;top:50%;transform:translateY(-50%);z-index:3;
+  }
+  .cover-center h3{
+    font:600 clamp(26px,3vw,38px)/1.02 var(--font-display)!important;
+    max-width:88%;color:inherit!important;margin:0!important;
+  }
+  .cover-number{
+    display:block;margin-bottom:12px;font:600 12px/1 var(--font-body);
+    letter-spacing:.16em;color:var(--c2);opacity:.9;
+  }
+  .typographic-cover .cover-micro{
+    position:absolute!important;left:22px!important;bottom:20px!important;z-index:3;
+    font-size:.67rem!important;letter-spacing:.06em!important;opacity:.72!important;
+  }
+  .cover-ornament{
+    position:absolute;pointer-events:none;z-index:1;border:1px solid var(--c2);opacity:.34;
+  }
+  .cover-ornament-a{
+    width:170px;height:170px;border-radius:50%;right:-66px;bottom:-54px;
+  }
+  .cover-ornament-b{
+    width:88px;height:88px;left:-40px;top:76px;transform:rotate(28deg);
+  }
+  .collection-card:nth-child(3n+2) .cover-ornament-a{
+    border-radius:0;transform:rotate(34deg);right:-88px;bottom:-54px;width:180px;height:120px;
+  }
+  .collection-card:nth-child(3n) .cover-ornament-b{
+    border-radius:50%;width:130px;height:58px;left:-54px;top:92px;transform:rotate(-18deg);
+  }
+  .is-coming .typographic-cover{filter:saturate(.88)}
 </style>
+<link rel="stylesheet" href="/cart.css">
+<link rel="stylesheet" href="/brand68.css">
 </head>
 <body>
 
 <header>
   <div class="header-inner">
-    <a href="/" class="logo"><span class="six">6</span>EIGHT</a>
-    <a href="/" class="back-link">← Volver a 6EIGHT</a>
+    <a href="/" class="logo"><span class="six">68</span>INSPIRED</a>
+    <a href="/" class="back-link">← Volver a 68INSPIRED</a>
   </div>
 </header>
+<div class="welcome-strip">
+  <span class="welcome-label">REGALO DE BIENVENIDA</span>
+  <strong>El primer pedido desde este navegador incluye 12 mini citas gratis.</strong>
+</div>
 
 <section class="intro wrap">
-  <span class="eyebrow-hand">Tienda</span>
-  <h1>Experiencias, juegos y regalos para parejas</h1>
-  <p>Todo en descarga digital: pagáis, descargáis, lo vivís. Filtrad por lo que buscáis ahora mismo.</p>
+  <span class="eyebrow-hand">Tienda 68INSPIRED</span>
+  <h1>Elegid vuestra próxima parada.</h1>
+  <p>Juegos, calendarios, experiencias y regalos digitales para parejas. Los que ya están terminados se pueden descargar hoy; los demás son las próximas paradas que iremos completando.</p>
+  <div class="shop-trust">
+    <span>Descarga digital</span>
+    <span>Pago seguro</span>
+    <span>Regalo en el primer pedido</span>
+  </div>
 </section>
 
-<div class="wrap">
+<main class="wrap shop-main">
   <div class="filters" id="filtros">
     <button class="filtro-chip active" data-cat="todos">Todos</button>
     <button class="filtro-chip" data-cat="insignia">Inspired by 68</button>
@@ -101,62 +342,182 @@
     <button class="filtro-chip" data-cat="kit">Kits de regalo</button>
   </div>
 
-  <div class="productos-grid" id="grid"></div>
-</div>
+  <div class="collection-head">
+    <div>
+      <span class="section-kicker">Colección 68INSPIRED</span>
+      <h2>Todas las próximas paradas</h2>
+    </div>
+    <p>Los productos disponibles llevan el botón de compra. Los demás se irán activando conforme los terminemos.</p>
+  </div>
+
+  <div class="productos-grid full-grid" id="grid"></div>
+</main>
 
 <footer>
   <p>¿Buscáis algo personalizado? <a href="/crea-el-vuestro">Crear el nuestro</a></p>
 </footer>
 
+<script src="/shop-catalog.js"></script>
 <script>
   const productos = [
-    {cat:'insignia', nombre:'Inspired by 68', desc:'68 paradas para volver a poner vuestra relación en movimiento.', precio:'9,90 €', antes:'17,90 €', color1:'#22362B', color2:'#B87460', href:'/inspired-by-68'},
-    {cat:'insignia', nombre:'Inspired by 68 — Edición personalizada', desc:'Las 68 paradas con portada y dedicatoria propias.', precio:'24,90 €', color1:'#B87460', color2:'#22362B', href:'/crea-el-vuestro'},
-    {cat:'juego', nombre:'Calendario de 12 citas', desc:'Una cita diferente cada mes, para todo el año.', precio:'14,90 €', color1:'#C9A57A', color2:'#22362B', href:'/calendario-12-citas'},
-    {cat:'juego', nombre:'Calendario de 52 citas', desc:'Una experiencia nueva cada semana del año.', precio:'19,90 €', color1:'#22362B', color2:'#C9A57A', href:'/calendario-52-citas'},
-    {cat:'kit', nombre:'Calendario de Adviento para parejas', desc:'24 sorpresas para diciembre, una por día.', precio:'17,90 €', color1:'#B87460', color2:'#C9A57A', href:'/calendario-adviento-parejas'},
-    {cat:'juego', nombre:'Cuponera de experiencias', desc:'20 vales para canjear cuando os apetezca.', precio:'12,90 €', color1:'#C9A57A', color2:'#B87460', href:'/cuponera-experiencias'},
-    {cat:'juego', nombre:'Juego de preguntas para parejas', desc:'100 preguntas para conoceros mejor, en formato imprimible.', precio:'9,90 €', color1:'#22362B', color2:'#B87460', href:'/juego-preguntas-parejas'},
-    {cat:'juego', nombre:'¿Cuánto me conoces?', desc:'El juego para descubrir cuánto sabéis realmente el uno del otro.', precio:'9,90 €', color1:'#B87460', color2:'#22362B', href:'/cuanto-me-conoces'},
-    {cat:'kit', nombre:'Kit noche de cita en casa', desc:'Todo lo necesario para una cita sin salir de casa.', precio:'14,90 €', color1:'#C9A57A', color2:'#22362B', href:'/kit-noche-cita-casa'},
-    {cat:'juego', nombre:'Bingo de pareja', desc:'Marcad juntos los pequeños momentos del día a día.', precio:'7,90 €', color1:'#22362B', color2:'#C9A57A', href:'/bingo-pareja'},
-    {cat:'personalizado', nombre:'Nuestra historia', desc:'Vuestra línea del tiempo como pareja, con fotos y anécdotas.', precio:'19,90 €', color1:'#B87460', color2:'#C9A57A', href:'/crea-el-vuestro'},
-    {cat:'personalizado', nombre:'Calendario con fotos', desc:'12 meses, 12 recuerdos elegidos por vosotros.', precio:'22,90 €', color1:'#22362B', color2:'#B87460', href:'/crea-el-vuestro'},
-    {cat:'personalizado', nombre:'Juego personalizado', desc:'Preguntas y retos con vuestros nombres, lugares y fechas.', precio:'17,90 €', color1:'#C9A57A', color2:'#22362B', href:'/crea-el-vuestro'},
-    {cat:'kit', nombre:'Kit San Valentín', desc:'Una selección para esta fecha, sin tópicos.', precio:'14,90 €', color1:'#B87460', color2:'#22362B', href:'/san-valentin'},
-    {cat:'kit', nombre:'Kit Navidad en pareja', desc:'Planes y juegos para las fiestas, de los dos.', precio:'14,90 €', color1:'#22362B', color2:'#C9A57A', href:'/kit-navidad-pareja'},
-    {cat:'juego', nombre:'50 preguntas profundas', desc:'Para cuando queráis hablar de algo que no sea el día a día.', precio:'6,90 €', color1:'#C9A57A', color2:'#B87460', href:'/50-preguntas-profundas'},
+    {
+      cat:'insignia', nombre:'Inspired by 68',
+      desc:'68 paradas para volver a poner vuestra relación en movimiento.',
+      precio:'9,90 €', href:'/inspired-by-68', disponible:true, id:'inspired-by-68',
+      c1:'#22362B', c2:'#B87460', micro:'68 experiencias'
+    },
+    {
+      cat:'personalizado', nombre:'Inspired by 68 — Edición personalizada',
+      desc:'Las 68 paradas con portada, nombres y dedicatoria propias.',
+      href:'/crea-el-vuestro',
+      c1:'#B87460', c2:'#22362B', micro:'Edición personalizada'
+    },
+    {
+      cat:'juego', nombre:'Calendario de 12 citas',
+      desc:'Una cita diferente cada mes para tener siempre un plan pendiente.',
+      precio:'14,90 €', href:'/calendario-12-citas', disponible:true, id:'calendario-12-citas',
+      c1:'#C9A57A', c2:'#22362B', micro:'12 citas · 12 meses'
+    },
+    {
+      cat:'juego', nombre:'Calendario de 52 citas',
+      desc:'Una experiencia nueva cada semana del año.',
+      href:'/calendario-52-citas',
+      c1:'#22362B', c2:'#C9A57A', micro:'52 semanas'
+    },
+    {
+      cat:'kit', nombre:'Calendario de Adviento para parejas',
+      desc:'24 paradas para hablar, improvisar planes, recordar y hacer diciembre un poco más vuestro.',
+      precio:'12,90 €', href:'/calendario-adviento-parejas', disponible:true, id:'calendario-adviento-parejas',
+      c1:'#B87460', c2:'#F7EFE2', micro:'24 días · diciembre'
+    },
+    {
+      cat:'juego', nombre:'Cuponera de experiencias',
+      desc:'Vales y planes para canjear cuando os apetezca.',
+      href:'/cuponera-experiencias',
+      c1:'#C9A57A', c2:'#B87460', micro:'Cupones para dos'
+    },
+    {
+      cat:'juego', nombre:'Juego de 100 preguntas',
+      desc:'100 preguntas para hablar, reíros y descubrir cosas nuevas del otro.',
+      precio:'9,90 €', href:'/juego-preguntas-parejas', disponible:true, id:'juego-preguntas-parejas',
+      c1:'#2E302D', c2:'#B87460', micro:'100 preguntas'
+    },
+    {
+      cat:'juego', nombre:'¿Cuánto me conoces?',
+      desc:'Un juego para comprobar cuánto sabéis realmente el uno del otro.',
+      precio:'9,90 €', href:'/cuanto-me-conoces', disponible:true, id:'cuanto-me-conoces',
+      c1:'#B87460', c2:'#C9A57A', micro:'Juego para dos'
+    },
+    {
+      cat:'kit', nombre:'Kit noche de cita en casa',
+      desc:'Todo lo necesario para una cita especial sin salir de casa.',
+      href:'/kit-noche-cita-casa',
+      c1:'#22362B', c2:'#EFE5D6', micro:'Noche de cita'
+    },
+    {
+      cat:'juego', nombre:'Bingo de pareja',
+      desc:'Pequeños momentos del día a día convertidos en juego.',
+      href:'/bingo-pareja',
+      c1:'#2E302D', c2:'#C9A57A', micro:'Bingo para dos'
+    },
+    {
+      cat:'personalizado', nombre:'Nuestra historia',
+      desc:'Vuestra línea del tiempo como pareja, con fotos y recuerdos propios.',
+      href:'/crea-el-vuestro',
+      c1:'#C9A57A', c2:'#2E302D', micro:'Vuestra historia'
+    },
+    {
+      cat:'personalizado', nombre:'Calendario con fotos',
+      desc:'Doce meses construidos alrededor de vuestros recuerdos.',
+      href:'/crea-el-vuestro',
+      c1:'#22362B', c2:'#B87460', micro:'12 recuerdos'
+    },
+    {
+      cat:'personalizado', nombre:'Juego personalizado',
+      desc:'Preguntas y retos con vuestros nombres, lugares y fechas.',
+      href:'/crea-el-vuestro',
+      c1:'#B87460', c2:'#22362B', micro:'Hecho para vosotros'
+    },
+    {
+      cat:'kit', nombre:'Kit San Valentín',
+      desc:'Una experiencia para celebrar juntos sin caer en los tópicos de siempre.',
+      href:'/san-valentin', id:'kit-san-valentin',
+      c1:'#2E302D', c2:'#B87460', micro:'14 de febrero'
+    },
+    {
+      cat:'kit', nombre:'Kit Navidad en pareja',
+      desc:'Planes y juegos para compartir durante las fiestas.',
+      href:'/kit-navidad-pareja',
+      c1:'#22362B', c2:'#C9A57A', micro:'Navidad para dos'
+    },
+    {
+      cat:'juego', nombre:'50 preguntas profundas',
+      desc:'Para hablar de algo que no sea solo el día a día.',
+      href:'/50-preguntas-profundas',
+      c1:'#C9A57A', c2:'#22362B', micro:'50 preguntas'
+    }
   ];
 
   const grid = document.getElementById('grid');
 
-  function render(cat){
-    const lista = cat === 'todos' ? productos : productos.filter(p => p.cat === cat);
-    grid.innerHTML = lista.map(p => {
-      const disponible = p.href !== '#';
-      const tag = disponible ? 'a' : 'div';
-      const attrs = disponible ? `href="${p.href}"` : `aria-disabled="true"`;
-      return `
-      <${tag} ${attrs} class="producto-card ${disponible ? '' : 'proximamente'}">
-        <div class="card-visual" style="background:linear-gradient(135deg, ${p.color1}, ${p.color2});">
-          <div class="sello">68</div>
-        </div>
+  function labelCat(cat){
+    return {insignia:'Producto insignia', personalizado:'Personalizado', juego:'Juego / calendario', kit:'Kit de regalo'}[cat] || '';
+  }
+
+  function render(cat='todos'){
+    const lista = (cat === 'todos' ? productos : productos.filter(p => p.cat === cat)).map(producto => {
+      const id = producto.id || producto.href.slice(1);
+      const item = window.ShopCatalog[id];
+      const disponible = Boolean(item?.core);
+      return {
+        ...producto, id, disponible,
+        precio: disponible ? (item.p / 100).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' }) : null,
+        img: disponible ? '/covers/' + id + '.jpg' : null,
+      };
+    });
+
+    grid.innerHTML = lista.map((p,i) => `
+      <article class="producto-card collection-card ${p.disponible ? 'is-ready' : 'is-coming'}">
+        <a href="${p.href}" class="collection-cover" style="--c1:${p.c1};--c2:${p.c2}" aria-label="${p.nombre}">
+          <div class="cover-copy">
+            <div class="cover-topline">
+              <span class="cover-brand">68INSPIRED</span>
+              <span class="cover-status">${p.disponible ? 'Descargable' : 'Personalizado'}</span>
+            </div>
+            <h3>${p.nombre}</h3>
+            <span class="cover-micro">${p.micro}</span>
+          </div>
+          <div class="cover-photo">
+            ${p.img ? `<img src="${p.img}" alt="" loading="lazy">` : ''}
+          </div>
+        </a>
+
         <div class="card-body">
           <span class="card-tag">${labelCat(p.cat)}</span>
           <h3>${p.nombre}</h3>
           <p>${p.desc}</p>
-          <div class="card-footer">
-            <span class="card-precio">${p.antes ? `<span class="antes">${p.antes}</span>` : ''}${p.precio}</span>
-            <span class="btn-mini ${disponible ? '' : 'disabled'}">${disponible ? 'Ver producto' : 'Próximamente'}</span>
-          </div>
-        </div>
-      </${tag}>
-    `;
-    }).join('');
-  }
 
-  function labelCat(cat){
-    return {insignia:'Producto insignia', personalizado:'Personalizado', juego:'Juego / calendario', kit:'Kit de regalo'}[cat] || '';
+          ${p.disponible ? `
+            <div class="product-buy-line">
+              <div>
+                <span class="price-label">Precio</span>
+                <strong class="card-precio">${p.precio}</strong>
+              </div>
+              <span class="instant-note">Descarga tras el pago</span>
+            </div>
+            <div class="card-actions">
+              <a class="view-link" href="${p.href}">Ver producto</a>
+              <button class="btn-mini" data-cart-add="${p.id}">Añadir a la cesta</button>
+            </div>
+          ` : `
+            <div class="coming-line">
+              <span>A medida</span>
+              <a href="${p.href}">Ver avance →</a>
+            </div>
+          `}
+        </div>
+      </article>
+    `).join('');
   }
 
   document.querySelectorAll('.filtro-chip').forEach(chip => {
@@ -167,8 +528,9 @@
     });
   });
 
-  render('todos');
+  render();
 </script>
 
+<script src="/cart.js"></script>
 </body>
 </html>
