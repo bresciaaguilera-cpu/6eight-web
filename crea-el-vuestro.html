@@ -73,13 +73,6 @@
   .form-row{display:flex; flex-direction:column; gap:20px;}
   @media(min-width:520px){ .form-row.two{flex-direction:row;} .form-row.two .form-field{flex:1; margin-bottom:0;} }
 
-  .upload-box{
-    border:2px dashed var(--kraft); background:var(--beige2); padding:40px 20px; text-align:center; margin-bottom:20px;
-  }
-  .upload-box p{color:rgba(46,48,45,.65); font-size:.92rem; margin-top:8px;}
-  .upload-box .upload-icon{font-size:1.8rem; color:var(--terracota);}
-  .upload-note{font-size:.82rem; color:rgba(46,48,45,.5);}
-
   .resumen{background:var(--beige2); padding:24px 22px; margin-bottom:24px;}
   .resumen-row{display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid rgba(46,48,45,.15); font-size:.92rem;}
   .resumen-row:last-child{border-bottom:none; padding-top:16px; font-weight:700; font-size:1.05rem;}
@@ -98,11 +91,7 @@
   .error-msg{color:var(--terracota); font-size:.82rem; margin-top:-14px; margin-bottom:16px; display:none;}
   .error-msg.show{display:block;}
 
-  .confirmacion{text-align:center; padding:20px 0 50px;}
-  .confirmacion .sello{width:70px; height:70px; border-radius:50%; border:2px solid var(--terracota); margin:0 auto 22px;
-    display:flex; align-items:center; justify-content:center; font-family:var(--font-display); color:var(--terracota); font-size:1.3rem;}
-  .confirmacion h2{font-size:1.6rem; margin-bottom:12px;}
-  .confirmacion p{color:rgba(46,48,45,.72); max-width:44ch; margin:0 auto 26px;}
+  .resumen-row dd{margin:0 0 0 12px;text-align:right;overflow-wrap:anywhere;}
 </style>
 <link rel="stylesheet" href="/brand68.css">
 </head>
@@ -111,7 +100,7 @@
 <header>
   <div class="header-inner">
     <a href="/" class="logo"><span class="six">68</span>INSPIRED</a>
-    <a href="/" class="back-link">← Volver a 68INSPIRED</a>
+    <a href="/tienda" class="back-link">← Volver a la tienda</a>
   </div>
 </header>
 
@@ -119,40 +108,39 @@
   <div class="intro">
     <span class="eyebrow-hand">Personalizado</span>
     <h1>Crea el vuestro</h1>
-    <p>Cinco minutos. Vuestros nombres, vuestra historia, vuestro diseño.</p>
+    <p>Elegid vuestro diseño y preparad la solicitud. Os responderemos por email para concretar los detalles.</p>
   </div>
 
   <div class="progress-wrap">
     <div class="progress-steps" id="progressSteps">
       <div class="p-step active" data-step="1"><div class="p-dot">1</div><div class="p-label">Producto</div></div>
       <div class="p-step" data-step="2"><div class="p-dot">2</div><div class="p-label">Vuestra historia</div></div>
-      <div class="p-step" data-step="3"><div class="p-dot">3</div><div class="p-label">Fotos</div></div>
-      <div class="p-step" data-step="4"><div class="p-dot">4</div><div class="p-label">Pedido</div></div>
+      <div class="p-step" data-step="3"><div class="p-dot">3</div><div class="p-label">Solicitud</div></div>
     </div>
     <div class="progress-bar"><div class="progress-bar-fill" id="progressFill"></div></div>
   </div>
 
   <!-- PASO 1 -->
   <div class="step-panel active" data-panel="1">
-    <h2>Elige producto</h2>
-    <p class="step-sub">Todos incluyen vuestros nombres y fecha. Podéis añadir fotos en el siguiente paso.</p>
+    <h2 tabindex="-1">Elige producto</h2>
+    <p class="step-sub">Cada diseño se prepara en PDF con vuestros datos. Si lleva fotos, podréis adjuntarlas al email.</p>
     <div class="producto-grid" id="productoGrid">
-      <button class="producto-opcion" data-nombre="Inspired by 68 — Edición personalizada" data-precio="24.90" data-id="inspired-by-68-personalizado">
+      <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Inspired by 68 — Edición personalizada" data-precio="24.90" data-id="inspired-by-68-personalizado">
         <h3>Inspired by 68 personalizado</h3>
         <p>Las 68 paradas con portada y dedicatoria propias.</p>
         <span class="precio">24,90 €</span>
       </button>
-      <button class="producto-opcion" data-nombre="Nuestra historia (libro digital)" data-precio="19.90" data-id="nuestra-historia">
+      <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Nuestra historia (libro digital)" data-precio="19.90" data-id="nuestra-historia">
         <h3>Nuestra historia</h3>
         <p>Línea del tiempo de vuestra relación, con fotos y anécdotas.</p>
         <span class="precio">19,90 €</span>
       </button>
-      <button class="producto-opcion" data-nombre="Calendario personalizado con fotos" data-precio="22.90" data-id="calendario-personalizado">
+      <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Calendario personalizado con fotos" data-precio="22.90" data-id="calendario-personalizado">
         <h3>Calendario con fotos</h3>
         <p>12 meses, 12 recuerdos elegidos por vosotros.</p>
         <span class="precio">22,90 €</span>
       </button>
-      <button class="producto-opcion" data-nombre="Juego personalizado con nombres" data-precio="17.90" data-id="juego-personalizado">
+      <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Juego personalizado con nombres" data-precio="17.90" data-id="juego-personalizado">
         <h3>Juego personalizado</h3>
         <p>Preguntas y retos con vuestros nombres, lugares y fechas.</p>
         <span class="precio">17,90 €</span>
@@ -164,15 +152,15 @@
 
   <!-- PASO 2 -->
   <div class="step-panel" data-panel="2">
-    <h2>Contadnos vuestra historia</h2>
-    <p class="step-sub">Con esto es suficiente para empezar. Podréis añadir detalles después.</p>
+    <h2 tabindex="-1">Contadnos vuestra historia</h2>
+    <p class="step-sub">Estáis preparando una solicitud para <strong id="productoSeleccionado"></strong>.</p>
     <div class="form-row two">
-      <div class="form-field"><label for="nombre1">Vuestro nombre</label><input type="text" id="nombre1" placeholder="Ej. Marta"></div>
-      <div class="form-field"><label for="nombre2">El nombre de vuestra pareja</label><input type="text" id="nombre2" placeholder="Ej. Diego"></div>
+      <div class="form-field"><label for="nombre1">Vuestro nombre</label><input type="text" id="nombre1" maxlength="60" placeholder="Ej. Marta"></div>
+      <div class="form-field"><label for="nombre2">El nombre de vuestra pareja</label><input type="text" id="nombre2" maxlength="60" placeholder="Ej. Diego"></div>
     </div>
     <div class="form-field"><label for="fecha">Fecha importante</label><input type="date" id="fecha"></div>
-    <div class="form-field"><label for="lugar">¿Dónde os conocisteis?</label><input type="text" id="lugar" placeholder="Ej. En una boda de amigos comunes"></div>
-    <div class="form-field"><label for="anecdota">Una anécdota o mensaje que queráis incluir (opcional)</label><textarea id="anecdota" rows="4" placeholder="Contadnos algo que solo vosotros entendáis..."></textarea></div>
+    <div class="form-field"><label for="lugar">¿Dónde os conocisteis?</label><input type="text" id="lugar" maxlength="100" placeholder="Ej. En una boda de amigos comunes"></div>
+    <div class="form-field"><label for="anecdota">Una anécdota o mensaje que queráis incluir (opcional)</label><textarea id="anecdota" maxlength="400" rows="4" placeholder="Contadnos algo que solo vosotros entendáis..."></textarea></div>
     <p class="error-msg" id="error2">Necesitamos al menos vuestros dos nombres para continuar.</p>
     <div class="nav-buttons">
       <button class="btn btn-secondary" id="back2">Atrás</button>
@@ -180,156 +168,100 @@
     </div>
   </div>
 
-  <!-- PASO 3 -->
   <div class="step-panel" data-panel="3">
-    <h2>Subid fotografías</h2>
-    <p class="step-sub">Entre 3 y 10 fotos suele ser suficiente. Podéis saltar este paso y enviarlas por email más tarde.</p>
-    <div class="upload-box" id="uploadBox">
-      <div class="upload-icon">↑</div>
-      <p><strong>Toca para elegir fotos</strong> o arrástralas aquí</p>
-      <p class="upload-note">JPG o PNG, hasta 10 fotos</p>
-      <input type="file" id="fileInput" accept="image/*" multiple style="display:none;">
-    </div>
-    <p id="filesSummary" style="font-size:.88rem; color:var(--verde); margin-bottom:20px;"></p>
+    <h2 tabindex="-1">Revisad vuestra solicitud</h2>
+    <p class="step-sub">El botón abre un borrador en vuestra aplicación de correo. Adjuntad las fotos allí, si hacen falta, y enviadlo a <a href="mailto:hola@68inspired.com">hola@68inspired.com</a>.</p>
+    <dl class="resumen" id="resumenBox"></dl>
+    <label for="mensaje" class="step-sub">Si no se abre el correo, podéis copiar este mensaje y pegarlo en un email.</label>
+    <div class="form-field"><textarea id="mensaje" rows="8" readonly></textarea></div>
     <div class="nav-buttons">
       <button class="btn btn-secondary" id="back3">Atrás</button>
-      <button class="btn btn-primary" id="next3">Continuar</button>
-    </div>
-  </div>
-
-  <!-- PASO 4 -->
-  <div class="step-panel" data-panel="4">
-    <h2>Revisad y confirmad</h2>
-    <p class="step-sub">Comprobad que todo esté bien antes de pagar. Podéis volver atrás si falta algo.</p>
-    <div class="resumen" id="resumenBox"></div>
-    <div class="nav-buttons">
-      <button class="btn btn-secondary" id="back4">Atrás</button>
-      <button class="btn btn-primary" id="pagarBtn">Realizar pedido</button>
-    </div>
-  </div>
-
-  <!-- CONFIRMACION -->
-  <div class="step-panel" data-panel="5">
-    <div class="confirmacion">
-      <div class="sello">68</div>
-      <h2>Pedido recibido</h2>
-      <p>En cuanto confirmemos el pago, empezaremos a preparar vuestro diseño. Os llegará por email en un plazo de 2 a 4 días.</p>
-      <a href="/" class="btn btn-primary" style="max-width:220px; margin:0 auto;">Volver a 68INSPIRED</a>
+      <a class="btn btn-primary" id="enviarSolicitud" href="mailto:hola@68inspired.com">Abrir borrador de email</a>
     </div>
   </div>
 </div>
 
 <script>
-  const state = { producto:null, productoId:null, precio:null, nombre1:'', nombre2:'', fecha:'', lugar:'', anecdota:'', fotos:0 };
-  let currentStep = 1;
-  const totalSteps = 4;
+  const options = Array.from(document.querySelectorAll('.producto-opcion'));
+  let selectedProduct;
 
-  function goToStep(n){
-    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
-    document.querySelector(`.step-panel[data-panel="${n}"]`).classList.add('active');
-    document.querySelectorAll('.p-step').forEach(s => {
-      const stepNum = Number(s.dataset.step);
-      s.classList.toggle('active', stepNum === n);
-      s.classList.toggle('done', stepNum < n);
+  function selectProduct(product) {
+    selectedProduct = product;
+    document.getElementById('productoSeleccionado').textContent = product.dataset.nombre;
+    options.forEach(option => {
+      const selected = option === product;
+      option.classList.toggle('selected', selected);
+      option.setAttribute('aria-pressed', String(selected));
     });
-    document.getElementById('progressFill').style.width = (Math.min(n, totalSteps) / totalSteps * 100) + '%';
-    currentStep = n;
-    window.scrollTo({top:0, behavior:'smooth'});
+    document.getElementById('error1').classList.remove('show');
   }
 
-  // PASO 1
-  document.querySelectorAll('.producto-opcion').forEach(opt => {
-    opt.addEventListener('click', () => {
-      document.querySelectorAll('.producto-opcion').forEach(o => o.classList.remove('selected'));
-      opt.classList.add('selected');
-      state.producto = opt.dataset.nombre;
-      state.productoId = opt.dataset.id;
-      state.precio = opt.dataset.precio;
-      document.getElementById('error1').classList.remove('show');
+  function goToStep(n) {
+    document.querySelectorAll('.step-panel').forEach(panel => {
+      panel.classList.toggle('active', Number(panel.dataset.panel) === n);
     });
-  });
+    document.querySelectorAll('.p-step').forEach(step => {
+      const stepNum = Number(step.dataset.step);
+      step.classList.toggle('active', stepNum === n);
+      step.classList.toggle('done', stepNum < n);
+    });
+    document.getElementById('progressFill').style.width = (n / 3 * 100) + '%';
+    document.querySelector('.step-panel.active h2').focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  options.forEach(option => option.addEventListener('click', () => selectProduct(option)));
+  const productId = new URLSearchParams(window.location.search).get('producto');
+  const initialProduct = options.find(option => option.dataset.id === productId);
+  if (initialProduct) {
+    selectProduct(initialProduct);
+    goToStep(2);
+  }
+
   document.getElementById('next1').addEventListener('click', () => {
-    if(!state.producto){ document.getElementById('error1').classList.add('show'); return; }
+    if (!selectedProduct) {
+      document.getElementById('error1').classList.add('show');
+      return;
+    }
     goToStep(2);
   });
-
-  // PASO 2
   document.getElementById('back2').addEventListener('click', () => goToStep(1));
+  document.getElementById('back3').addEventListener('click', () => goToStep(2));
   document.getElementById('next2').addEventListener('click', () => {
-    state.nombre1 = document.getElementById('nombre1').value.trim();
-    state.nombre2 = document.getElementById('nombre2').value.trim();
-    state.fecha = document.getElementById('fecha').value;
-    state.lugar = document.getElementById('lugar').value.trim();
-    state.anecdota = document.getElementById('anecdota').value.trim();
-    if(!state.nombre1 || !state.nombre2){ document.getElementById('error2').classList.add('show'); return; }
-    document.getElementById('error2').classList.remove('show');
+    const value = id => document.getElementById(id).value.trim();
+    const names = [value('nombre1'), value('nombre2')];
+    const error = document.getElementById('error2');
+    error.classList.toggle('show', names.some(name => !name));
+    if (names.some(name => !name)) return;
+
+    const { nombre, precio } = selectedProduct.dataset;
+    const rows = [
+      ['Producto', nombre],
+      ['Precio del catálogo', precio.replace('.', ',') + ' €'],
+      ['Nombres', names.join(' y ')],
+      ['Fecha', value('fecha')],
+      ['Dónde os conocisteis', value('lugar')],
+      ['Dedicatoria o anécdota', value('anecdota')]
+    ].filter(([, text]) => text);
+    const summary = document.getElementById('resumenBox');
+    summary.replaceChildren(...rows.map(([label, text]) => {
+      const row = document.createElement('div');
+      row.className = 'resumen-row';
+      const term = document.createElement('dt');
+      term.textContent = label;
+      const detail = document.createElement('dd');
+      detail.textContent = text;
+      row.append(term, detail);
+      return row;
+    }));
+
+    const message = 'Hola, me gustaría solicitar un PDF personalizado.\r\n\r\n' +
+      rows.map(([label, text]) => label + ': ' + text).join('\r\n') + '\r\n\r\nGracias.';
+    document.getElementById('mensaje').value = message;
+    document.getElementById('enviarSolicitud').href = 'mailto:hola@68inspired.com?subject=' +
+      encodeURIComponent('Solicitud personalizada: ' + nombre) + '&body=' + encodeURIComponent(message);
     goToStep(3);
   });
-
-  // PASO 3
-  document.getElementById('back3').addEventListener('click', () => goToStep(2));
-  const uploadBox = document.getElementById('uploadBox');
-  const fileInput = document.getElementById('fileInput');
-  uploadBox.addEventListener('click', () => fileInput.click());
-  fileInput.addEventListener('change', () => {
-    state.fotos = fileInput.files.length;
-    document.getElementById('filesSummary').textContent = state.fotos > 0
-      ? `${state.fotos} foto(s) seleccionada(s).`
-      : '';
-  });
-  document.getElementById('next3').addEventListener('click', () => {
-    goToStep(4);
-    renderResumen();
-  });
-
-  // PASO 4
-  document.getElementById('back4').addEventListener('click', () => goToStep(3));
-  function renderResumen(){
-    document.getElementById('resumenBox').innerHTML = `
-      <div class="resumen-row"><span>Producto</span><span>${state.producto || '—'}</span></div>
-      <div class="resumen-row"><span>Nombres</span><span>${state.nombre1} &amp; ${state.nombre2}</span></div>
-      <div class="resumen-row"><span>Fecha</span><span>${state.fecha || '—'}</span></div>
-      <div class="resumen-row"><span>Dónde os conocisteis</span><span>${state.lugar || '—'}</span></div>
-      <div class="resumen-row"><span>Fotografías</span><span>${state.fotos} adjuntadas</span></div>
-      <div class="resumen-row"><span>Total</span><span>${state.precio ? Number(state.precio).toFixed(2).replace('.', ',') + ' €' : '—'}</span></div>
-    `;
-  }
-  document.getElementById('pagarBtn').addEventListener('click', () => iniciarPagoPersonalizado());
-
-  async function iniciarPagoPersonalizado(){
-    const btn = document.getElementById('pagarBtn');
-    const textoOriginal = btn.textContent;
-    btn.textContent = 'Redirigiendo al pago...';
-    btn.disabled = true;
-
-    try {
-      const response = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          productId: state.productoId,
-          personalization: {
-            nombre1: state.nombre1,
-            nombre2: state.nombre2,
-            fecha: state.fecha,
-            lugar: state.lugar,
-          },
-        }),
-      });
-      if (!response.ok) throw new Error('Respuesta no válida');
-      const { url } = await response.json();
-      window.location.href = url;
-    } catch (err) {
-      // Sin backend desplegado todavía: mostramos la confirmación simulada
-      // (igual que antes) pero dejándolo dicho con claridad, para no fingir
-      // un pago real que no ha ocurrido.
-      document.querySelector('[data-panel="5"] p').textContent =
-        'Esto es una simulación — el backend de pago aún no está desplegado. En producción, aquí se confirmaría el pago real y os llegaría el diseño por email en 2-4 días.';
-      goToStep(5);
-      btn.textContent = textoOriginal;
-      btn.disabled = false;
-    }
-  }
 </script>
 
 </body>

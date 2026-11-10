@@ -225,7 +225,8 @@
   filter:saturate(.82) contrast(.96);
 }
 .is-coming .collection-cover{filter:saturate(.82)}
-.is-coming .cover-photo img{opacity:.82}
+.is-coming .cover-photo{background:var(--c2);color:#F7EFE2;display:grid;place-items:center;}
+.custom-cover-mark{font:600 clamp(2.8rem,8vw,5rem)/1 var(--font-display);z-index:1;}
 .collection-card .card-body{padding:18px 20px 21px!important}
 .collection-card .card-body h3{font-size:1.08rem}
 .collection-card .card-body p{font-size:.84rem;line-height:1.48}
@@ -325,7 +326,7 @@
 <section class="intro wrap">
   <span class="eyebrow-hand">Tienda 68INSPIRED</span>
   <h1>Elegid vuestra próxima parada.</h1>
-  <p>Juegos, calendarios, experiencias y regalos digitales para parejas. Los que ya están terminados se pueden descargar hoy; los demás son las próximas paradas que iremos completando.</p>
+  <p>Juegos, calendarios, experiencias y regalos digitales para parejas. Elegid un PDF descargable o pedid un diseño hecho a medida para vosotros.</p>
   <div class="shop-trust">
     <span>Descarga digital</span>
     <span>Pago seguro</span>
@@ -369,7 +370,7 @@
     {
       cat:'personalizado', nombre:'Inspired by 68 — Edición personalizada',
       desc:'Las 68 paradas con portada, nombres y dedicatoria propias.',
-      href:'/crea-el-vuestro',
+      href:'/crea-el-vuestro?producto=inspired-by-68-personalizado', precio:'24,90 €', marca:'68',
       c1:'#B87460', c2:'#22362B', micro:'Edición personalizada'
     },
     {
@@ -423,19 +424,19 @@
     {
       cat:'personalizado', nombre:'Nuestra historia',
       desc:'Vuestra línea del tiempo como pareja, con fotos y recuerdos propios.',
-      href:'/crea-el-vuestro',
+      href:'/crea-el-vuestro?producto=nuestra-historia', precio:'19,90 €', marca:'01',
       c1:'#C9A57A', c2:'#2E302D', micro:'Vuestra historia'
     },
     {
       cat:'personalizado', nombre:'Calendario con fotos',
       desc:'Doce meses construidos alrededor de vuestros recuerdos.',
-      href:'/crea-el-vuestro',
+      href:'/crea-el-vuestro?producto=calendario-personalizado', precio:'22,90 €', marca:'12',
       c1:'#22362B', c2:'#B87460', micro:'12 recuerdos'
     },
     {
       cat:'personalizado', nombre:'Juego personalizado',
       desc:'Preguntas y retos con vuestros nombres, lugares y fechas.',
-      href:'/crea-el-vuestro',
+      href:'/crea-el-vuestro?producto=juego-personalizado', precio:'17,90 €', marca:'?',
       c1:'#B87460', c2:'#22362B', micro:'Hecho para vosotros'
     },
     {
@@ -471,7 +472,7 @@
       const disponible = Boolean(item?.core);
       return {
         ...producto, id, disponible,
-        precio: disponible ? (item.p / 100).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' }) : null,
+        precio: disponible ? (item.p / 100).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' }) : producto.precio,
         img: disponible ? '/covers/' + id + '.jpg' : null,
       };
     });
@@ -488,7 +489,7 @@
             <span class="cover-micro">${p.micro}</span>
           </div>
           <div class="cover-photo">
-            ${p.img ? `<img src="${p.img}" alt="" loading="lazy">` : ''}
+            ${p.img ? `<img src="${p.img}" alt="" loading="lazy">` : `<span class="custom-cover-mark" aria-hidden="true">${p.marca}</span>`}
           </div>
         </a>
 
@@ -510,9 +511,15 @@
               <button class="btn-mini" data-cart-add="${p.id}">Añadir a la cesta</button>
             </div>
           ` : `
-            <div class="coming-line">
-              <span>A medida</span>
-              <a href="${p.href}">Ver avance →</a>
+            <div class="product-buy-line">
+              <div>
+                <span class="price-label">Precio</span>
+                <strong class="card-precio">${p.precio}</strong>
+              </div>
+              <span class="instant-note">PDF hecho a medida</span>
+            </div>
+            <div class="card-actions">
+              <a class="view-link" href="${p.href}">Solicitar por email →</a>
             </div>
           `}
         </div>
