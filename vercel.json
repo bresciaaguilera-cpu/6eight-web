@@ -17,5 +17,22 @@
       "destination": "/",
       "permanent": true
     }
+  ],
+  "functions": {
+    "api/personalized-checkout.js": {
+      "maxDuration": 60
+    },
+    "api/personalized-webhook.js": {
+      "maxDuration": 30
+    },
+    "api/cleanup-personalized-orders.js": {
+      "maxDuration": 60
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/cleanup-personalized-orders",
+      "schedule": "0 4 * * *"
+    }
   ]
 }

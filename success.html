@@ -138,7 +138,9 @@
     }
 
     try {
-      const response = await fetch('/api/get-download?session_id=' + encodeURIComponent(sessionId));
+      const query = new URLSearchParams({ session_id: sessionId });
+      if (params.has('access')) query.set('access', params.get('access'));
+      const response = await fetch('/api/get-download?' + query);
       const datos = await response.json().catch(() => ({}));
 
       if (!response.ok) {
@@ -167,7 +169,7 @@
       });
       try {
         localStorage.setItem('68inspired_has_order','1');
-        localStorage.removeItem('68inspired_cart_v2');
+        if (!datos.personalizado) localStorage.removeItem('68inspired_cart_v2');
       } catch {}
       mostrarEstado('estadoConfirmado');
     } catch (err) {

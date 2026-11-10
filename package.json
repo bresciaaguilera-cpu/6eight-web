@@ -4,8 +4,9 @@
   "private": true,
   "description": "Web estática de 6EIGHT con funciones serverless de Vercel para checkout y descarga de productos digitales.",
   "dependencies": {
-    "stripe": "^17.4.0",
-    "@vercel/blob": "^2.4.0"
+    "@vercel/blob": "^2.4.0",
+    "pdf-lib": "^1.17.1",
+    "stripe": "^17.4.0"
   },
   "scripts": {
     "catalog": "node scripts/generate-shop-catalog.js",
