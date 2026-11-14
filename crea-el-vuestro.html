@@ -113,8 +113,9 @@
 </style>
 <link rel="stylesheet" href="/brand68.css">
 <link rel="stylesheet" href="/cart.css">
+<link rel="stylesheet" href="/muestras.css">
 </head>
-<body>
+<body data-show-empty-cart>
 <header><div class="header-inner"><a href="/" class="logo"><span class="six">68</span>INSPIRED</a>
 <a href="/tienda" class="back-link">← Volver a la tienda</a></div></header>
 <div class="wrap">
@@ -123,25 +124,25 @@
   <form class="pedido" id="pedido">
     <fieldset><legend>Elegid vuestro PDF</legend>
     <div class="producto-grid" id="productoGrid">
-      <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Inspired by 68 — Edición personalizada" data-precio="0.10" data-id="inspired-by-68-personalizado">
+      <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Inspired by 68 — Edición personalizada" data-precio="19.90" data-id="inspired-by-68-personalizado">
         <h3>Inspired by 68 personalizado</h3>
         <p>Las 68 paradas con portada y dedicatoria propias.</p>
-        <span class="precio">0,10 €</span>
+        <span class="precio">19,90 €</span>
       </button>
-      <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Nuestra historia (libro digital)" data-precio="0.10" data-id="nuestra-historia">
+      <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Nuestra historia (libro digital)" data-precio="19.90" data-id="nuestra-historia">
         <h3>Nuestra historia</h3>
         <p>Línea del tiempo de vuestra relación, con lugares y anécdotas.</p>
-        <span class="precio">0,10 €</span>
+        <span class="precio">19,90 €</span>
       </button>
-      <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Calendario personalizado" data-precio="0.10" data-id="calendario-personalizado">
+      <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Calendario personalizado" data-precio="17.90" data-id="calendario-personalizado">
         <h3>Calendario personalizado</h3>
         <p>12 meses, 12 recuerdos elegidos por vosotros.</p>
-        <span class="precio">0,10 €</span>
+        <span class="precio">17,90 €</span>
       </button>
-      <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Juego personalizado con nombres" data-precio="0.10" data-id="juego-personalizado">
+      <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Juego personalizado con nombres" data-precio="17.90" data-id="juego-personalizado">
         <h3>Juego personalizado</h3>
         <p>Preguntas y retos con vuestros nombres, lugares y fechas.</p>
-        <span class="precio">0,10 €</span>
+        <span class="precio">17,90 €</span>
       </button>
     </div>
 
@@ -155,19 +156,23 @@
       <div class="form-field"><label for="fecha">Fecha especial</label><input id="fecha" type="date"></div>
     </fieldset>
     <fieldset data-form="inspired-by-68-personalizado" disabled hidden><legend>Dedicatoria</legend>
+      <details class="personal-sample"><summary>Ver un ejemplo de este PDF</summary><figure><a href="/images/muestras/personalizado-inspired.webp" target="_blank" rel="noopener"><img src="/images/muestras/personalizado-inspired.webp" alt="Página de muestra con datos ficticios" width="494" height="699" loading="lazy"></a><figcaption>Página 8</figcaption></figure></details>
       <div class="form-field"><label for="dedicatoria">El texto para vuestra dedicatoria</label><textarea id="dedicatoria" maxlength="650" required rows="5"></textarea></div>
     </fieldset>
     <fieldset data-form="nuestra-historia" disabled hidden><legend>Vuestros recuerdos</legend>
+      <details class="personal-sample"><summary>Ver un ejemplo de este PDF</summary><figure><a href="/images/muestras/personalizado-historia.webp" target="_blank" rel="noopener"><img src="/images/muestras/personalizado-historia.webp" alt="Página de muestra con datos ficticios" width="494" height="699" loading="lazy"></a><figcaption>Página 3</figcaption></figure></details>
       <p class="help">Añadid entre uno y doce recuerdos. El álbum los ordenará por fecha.</p>
       <div id="recuerdos"></div>
       <button type="button" class="btn btn-secondary" id="anadir">Añadir recuerdo</button>
     </fieldset>
     <fieldset data-form="calendario-personalizado" disabled hidden><legend>Vuestro calendario</legend>
+      <details class="personal-sample"><summary>Ver un ejemplo de este PDF</summary><figure><a href="/images/muestras/personalizado-calendario.webp" target="_blank" rel="noopener"><img src="/images/muestras/personalizado-calendario.webp" alt="Página de muestra con datos ficticios" width="494" height="699" loading="lazy"></a><figcaption>Página 3</figcaption></figure></details>
       <div class="form-field"><label for="anio">Año</label><input id="anio" type="number" min="1900" max="2100" step="1" required></div>
       <p class="help">Podéis escribir un plan o mensaje para cada mes. Si indicáis una fecha especial, el calendario resaltará ese día.</p>
       <div id="notasMes" class="meses"></div>
     </fieldset>
     <fieldset data-form="juego-personalizado" disabled hidden><legend>Preguntas y retos para dos</legend>
+      <details class="personal-sample"><summary>Ver un ejemplo de este PDF</summary><figure><a href="/images/muestras/personalizado-juego.webp" target="_blank" rel="noopener"><img src="/images/muestras/personalizado-juego.webp" alt="Página de muestra con datos ficticios" width="494" height="699" loading="lazy"></a><figcaption>Página 3</figcaption></figure></details>
       <div class="form-field"><label for="lugar">Un lugar importante para vosotros</label><input id="lugar" maxlength="75" required></div>
       <p class="help">El juego incluye 24 tarjetas. Usaremos los nombres, el lugar y la fecha especial que nos indiquéis.</p>
     </fieldset>

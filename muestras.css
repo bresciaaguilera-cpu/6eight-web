@@ -1,0 +1,9 @@
+.product-samples{width:min(100% - 40px,800px);margin:36px auto 50px}
+.product-samples p{margin:8px 0 20px}
+.sample-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:18px}
+.product-samples figure,.personal-sample figure{margin:0}
+.product-samples img,.personal-sample img{display:block;width:100%;height:auto;border:1px solid #d7c9b5}
+.product-samples figcaption,.personal-sample figcaption{font-size:.875rem;margin-top:5px}
+.personal-sample{margin-bottom:18px}
+.personal-sample summary{cursor:pointer;font-weight:600}
+.personal-sample figure{max-width:300px;margin-top:8px}

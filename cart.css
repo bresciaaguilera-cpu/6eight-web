@@ -31,3 +31,6 @@
 .cart-toast{position:fixed;right:18px;bottom:72px;background:#fff;color:#22362B;padding:9px 12px;z-index:980;box-shadow:0 7px 20px rgba(0,0,0,.12);font-size:.8rem;opacity:0;transform:translateY(8px);transition:.2s}.cart-toast.show{opacity:1;transform:none}
 
 .cart-continue{display:block;text-align:center;margin-top:8px;padding:11px;border:1px solid #22362B;color:#22362B;border-radius:2px;font-weight:800;text-decoration:none}
+
+#cartFab[hidden]{display:none}
+body:has(#cartFab:not([hidden])) footer{padding-bottom:86px}
