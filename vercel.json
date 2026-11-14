@@ -19,6 +19,8 @@
     }
   ],
   "functions": {
+    "api/create-checkout-session.js": { "maxDuration": 60 },
+    "api/get-download.js": { "maxDuration": 60 },
     "api/personalized-checkout.js": {
       "maxDuration": 60
     },

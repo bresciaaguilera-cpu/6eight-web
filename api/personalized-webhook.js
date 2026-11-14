@@ -41,7 +41,7 @@ module.exports = async function handler(req, res) {
 
   try {
     if (event.type === "checkout.session.expired" && session.payment_status === "unpaid") {
-      await del(pdfPath(order));
+      await del(order.products.map(product => pdfPath({ ...order, ...product })));
     }
     if (event.type === "checkout.session.completed" && session.mode === "payment" &&
         session.payment_status === "paid") {
@@ -63,8 +63,8 @@ module.exports = async function handler(req, res) {
         body: JSON.stringify({
           from: process.env.PERSONALIZED_EMAIL_FROM,
           to: [email],
-          subject: "Vuestro PDF personalizado de 68 Inspired está listo",
-          text: `Hola,\n\nYa podéis descargar vuestro pedido de ${order.nombre}:\n${url}\n\nGuardad el PDF en vuestro dispositivo. El enlace estará disponible durante ${retentionDays} días.\n\n68 Inspired`,
+          subject: "Vuestro pedido de 68 Inspired está listo",
+          text: `Hola,\n\nYa podéis descargar todos los PDF de vuestro pedido:\n${url}\n\nGuardad el PDF en vuestro dispositivo. El enlace estará disponible durante ${retentionDays} días.\n\n68 Inspired`,
         }),
         signal: AbortSignal.timeout(8000),
       });

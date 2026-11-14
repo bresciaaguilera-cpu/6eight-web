@@ -56,7 +56,7 @@ test("catalogue has the same twelve public items and prices", () => {
   assert.equal(new Set(Object.values(PRODUCTS).map(p => p.pdfPathname)).size, 14);
 });
 
-test("checkout checks all order files, keeps the welcome gift and rejects live keys", async () => {
+test("checkout checks all order files, marks the welcome gift for verification and rejects live keys", async () => {
   process.env.STRIPE_SECRET_KEY = "sk_live_fixture";
   const order = { method: "POST", body: { productIds: ["calendario-12-citas"], welcomeGift: true } };
   assert.equal((await request(checkout, order)).status, 503);
@@ -69,9 +69,10 @@ test("checkout checks all order files, keeps the welcome gift and rejects live k
   calls.length = 0;
   const result = await request(checkout, order);
   assert.equal(result.status, 200);
-  assert.deepEqual(calls, [["calendario-12-citas.pdf", undefined], ["products/12-mini-citas.pdf", undefined]]);
+  assert.deepEqual(calls, [["calendario-12-citas.pdf", undefined]]);
   assert.equal(checkoutInput.line_items[0].price_data.unit_amount, 1490);
-  assert.equal(checkoutInput.metadata.deliverIds, "calendario-12-citas,12-mini-citas");
+  assert.equal(checkoutInput.metadata.deliverIds, "calendario-12-citas");
+  assert.equal(checkoutInput.metadata.welcomeEligible, "1");
   assert.equal((await request(checkout, { method: "POST", body: { productIds: ["12-mini-citas"] } })).status, 400);
 });
 

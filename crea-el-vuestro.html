@@ -112,6 +112,7 @@
   @media(max-width:560px){.pedido .meses{grid-template-columns:1fr;}}
 </style>
 <link rel="stylesheet" href="/brand68.css">
+<link rel="stylesheet" href="/cart.css">
 </head>
 <body>
 <header><div class="header-inner"><a href="/" class="logo"><span class="six">68</span>INSPIRED</a>
@@ -122,20 +123,20 @@
   <form class="pedido" id="pedido">
     <fieldset><legend>Elegid vuestro PDF</legend>
     <div class="producto-grid" id="productoGrid">
-      <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Inspired by 68 — Edición personalizada" data-precio="24.90" data-id="inspired-by-68-personalizado">
+      <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Inspired by 68 — Edición personalizada" data-precio="19.90" data-id="inspired-by-68-personalizado">
         <h3>Inspired by 68 personalizado</h3>
         <p>Las 68 paradas con portada y dedicatoria propias.</p>
-        <span class="precio">24,90 €</span>
+        <span class="precio">19,90 €</span>
       </button>
       <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Nuestra historia (libro digital)" data-precio="19.90" data-id="nuestra-historia">
         <h3>Nuestra historia</h3>
-        <p>Línea del tiempo de vuestra relación, con fotos y anécdotas.</p>
+        <p>Línea del tiempo de vuestra relación, con lugares y anécdotas.</p>
         <span class="precio">19,90 €</span>
       </button>
-      <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Calendario personalizado con fotos" data-precio="22.90" data-id="calendario-personalizado">
-        <h3>Calendario con fotos</h3>
+      <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Calendario personalizado" data-precio="17.90" data-id="calendario-personalizado">
+        <h3>Calendario personalizado</h3>
         <p>12 meses, 12 recuerdos elegidos por vosotros.</p>
-        <span class="precio">22,90 €</span>
+        <span class="precio">17,90 €</span>
       </button>
       <button class="producto-opcion" type="button" aria-pressed="false" data-nombre="Juego personalizado con nombres" data-precio="1.00" data-id="juego-personalizado">
         <h3>Juego personalizado</h3>
@@ -152,8 +153,6 @@
         <div class="form-field"><label for="nombre2">Segundo nombre</label><input id="nombre2" maxlength="42" required></div>
       </div>
       <div class="form-field"><label for="fecha">Fecha especial</label><input id="fecha" type="date"></div>
-      <div class="form-field"><label for="portada">Foto de portada (opcional)</label><input id="portada" type="file" accept="image/jpeg,image/png,image/webp"></div>
-      <p class="help">Admitimos JPG, PNG y WebP. Las imágenes se ajustan al marco de cada página.</p>
     </fieldset>
     <fieldset data-form="inspired-by-68-personalizado" disabled hidden><legend>Dedicatoria</legend>
       <div class="form-field"><label for="dedicatoria">El texto para vuestra dedicatoria</label><textarea id="dedicatoria" maxlength="650" required rows="5"></textarea></div>
@@ -163,17 +162,17 @@
       <div id="recuerdos"></div>
       <button type="button" class="btn btn-secondary" id="anadir">Añadir recuerdo</button>
     </fieldset>
-    <fieldset data-form="calendario-personalizado" disabled hidden><legend>Las fotos de vuestro calendario</legend>
+    <fieldset data-form="calendario-personalizado" disabled hidden><legend>Vuestro calendario</legend>
       <div class="form-field"><label for="anio">Año</label><input id="anio" type="number" min="1900" max="2100" step="1" required></div>
-      <p class="help">Elegid una foto por mes. Si indicáis una fecha especial, el calendario resaltará ese día.</p>
-      <div id="fotosMes" class="meses"></div>
+      <p class="help">Podéis escribir un plan o mensaje para cada mes. Si indicáis una fecha especial, el calendario resaltará ese día.</p>
+      <div id="notasMes" class="meses"></div>
     </fieldset>
     <fieldset data-form="juego-personalizado" disabled hidden><legend>Preguntas y retos para dos</legend>
       <div class="form-field"><label for="lugar">Un lugar importante para vosotros</label><input id="lugar" maxlength="75" required></div>
       <p class="help">El juego incluye 24 tarjetas. Usaremos los nombres, el lugar y la fecha especial que nos indiquéis.</p>
     </fieldset>
-    <label class="consent"><input id="permiso" type="checkbox" required><span>Tengo permiso para usar los datos y las fotos de este pedido. <a href="/privacidad">Ver privacidad</a>.</span></label>
-    <div class="nav-buttons"><button type="submit" class="btn btn-primary" id="pagar" disabled>Continuar al pago</button></div>
+    <label class="consent"><input id="permiso" type="checkbox" required><span>Tengo permiso para usar los datos de este pedido. <a href="/privacidad">Ver privacidad</a>.</span></label>
+    <div class="nav-buttons"><button type="submit" class="btn btn-primary" id="pagar" disabled>Añadir a la cesta</button></div>
     <p id="estado" role="status" aria-live="polite">Comprobando si los pedidos están disponibles…</p>
   </form>
 </div>
@@ -181,10 +180,12 @@
   <article><header><h3></h3><button type="button" class="btn btn-secondary quitar">Quitar</button></header>
     <div class="form-field"><label>Título del recuerdo<input data-field="title" maxlength="75" required></label></div>
     <div class="form-field"><label>Fecha<input data-field="date" type="date" required></label></div>
+    <div class="form-field"><label>Lugar<input data-field="place" maxlength="75"></label></div>
     <div class="form-field"><label>Qué pasó<textarea data-field="note" rows="3" maxlength="550" required></textarea></label></div>
-    <div class="form-field"><label>Foto (opcional)<input data-field="image" type="file" accept="image/jpeg,image/png,image/webp"></label></div>
   </article>
 </template>
+<script src="/shop-catalog.js"></script>
+<script src="/cart.js"></script>
 <script src="/pedido-personalizado.js"></script>
 </body>
 </html>

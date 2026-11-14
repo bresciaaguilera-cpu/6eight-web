@@ -28,7 +28,7 @@ const mockBlob = {
     return {};
   },
   async del(path) {
-    blobs.delete(path);
+    for (const item of [path].flat()) blobs.delete(item);
   },
 };
 class MockStripe {
@@ -42,6 +42,7 @@ class MockStripe {
       sessions.set(id, s);
       return s;
     },
+    async *list() { yield* sessions.values(); },
     async retrieve(id) { return sessions.get(id); },
   } };
 }
@@ -52,11 +53,12 @@ Module._load = function (name, parent, ...args) {
   if (name === "stripe") return MockStripe;
   if (name === "../lib/private-pdfs") return {
     DOWNLOAD_TTL_MS: 600,
-    findPdf: async (p, include) => include && blobs.has(p.pdfPathname) ? { nombre: p.nombre, url: "https://private.invalid/signed" } : null,
+    findPdf: async (p, include) => (!p.pdfPathname.startsWith("personalized-orders/") || (include && blobs.has(p.pdfPathname))) ? { nombre: p.nombre, url: "https://private.invalid/signed" } : null,
   };
   return originalLoad.call(this, name, parent, ...args);
 };
-const checkout = require("../api/personalized-checkout");
+const availability = require("../api/personalized-checkout");
+const checkout = require("../api/create-checkout-session");
 const webhook = require("../api/personalized-webhook");
 const download = require("../api/get-download");
 Module._load = originalLoad;
@@ -101,28 +103,26 @@ test("prepares all four PDFs, keeps downloads private until payment and sends a 
   const book = await PDFDocument.create();
   for (let i = 0; i < 87; i++) book.addPage();
   base = await book.save();
-  const jpeg = Buffer.from("/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAQAAwDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAX/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAgT/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCsAjF//9k=", "base64").toString("base64");
-  const input = { a: "Lucía", b: "Mateo", date: "2020-02-29", photosPermission: true };
-  const make = body => request(checkout, { method: "POST", body: { ...input, ...body } });
+  const input = { a: "Lucía", b: "Mateo", date: "2020-02-29", permission: true };
+  const make = body => request(checkout, { method: "POST", body: { productIds: [], personalizations: [{ ...input, ...body }] } });
   process.env.PERSONALIZED_ORDERS_ENABLED = "false";
-  assert.equal((await request(checkout, { method: "GET" })).data.ready, false);
+  assert.equal((await request(availability, { method: "GET" })).data.ready, false);
   assert.equal((await make({ productId: "juego-personalizado" })).code, 503);
   process.env.PERSONALIZED_ORDERS_ENABLED = "true";
-  assert.equal((await make({ productId: "juego-personalizado", photosPermission: false })).code, 400);
-  assert.equal((await make({ productId: "juego-personalizado", cover: "ZmFrZQ==" })).code, 400);
+  assert.equal((await make({ productId: "juego-personalizado", permission: false })).code, 400);
 
   const cases = [
-    ["inspired-by-68-personalizado", 2490, 88, { dedication: "Para los dos" }],
-    ["nuestra-historia", 1990, 3, { events: [{ title: "El viaje", date: "2020-05-05", note: "El recuerdo", image: jpeg }] }],
-    ["calendario-personalizado", 2290, 13, { year: 2028, images: Array(12).fill(jpeg) }],
-    ["juego-personalizado", 1790, 8, { place: "Málaga" }],
+    ["inspired-by-68-personalizado", 1990, 88, { dedication: "Para los dos" }],
+    ["nuestra-historia", 1990, 3, { events: [{ title: "El viaje", date: "2020-05-05", note: "El recuerdo", place: "Málaga" }] }],
+    ["calendario-personalizado", 1790, 13, { year: 2028, notes: Array(12).fill("Un paseo juntos") }],
+    ["juego-personalizado", 100, 8, { place: "Málaga" }],
   ];
   for (const [productId, price, pages, fields] of cases) {
     const result = await make({ productId, price: 1, ...fields });
     assert.equal(result.code, 200, JSON.stringify(result.data));
     const session = sessions.get(result.data.url.split("/").at(-1));
     assert.equal(session.line_items[0].price_data.unit_amount, price);
-    assert.deepEqual(Object.keys(session.metadata).sort(), ["personalizedAccess", "personalizedOrder", "personalizedProduct"]);
+    assert.deepEqual(Object.keys(session.metadata).sort(), ["deliverIds", "personalizedAccess", "personalizedOrder", "personalizedProducts", "welcomeEligible"]);
     const pdf = "personalized-orders/" + session.metadata.personalizedOrder + "/" + productId + ".pdf";
     assert.equal((await PDFDocument.load(blobs.get(pdf))).getPageCount(), pages);
     const access = session.metadata.personalizedAccess;
@@ -141,6 +141,22 @@ test("prepares all four PDFs, keeps downloads private until payment and sends a 
     session.created -= 31 * 86400;
     assert.equal((await open(access)).code, 410);
   }
+  const mixed = await request(checkout, { method: "POST", body: {
+    productIds: ["calendario-12-citas"], personalizations: [
+      { ...input, productId: "juego-personalizado", place: "Málaga" },
+      { ...input, productId: "calendario-personalizado", year: 2028, notes: Array(12).fill("") },
+    ],
+  } });
+  assert.equal(mixed.code, 200, JSON.stringify(mixed.data));
+  const combined = sessions.get(mixed.data.url.split("/").at(-1));
+  assert.equal(combined.line_items.length, 3);
+  combined.payment_status = "paid";
+  combined.customer_details.email = "first@example.com";
+  const downloads = await request(download, { method: "GET", query: {
+    session_id: combined.id, access: combined.metadata.personalizedAccess,
+  } });
+  assert.equal(downloads.data.descargas.length, 4);
+  assert.equal(downloads.data.descargas.at(-1).nombre, "12 mini citas");
   const unpaid = await make({ productId: "juego-personalizado", place: "Málaga" });
   const session = sessions.get(unpaid.data.url.split("/").at(-1));
   const key = "personalized-orders/" + session.metadata.personalizedOrder + "/juego-personalizado.pdf";

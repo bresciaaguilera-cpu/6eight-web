@@ -170,7 +170,10 @@
       });
       try {
         localStorage.setItem('68inspired_has_order','1');
-        if (!datos.personalizado) localStorage.removeItem('68inspired_cart_v2');
+        if (!datos.personalizado || datos.cesta) {
+          localStorage.removeItem('68inspired_cart_v2');
+          sessionStorage.removeItem('68inspired_personalizations');
+        }
       } catch {}
       mostrarEstado('estadoConfirmado');
     } catch (err) {
