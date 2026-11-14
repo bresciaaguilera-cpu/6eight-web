@@ -70,17 +70,17 @@ test("checkout checks all order files, marks the welcome gift for verification a
   const result = await request(checkout, order);
   assert.equal(result.status, 200);
   assert.deepEqual(calls, [["calendario-12-citas.pdf", undefined]]);
-  assert.equal(checkoutInput.line_items[0].price_data.unit_amount, 1490);
+  assert.equal(checkoutInput.line_items[0].price_data.unit_amount, 10);
   assert.equal(checkoutInput.metadata.deliverIds, "calendario-12-citas");
   assert.equal(checkoutInput.metadata.welcomeEligible, "1");
   assert.equal((await request(checkout, { method: "POST", body: { productIds: ["12-mini-citas"] } })).status, 400);
 });
 
-test("discounts and gifts use the pre-discount core subtotal", async () => {
+test("temporary prices apply to all five checkout items", async () => {
   const productIds = ["calendario-52-citas", "calendario-12-citas", "kit-navidad-pareja", "kit-noche-cita-casa", "50-preguntas-picantes"];
   const result = await request(checkout, { method: "POST", body: { productIds } });
   assert.equal(result.status, 200);
-  assert.equal(checkoutInput.line_items.reduce((sum, line) => sum + line.price_data.unit_amount, 0), 6460);
+  assert.equal(checkoutInput.line_items.reduce((sum, line) => sum + line.price_data.unit_amount, 0), 50);
   assert.equal(checkoutInput.metadata.deliverIds.split(",").at(-1), "50-preguntas-picantes");
 });
 
@@ -114,7 +114,7 @@ test("production requires a live key and keeps the same order validation", async
   process.env.STRIPE_SECRET_KEY = "sk_live_fixture";
   unavailable.clear();
   assert.equal((await request(checkout, order)).status, 200);
-  assert.equal(checkoutInput.line_items[0].price_data.unit_amount, 1490);
+  assert.equal(checkoutInput.line_items[0].price_data.unit_amount, 10);
   delete process.env.VERCEL_ENV;
 });
 

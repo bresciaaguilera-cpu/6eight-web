@@ -1,10 +1,10 @@
 
 (()=>{const KEY='68inspired_cart_v2';
 const C={...window.ShopCatalog,
-'inspired-by-68-personalizado':{n:'Inspired by 68 personalizado',p:1990,core:true,personal:true},
-'nuestra-historia':{n:'Nuestra historia',p:1990,core:true,personal:true},
-'calendario-personalizado':{n:'Calendario personalizado',p:1790,core:true,personal:true},
-'juego-personalizado':{n:'Juego personalizado',p:1790,core:true,personal:true}};
+'inspired-by-68-personalizado':{n:'Inspired by 68 personalizado',p:10,core:true,personal:true},
+'nuestra-historia':{n:'Nuestra historia',p:10,core:true,personal:true},
+'calendario-personalizado':{n:'Calendario personalizado',p:10,core:true,personal:true},
+'juego-personalizado':{n:'Juego personalizado',p:10,core:true,personal:true}};
 const personalKey='68inspired_personalizations';
 const custom=()=>JSON.parse(sessionStorage.getItem(personalKey)||'{}');
 const money=c=>(c/100).toLocaleString('es-ES',{style:'currency',currency:'EUR'});
@@ -17,7 +17,7 @@ let overlay,drawer,bump,fab;
 function inject(){if(document.getElementById('cartFab'))return;document.body.insertAdjacentHTML('beforeend',`
 <button id="cartFab" aria-label="Abrir cesta">Cesta <span class="count">0</span></button>
 <div id="cartOverlay"></div><aside id="cartDrawer" aria-label="Cesta"><div class="cart-head"><h2>Vuestra cesta</h2><button class="cart-close" aria-label="Cerrar">×</button></div><div class="cart-body"></div><div class="cart-foot"></div></aside>
-<div id="bumpModal"><div class="bump-card"><span class="bump-tag">Antes de pagar</span><h3>¿Le ponemos un poco de chispa?</h3><p>Añade <strong>50 preguntas picantes para dos</strong>. Es un PDF exclusivo de esta cesta y, si llegáis a 50 € en productos, os sale gratis automáticamente.</p><div class="bump-price">Ahora por 4,95 €</div><div class="bump-actions"><button class="bump-yes">Sí, añadirlo</button><button class="bump-no">No, seguir al pago</button></div></div></div>
+<div id="bumpModal"><div class="bump-card"><span class="bump-tag">Antes de pagar</span><h3>¿Le ponemos un poco de chispa?</h3><p>Añade <strong>50 preguntas picantes para dos</strong>. Es un PDF exclusivo de esta cesta y, si llegáis a 50 € en productos, os sale gratis automáticamente.</p><div class="bump-price">Ahora por 0,10 €</div><div class="bump-actions"><button class="bump-yes">Sí, añadirlo</button><button class="bump-no">No, seguir al pago</button></div></div></div>
 <div class="cart-toast" id="cartToast">Añadido a la cesta</div>`);
 fab=document.getElementById('cartFab');overlay=document.getElementById('cartOverlay');drawer=document.getElementById('cartDrawer');bump=document.getElementById('bumpModal');
 fab.onclick=()=>open(); overlay.onclick=close; drawer.querySelector('.cart-close').onclick=close; bump.querySelector('.bump-no').onclick=()=>{bump.classList.remove('open');goCheckout()}; bump.querySelector('.bump-yes').onclick=()=>{const a=get();if(!a.includes('50-preguntas-picantes'))a.push('50-preguntas-picantes');set(a);bump.classList.remove('open');goCheckout()};
