@@ -83,6 +83,9 @@
   #mobileMenu.open{display:flex;}
   #mobileMenu a{padding:12px 0; font-size:1.05rem; border-bottom:1px solid rgba(46,48,45,.08);}
 
+  /* Leave room for the sticky header when following section links. */
+  html{scroll-padding-top:var(--anchor-offset, 100px);}
+
   /* ---------- SECTION SPACING ---------- */
   section{padding:64px 0;}
   @media(min-width:860px){ section{padding:100px 0;} }
@@ -301,11 +304,10 @@
   <div class="header-inner wrap">
     <a href="/" class="logo"><span class="six">68</span>INSPIRED</a>
     <nav class="main-nav">
+      <a href="#historia">Por qué 68</a>
+      <a href="#jugar">Probar gratis</a>
       <a href="/tienda">Tienda</a>
       <a href="#producto">Inspired by 68</a>
-      <a href="#personalizados">Personalizados</a>
-      <a href="#jugar">Probar gratis</a>
-      <a href="#historia">Por qué 68</a>
       <a href="/preguntas-para-parejas">Ideas</a>
     </nav>
     <div class="header-icons">
@@ -317,11 +319,10 @@
     </div>
   </div>
   <div id="mobileMenu">
+    <a href="#historia">Por qué 68</a>
+    <a href="#jugar">Probar gratis</a>
     <a href="/tienda">Tienda</a>
     <a href="#producto">Inspired by 68</a>
-    <a href="#personalizados">Personalizados</a>
-    <a href="#jugar">Probar gratis</a>
-    <a href="#historia">Por qué 68</a>
     <a href="/preguntas-para-parejas">Ideas</a>
   </div>
 </header>
@@ -331,7 +332,7 @@
   <div class="wrap hero-v2-grid">
     <div>
       <div class="hero-kicker">Una historia detrás. Muchas por delante.</div>
-      <h1>El 68 empezó con él. Ahora empieza vuestra ruta.</h1>
+      <h1>Él empezó la ruta con el 68. Ahora la ruta es vuestra.</h1>
       <p>Juegos, experiencias y descargables para salir del piloto automático, volver a sorprenderos y crear recuerdos juntos.</p>
       <div class="btn-row" style="margin-top:26px">
         <a href="#jugar" class="btn btn-primary">Probar algo gratis</a>
@@ -524,6 +525,12 @@
 <script>
   const menuBtn = document.getElementById('menuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
+  const headerBar = document.querySelector('.header-inner');
+  const updateAnchorOffset = () => {
+    document.documentElement.style.setProperty('--anchor-offset', `${headerBar.offsetHeight + 12}px`);
+  };
+  updateAnchorOffset();
+  new ResizeObserver(updateAnchorOffset).observe(headerBar);
   menuBtn.addEventListener('click', () => {
     const open = mobileMenu.classList.toggle('open');
     menuBtn.setAttribute('aria-expanded', open);
