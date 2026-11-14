@@ -115,7 +115,7 @@ test("prepares all four PDFs, keeps downloads private until payment and sends a 
     ["inspired-by-68-personalizado", 1990, 88, { dedication: "Para los dos" }],
     ["nuestra-historia", 1990, 3, { events: [{ title: "El viaje", date: "2020-05-05", note: "El recuerdo", place: "Málaga" }] }],
     ["calendario-personalizado", 1790, 13, { year: 2028, notes: Array(12).fill("Un paseo juntos") }],
-    ["juego-personalizado", 100, 8, { place: "Málaga" }],
+    ["juego-personalizado", 1790, 8, { place: "Málaga" }],
   ];
   for (const [productId, price, pages, fields] of cases) {
     const result = await make({ productId, price: 1, ...fields });
@@ -155,7 +155,7 @@ test("prepares all four PDFs, keeps downloads private until payment and sends a 
   const downloads = await request(download, { method: "GET", query: {
     session_id: combined.id, access: combined.metadata.personalizedAccess,
   } });
-  assert.equal(downloads.data.descargas.length, 4);
+  assert.equal(downloads.data.descargas.length, 5);
   assert.equal(downloads.data.descargas.at(-1).nombre, "12 mini citas");
   const unpaid = await make({ productId: "juego-personalizado", place: "Málaga" });
   const session = sessions.get(unpaid.data.url.split("/").at(-1));
