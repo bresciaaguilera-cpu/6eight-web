@@ -105,7 +105,7 @@ byId("pedido").addEventListener("submit", event => {
   if (!ready) return;
   try {
     window.Cart68.addPersonalized(readOrder(selected.dataset.id));
-    setStatus("Añadido a la cesta. Podéis seguir añadiendo productos o ir al pago.");
+    window.location.assign("/tienda");
   } catch {
     setStatus("No se ha podido guardar la personalización en este navegador.", true);
   }

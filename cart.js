@@ -26,7 +26,7 @@ render();}
 function open(){drawer.classList.add('open');overlay.classList.add('open')}
 function close(){drawer.classList.remove('open');overlay.classList.remove('open')}
 function toast(){const t=document.getElementById('cartToast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1400)}
-function add(id){if(!Object.hasOwn(C,id))return;const a=get();if(!a.includes(id))a.push(id);set(a);toast();open()}
+function add(id,showDrawer=true){if(!Object.hasOwn(C,id))return;const a=get();if(!a.includes(id))a.push(id);set(a);if(showDrawer){toast();open()}}
 function remove(id){
  const remaining=get().filter(x=>x!==id);
  if(C[id]?.personal){
@@ -42,13 +42,19 @@ if(!a.length){body.innerHTML='<div class="cart-empty"><strong>La cesta está vac
 const rc=rewardCopy(t);let gifts='';if(t.r.spicy)gifts+='<div class="cart-gift"><span>🔥 50 preguntas picantes</span><strong>GRATIS</strong></div>';
 body.innerHTML=a.map(id=>`<div class="cart-item"><div><strong>${C[id].n}</strong><small>${id==='50-preguntas-picantes'&&t.r.spicy?'Regalo desbloqueado':money(C[id].p)}</small></div><button class="cart-remove" data-remove="${id}">Quitar</button></div>`).join('')+`<div class="cart-rewards"><h3>La ruta del 68</h3><div class="reward-progress"><i style="width:${Math.min(100,rc[1])}%"></i></div><div class="reward">🎁 Primer pedido · 12 mini citas GRATIS</div><div class="reward ${t.r.spicy?'unlocked':''}">50 € · 50 preguntas picantes gratis</div><div class="reward ${t.r.d68?'unlocked':''}">68 € · 10 % de descuento automático</div><p style="font-size:.78rem;margin:9px 0 0">${rc[0]}</p>${gifts}</div>`;
 body.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>remove(b.dataset.remove));
-foot.innerHTML=`<div class="cart-line"><span>Subtotal</span><span>${money(t.subtotal)}</span></div>${t.discount?'<div class="cart-line"><span>Descuento 68 (10 %)</span><span>-'+money(t.discount)+'</span></div>':''}<div class="cart-line total"><span>Total</span><span>${money(t.total)}</span></div><button class="cart-checkout">Continuar al pago</button><div class="cart-note">El regalo de bienvenida se comprueba con el correo del primer pedido. Los demás premios se activan automáticamente.</div>`;
-foot.querySelector('.cart-checkout').onclick=checkout;}
+foot.innerHTML=`<div class="cart-line"><span>Subtotal</span><span>${money(t.subtotal)}</span></div>${t.discount?'<div class="cart-line"><span>Descuento 68 (10 %)</span><span>-'+money(t.discount)+'</span></div>':''}<div class="cart-line total"><span>Total</span><span>${money(t.total)}</span></div><button class="cart-checkout">Continuar al pago</button><a class="cart-continue" href="/tienda">Seguir comprando</a><div class="cart-note">El regalo de bienvenida se comprueba con el correo del primer pedido. Los demás premios se activan automáticamente.</div>`;
+foot.querySelector('.cart-checkout').onclick=checkout;
+foot.querySelector('.cart-continue').onclick=event=>{
+ if(!/^\/tienda(?:\.html)?\/?$/.test(location.pathname))return;
+ event.preventDefault();
+ close();
+ fab.focus();
+};}
 function checkout(){const a=get(),t=totals(a);if(!t.b)return;if(t.b<5000&&!a.includes('50-preguntas-picantes')){bump.classList.add('open');return}goCheckout()}
 async function goCheckout(){const a=get();if(!a.length)return;const btn=drawer.querySelector('.cart-checkout');if(btn){btn.disabled=true;btn.textContent='Preparando pago…'}try{const r=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({productIds:a.filter(id=>!C[id].personal),personalizations:a.filter(id=>C[id].personal).map(id=>custom()[id])})});const d=await r.json();if(!r.ok||!d.url)throw new Error(d.error||'No se pudo iniciar el pago');location.href=d.url}catch(e){alert(e.message||'No se pudo iniciar el pago');if(btn){btn.disabled=false;btn.textContent='Continuar al pago'}}}
 function addPersonalized(order){
  if(!C[order.productId]?.personal)throw new Error('Producto inválido');
  sessionStorage.setItem(personalKey,JSON.stringify({...custom(),[order.productId]:order}));
- add(order.productId);
+ add(order.productId,false);
 }
 window.Cart68={add,addPersonalized,open,get};document.readyState==='loading'?document.addEventListener('DOMContentLoaded',inject):inject();})();
