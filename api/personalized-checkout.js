@@ -6,7 +6,7 @@ async function buildPdf(body, product) {
   const data = { product: product.product, a: body.a, b: body.b, date: body.date };
   if (product.product === "inspired") {
     data.dedication = body.dedication;
-    const base = await get("products/inspired-by-68.pdf", { access: "private" });
+    const base = await get("edicion-adviento-v2/inspired-by-68-edicion-personalizada.pdf", { access: "private" });
     if (!base?.stream) throw new Error("El libro base no está disponible.");
     data.book = await new Response(base.stream).arrayBuffer();
   }

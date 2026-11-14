@@ -18,7 +18,7 @@ const emails = [];
 let base;
 const mockBlob = {
   async get(path) {
-    const bytes = path === "products/inspired-by-68.pdf" ? base : blobs.get(path);
+    const bytes = path === "edicion-adviento-v2/inspired-by-68-edicion-personalizada.pdf" ? base : blobs.get(path);
     if (!bytes) return null;
     return { stream: new Response(bytes).body };
   },

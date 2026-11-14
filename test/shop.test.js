@@ -52,7 +52,7 @@ test("catalogue has the same twelve public items and prices", () => {
     assert.equal(item.p, PRODUCTS[id].precioCentimos);
     assert.equal(item.n, PRODUCTS[id].nombre);
   }
-  assert.equal(PRODUCTS["calendario-12-citas"].pdfPathname, "calendario-12-citas.pdf");
+  assert.equal(PRODUCTS["calendario-12-citas"].pdfPathname, "edicion-adviento-v2/calendario-12-citas.pdf");
   assert.equal(new Set(Object.values(PRODUCTS).map(p => p.pdfPathname)).size, 14);
 });
 
@@ -69,7 +69,7 @@ test("checkout checks all order files, marks the welcome gift for verification a
   calls.length = 0;
   const result = await request(checkout, order);
   assert.equal(result.status, 200);
-  assert.deepEqual(calls, [["calendario-12-citas.pdf", undefined]]);
+  assert.deepEqual(calls, [["edicion-adviento-v2/calendario-12-citas.pdf", undefined]]);
   assert.equal(checkoutInput.line_items[0].price_data.unit_amount, 10);
   assert.equal(checkoutInput.metadata.deliverIds, "calendario-12-citas");
   assert.equal(checkoutInput.metadata.welcomeEligible, "1");
