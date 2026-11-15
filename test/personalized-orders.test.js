@@ -112,9 +112,9 @@ test("prepares all four PDFs, keeps downloads private until payment and sends a 
   assert.equal((await make({ productId: "juego-personalizado", permission: false })).code, 400);
 
   const cases = [
-    ["inspired-by-68-personalizado", 1990, 88, { dedication: "Para los dos" }],
-    ["nuestra-historia", 1990, 3, { events: [{ title: "El viaje", date: "2020-05-05", note: "El recuerdo", place: "Málaga" }] }],
-    ["calendario-personalizado", 1790, 13, { year: 2028, notes: Array(12).fill("Un paseo juntos") }],
+    ["inspired-by-68-personalizado", 1490, 88, { dedication: "Para los dos" }],
+    ["nuestra-historia", 1290, 3, { events: [{ title: "El viaje", date: "2020-05-05", note: "El recuerdo", place: "Málaga" }] }],
+    ["calendario-personalizado", 1490, 13, { year: 2028, notes: Array(12).fill("Un paseo juntos") }],
     ["juego-personalizado", 1290, 8, { place: "Málaga" }],
   ];
   for (const [productId, price, pages, fields] of cases) {
