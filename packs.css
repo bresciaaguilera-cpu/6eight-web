@@ -4,3 +4,11 @@
 .pack-card{border:1px solid #d8c8b6;background:#f5eee1;padding:20px;color:#22362b}
 .pack-card p{margin:8px 0 14px}
 .pack-card .btn{display:inline-block;background:#22362b;color:#fff;padding:10px 14px;border:0;font-weight:700;cursor:pointer}
+
+#packs{scroll-margin-top:90px;padding-top:42px;padding-bottom:48px}
+.shop-packs-grid .pack-card{--pack-bg:#efe1cd;--pack-accent:#854523;position:relative;overflow:hidden;border:0;border-top:7px solid var(--pack-accent);border-radius:12px;background:var(--pack-bg);padding:24px;display:flex;flex-direction:column;box-shadow:0 5px 15px #22362b14}
+.shop-packs-grid .pack-card:nth-child(2){--pack-bg:#dfe9df;--pack-accent:#325540}
+.shop-packs-grid .pack-card:nth-child(3){--pack-bg:#f3dce2;--pack-accent:#813f54}
+.shop-packs-grid .pack-card h3{font-size:1.35rem;color:var(--pack-accent)}
+.shop-packs-grid .pack-card strong{display:block;font-size:1.55rem;color:var(--pack-accent);margin-bottom:4px}
+.shop-packs-grid .pack-card .btn{margin-top:auto;background:var(--pack-accent);border-radius:5px}
