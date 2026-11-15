@@ -163,4 +163,28 @@ test("prepares all four PDFs, keeps downloads private until payment and sends a 
   assert.equal((await notify(session, "checkout.session.expired")).code, 200);
   assert.equal(blobs.has(key), false);
   assert.equal(emails.length, 4);
+  for (const [productId, expectedFiles] of [["calendario-12-citas", 1], ["pack-citas", 2]]) {
+    const result = await request(checkout, { method: "POST", body: { productIds: [productId] } });
+    assert.equal(result.code, 200);
+    const standard = sessions.get(result.data.url.split("/").at(-1));
+    standard.customer_details.email = `${productId}@example.com`;
+    assert.equal((await notify(standard, "checkout.session.completed")).code, 200);
+    assert.equal(emails.some(email => email.key.endsWith(standard.id)), false);
+    standard.payment_status = "paid";
+    assert.equal((await notify(standard, "checkout.session.completed", false)).code, 400);
+    assert.equal((await notify(standard, "checkout.session.completed")).code, 200);
+    assert.equal((await notify(standard, "checkout.session.completed")).code, 200);
+    const sent = emails.filter(email => email.key.endsWith(standard.id));
+    assert.equal(sent.length, 1);
+    assert.deepEqual(sent[0].data.to, [standard.customer_details.email]);
+    const url = new URL(sent[0].data.text.match(/https:\/\/[^\s]+/)[0]);
+    assert.equal(url.pathname, "/success");
+    assert.equal(url.searchParams.has("access"), false);
+    const resultFromEmail = await request(download, {
+      method: "GET", query: Object.fromEntries(url.searchParams),
+    });
+    assert.equal(resultFromEmail.code, 200);
+    assert.equal(resultFromEmail.data.descargas.length, expectedFiles + 1);
+    assert.equal(resultFromEmail.data.descargas.at(-1).nombre, "12 mini citas");
+  }
 });
