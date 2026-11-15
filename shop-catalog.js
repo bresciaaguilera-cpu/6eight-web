@@ -62,7 +62,7 @@ window.ShopCatalog = {
   },
   "50-preguntas-picantes": {
     "n": "50 preguntas picantes",
-    "p": 790,
+    "p": 390,
     "core": false
   }
 };

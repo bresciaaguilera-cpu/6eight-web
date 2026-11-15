@@ -80,7 +80,7 @@ test("checkout totals include the optional questions PDF", async () => {
   const productIds = ["calendario-52-citas", "calendario-12-citas", "kit-navidad-pareja", "kit-noche-cita-casa", "50-preguntas-picantes"];
   const result = await request(checkout, { method: "POST", body: { productIds } });
   assert.equal(result.status, 200);
-  assert.equal(checkoutInput.line_items.reduce((sum, line) => sum + line.price_data.unit_amount, 0), 4650);
+  assert.equal(checkoutInput.line_items.reduce((sum, line) => sum + line.price_data.unit_amount, 0), 4250);
   assert.equal(checkoutInput.metadata.deliverIds.split(",").at(-1), "50-preguntas-picantes");
 });
 
