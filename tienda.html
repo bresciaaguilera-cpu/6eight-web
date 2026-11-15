@@ -494,7 +494,7 @@
     if (cat === 'todos') {
       const rank = product => {
         const featured = starterProducts.indexOf(product.id);
-        return featured < 0 ? 1000 + Math.round(Number(product.precio.replace(',', '.').split(' ')[0]) * 100) : featured;
+        return featured < 0 ? 1000 + Math.round(parseFloat(product.precio.replace(',', '.')) * 100) : featured;
       };
       lista.sort((a, b) => rank(a) - rank(b));
     }
