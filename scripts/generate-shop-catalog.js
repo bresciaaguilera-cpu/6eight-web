@@ -7,7 +7,8 @@ const catalogue = Object.fromEntries(Object.values(PRODUCTS)
   .map(product => [product.productId, {
     n: product.nombre,
     p: product.precioCentimos,
-    core: product.kind === "core",
+    core: product.kind !== "bump",
+    ...(product.includes && { includes: product.includes }),
   }]));
 
 fs.writeFileSync(path.join(__dirname, "../shop-catalog.js"),

@@ -18,7 +18,7 @@ async function main() {
     throw new Error("Usage: node scripts/upload-shop-pdfs.js --upload|--verify DIRECTORY");
   }
   const manifest = JSON.parse(readFileSync(path.join(directory, "manifest.json"), "utf8"));
-  const inputs = Object.values(PRODUCTS).map(product => {
+  const inputs = Object.values(PRODUCTS).filter(product => product.pdfPathname).map(product => {
     const pathname = product.pdfPathname;
     const item = manifest.find(entry => entry.productId === product.productId);
     if (!item || item.pathname !== pathname) throw new Error(`Ruta incorrecta en el manifiesto: ${pathname}`);

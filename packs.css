@@ -1,0 +1,6 @@
+.packs{padding-top:28px;padding-bottom:30px}
+.packs h2{margin-bottom:16px}
+.packs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:14px}
+.pack-card{border:1px solid #d8c8b6;background:#f5eee1;padding:20px;color:#22362b}
+.pack-card p{margin:8px 0 14px}
+.pack-card .btn{display:inline-block;background:#22362b;color:#fff;padding:10px 14px;border:0;font-weight:700;cursor:pointer}

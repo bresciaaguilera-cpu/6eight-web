@@ -64,5 +64,32 @@ window.ShopCatalog = {
     "n": "50 preguntas picantes",
     "p": 390,
     "core": false
+  },
+  "pack-citas": {
+    "n": "Pack Un año de citas",
+    "p": 2290,
+    "core": true,
+    "includes": [
+      "inspired-by-68",
+      "calendario-12-citas"
+    ]
+  },
+  "pack-navidad": {
+    "n": "Pack Navidad en pareja",
+    "p": 1590,
+    "core": true,
+    "includes": [
+      "calendario-adviento-parejas",
+      "kit-navidad-pareja"
+    ]
+  },
+  "pack-preguntas": {
+    "n": "Pack Preguntas para dos",
+    "p": 1290,
+    "core": true,
+    "includes": [
+      "juego-preguntas-parejas",
+      "50-preguntas-profundas"
+    ]
   }
 };

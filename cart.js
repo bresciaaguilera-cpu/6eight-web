@@ -26,7 +26,19 @@ render();}
 function open(){drawer.classList.add('open');overlay.classList.add('open')}
 function close(){drawer.classList.remove('open');overlay.classList.remove('open')}
 function toast(){const t=document.getElementById('cartToast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1400)}
-function add(id,showDrawer=true){if(!Object.hasOwn(C,id))return;const a=get();if(!a.includes(id))a.push(id);set(a);if(showDrawer){toast();open()}}
+function add(id, showDrawer = true) {
+ const item = C[id];
+ if (!item) return;
+ let items = get();
+ if (items.some(other => C[other].includes?.includes(id))) {
+  if (showDrawer) open();
+  return;
+ }
+ if (item.includes) items = items.filter(other => !item.includes.includes(other));
+ if (!items.includes(id)) items.push(id);
+ set(items);
+ if (showDrawer) { toast(); open(); }
+}
 function remove(id){
  const remaining=get().filter(x=>x!==id);
  if(C[id]?.personal){

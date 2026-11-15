@@ -47,13 +47,13 @@ test("catalogue has the same twelve public items and prices", () => {
   const ctx = { window: {} };
   vm.runInNewContext(readFileSync("shop-catalog.js", "utf8"), ctx);
   const { ShopCatalog } = ctx.window;
-  assert.equal(Object.values(ShopCatalog).filter(p => p.core).length, 12);
+  assert.equal(Object.values(ShopCatalog).filter(p => p.core && !p.includes).length, 12);
   for (const [id, item] of Object.entries(ShopCatalog)) {
     assert.equal(item.p, PRODUCTS[id].precioCentimos);
     assert.equal(item.n, PRODUCTS[id].nombre);
   }
   assert.equal(PRODUCTS["calendario-12-citas"].pdfPathname, "edicion-adviento-v2/calendario-12-citas.pdf");
-  assert.equal(new Set(Object.values(PRODUCTS).map(p => p.pdfPathname)).size, 14);
+  assert.equal(new Set(Object.values(PRODUCTS).filter(p => p.pdfPathname).map(p => p.pdfPathname)).size, 14);
 });
 
 test("checkout checks all order files, marks the welcome gift for verification and rejects live keys", async () => {
@@ -119,3 +119,14 @@ test("production requires a live key and keeps the same order validation", async
 });
 
 require.cache[require.resolve("stripe")].exports = Stripe;
+
+test("charges for a pack once and delivers both individual PDFs", async () => {
+  process.env.STRIPE_SECRET_KEY = "sk_test_fixture";
+  unavailable.clear();
+  const buy = productIds => request(checkout, { method: "POST", body: { productIds } });
+  assert.equal((await buy(["pack-citas"])).status, 200);
+  assert.equal(checkoutInput.line_items.length, 1);
+  assert.equal(checkoutInput.line_items[0].price_data.unit_amount, 2290);
+  assert.equal(checkoutInput.metadata.deliverIds, "inspired-by-68,calendario-12-citas");
+  assert.equal((await buy(["pack-citas", "inspired-by-68"])).status, 400);
+});

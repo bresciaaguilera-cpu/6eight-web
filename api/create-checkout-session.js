@@ -38,7 +38,7 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: "Revisad los productos de la cesta." });
   }
 
-  const core = products.filter(product => product.kind === "core");
+  const core = products.filter(product => product.kind === "core" || product.kind === "pack");
   if (!core.length && !custom.length) {
     return res.status(400).json({ error: "Añadid un producto de la tienda antes de continuar." });
   }
@@ -49,7 +49,10 @@ module.exports = async function handler(req, res) {
   const spicy = getProduct("50-preguntas-picantes");
   const buySpicy = subtotal < 5000 && products.includes(spicy);
   const paid = buySpicy ? [...core, spicy] : core;
-  const deliver = [...paid];
+  const deliver = paid.flatMap(product => product.includes ? product.includes.map(getProduct) : [product]);
+  if (new Set(deliver).size !== deliver.length) {
+    return res.status(400).json({ error: "La cesta repite un PDF incluido en un pack. Quitad el duplicado para continuar." });
+  }
   if (subtotal >= 5000) deliver.push(spicy);
 
   const order = custom.length ? newPersonalizedOrder(custom[0]) : null;
@@ -90,7 +93,7 @@ module.exports = async function handler(req, res) {
         price_data: {
           currency: "eur",
           product_data: { name: product.nombre },
-          unit_amount: discount && product.kind === "core"
+          unit_amount: discount && product.kind !== "bump"
             ? Math.round(product.precioCentimos * 0.9)
             : product.precioCentimos,
         },
