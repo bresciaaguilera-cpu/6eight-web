@@ -76,7 +76,7 @@ window.ShopCatalog = {
   },
   "pack-navidad": {
     "n": "Pack Navidad en pareja",
-    "p": 1590,
+    "p": 100,
     "core": true,
     "includes": [
       "calendario-adviento-parejas",

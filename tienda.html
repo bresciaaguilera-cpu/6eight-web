@@ -465,7 +465,7 @@
 
   productos.push(
     {cat:'packs', id:'pack-citas', nombre:'Un año de citas', desc:'Inspired by 68 + Calendario de 12 citas.', href:'#detalle-pack-citas', cover:'inspired-by-68', c1:'#22362B', c2:'#C9A57A', micro:'2 PDF · Ahorráis 3,90 €'},
-    {cat:'packs', id:'pack-navidad', nombre:'Navidad en pareja', desc:'Calendario de Adviento + Kit Navidad en pareja.', href:'#detalle-pack-navidad', cover:'calendario-adviento-parejas', c1:'#344738', c2:'#B87460', micro:'2 PDF · Ahorráis 3,90 €'},
+    {cat:'packs', id:'pack-navidad', nombre:'Navidad en pareja', desc:'Calendario de Adviento + Kit Navidad en pareja.', href:'#detalle-pack-navidad', cover:'calendario-adviento-parejas', c1:'#344738', c2:'#B87460', micro:'2 PDF · Precio de prueba'},
     {cat:'packs', id:'pack-preguntas', nombre:'Preguntas para dos', desc:'Juego de 100 preguntas + 50 preguntas profundas.', href:'#detalle-pack-preguntas', cover:'juego-preguntas-parejas', c1:'#574135', c2:'#C9A57A', micro:'2 PDF · Ahorráis 3,90 €'}
   );
 
@@ -525,7 +525,7 @@
               <span class="instant-note">Descarga tras el pago</span>
             </div>
             <div class="card-actions">
-              ${p.cat === 'packs' ? '<span class="view-link">Ahorráis 3,90 €</span>' : `<a class="view-link" href="${p.href}">Ver producto</a>`}
+              ${p.cat === 'packs' ? `<span class="view-link">${p.id === 'pack-navidad' ? 'Precio de prueba' : 'Ahorráis 3,90 €'}</span>` : `<a class="view-link" href="${p.href}">Ver producto</a>`}
               <button class="btn-mini" data-cart-add="${p.id}">Añadir a la cesta</button>
             </div>
           ` : `
