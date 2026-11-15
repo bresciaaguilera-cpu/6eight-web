@@ -93,3 +93,4 @@ window.ShopCatalog = {
     ]
   }
 };
+window.ChristmasOffer = {"pack":"pack-navidad","start":1794697200000,"christmas":1796079600000,"end":1798239600000,"gifts":["calendario-12-citas","calendario-52-citas","cuponera-experiencias","juego-preguntas-parejas","cuanto-me-conoces","kit-noche-cita-casa","bingo-pareja","kit-san-valentin","50-preguntas-profundas"]};

@@ -34,3 +34,5 @@
 
 #cartFab[hidden]{display:none}
 body:has(#cartFab:not([hidden])) footer{padding-bottom:86px}
+
+.christmas-gift select{display:block;width:100%;padding:9px;margin:8px 0;color:#22362b;background:white;border:1px solid #b87460}.gift-status{color:#854523;font-weight:600}

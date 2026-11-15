@@ -130,3 +130,19 @@ test("charges for a pack once and delivers both individual PDFs", async () => {
   assert.equal(checkoutInput.metadata.deliverIds, "inspired-by-68,calendario-12-citas");
   assert.equal((await buy(["pack-citas", "inspired-by-68"])).status, 400);
 });
+
+test("includes the seasonal gift at no charge and rejects ineligible selections", async t => {
+  t.mock.method(Date, "now", () => Date.parse("2026-11-27T13:00:00Z"));
+  process.env.STRIPE_SECRET_KEY = "sk_test_fixture";
+  unavailable.clear();
+  const buy = body => request(checkout, { method: "POST", body });
+  const productIds = ["pack-navidad"];
+  assert.equal((await buy({ productIds, christmasGift: "bingo-pareja" })).status, 200);
+  assert.deepEqual(checkoutInput.line_items.map(item => item.price_data.unit_amount), [1590]);
+  assert.equal(checkoutInput.metadata.deliverIds, "calendario-adviento-parejas,kit-navidad-pareja,bingo-pareja");
+  assert.equal((await buy({ productIds, christmasGift: "inspired-by-68" })).status, 400);
+  assert.equal((await buy({ productIds, christmasGift: "kit-navidad-pareja" })).status, 400);
+  assert.equal((await buy({ productIds: ["bingo-pareja"], christmasGift: "cuponera-experiencias" })).status, 400);
+  Date.now.mock.mockImplementation(() => Date.parse("2026-12-25T23:00:00Z"));
+  assert.equal((await buy({ productIds, christmasGift: "bingo-pareja" })).status, 400);
+});

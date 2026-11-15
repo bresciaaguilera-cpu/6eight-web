@@ -305,6 +305,16 @@
 .home-header #mobileMenu a{border-color:#f7efe233}
 .home-header :is(a,button):focus-visible{outline:2px solid #f2c6b4;outline-offset:4px}
 </style>
+<style>
+.christmas-campaign{padding-top:30px;padding-bottom:30px}
+.christmas-campaign[hidden]{display:none}
+.christmas-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,210px);align-items:center;gap:24px;background:#e8e9df;border-left:5px solid #b87460;padding:clamp(18px,4vw,42px)}
+.christmas-card h2{margin:8px 0;font-size:clamp(1.5rem,3vw,2.3rem)}
+.christmas-card p{margin-bottom:16px}
+.christmas-card img{width:100%;height:auto;border:1px solid #d8c8b6}
+.christmas-season{font-weight:700;color:#854523}
+@media(max-width:540px){.christmas-card{grid-template-columns:1fr}.christmas-card img{max-width:150px}}
+</style>
 </head>
 <body>
 
@@ -366,6 +376,18 @@
         <a href="/tienda">Empezar a jugar →</a>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="christmas-campaign" class="christmas-campaign wrap" hidden>
+  <div class="christmas-card">
+    <div>
+      <p class="christmas-season" data-season></p>
+      <h2>Esta Navidad, regalad tiempo juntos</h2>
+      <p>Calendario de Adviento y Kit Navidad en pareja por <strong>15,90 €</strong>. Elegid además un PDF de regalo en la cesta.</p>
+      <a class="btn btn-primary" href="/tienda#packs">Ver el Pack Navidad</a>
+    </div>
+    <img src="/images/muestras/calendario-adviento-parejas-4.webp" alt="Una página del Calendario de Adviento para parejas" width="494" height="699" loading="lazy">
   </div>
 </section>
 

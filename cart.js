@@ -5,6 +5,18 @@ const C={...window.ShopCatalog,
 'nuestra-historia':{n:'Nuestra historia',p:1290,core:true,personal:true},
 'calendario-personalizado':{n:'Calendario personalizado',p:1490,core:true,personal:true},
 'juego-personalizado':{n:'Juego personalizado',p:1290,core:true,personal:true}};
+const christmas = window.ChristmasOffer;
+const giftKey = '68inspired_christmas_gift';
+const giftOptions = items => {
+ const now = Date.now();
+ if (!christmas || now < christmas.start || now >= christmas.end || !items.includes(christmas.pack)) return [];
+ const covered = new Set(items.flatMap(id => [id, ...(C[id].includes || [])]));
+ return christmas.gifts.filter(id => !covered.has(id));
+};
+const chosenGift = items => {
+ const id = sessionStorage.getItem(giftKey);
+ return giftOptions(items).includes(id) ? id : undefined;
+};
 const personalKey='68inspired_personalizations';
 const custom=()=>JSON.parse(sessionStorage.getItem(personalKey)||'{}');
 const money=c=>(c/100).toLocaleString('es-ES',{style:'currency',currency:'EUR'});
@@ -41,6 +53,7 @@ function add(id, showDrawer = true) {
 }
 function remove(id){
  const remaining=get().filter(x=>x!==id);
+ if(id===christmas?.pack) sessionStorage.removeItem(giftKey);
  if(C[id]?.personal){
   const data=custom();
   delete data[id];
@@ -54,6 +67,19 @@ fab.hidden = !a.length && !document.body.hasAttribute('data-show-empty-cart');
 if(!a.length){body.innerHTML='<div class="cart-empty"><strong>La cesta está vacía.</strong><br>Una parada bonita puede empezar con un PDF.</div>';foot.innerHTML='';return}
 const rc=rewardCopy(t);let gifts='';if(t.r.spicy)gifts+='<div class="cart-gift"><span>🔥 50 preguntas picantes</span><strong>GRATIS</strong></div>';
 body.innerHTML=a.map(id=>`<div class="cart-item"><div><strong>${C[id].n}</strong><small>${id==='50-preguntas-picantes'&&t.r.spicy?'Regalo desbloqueado':money(C[id].p)}</small></div><button class="cart-remove" data-remove="${id}">Quitar</button></div>`).join('')+`<div class="cart-rewards"><h3>La ruta del 68</h3><div class="reward-progress"><i style="width:${Math.min(100,rc[1])}%"></i></div><div class="reward">🎁 Primer pedido · 12 mini citas GRATIS</div><div class="reward ${t.r.spicy?'unlocked':''}">50 € · 50 preguntas picantes gratis</div><div class="reward ${t.r.d68?'unlocked':''}">68 € · 10 % de descuento automático</div><p style="font-size:.78rem;margin:9px 0 0">${rc[0]}</p>${gifts}</div>`;
+const available = giftOptions(a);
+if (available.length) {
+ const selected = chosenGift(a);
+ body.insertAdjacentHTML('beforeend', `<div class="cart-rewards christmas-gift">
+   <label for="christmas-gift"><strong>Elige tu PDF de regalo</strong></label>
+   <select id="christmas-gift"><option value="">Selecciona un PDF</option>${available.map(id=>`<option value="${id}"${selected===id?' selected':''}>${C[id].n}</option>`).join('')}</select>
+   <small>Incluido con el Pack Navidad.</small><p role="status" class="gift-status"></p>
+ </div>`);
+ body.querySelector('#christmas-gift').onchange = event => {
+  sessionStorage.setItem(giftKey, event.target.value);
+  body.querySelector('.gift-status').textContent = '';
+ };
+}
 body.querySelectorAll('[data-remove]').forEach(b=>b.onclick=()=>remove(b.dataset.remove));
 foot.innerHTML=`<div class="cart-line"><span>Subtotal</span><span>${money(t.subtotal)}</span></div>${t.discount?'<div class="cart-line"><span>Descuento 68 (10 %)</span><span>-'+money(t.discount)+'</span></div>':''}<div class="cart-line total"><span>Total</span><span>${money(t.total)}</span></div><button class="cart-checkout">Continuar al pago</button><a class="cart-continue" href="/tienda">Seguir comprando</a><div class="cart-note">El regalo de bienvenida se comprueba con el correo del primer pedido. Los demás premios se activan automáticamente.</div>`;
 foot.querySelector('.cart-checkout').onclick=checkout;
@@ -63,11 +89,16 @@ foot.querySelector('.cart-continue').onclick=event=>{
  close();
  fab.focus();
 };}
-function checkout(){const a=get(),t=totals(a);if(!t.b)return;if(t.b<5000&&!a.includes('50-preguntas-picantes')){bump.classList.add('open');return}goCheckout()}
-async function goCheckout(){const a=get();if(!a.length)return;const btn=drawer.querySelector('.cart-checkout');if(btn){btn.disabled=true;btn.textContent='Preparando pago…'}try{const r=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({productIds:a.filter(id=>!C[id].personal),personalizations:a.filter(id=>C[id].personal).map(id=>custom()[id])})});const d=await r.json();if(!r.ok||!d.url)throw new Error(d.error||'No se pudo iniciar el pago');location.href=d.url}catch(e){alert(e.message||'No se pudo iniciar el pago');if(btn){btn.disabled=false;btn.textContent='Continuar al pago'}}}
+function checkout(){const a=get(),t=totals(a);if(!t.b)return;const gift=drawer.querySelector('#christmas-gift');if(gift&&!chosenGift(a)){drawer.querySelector('.gift-status').textContent='Elige el PDF que quieres llevarte de regalo.';gift.focus();return}if(t.b<5000&&!a.includes('50-preguntas-picantes')){bump.classList.add('open');return}goCheckout()}
+async function goCheckout(){const a=get();if(!a.length)return;const btn=drawer.querySelector('.cart-checkout');if(btn){btn.disabled=true;btn.textContent='Preparando pago…'}try{const r=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({christmasGift:chosenGift(a),productIds:a.filter(id=>!C[id].personal),personalizations:a.filter(id=>C[id].personal).map(id=>custom()[id])})});const d=await r.json();if(!r.ok||!d.url)throw new Error(d.error||'No se pudo iniciar el pago');location.href=d.url}catch(e){alert(e.message||'No se pudo iniciar el pago');if(btn){btn.disabled=false;btn.textContent='Continuar al pago'}}}
 function addPersonalized(order){
  if(!C[order.productId]?.personal)throw new Error('Producto inválido');
  sessionStorage.setItem(personalKey,JSON.stringify({...custom(),[order.productId]:order}));
  add(order.productId,false);
+}
+const campaign = document.getElementById('christmas-campaign');
+if(campaign && christmas && Date.now() >= christmas.start && Date.now() < christmas.end){
+ campaign.querySelector('[data-season]').textContent=Date.now() < christmas.christmas ? 'Especial Black Friday' : 'Especial Navidad';
+ campaign.hidden=false;
 }
 window.Cart68={add,addPersonalized,open,get};document.readyState==='loading'?document.addEventListener('DOMContentLoaded',inject):inject();})();

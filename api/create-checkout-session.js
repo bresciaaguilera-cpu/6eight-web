@@ -3,7 +3,7 @@ const { put, del } = require("@vercel/blob");
 const { buildPdf } = require("./personalized-checkout");
 const { getPersonalizedProduct, personalConfig, newPersonalizedOrder, pdfPath, siteUrl } =
   require("../lib/personalized-orders");
-const { getProduct } = require("../lib/products");
+const { getProduct, christmasOffer } = require("../lib/products");
 const { findPdf } = require("../lib/private-pdfs");
 
 module.exports = async function handler(req, res) {
@@ -54,6 +54,17 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: "La cesta repite un PDF incluido en un pack. Quitad el duplicado para continuar." });
   }
   if (subtotal >= 5000) deliver.push(spicy);
+
+  if (body.christmasGift !== undefined) {
+    const now = Date.now();
+    const gift = getProduct(body.christmasGift);
+    if (now < christmasOffer.start || now >= christmasOffer.end ||
+        !items.includes(christmasOffer.pack) || !gift ||
+        !christmasOffer.gifts.includes(gift.productId) || deliver.includes(gift)) {
+      return res.status(400).json({ error: "Ese PDF de regalo no está disponible para esta cesta." });
+    }
+    deliver.push(gift);
+  }
 
   const order = custom.length ? newPersonalizedOrder(custom[0]) : null;
   const stored = [];
