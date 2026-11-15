@@ -311,6 +311,7 @@
 <link rel="stylesheet" href="/cart.css">
 <link rel="stylesheet" href="/brand68.css">
 <link rel="stylesheet" href="/packs.css">
+<style>[hidden]{display:none!important}.filtro-chip[data-cat="packs"]:not(.active){border-color:#b87460;color:#854523}</style>
 </head>
 <body data-show-empty-cart>
 
@@ -343,6 +344,7 @@
     <button class="filtro-chip" data-cat="personalizado">Personalizados</button>
     <button class="filtro-chip" data-cat="juego">Juegos y calendarios</button>
     <button class="filtro-chip" data-cat="kit">Kits de regalo</button>
+    <button class="filtro-chip" data-cat="packs">Packs ahorro</button>
   </div>
 
   <div class="collection-head">
@@ -353,8 +355,9 @@
   </div>
 
   <div class="productos-grid full-grid" id="grid"></div>
+<section class="packs" hidden id="packs"><h2>Dos PDF para disfrutar juntos</h2><div class="packs-grid shop-packs-grid"><article class="pack-card"><h3>Un año de citas</h3><p>Inspired by 68 y Calendario de 12 citas</p><p><strong>22,90 €</strong> · Ahorráis 3,90 € frente a comprarlos por separado.</p><button class="btn btn-primary" type="button" data-cart-add="pack-citas">Añadir pack a la cesta</button></article><article class="pack-card"><h3>Navidad en pareja</h3><p>Calendario de Adviento y Kit Navidad en pareja</p><p><strong>15,90 €</strong> · Ahorráis 3,90 € frente a comprarlos por separado.</p><button class="btn btn-primary" type="button" data-cart-add="pack-navidad">Añadir pack a la cesta</button></article><article class="pack-card"><h3>Preguntas para dos</h3><p>Juego de 100 preguntas y 50 preguntas profundas</p><p><strong>12,90 €</strong> · Ahorráis 3,90 € frente a comprarlos por separado.</p><button class="btn btn-primary" type="button" data-cart-add="pack-preguntas">Añadir pack a la cesta</button></article></div></section>
 </main>
-<section class="wrap packs" id="packs"><h2>Dos PDF para disfrutar juntos</h2><div class="packs-grid shop-packs-grid"><article class="pack-card"><h3>Un año de citas</h3><p>Inspired by 68 y Calendario de 12 citas</p><p><strong>22,90 €</strong> · Ahorráis 3,90 € frente a comprarlos por separado.</p><button class="btn btn-primary" type="button" data-cart-add="pack-citas">Añadir pack a la cesta</button></article><article class="pack-card"><h3>Navidad en pareja</h3><p>Calendario de Adviento y Kit Navidad en pareja</p><p><strong>15,90 €</strong> · Ahorráis 3,90 € frente a comprarlos por separado.</p><button class="btn btn-primary" type="button" data-cart-add="pack-navidad">Añadir pack a la cesta</button></article><article class="pack-card"><h3>Preguntas para dos</h3><p>Juego de 100 preguntas y 50 preguntas profundas</p><p><strong>12,90 €</strong> · Ahorráis 3,90 € frente a comprarlos por separado.</p><button class="btn btn-primary" type="button" data-cart-add="pack-preguntas">Añadir pack a la cesta</button></article></div></section>
+
 
 
 <footer>
@@ -468,7 +471,15 @@
     return {insignia:'Producto insignia', personalizado:'Personalizado', juego:'Juego / calendario', kit:'Kit de regalo'}[cat] || '';
   }
 
+  const packs = document.getElementById('packs');
+  const collectionHead = document.querySelector('.collection-head');
+  const starterProducts = ['cuanto-me-conoces', 'calendario-12-citas', 'juego-preguntas-parejas'];
   function render(cat='todos'){
+    const showPacks = cat === 'packs';
+    packs.hidden = !showPacks;
+    collectionHead.hidden = showPacks;
+    grid.hidden = showPacks;
+    if (showPacks) return;
     const lista = (cat === 'todos' ? productos : productos.filter(p => p.cat === cat)).map(producto => {
       const id = producto.id || producto.href.slice(1);
       const item = window.ShopCatalog[id];
@@ -480,6 +491,13 @@
       };
     });
 
+    if (cat === 'todos') {
+      const rank = product => {
+        const featured = starterProducts.indexOf(product.id);
+        return featured < 0 ? 1000 + Math.round(Number(product.precio.replace(',', '.').split(' ')[0]) * 100) : featured;
+      };
+      lista.sort((a, b) => rank(a) - rank(b));
+    }
     grid.innerHTML = lista.map((p,i) => `
       <article class="producto-card collection-card ${p.disponible ? 'is-ready' : 'is-coming'}">
         <a href="${p.href}" class="collection-cover" style="--c1:${p.c1};--c2:${p.c2}" aria-label="${p.nombre}">
@@ -538,7 +556,8 @@
     });
   });
 
-  render();
+  if (location.hash === '#packs') document.querySelector('[data-cat="packs"]').click();
+  else render();
 </script>
 
 <script src="/cart.js"></script>
