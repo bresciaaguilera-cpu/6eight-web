@@ -2,7 +2,7 @@
 window.ShopCatalog = {
   "inspired-by-68": {
     "n": "Inspired by 68",
-    "p": 990,
+    "p": 1790,
     "core": true
   },
   "calendario-12-citas": {

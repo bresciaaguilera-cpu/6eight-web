@@ -1,7 +1,7 @@
 
 (()=>{const KEY='68inspired_cart_v2';
 const C={...window.ShopCatalog,
-'inspired-by-68-personalizado':{n:'Inspired by 68 personalizado',p:1490,core:true,personal:true},
+'inspired-by-68-personalizado':{n:'Inspired by 68 personalizado',p:1990,core:true,personal:true},
 'nuestra-historia':{n:'Nuestra historia',p:1290,core:true,personal:true},
 'calendario-personalizado':{n:'Calendario personalizado',p:1490,core:true,personal:true},
 'juego-personalizado':{n:'Juego personalizado',p:1290,core:true,personal:true}};
