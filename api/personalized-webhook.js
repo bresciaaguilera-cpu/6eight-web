@@ -1,4 +1,5 @@
 const Stripe = require("stripe");
+const { sendOrderNotification } = require("../lib/order-notification");
 const { getProduct } = require("../lib/products");
 const { del, get, put } = require("@vercel/blob");
 const { fromStripe, pdfPath, emailMarkerPath, personalConfig, siteUrl, retentionDays, sessionId } =
@@ -50,36 +51,55 @@ module.exports = async function handler(req, res) {
     }
     if ((order || standardOrder) && event.type === "checkout.session.completed" && session.mode === "payment" &&
         session.payment_status === "paid") {
-      const markerPath = order ? emailMarkerPath(order) : `order-delivery/${session.id}/email-sent.txt`;
-      const marker = await get(markerPath, { access: "private", useCache: false });
-      if (marker) {
-        await marker.stream?.cancel();
-        return res.status(200).json({ received: true });
-      }
+      const deliverCustomer = async () => {
+        const markerPath = order ? emailMarkerPath(order) : `order-delivery/${session.id}/email-sent.txt`;
+        const marker = await get(markerPath, { access: "private", useCache: false });
+        if (marker) {
+          await marker.stream?.cancel();
+          return;
+        }
 
-      const email = session.customer_details?.email || session.customer_email;
-      if (!email || !process.env.RESEND_API_KEY || !process.env.PERSONALIZED_EMAIL_FROM) {
-        throw new Error("No delivery address or sender");
-      }
-      const query = new URLSearchParams({ session_id: session.id });
-      if (order) query.set("access", order.access);
-      const url = `${siteUrl()}/success?${query}`;
-      const expiry = order ? ` El enlace estará disponible durante ${retentionDays} días.` : "";
-      const response = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-          "Content-Type": "application/json", "Idempotency-Key": `68-inspired-${session.id}` },
-        body: JSON.stringify({
-          from: process.env.PERSONALIZED_EMAIL_FROM,
-          to: [email],
-          subject: "Vuestro pedido de 68 Inspired está listo",
-          text: `Hola,\n\nYa podéis descargar todos los PDF de vuestro pedido:\n${url}\n\nGuardad el PDF en vuestro dispositivo.${expiry}\n\n68 Inspired`,
-        }),
-        signal: AbortSignal.timeout(8000),
-      });
-      if (!response.ok) throw new Error(`Email provider returned ${response.status}`);
-      await put(markerPath, "sent", { access: "private", allowOverwrite: true,
-        addRandomSuffix: false, contentType: "text/plain" });
+        const email = session.customer_details?.email || session.customer_email;
+        if (!email || !process.env.RESEND_API_KEY || !process.env.PERSONALIZED_EMAIL_FROM) {
+          throw new Error("No delivery address or sender");
+        }
+        const query = new URLSearchParams({ session_id: session.id });
+        if (order) query.set("access", order.access);
+        const url = `${siteUrl()}/success?${query}`;
+        const expiry = order ? ` El enlace estará disponible durante ${retentionDays} días.` : "";
+        const response = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+            "Content-Type": "application/json", "Idempotency-Key": `68-inspired-${session.id}` },
+          body: JSON.stringify({
+            from: process.env.PERSONALIZED_EMAIL_FROM,
+            to: [email],
+            subject: "Vuestro pedido de 68 Inspired está listo",
+            text: `Hola,\n\nYa podéis descargar todos los PDF de vuestro pedido:\n${url}\n\nGuardad el PDF en vuestro dispositivo.${expiry}\n\n68 Inspired`,
+          }),
+          signal: AbortSignal.timeout(8000),
+        });
+        if (!response.ok) throw new Error(`Email provider returned ${response.status}`);
+        await put(markerPath, "sent", { access: "private", allowOverwrite: true,
+          addRandomSuffix: false, contentType: "text/plain" });
+      };
+      const deliverSeller = async () => {
+        const markerPath = `order-delivery/${session.id}/seller-sent.txt`;
+        const marker = await get(markerPath, { access: "private", useCache: false });
+        if (marker) {
+          await marker.stream?.cancel();
+          return;
+        }
+        const products = [...purchasedIds.map(id => getProduct(id)?.nombre), ...(
+          order?.products.map(product => product.nombre) || []
+        )].filter(Boolean);
+        await sendOrderNotification(session, [...new Set(products)]);
+        await put(markerPath, "sent", { access: "private", allowOverwrite: true,
+          addRandomSuffix: false, contentType: "text/plain" });
+      };
+      const deliveries = await Promise.allSettled([deliverCustomer(), ...(event.livemode ? [deliverSeller()] : [])]);
+      const failed = deliveries.find(result => result.status === "rejected");
+      if (failed) throw failed.reason;
     }
     return res.status(200).json({ received: true });
   } catch (err) {
