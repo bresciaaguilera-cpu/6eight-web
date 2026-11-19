@@ -32,7 +32,7 @@ function inject(){if(document.getElementById('cartFab'))return;document.body.ins
 <div id="bumpModal"><div class="bump-card"><span class="bump-tag">Antes de pagar</span><h3>¿Le ponemos un poco de chispa?</h3><p>Añade <strong>50 preguntas picantes para dos</strong>. Es un PDF exclusivo de esta cesta y, si llegáis a 50 € en productos, os sale gratis automáticamente.</p><div class="bump-price">Ahora por 3,90 €</div><div class="bump-actions"><button class="bump-yes">Sí, añadirlo</button><button class="bump-no">No, seguir al pago</button></div></div></div>
 <div class="cart-toast" id="cartToast">Añadido a la cesta</div>`);
 fab=document.getElementById('cartFab');overlay=document.getElementById('cartOverlay');drawer=document.getElementById('cartDrawer');bump=document.getElementById('bumpModal');
-fab.onclick=()=>open(); overlay.onclick=close; drawer.querySelector('.cart-close').onclick=close; bump.querySelector('.bump-no').onclick=()=>{bump.classList.remove('open');goCheckout()}; bump.querySelector('.bump-yes').onclick=()=>{const a=get();if(!a.includes('50-preguntas-picantes'))a.push('50-preguntas-picantes');set(a);bump.classList.remove('open');goCheckout()};
+fab.onclick=()=>open(); overlay.onclick=close; drawer.querySelector('.cart-close').onclick=close; bump.querySelector('.bump-no').onclick=()=>{bump.classList.remove('open');goCheckout()}; bump.querySelector('.bump-yes').onclick=()=>{const a=get();if(!a.includes('50-preguntas-picantes'))a.push('50-preguntas-picantes');set(a);document.dispatchEvent(new CustomEvent('68inspired:cart-add',{detail:'50-preguntas-picantes'}));bump.classList.remove('open');goCheckout()};
 document.addEventListener('click',e=>{const b=e.target.closest('[data-cart-add]');if(!b)return;e.preventDefault();add(b.dataset.cartAdd)});
 render();}
 function open(){drawer.classList.add('open');overlay.classList.add('open')}
@@ -47,8 +47,10 @@ function add(id, showDrawer = true) {
   return;
  }
  if (item.includes) items = items.filter(other => !item.includes.includes(other));
- if (!items.includes(id)) items.push(id);
+ const added = !items.includes(id);
+ if (added) items.push(id);
  set(items);
+ if (added) document.dispatchEvent(new CustomEvent("68inspired:cart-add", { detail: id }));
  if (showDrawer) { toast(); open(); }
 }
 function remove(id){

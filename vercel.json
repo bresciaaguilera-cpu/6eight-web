@@ -20,6 +20,7 @@
   ],
   "functions": {
     "api/create-checkout-session.js": { "maxDuration": 60 },
+    "api/visit-notification.js": { "maxDuration": 60 },
     "api/get-download.js": { "maxDuration": 60 },
     "api/personalized-checkout.js": {
       "maxDuration": 60
@@ -32,6 +33,7 @@
     }
   },
   "crons": [
+    { "path": "/api/visit-notification", "schedule": "0 5 * * *" },
     {
       "path": "/api/cleanup-personalized-orders",
       "schedule": "0 4 * * *"
