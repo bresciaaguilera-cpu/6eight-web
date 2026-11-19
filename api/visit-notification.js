@@ -1,7 +1,7 @@
 const { createHmac, timingSafeEqual } = require("node:crypto");
 
 const { put } = require("@vercel/blob");
-const { prefix, madridDate, sendVisitReport } = require("../lib/visit-report");
+const { prefix, madridDate, sendVisitReport, visitDetails } = require("../lib/visit-report");
 const { getProduct } = require("../lib/products");
 const { getPersonalizedProduct } = require("../lib/personalized-orders");
 
@@ -46,7 +46,7 @@ module.exports = async function handler(req, res) {
     return res.status(400).end();
   }
   if (/bot|crawler|spider|headless/i.test(req.headers["user-agent"] || "")) return res.status(204).end();
-  const { id, seconds, shop, cart, entry } = req.body;
+  const { id, seconds, shop, cart, entry, summary } = req.body;
   if (!/^[a-f0-9-]{36}$/.test(typeof id === "string" ? id : "") ||
       !Number.isInteger(seconds) || seconds < 0 || seconds > 86400 ||
       typeof shop !== "boolean" || !Array.isArray(cart) || cart.length > 25 ||
@@ -58,7 +58,8 @@ module.exports = async function handler(req, res) {
     const names = [...new Set(cart.map(product =>
       getProduct(product)?.nombre || getPersonalizedProduct(product)?.nombre
     ).filter(Boolean))];
-    await put(`${prefix}${day}/${id}.json`, JSON.stringify({ id, page, seconds, shop, cart: names }), {
+    const activity = { id, page, seconds, shop, cart: names };
+    await put(`${prefix}${day}/${id}.json`, JSON.stringify(activity), {
       access: "private", allowOverwrite: true, addRandomSuffix: false, contentType: "application/json",
     });
     const ip = String(req.headers["x-vercel-forwarded-for"] || req.headers["x-forwarded-for"] || "").split(",")[0].trim();
@@ -66,7 +67,12 @@ module.exports = async function handler(req, res) {
       const bucket = Math.floor(Date.now() / (30 * 60 * 1000));
       const key = createHmac("sha256", secret).update(ip + ":" + bucket).digest("hex");
       await send(`68-visit-${key}`, "Nueva visita a 68INSPIRED",
-        "Se ha registrado una visita. Consulta las páginas de entrada y la actividad en el resumen diario.");
+        "Se ha registrado una visita. Recibirás un resumen cuando la persona deje de tener la página visible.");
+    }
+    if (summary === true && ip) {
+      const message = visitDetails(activity).join("\n");
+      const key = createHmac("sha256", secret).update(id + "\n" + message).digest("hex");
+      await send(`68-visit-summary-${key}`, "Resumen de visita a 68INSPIRED", message);
     }
     return res.status(204).end();
   } catch {

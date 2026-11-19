@@ -16,7 +16,7 @@
   visit.shop ||= page === "/tienda";
   let visibleSince = document.visibilityState === "visible" ? now : null;
 
-  function save(isEntry = false, send = true) {
+  function save(isEntry = false, send = true, summary = false) {
     const timestamp = Date.now();
     if (visibleSince !== null) {
       visit.elapsed += timestamp - visibleSince;
@@ -28,7 +28,7 @@
     const { id, page, shop, cart, elapsed } = visit;
     fetch("/api/visit-notification", {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, page, shop, cart, seconds: Math.floor(elapsed / 1000), entry: isEntry }),
+      body: JSON.stringify({ id, page, shop, cart, seconds: Math.floor(elapsed / 1000), entry: isEntry, summary }),
       keepalive: true,
     }).catch(() => {});
   }
@@ -36,10 +36,16 @@
     if (!visit.cart.includes(event.detail)) visit.cart.push(event.detail);
     save();
   });
+  function pause() {
+    if (visibleSince === null) return;
+    save(false, true, true);
+    visibleSince = null;
+  }
+
+  window.addEventListener("pagehide", pause);
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden") {
-      save();
-      visibleSince = null;
+      pause();
     } else {
       visibleSince = Date.now();
     }
