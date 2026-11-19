@@ -82,6 +82,8 @@
 
     <p>Para los pedidos personalizados, la web usa los datos que indiquéis para generar el PDF del pedido. Para todos los pedidos usamos Resend para enviar el enlace de descarga al correo facilitado en Stripe.</p>
 
+    <p>La web envía avisos internos de visita al titular para supervisar la actividad. Agrupa recargas durante 30 minutos mediante almacenamiento de sesión del navegador. La dirección de conexión se usa en el servidor para evitar avisos repetidos y no se incluye en los correos. Estos avisos no identifican a la persona visitante.</p>
+
     <h2>3. Pagos</h2>
     <p>Stripe procesa directamente los datos de la tarjeta conforme a su política de privacidad. 68INSPIRED no almacena ni ve en ningún momento los datos completos de vuestra tarjeta.</p>
 
@@ -107,5 +109,6 @@
   <p>¿Dudas sobre esta página? <a href="mailto:hola@68inspired.com">Escribidnos</a></p>
 </footer>
 
+<script src="/visit-notification.js" defer></script>
 </body>
 </html>
