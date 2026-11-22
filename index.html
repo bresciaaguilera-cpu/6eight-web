@@ -276,7 +276,19 @@
   .route-hero .btn{display:inline-flex;justify-content:center;align-items:center;width:auto;min-height:52px;padding:12px clamp(15px,2.2vw,24px);font-size:clamp(.98rem,2vw,1.1rem);font-weight:700}
   .route-hero a:focus-visible{outline:2px solid var(--verde);outline-offset:4px}
   .route-hero .route-welcome{margin-top:10px;font-size:.9rem}
-  .route-hero-image{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;box-shadow:0 14px 34px rgba(46,48,45,.13)}
+  .cover-route{position:relative;isolation:isolate;width:100%;max-width:650px;aspect-ratio:4/3;justify-self:center}
+  .cover-route-photo{position:absolute;display:block;overflow:hidden;border:clamp(4px,1vw,8px) solid #fff;background:#e8dccb;box-shadow:0 10px 26px rgba(46,48,45,.19)}
+  .cover-route-photo img{width:100%;height:100%;object-fit:cover}
+  .cover-route-start{inset:7% 32% 20% 2%;transform:rotate(-3deg)}
+  .cover-route-road{inset:0 3% 55% 57%;transform:rotate(4deg)}
+  .cover-route-pdf{inset:40% 4% 3% 57%;transform:rotate(3deg);z-index:2;background:#f9f4e9}
+  .cover-route-pdf img{object-fit:contain}
+  .cover-route-line{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;filter:drop-shadow(0 1px 2px #302a23)}
+  .cover-route-line path{fill:none;stroke:#fff2d9;stroke-width:2.5;stroke-dasharray:6 7;stroke-linecap:round;vector-effect:non-scaling-stroke}
+  .cover-route-stop{position:absolute;z-index:4;transform:translate(-50%,-50%);padding:4px 8px;background:var(--crema);color:var(--verde);border:1px solid var(--terracota);font-size:clamp(.75rem,1.4vw,.9rem);font-weight:700;white-space:nowrap;pointer-events:none}
+  .cover-route-stop-start{left:13%;top:63%}
+  .cover-route-stop-road{left:45%;top:42%}
+  .cover-route-stop-pdf{left:88%;top:76%}
   .origin-top{background:var(--verde);color:var(--crema);padding:36px 0}
   .origin-grid{display:grid;gap:20px;align-items:center}@media(min-width:760px){.origin-grid{grid-template-columns:130px 1fr auto}}
   .origin-num{font:700 72px var(--font-display);color:var(--kraft);line-height:.9}
@@ -353,7 +365,17 @@
       </div>
       <p class="route-welcome">12 minicitas de regalo en vuestro primer pedido.</p>
     </div>
-    <img class="route-hero-image" src="/images/personalizados-sobre.webp" alt="Dos personas comparten un sobre junto a dos tazas de café" width="800" height="600" fetchpriority="high">
+    <div class="cover-route" role="group" aria-label="Tres paradas de Inspired by 68">
+      <div class="cover-route-photo cover-route-start"><img src="https://images.pexels.com/photos/6108074/pexels-photo-6108074.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="Mapa, cámara y café durante la planificación de un viaje" fetchpriority="high"></div>
+      <div class="cover-route-photo cover-route-road"><img src="https://images.pexels.com/photos/37832996/pexels-photo-37832996.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" alt="Carretera al atardecer vista desde el interior de un coche"></div>
+      <a class="cover-route-photo cover-route-pdf" href="/inspired-by-68#ver-pdf"><img src="/images/muestras/inspired-by-68-8.webp" alt="Una página real del PDF Inspired by 68"></a>
+      <svg class="cover-route-line" viewBox="0 0 600 450" aria-hidden="true" preserveAspectRatio="none">
+        <path d="M78 285 C141 328 235 282 267 188 S460 112 530 341"></path>
+      </svg>
+      <span class="cover-route-stop cover-route-stop-start">Parada 01</span>
+      <span class="cover-route-stop cover-route-stop-road">Parada 24</span>
+      <span class="cover-route-stop cover-route-stop-pdf">Parada 68</span>
+    </div>
   </div>
 </section>
 
