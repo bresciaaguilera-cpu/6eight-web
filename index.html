@@ -264,21 +264,19 @@
   .footer-bottom{margin-top:40px; font-size:.8rem; color:rgba(46,48,45,.5); display:flex; flex-direction:column; gap:6px;}
   @media(min-width:640px){ .footer-bottom{flex-direction:row; justify-content:space-between;} }
 
-  /* ---------- NUEVA APERTURA 68 ---------- */
-  .hero-v2{padding:46px 0 52px;overflow:hidden}
-  .hero-v2-grid{display:grid;gap:34px;align-items:center}
-  @media(min-width:900px){.hero-v2-grid{grid-template-columns:.92fr 1.08fr;gap:58px}.hero-v2{padding:70px 0}}
-  .hero-kicker{font-family:var(--font-hand);font-size:1.45rem;color:var(--terracota);margin-bottom:10px}
-  .hero-v2 h1{font-size:2.65rem;max-width:13ch;margin-bottom:18px}
-  @media(min-width:640px){.hero-v2 h1{font-size:3.55rem}}
-  .hero-v2 p{max-width:48ch;color:rgba(46,48,45,.78);font-size:1.04rem}
-  .hero-media{position:relative;min-height:390px}
-  .route-photo{position:absolute;overflow:hidden;background:#ddd;box-shadow:0 18px 40px rgba(46,48,45,.18)}
-  .route-photo img{width:100%;height:100%;object-fit:cover}
-  .route-main{inset:12px 70px 34px 0;transform:rotate(-2deg)}
-  .route-small{width:42%;height:42%;right:0;bottom:4px;border:10px solid #fff;transform:rotate(5deg)}
-  .route-detail{width:34%;height:32%;right:4%;top:0;border:9px solid #fff;transform:rotate(7deg)}
-  .stamp68big{position:absolute;left:18px;bottom:5px;width:92px;height:92px;border-radius:50%;background:var(--terracota);color:#fff;display:grid;place-items:center;font:700 36px var(--font-display);border:3px dashed rgba(255,255,255,.75);transform:rotate(-8deg)}
+  /* ---------- PORTADA ---------- */
+  .hero-v2{padding:clamp(24px,5vw,64px) 0}
+  .hero-v2-grid{display:grid;gap:clamp(24px,5vw,64px);align-items:center}
+  @media(min-width:830px){.hero-v2-grid{grid-template-columns:1fr 1fr}}
+  .hero-v2 h1{font-size:clamp(2rem,5.6vw,3.7rem);max-width:16ch;margin-bottom:14px}
+  .hero-v2 p{max-width:45ch;color:var(--tinta);font-size:1.03rem}
+  .hero-v2 .btn-row{margin-top:18px;gap:10px}
+  .hero-v2 .hero-note{margin-top:14px;font-size:.92rem;color:var(--verde);font-weight:700}
+  .hero-sample{margin:0;text-align:center;background:var(--beige2);padding:clamp(16px,3vw,28px)}
+  .hero-sample-link{display:block;width:min(100%,270px);margin-inline:auto;color:var(--verde)}
+  .hero-sample img{display:block;width:100%;height:auto;box-shadow:0 8px 24px rgba(46,48,45,.16)}
+  .hero-sample figcaption{margin-top:12px;font-size:.95rem}
+  .hero-sample figcaption a{color:var(--verde);text-decoration:underline;text-underline-offset:3px}
   .origin-top{background:var(--verde);color:var(--crema);padding:36px 0}
   .origin-grid{display:grid;gap:20px;align-items:center}@media(min-width:760px){.origin-grid{grid-template-columns:130px 1fr auto}}
   .origin-num{font:700 72px var(--font-display);color:var(--kraft);line-height:.9}
@@ -291,7 +289,6 @@
   .free-card{background:var(--crema);padding:28px;box-shadow:0 8px 20px rgba(46,48,45,.07)}
   .free-card h3{margin-bottom:10px}.free-card #pregunta-texto{font-family:var(--font-hand);font-size:1.55rem;color:var(--verde);min-height:76px;display:flex;align-items:center}
   .free-links{display:grid;gap:12px}
-  .hero-note{font-size:.76rem!important;margin-top:12px;color:rgba(46,48,45,.55)!important}
 
 </style>
 <link rel="stylesheet" href="/cart.css">
@@ -313,7 +310,7 @@
 .christmas-card p{margin-bottom:16px}
 .christmas-card img{width:100%;height:auto;border:1px solid #d8c8b6}
 .christmas-season{font-weight:700;color:#854523}
-@media(max-width:540px){.christmas-card{grid-template-columns:1fr}.christmas-card img{max-width:150px}}
+@media(max-width:540px){.christmas-card{grid-template-columns:1fr}.christmas-card img{max-width:190px}}
 </style>
 </head>
 <body>
@@ -347,35 +344,20 @@
 <section class="hero-v2">
   <div class="wrap hero-v2-grid">
     <div>
-      <div class="hero-kicker">Una historia detrás. Muchas por delante.</div>
-      <h1>Él empezó la ruta con el 68. Ahora la ruta es vuestra.</h1>
-      <p>Juegos y citas en PDF para parejas. Descargadlos al instante o cread uno con vuestra historia.</p>
-      <div class="btn-row" style="margin-top:26px">
-        <a href="#jugar" class="btn btn-primary">Probar algo gratis</a>
-        <a href="/tienda" class="btn btn-secondary">Ver la tienda</a>
+      <h1>¿Otra vez sin plan? Hoy tenéis cita en casa.</h1>
+      <p>Juegos, preguntas y planes en PDF para disfrutar en pareja. Descargadlos al instante y empezad hoy.</p>
+      <div class="btn-row">
+        <a href="/tienda" class="btn btn-primary">Ver juegos y citas</a>
+        <a href="#jugar" class="btn btn-secondary">Probar una pregunta gratis</a>
       </div>
-
+      <p class="hero-note">12 minicitas de regalo en vuestro primer pedido.</p>
     </div>
-    <div class="hero-media" aria-label="Recuerdos conectados por una ruta">
-      <svg class="route-map-line" viewBox="0 0 620 430" aria-hidden="true" preserveAspectRatio="none">
-        <path d="M45 350 C125 300, 105 205, 205 190 S350 275, 405 190 S500 95, 575 80"></path>
-        <circle cx="62" cy="340" r="8"></circle>
-        <circle cx="305" cy="220" r="8"></circle>
-        <circle cx="555" cy="88" r="8"></circle>
-      </svg>
-      <div class="route-photo route-main"><img src="https://images.pexels.com/photos/6108074/pexels-photo-6108074.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Mapa, cámara y café durante la planificación de un viaje"></div>
-      <div class="route-photo route-detail"><img src="https://images.pexels.com/photos/37832996/pexels-photo-37832996.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Carretera al atardecer vista desde el interior de un coche"></div>
-      <div class="route-photo route-small"><a href="/inspired-by-68#ver-pdf"><img src="/images/muestras/inspired-by-68-8.webp" alt="Una página real del PDF Inspired by 68"></a></div>
-      <div class="route-label stop-a">parada 01</div>
-      <div class="route-label stop-b">parada 24</div>
-      <div class="route-label stop-c">parada 68</div>
-      <div class="route-question">
-        <span class="route-question-kicker">Siguiente parada</span>
-        <strong>¿Preparados para vuestra próxima parada?</strong>
-        <span>Primer pedido: 12 mini citas de regalo.</span>
-        <a href="/tienda">Empezar a jugar →</a>
-      </div>
-    </div>
+    <figure class="hero-sample">
+      <a class="hero-sample-link" href="/images/muestras/kit-noche-cita-casa-4.webp" aria-label="Ver en grande la página Juego de coincidencias">
+        <img src="/images/muestras/kit-noche-cita-casa-4.webp" alt="Página Juego de coincidencias, con retos para adivinar lo que elegiría vuestra pareja" width="495" height="699" fetchpriority="high">
+      </a>
+      <figcaption>Página real del <a href="/kit-noche-cita-casa">Kit noche de cita en casa</a></figcaption>
+    </figure>
   </div>
 </section>
 
@@ -383,9 +365,9 @@
   <div class="christmas-card">
     <div>
       <p class="christmas-season" data-season></p>
-      <h2>Esta Navidad, regalad tiempo juntos</h2>
-      <p>Calendario de Adviento y Kit Navidad en pareja por <strong>15,90 €</strong>. Elegid además un PDF de regalo en la cesta.</p>
-      <a class="btn btn-primary" href="/tienda#packs">Ver el Pack Navidad</a>
+      <h2>Pack Navidad en pareja</h2>
+      <p>Calendario de Adviento y Kit Navidad por <strong>15,90 €</strong>. Elegid además un PDF de regalo en la cesta.</p>
+      <a class="btn btn-primary" href="/tienda#packs">Ver el pack y qué incluye</a>
     </div>
     <img src="/images/muestras/calendario-adviento-parejas-4.webp" alt="Una página del Calendario de Adviento para parejas" width="494" height="699" loading="lazy">
   </div>
@@ -565,7 +547,7 @@
     '¿Qué recuerdo cambiarías si pudieras revivirlo exactamente igual?',
     '¿Qué es lo que más ha cambiado de nosotros en el último año, para bien?'
   ];
-  let lastIndex = -1;
+  let lastIndex = 0;
   const preguntaEl = document.getElementById('pregunta-texto');
   document.getElementById('otraPreguntaBtn').addEventListener('click', () => {
     let i;
