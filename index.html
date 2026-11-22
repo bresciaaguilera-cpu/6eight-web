@@ -265,27 +265,20 @@
   @media(min-width:640px){ .footer-bottom{flex-direction:row; justify-content:space-between;} }
 
   /* ---------- PORTADA ---------- */
-  .plan-hero{padding:clamp(28px,5vw,68px) 0 clamp(24px,4vw,48px)}
-  .plan-intro{max-width:650px;margin:0 auto 24px;text-align:center}
-  .plan-intro h1{font-size:clamp(2.05rem,5.4vw,3.9rem);line-height:1.1;margin-bottom:12px}
-  .plan-intro p{max-width:46ch;margin-inline:auto;font-size:1.03rem}
-  .plan-options{display:grid;gap:12px}
-  @media(min-width:880px){.plan-options{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}}
-  .plan-option{display:grid;grid-template-columns:clamp(56px,8vw,82px) 1fr;align-items:center;gap:clamp(12px,2vw,20px);
-    padding:clamp(12px,2.2vw,24px);border:1px solid #5c4f421f;border-radius:6px;background:var(--plan-bg);color:var(--verde)}
-  .plan-option:hover,.plan-option:focus-visible{border-color:currentColor}
-  .plan-option:focus-visible{outline:2px solid var(--verde);outline-offset:3px}
-  .plan-date{--plan-bg:#e7e9df}
-  .plan-questions{--plan-bg:#f1e1d8}
-  .plan-gift{--plan-bg:#eee3ce}
-  .plan-option img{width:100%;height:auto;border-radius:2px;box-shadow:0 4px 10px #2e302d24}
-  .plan-gift img{aspect-ratio:340 / 480;object-fit:cover}
-  .plan-option strong{display:block;font:700 clamp(1.18rem,2.1vw,1.6rem)/1.14 var(--font-display)}
-  .plan-option small{display:block;margin-top:6px;font-size:.89rem;line-height:1.35}
-  .plan-option:hover strong{text-decoration:underline;text-underline-offset:3px}
-  .plan-links{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:4px 20px;margin-top:14px}
-  .plan-links a{padding:9px 2px;color:var(--verde);font-weight:700;text-decoration:underline;text-underline-offset:3px}
-  .plan-welcome{text-align:center;font-size:.88rem;margin-top:2px}
+  .route-hero{padding:clamp(28px,6vw,76px) 0}
+  .route-hero-grid{display:grid;align-items:center;gap:clamp(24px,5vw,64px)}
+  @media(min-width:860px){.route-hero-grid{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}}
+  .route-hero h1{max-width:17ch;font-size:clamp(2.1rem,5.1vw,3.7rem);line-height:1.12;margin:0 0 14px}
+  .route-hero p{max-width:42ch;font-size:1.03rem}
+  .route-hero .btn-row{margin-top:18px;align-items:flex-start;gap:8px 16px;flex-wrap:wrap}
+  .route-hero .btn-primary{width:auto}
+  .route-free{display:inline-flex;align-items:center;min-height:44px;color:var(--verde);font-weight:700;text-decoration:underline;text-underline-offset:4px}
+  .route-hero .route-welcome{margin-top:10px;font-size:.9rem}
+  .route-hero-image{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;box-shadow:0 14px 34px rgba(46,48,45,.13)}
+  @media(max-width:479px){
+    .route-hero .btn-row{flex-direction:row;align-items:center}
+    .route-hero .btn-primary{padding:10px 15px;min-height:44px}
+  }
   .origin-top{background:var(--verde);color:var(--crema);padding:36px 0}
   .origin-grid{display:grid;gap:20px;align-items:center}@media(min-width:760px){.origin-grid{grid-template-columns:130px 1fr auto}}
   .origin-num{font:700 72px var(--font-display);color:var(--kraft);line-height:.9}
@@ -350,31 +343,18 @@
 </header>
 
 <!-- HERO -->
-<section class="plan-hero">
-  <div class="wrap">
-    <div class="plan-intro">
-      <h1>¿Qué os apetece hacer juntos?</h1>
-      <p>Elegid vuestro próximo plan para dos. Juegos, citas y regalos en PDF.</p>
+<section class="route-hero">
+  <div class="wrap route-hero-grid">
+    <div>
+      <h1>Él empezó la ruta con el 68. Ahora la ruta es vuestra.</h1>
+      <p>Juegos, ideas de citas y regalos personalizados en PDF para disfrutar en pareja.</p>
+      <div class="btn-row">
+        <a href="/tienda" class="btn btn-primary">Ver los planes</a>
+        <a href="#jugar" class="route-free">Probar gratis</a>
+      </div>
+      <p class="route-welcome">12 minicitas de regalo en vuestro primer pedido.</p>
     </div>
-    <ul class="plan-options">
-      <li><a class="plan-option plan-date" href="/kit-noche-cita-casa">
-        <img src="/covers/kit-noche-cita-casa.jpg" alt="" width="340" height="480">
-        <span><strong>Una cita en casa</strong><small>Una cena, un juego y un rato para vosotros.</small></span>
-      </a></li>
-      <li><a class="plan-option plan-questions" href="/juego-preguntas-parejas">
-        <img src="/covers/juego-preguntas-parejas.jpg" alt="" width="340" height="480">
-        <span><strong>Jugar a preguntas</strong><small>100 preguntas para reíros y conoceros mejor.</small></span>
-      </a></li>
-      <li><a class="plan-option plan-gift" href="/crea-el-vuestro">
-        <img src="/images/personalizados-sobre.webp" alt="" width="800" height="600">
-        <span><strong>Un regalo personalizado</strong><small>Con vuestros nombres, fechas y recuerdos.</small></span>
-      </a></li>
-    </ul>
-    <div class="plan-links">
-      <a href="/tienda">Ver toda la tienda</a>
-      <a href="#jugar">Probar una pregunta gratis</a>
-    </div>
-    <p class="plan-welcome">12 minicitas de regalo en vuestro primer pedido.</p>
+    <img class="route-hero-image" src="/images/personalizados-sobre.webp" alt="Dos personas comparten un sobre junto a dos tazas de café" width="800" height="600" fetchpriority="high">
   </div>
 </section>
 
