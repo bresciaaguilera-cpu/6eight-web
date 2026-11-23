@@ -249,7 +249,8 @@
   .route-hero .btn-row{margin-top:22px;gap:10px 12px;flex-direction:row;flex-wrap:wrap}
   .route-hero .btn{display:inline-flex;justify-content:center;align-items:center;width:auto;min-height:52px;padding:12px clamp(15px,2.2vw,24px);font-size:clamp(.98rem,2vw,1.1rem);font-weight:700}
   .route-hero a:focus-visible{outline:2px solid var(--verde);outline-offset:4px}
-  .route-hero .route-welcome{margin-top:10px;font-size:.9rem}
+  .route-hero .route-welcome{margin-top:14px;font-size:.9rem;color:var(--verde)}
+  .route-hero .route-trust{margin-top:4px;font-size:.88rem;color:var(--verde)}
   .cover-route{position:relative;isolation:isolate;width:100%;max-width:650px;aspect-ratio:4/3;justify-self:center}
   .cover-route-photo{position:absolute;display:block;overflow:hidden;border:clamp(4px,1vw,8px) solid #fff;background:#e8dccb;box-shadow:0 10px 26px rgba(46,48,45,.19)}
   .cover-route-photo img{width:100%;height:100%;object-fit:cover}
@@ -292,7 +293,7 @@
 .christmas-campaign{background:#e8e9df;padding:10px 0;color:var(--verde)}
 .christmas-campaign[hidden]{display:none}
 .christmas-banner{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px 16px;font-size:.9rem;text-align:center}
-.christmas-season{color:#854523;font-weight:700;margin-right:.45em}
+.christmas-gift-note{color:#854523;font-weight:700}
 .christmas-banner a{color:inherit;text-decoration:underline;text-underline-offset:3px;font-weight:700;padding:4px 0}
 </style>
 </head>
@@ -325,7 +326,7 @@
 
 <section id="christmas-campaign" class="christmas-campaign" aria-label="Oferta de Navidad" hidden>
   <div class="wrap christmas-banner">
-    <p><span class="christmas-season" data-season></span> <strong>Regalo de Navidad que llega al instante, aunque lo compres el 24.</strong></p>
+    <p><strong>Regalo de Navidad que llega al instante, aunque lo compres el 24.</strong><br><span class="christmas-gift-note">Con el Pack Navidad, elegís un PDF de regalo de hasta 9,90 €.</span></p>
     <a href="/tienda#packs">Ver Pack Navidad · 15,90 €</a>
   </div>
 </section>
@@ -336,12 +337,13 @@
     <div>
       <p class="route-hook">Os merecéis un rato solo para vosotros.</p>
       <h1>68 citas para salir de la rutina en pareja</h1>
-      <p>Un libro-experiencia en PDF con 4 rutas. Descarga inmediata. <strong>17,90 €</strong></p>
+      <p>Un libro-experiencia en PDF con 4 rutas. <strong>17,90 €</strong></p>
       <div class="btn-row">
         <a href="/tienda" class="btn btn-primary">Ver más planes</a>
         <a href="#jugar" class="btn btn-secondary">Probadlo gratis</a>
       </div>
-      <p class="route-welcome">12 minicitas de regalo en vuestro primer pedido.</p>
+      <p class="route-welcome"><strong>12 minicitas de regalo en vuestro primer pedido.</strong></p>
+      <p class="route-trust">Descarga inmediata · Sin envíos · Pago seguro con Stripe</p>
     </div>
     <div class="cover-route" role="group" aria-label="Tres paradas de Inspired by 68">
       <div class="cover-route-photo cover-route-start"><img src="https://images.pexels.com/photos/6108074/pexels-photo-6108074.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="Mapa, cámara y café durante la planificación de un viaje" fetchpriority="high"></div>

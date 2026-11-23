@@ -100,7 +100,6 @@ function addPersonalized(order){
 }
 const campaign = document.getElementById('christmas-campaign');
 if(campaign && christmas && Date.now() >= christmas.start && Date.now() < christmas.end){
- campaign.querySelector('[data-season]').textContent=Date.now() < christmas.christmas ? 'Especial Black Friday' : 'Especial Navidad';
  campaign.hidden=false;
 }
 window.Cart68={add,addPersonalized,open,get};document.readyState==='loading'?document.addEventListener('DOMContentLoaded',inject):inject();})();
