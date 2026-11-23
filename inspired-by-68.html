@@ -68,6 +68,9 @@
   }
   .link-discreto:hover{color:var(--terracota); text-decoration-color:var(--terracota);}
   .hero-visual{flex:1; position:relative; min-width:0;}
+  .hero .product-samples{width:100%;margin:0}
+  .hero .product-samples h2{font-size:clamp(1.4rem,2.3vw,1.85rem)}
+  .hero .sample-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(10px,2vw,18px)}
   .pages-fan{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
   .pagina{background:#fff; aspect-ratio:3/4; padding:16px; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 14px 28px rgba(46,48,45,.16); min-width:0;}
   .pagina:nth-child(2){transform:translateY(-14px);}
@@ -222,12 +225,10 @@
         <a href="#interior" class="link-discreto">Ver qué hay dentro</a>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="pages-fan">
-        <div class="pagina"><div><div class="num">07</div><div class="linea"></div><div class="txt">Ruta 1. Una experiencia para hoy, sin planearla demasiado.</div></div><div class="sello">68</div></div>
-        <div class="pagina"><div><div class="num">24</div><div class="linea"></div><div class="txt">Ruta 2. Anécdota para escribir juntos, aquí mismo.</div></div><div class="sello">68</div></div>
-        <div class="pagina"><div><div class="num">51</div><div class="linea"></div><div class="txt">Ruta 3. Reflexión y valoración de la parada.</div></div><div class="sello">68</div></div>
-      </div>
+    <div class="hero-visual product-samples" id="ver-pdf" role="region" aria-labelledby="pdf-samples-title">
+      <h2 id="pdf-samples-title">Así se ve por dentro</h2>
+      <p><strong>87 páginas en PDF.</strong> 68 experiencias, un índice por rutas y espacio para guardar recuerdos.</p>
+      <div class="sample-grid"><figure><a href="/images/muestras/inspired-by-68-8.webp" target="_blank" rel="noopener"><img src="/images/muestras/inspired-by-68-8.webp" alt="Muestra de la página 8" width="494" height="699"></a><figcaption>Página 8</figcaption></figure><figure><a href="/images/muestras/inspired-by-68-9.webp" target="_blank" rel="noopener"><img src="/images/muestras/inspired-by-68-9.webp" alt="Muestra de la página 9" width="494" height="699"></a><figcaption>Página 9</figcaption></figure></div>
     </div>
   </div>
 </section>
@@ -477,7 +478,6 @@
     <article class="pack-card"><h3>Un año de citas</h3><p>Inspired by 68 y Calendario de 12 citas</p><p><strong>22,90 €</strong> · Ahorráis 3,90 € frente a comprarlos por separado.</p><button class="btn btn-primary" type="button" data-cart-add="pack-citas">Añadir pack a la cesta</button></article>
   </div>
 </section>
-<section id="ver-pdf" class="product-samples" aria-label="Muestra del PDF"><h2>Así se ve por dentro</h2><p><strong>87 páginas en PDF.</strong> 68 experiencias, un índice por rutas y espacio para guardar recuerdos.</p><div class="sample-grid"><figure><a href="/images/muestras/inspired-by-68-8.webp" target="_blank" rel="noopener"><img src="/images/muestras/inspired-by-68-8.webp" alt="Muestra de la página 8" width="494" height="699" loading="lazy"></a><figcaption>Página 8</figcaption></figure><figure><a href="/images/muestras/inspired-by-68-9.webp" target="_blank" rel="noopener"><img src="/images/muestras/inspired-by-68-9.webp" alt="Muestra de la página 9" width="494" height="699" loading="lazy"></a><figcaption>Página 9</figcaption></figure></div></section>
 <footer>
   <p>¿Buscáis algo distinto? <a href="/">Volver a 68INSPIRED</a></p>
 </footer>

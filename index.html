@@ -166,17 +166,6 @@
     font-family:var(--font-display); font-size:.75rem; color:var(--terracota);
   }
 
-  /* ---------- ELIGE QUE NECESITAS ---------- */
-  .necesitas-grid{display:grid; grid-template-columns:1fr; gap:16px;}
-  @media(min-width:640px){ .necesitas-grid{grid-template-columns:1fr 1fr;} }
-  @media(min-width:960px){ .necesitas-grid{grid-template-columns:repeat(3,1fr);} }
-  .necesita-card{
-    background:var(--beige2); padding:26px 22px; border-left:3px solid var(--terracota);
-    transition:background .2s ease;
-  }
-  .necesita-card:hover{background:#e9ddc8;}
-  .necesita-card h3{font-size:1.15rem; margin-bottom:8px; color:var(--verde);}
-  .necesita-card p{font-size:.92rem; color:rgba(46,48,45,.72);}
 
   /* ---------- PERSONALIZADOS ---------- */
   .personalizados{display:flex; flex-direction:column; gap:40px;}
@@ -257,7 +246,6 @@
   .route-hero h1{max-width:17ch;font-size:clamp(2.1rem,5.1vw,3.7rem);line-height:1.12;margin:0 0 14px}
   .route-hero p{max-width:42ch;font-size:1.03rem}
   .route-hero .route-hook{margin:0 0 12px;color:#854523;font-size:clamp(1.3rem,2.6vw,1.75rem);font-weight:700;line-height:1.25}
-  .route-story{display:inline-block;color:#854523;font:700 clamp(1rem,2vw,1.2rem)/1.35 var(--font-body);text-decoration:underline;text-underline-offset:4px;white-space:nowrap}
   .route-hero .btn-row{margin-top:22px;gap:10px 12px;flex-direction:row;flex-wrap:wrap}
   .route-hero .btn{display:inline-flex;justify-content:center;align-items:center;width:auto;min-height:52px;padding:12px clamp(15px,2.2vw,24px);font-size:clamp(.98rem,2vw,1.1rem);font-weight:700}
   .route-hero a:focus-visible{outline:2px solid var(--verde);outline-offset:4px}
@@ -301,14 +289,11 @@
 .home-header :is(a,button):focus-visible{outline:2px solid #f2c6b4;outline-offset:4px}
 </style>
 <style>
-.christmas-campaign{padding-top:30px;padding-bottom:30px}
+.christmas-campaign{background:#e8e9df;padding:10px 0;color:var(--verde)}
 .christmas-campaign[hidden]{display:none}
-.christmas-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,210px);align-items:center;gap:24px;background:#e8e9df;border-left:5px solid #b87460;padding:clamp(18px,4vw,42px)}
-.christmas-card h2{margin:8px 0;font-size:clamp(1.5rem,3vw,2.3rem)}
-.christmas-card p{margin-bottom:16px}
-.christmas-card img{width:100%;height:auto;border:1px solid #d8c8b6}
-.christmas-season{font-weight:700;color:#854523}
-@media(max-width:540px){.christmas-card{grid-template-columns:1fr}.christmas-card img{max-width:190px}}
+.christmas-banner{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px 16px;font-size:.9rem;text-align:center}
+.christmas-season{color:#854523;font-weight:700;margin-right:.45em}
+.christmas-banner a{color:inherit;text-decoration:underline;text-underline-offset:3px;font-weight:700;padding:4px 0}
 </style>
 </head>
 <body>
@@ -338,13 +323,20 @@
   </div>
 </header>
 
+<section id="christmas-campaign" class="christmas-campaign" aria-label="Oferta de Navidad" hidden>
+  <div class="wrap christmas-banner">
+    <p><span class="christmas-season" data-season></span> <strong>Regalo de Navidad que llega al instante, aunque lo compres el 24.</strong></p>
+    <a href="/tienda#packs">Ver Pack Navidad · 15,90 €</a>
+  </div>
+</section>
+
 <!-- HERO -->
 <section class="route-hero">
   <div class="wrap route-hero-grid">
     <div>
       <p class="route-hook">Os merecéis un rato solo para vosotros.</p>
-      <h1>Él empezó la ruta con el 68. Ahora la ruta es vuestra. <a class="route-story" href="/sobre-68inspired">¿Por qué 68?</a></h1>
-      <p>Juegos, ideas de citas y regalos personalizados en PDF para disfrutar en pareja.</p>
+      <h1>68 citas para salir de la rutina en pareja</h1>
+      <p>Un libro-experiencia en PDF con 4 rutas. Descarga inmediata. <strong>17,90 €</strong></p>
       <div class="btn-row">
         <a href="/tienda" class="btn btn-primary">Ver más planes</a>
         <a href="#jugar" class="btn btn-secondary">Probadlo gratis</a>
@@ -361,49 +353,6 @@
       <span class="cover-route-stop cover-route-stop-start">Parada 01</span>
       <span class="cover-route-stop cover-route-stop-road">Parada 24</span>
       <span class="cover-route-stop cover-route-stop-pdf">Parada 68</span>
-    </div>
-  </div>
-</section>
-
-<section id="christmas-campaign" class="christmas-campaign wrap" hidden>
-  <div class="christmas-card">
-    <div>
-      <p class="christmas-season" data-season></p>
-      <h2>Pack Navidad en pareja</h2>
-      <p>Calendario de Adviento y Kit Navidad por <strong>15,90 €</strong>. Elegid además un PDF de regalo en la cesta.</p>
-      <a class="btn btn-primary" href="/tienda#packs">Ver el pack y qué incluye</a>
-    </div>
-    <img src="/images/muestras/calendario-adviento-parejas-4.webp" alt="Una página del Calendario de Adviento para parejas" width="494" height="699" loading="lazy">
-  </div>
-</section>
-
-<section class="origin-top" id="historia">
-  <div class="wrap origin-grid">
-    <div class="origin-num">68</div>
-    <div>
-      <h2>El 68 no salió de una lluvia de ideas. Venía de mucho antes.</h2>
-      <p>Mi padre trabajó durante años como taxista y el <strong>68</strong> era el número que identificaba su taxi. Con el tiempo dejó de ser una simple cifra: era carretera, gente que subía y bajaba, historias contadas entre semáforos, destinos, vueltas a casa y muchos kilómetros de vida.</p>
-      <p style="margin-top:10px">Cuando nació esta marca, ese número encajó con lo que queríamos crear: ideas que sacaran a las parejas del piloto automático y les dieran una excusa para volver a moverse, hablar, reírse, sorprenderse y crear recuerdos. Por eso aquí hablamos de <strong>rutas, paradas y experiencias</strong>. 68INSPIRED nace también como un pequeño homenaje a él y como recordatorio de que las mejores historias no se quedan quietas.</p>
-    </div>
-    <a class="origin-link" href="/sobre-68inspired">Leer la historia completa →</a>
-  </div>
-</section>
-
-<section class="free-hook" id="jugar">
-  <div class="wrap">
-    <div class="free-top"><div><span class="eyebrow-hand">Antes de comprar, probadnos</span><h2>Una pequeña chispa gratis</h2></div><p>Sacad una pregunta y jugad ahora.</p></div>
-    <div class="free-grid">
-      <div class="free-card">
-        <h3>Pregunta del día</h3>
-        <p id="pregunta-texto">"¿Qué pequeño hábito mío empezaste a hacer tú sin darte cuenta?"</p>
-        <button class="btn otra-btn" id="otraPreguntaBtn">Otra pregunta</button>
-        <p><a href="/juego-preguntas-parejas">Ver el juego de 100 preguntas →</a></p>
-      </div>
-      <div class="free-links">
-        <a href="/generador-citas" class="mini-tool"><span>Generador de citas</span><span class="arrow">→</span></a>
-        <a href="/test-lenguaje-del-amor" class="mini-tool"><span>Test del lenguaje del amor</span><span class="arrow">→</span></a>
-        <a href="/preguntas-para-parejas" class="mini-tool"><span>Preguntas para parejas</span><span class="arrow">→</span></a>
-      </div>
     </div>
   </div>
 </section>
@@ -437,20 +386,34 @@
   </div>
 </section>
 
-<!-- ELIGE QUE NECESITAS -->
-<section id="necesitas">
+<section class="free-hook" id="jugar">
   <div class="wrap">
-    <div class="section-head">
-      <h2>¿Qué necesitáis ahora mismo?</h2>
+    <div class="free-top"><div><span class="eyebrow-hand">Antes de comprar, probadnos</span><h2>Una pequeña chispa gratis</h2></div><p>Sacad una pregunta y jugad ahora.</p></div>
+    <div class="free-grid">
+      <div class="free-card">
+        <h3>Pregunta del día</h3>
+        <p id="pregunta-texto">"¿Qué pequeño hábito mío empezaste a hacer tú sin darte cuenta?"</p>
+        <button class="btn otra-btn" id="otraPreguntaBtn">Otra pregunta</button>
+        <p><a href="/juego-preguntas-parejas">Ver el juego de 100 preguntas →</a></p>
+      </div>
+      <div class="free-links">
+        <a href="/generador-citas" class="mini-tool"><span>Generador de citas</span><span class="arrow">→</span></a>
+        <a href="/test-lenguaje-del-amor" class="mini-tool"><span>Test del lenguaje del amor</span><span class="arrow">→</span></a>
+        <a href="/preguntas-para-parejas" class="mini-tool"><span>Preguntas para parejas</span><span class="arrow">→</span></a>
+      </div>
     </div>
-    <div class="necesitas-grid">
-      <a href="/ideas-citas-pareja" class="necesita-card"><h3>Salir de la rutina</h3><p>Planes y experiencias para dejar de repetir el mismo fin de semana.</p></a>
-      <a href="/tienda" class="necesita-card"><h3>Hacerle un regalo</h3><p>Algo que se recuerde más que se guarde en un cajón.</p></a>
-      <a href="#personalizados" class="necesita-card"><h3>Algo personalizado</h3><p>Con vuestros nombres, vuestra fecha, vuestra historia.</p></a>
-      <a href="/juegos-para-parejas" class="necesita-card"><h3>Un juego para esta noche</h3><p>Listo en cinco minutos, sin instrucciones complicadas.</p></a>
-      <a href="/generador-citas" class="necesita-card"><h3>Organizar vuestras citas</h3><p>Calendarios y cuponeras para no volver a decir "lo que sea".</p></a>
-      <a href="/preguntas-para-parejas" class="necesita-card"><h3>Descargar algo gratis</h3><p>Doce preguntas para salir de la conversación de siempre.</p></a>
+  </div>
+</section>
+
+<section class="origin-top" id="historia">
+  <div class="wrap origin-grid">
+    <div class="origin-num">68</div>
+    <div>
+      <h2>Él empezó la ruta con el 68. Ahora la ruta es vuestra.</h2>
+      <p>Mi padre trabajó durante años como taxista y el <strong>68</strong> era el número que identificaba su taxi. Con el tiempo dejó de ser una simple cifra: era carretera, gente que subía y bajaba, historias contadas entre semáforos, destinos, vueltas a casa y muchos kilómetros de vida.</p>
+      <p style="margin-top:10px">Cuando nació esta marca, ese número encajó con lo que queríamos crear: ideas que sacaran a las parejas del piloto automático y les dieran una excusa para volver a moverse, hablar, reírse, sorprenderse y crear recuerdos. Por eso aquí hablamos de <strong>rutas, paradas y experiencias</strong>. 68INSPIRED nace también como un pequeño homenaje a él y como recordatorio de que las mejores historias no se quedan quietas.</p>
     </div>
+    <a class="origin-link" href="/sobre-68inspired">Leer la historia completa →</a>
   </div>
 </section>
 
@@ -497,7 +460,7 @@
       </div>
       <div>
         <h4>La Guantera</h4>
-        <a href="/preguntas-para-parejas">Ideas para citas</a>
+        <a href="/ideas-citas-pareja">Ideas para citas</a>
         <a href="/preguntas-para-parejas">Preguntas para parejas</a>
         <a href="/juegos-para-parejas">Juegos</a>
       </div>
