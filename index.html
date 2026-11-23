@@ -255,15 +255,15 @@
   .cover-route-photo{position:absolute;display:block;overflow:hidden;border:clamp(4px,1vw,8px) solid #fff;background:#e8dccb;box-shadow:0 10px 26px rgba(46,48,45,.19)}
   .cover-route-photo img{width:100%;height:100%;object-fit:cover}
   .cover-route-start{inset:7% 32% 20% 2%;transform:rotate(-3deg)}
-  .cover-route-road{inset:0 3% 55% 57%;transform:rotate(4deg)}
-  .cover-route-pdf{inset:40% 4% 3% 57%;transform:rotate(3deg);z-index:2;background:#f9f4e9}
+  .cover-route-road{inset:0 3% 60% 57%;transform:rotate(4deg)}
+  .cover-route-pdf{inset:29% 4% 1% 46%;transform:rotate(3deg);z-index:2;background:#f9f4e9}
   .cover-route-pdf img{object-fit:contain}
   .cover-route-line{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;filter:drop-shadow(0 1px 2px #302a23)}
   .cover-route-line path{fill:none;stroke:#fff2d9;stroke-width:2.5;stroke-dasharray:6 7;stroke-linecap:round;vector-effect:non-scaling-stroke}
   .cover-route-stop{position:absolute;z-index:4;transform:translate(-50%,-50%);padding:4px 8px;background:var(--crema);color:var(--verde);border:1px solid var(--terracota);font-size:clamp(.75rem,1.4vw,.9rem);font-weight:700;white-space:nowrap;pointer-events:none}
   .cover-route-stop-start{left:13%;top:63%}
   .cover-route-stop-road{left:45%;top:42%}
-  .cover-route-stop-pdf{left:88%;top:76%}
+  .cover-route-stop-pdf{right:0;bottom:1%;transform:rotate(3deg)}
   .origin-top{background:var(--verde);color:var(--crema);padding:36px 0}
   .origin-grid{display:grid;gap:20px;align-items:center}@media(min-width:760px){.origin-grid{grid-template-columns:130px 1fr auto}}
   .origin-num{font:700 72px var(--font-display);color:var(--kraft);line-height:.9}
@@ -293,7 +293,7 @@
 .christmas-campaign{background:#e8e9df;padding:10px 0;color:var(--verde)}
 .christmas-campaign[hidden]{display:none}
 .christmas-banner{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px 16px;font-size:.9rem;text-align:center}
-.christmas-gift-note{color:#854523;font-weight:700}
+.christmas-delivery{font-size:.85em}
 .christmas-banner a{color:inherit;text-decoration:underline;text-underline-offset:3px;font-weight:700;padding:4px 0}
 </style>
 </head>
@@ -326,8 +326,8 @@
 
 <section id="christmas-campaign" class="christmas-campaign" aria-label="Oferta de Navidad" hidden>
   <div class="wrap christmas-banner">
-    <p><strong>Regalo de Navidad que llega al instante, aunque lo compres el 24.</strong><br><span class="christmas-gift-note">Con el Pack Navidad, elegís un PDF de regalo de hasta 9,90 €.</span></p>
-    <a href="/tienda#packs">Ver Pack Navidad · 15,90 €</a>
+    <p><strong>Pack Navidad · 15,90 € + un PDF de regalo de hasta 9,90 €</strong><br><span class="christmas-delivery">Descarga al instante, incluso el 24.</span></p>
+    <a href="/tienda#packs">Ver Pack Navidad</a>
   </div>
 </section>
 
@@ -339,7 +339,7 @@
       <h1>68 citas para salir de la rutina en pareja</h1>
       <p>Un libro-experiencia en PDF con 4 rutas. <strong>17,90 €</strong></p>
       <div class="btn-row">
-        <a href="/tienda" class="btn btn-primary">Ver más planes</a>
+        <a href="/inspired-by-68" class="btn btn-primary">Ver las 68 citas</a>
         <a href="#jugar" class="btn btn-secondary">Probadlo gratis</a>
       </div>
       <p class="route-welcome"><strong>12 minicitas de regalo en vuestro primer pedido.</strong></p>
@@ -350,7 +350,7 @@
       <div class="cover-route-photo cover-route-road"><img src="https://images.pexels.com/photos/37832996/pexels-photo-37832996.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900" alt="Carretera al atardecer vista desde el interior de un coche"></div>
       <a class="cover-route-photo cover-route-pdf" href="/inspired-by-68#ver-pdf"><img src="/images/muestras/inspired-by-68-8.webp" alt="Una página real del PDF Inspired by 68"></a>
       <svg class="cover-route-line" viewBox="0 0 600 450" aria-hidden="true" preserveAspectRatio="none">
-        <path d="M78 285 C141 328 235 282 267 188 S460 112 530 341"></path>
+        <path d="M78 285 C141 328 200 280 225 230 S251 195 276 188"></path>
       </svg>
       <span class="cover-route-stop cover-route-stop-start">Parada 01</span>
       <span class="cover-route-stop cover-route-stop-road">Parada 24</span>
