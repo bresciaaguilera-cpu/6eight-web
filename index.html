@@ -249,10 +249,7 @@
   .route-hero .btn-row{margin-top:22px;gap:10px 12px;flex-direction:row;flex-wrap:wrap}
   .route-hero .btn{display:inline-flex;justify-content:center;align-items:center;width:auto;min-height:52px;padding:12px clamp(15px,2.2vw,24px);font-size:clamp(.98rem,2vw,1.1rem);font-weight:700}
   .route-hero a:focus-visible{outline:2px solid var(--verde);outline-offset:4px}
-  .route-hero .route-book-link{margin-top:10px;font-size:.93rem;color:var(--verde)}
-  .route-book-link a{text-decoration:underline;text-underline-offset:3px}
-  .route-hero .route-welcome{margin-top:14px;font-size:.9rem;color:var(--verde)}
-  .route-hero .route-trust{margin-top:4px;font-size:.88rem;color:var(--verde)}
+  .route-hero .route-trust{margin-top:14px;font-size:.88rem;color:var(--verde)}
   .cover-route{position:relative;isolation:isolate;width:100%;max-width:650px;aspect-ratio:4/3;justify-self:center}
   .cover-route-photo{position:absolute;display:block;overflow:hidden;border:clamp(4px,1vw,8px) solid #fff;background:#e8dccb;box-shadow:0 10px 26px rgba(46,48,45,.19)}
   .cover-route-photo img{width:100%;height:100%;object-fit:cover}
@@ -292,7 +289,9 @@
 .home-header :is(a,button):focus-visible{outline:2px solid #f2c6b4;outline-offset:4px}
 </style>
 <style>
-.christmas-campaign{background:#e8e9df;padding:10px 0;color:var(--verde)}
+.entry-banner{background:#e8e9df;padding:10px 0;text-align:center;color:var(--verde);font-size:.9rem}
+.entry-banner .wrap{display:flex;justify-content:center;flex-wrap:wrap;gap:3px 16px}
+.christmas-campaign{background:#e8e9df;padding:16px 0;color:var(--verde)}
 .christmas-campaign[hidden]{display:none}
 .christmas-banner{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:4px 16px;font-size:.9rem;text-align:center}
 .christmas-contents{font-size:.9em}
@@ -326,26 +325,21 @@
   </div>
 </header>
 
-<section id="christmas-campaign" class="christmas-campaign" aria-label="Oferta de Navidad" hidden>
-  <div class="wrap christmas-banner">
-    <p><strong>Un PDF de regalo con vuestro Pack Navidad</strong><br><span class="christmas-contents">Incluye el Calendario de Adviento para parejas y el Kit Navidad · 15,90 €</span></p>
-    <a href="/tienda#packs">Ver Pack Navidad</a>
-  </div>
-</section>
+<div class="entry-banner">
+  <p class="wrap"><strong>PDF para parejas desde 7,90&nbsp;€</strong><span>12 minicitas de regalo en vuestro primer pedido.</span></p>
+</div>
 
 <!-- HERO -->
 <section class="route-hero">
   <div class="wrap route-hero-grid">
     <div>
       <p class="route-hook">Os merecéis un rato solo para vosotros.</p>
-      <h1>68 citas para salir de la rutina en pareja</h1>
-      <p>4 rutas en PDF · <strong>17,90&nbsp;€</strong></p>
+      <h1>Planes para salir de la rutina en pareja</h1>
+      <p>Juegos, preguntas e ideas de citas para disfrutar juntos, desde hoy.</p>
       <div class="btn-row">
-        <a href="/cuanto-me-conoces?desde=portada" class="btn btn-primary">Ver juego de pareja · 7,90&nbsp;€</a>
+        <a href="/cuanto-me-conoces?desde=portada" class="btn btn-primary">Ver juego de pareja</a>
         <a href="#jugar" class="btn btn-secondary">Probadlo gratis</a>
       </div>
-      <p class="route-book-link"><a href="/inspired-by-68">Ver el libro de las 68 citas</a></p>
-      <p class="route-welcome"><strong>12 minicitas de regalo en vuestro primer pedido.</strong></p>
       <p class="route-trust">Elegid vuestro plan, pagad y descargadlo al instante. ¡A disfrutar!<br>Sin envíos · Pago seguro con Stripe</p>
     </div>
     <div class="cover-route" role="group" aria-label="Tres paradas de Inspired by 68">
@@ -370,7 +364,7 @@
       <h2>68 paradas.<br>Una historia que todavía sigue moviéndose.</h2>
       <p>Un libro-experiencia para parejas, dividido en cuatro rutas: volver a arrancar, salir del camino conocido, conversaciones con vistas y carretera abierta. Cada parada es algo que se vive, no algo que se lee.</p>
       <div class="btn-row">
-        <a href="/inspired-by-68" class="btn btn-primary" style="background:var(--terracota);">Descubrir Inspired by 68</a>
+        <a href="/inspired-by-68" class="btn btn-primary" style="background:var(--terracota);">Descubrir Inspired by 68 · 17,90&nbsp;€</a>
       </div>
       <p style="margin-top:20px;"><a href="#historia" class="why68">¿Por qué 68?</a></p>
     </div>
@@ -407,6 +401,13 @@
         <a href="/preguntas-para-parejas" class="mini-tool"><span>Preguntas para parejas</span><span class="arrow">→</span></a>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="christmas-campaign" class="christmas-campaign" aria-label="Oferta de Navidad" hidden>
+  <div class="wrap christmas-banner">
+    <p><strong>Un PDF de regalo con vuestro Pack Navidad</strong><br><span class="christmas-contents">Incluye el Calendario de Adviento para parejas y el Kit Navidad · 15,90 €</span></p>
+    <a href="/tienda#packs">Ver Pack Navidad</a>
   </div>
 </section>
 
