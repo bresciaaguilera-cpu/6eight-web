@@ -14,6 +14,11 @@
   const entry = !visit || visit.day !== day || now - visit.updated >= timeout;
   if (entry) visit = { id: crypto.randomUUID(), day, page, shop: false, cart: [], elapsed: 0 };
   visit.shop ||= page === "/tienda";
+  visit.pages ??= [visit.page];
+  const newPage = visit.pages.at(-1) !== page;
+  if (newPage) visit.pages = [...visit.pages.slice(-19), page];
+  visit.homeGame ||= page === "/cuanto-me-conoces" &&
+    new URLSearchParams(location.search).get("desde") === "portada";
   let visibleSince = document.visibilityState === "visible" ? now : null;
 
   function save(isEntry = false, send = true, summary = false) {
@@ -25,10 +30,10 @@
     visit.updated = timestamp;
     try { sessionStorage.setItem(key, JSON.stringify(visit)); } catch {}
     if (!send) return;
-    const { id, page, shop, cart, elapsed } = visit;
+    const { id, page, shop, cart, elapsed, pages, homeGame } = visit;
     fetch("/api/visit-notification", {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, page, shop, cart, seconds: Math.floor(elapsed / 1000), entry: isEntry, summary }),
+      body: JSON.stringify({ id, page, shop, cart, pages, homeGame, seconds: Math.floor(elapsed / 1000), entry: isEntry, summary }),
       keepalive: true,
     }).catch(() => {});
   }
@@ -51,5 +56,5 @@
     }
   });
   setInterval(() => { if (visibleSince !== null) save(); }, 30000);
-  save(entry, entry || visit.shop);
+  save(entry, entry || visit.shop || newPage || visit.homeGame);
 })();

@@ -46,7 +46,12 @@ module.exports = async function handler(req, res) {
     return res.status(400).end();
   }
   if (/bot|crawler|spider|headless/i.test(req.headers["user-agent"] || "")) return res.status(204).end();
-  const { id, seconds, shop, cart, entry, summary } = req.body;
+  const { id, seconds, shop, cart, entry, summary, pages = [page], homeGame = false } = req.body;
+  if (!Array.isArray(pages) || !pages.length || pages.length > 20 ||
+      pages.some(path => typeof path !== "string" || path.length > 120 || !/^\/[a-z0-9/-]*$/.test(path)) ||
+      typeof homeGame !== "boolean") {
+    return res.status(400).end();
+  }
   if (!/^[a-f0-9-]{36}$/.test(typeof id === "string" ? id : "") ||
       !Number.isInteger(seconds) || seconds < 0 || seconds > 86400 ||
       typeof shop !== "boolean" || !Array.isArray(cart) || cart.length > 25 ||
@@ -58,7 +63,7 @@ module.exports = async function handler(req, res) {
     const names = [...new Set(cart.map(product =>
       getProduct(product)?.nombre || getPersonalizedProduct(product)?.nombre
     ).filter(Boolean))];
-    const activity = { id, page, seconds, shop, cart: names };
+    const activity = { id, page, seconds, shop, cart: names, pages, homeGame };
     await put(`${prefix}${day}/${id}.json`, JSON.stringify(activity), {
       access: "private", allowOverwrite: true, addRandomSuffix: false, contentType: "application/json",
     });
